@@ -3,6 +3,9 @@
 
 name: Build and deploy ASP app to Azure Web App - lokalmusic
 
+env:
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+
 on:
   push:
     branches:
