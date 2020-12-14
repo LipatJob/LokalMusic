@@ -44,4 +44,4 @@ jobs:
         app-name: 'lokalmusic'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_7a158896d1284d0ba1050f3e5238c399 }}
-        package: bin\Release\Publish
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/LokalMusic'
