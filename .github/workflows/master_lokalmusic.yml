@@ -1,0 +1,47 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP app to Azure Web App - lokalmusic
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: 'windows-latest'
+
+    steps:
+    - uses: actions/checkout@master
+  
+    - name: Setup MSBuild.exe
+      # You may pin to the exact commit or the version.
+      # uses: warrenbuckley/Setup-MSBuild@1176db82e64cd53b4944f0e57c2abec104b4782d
+      uses: warrenbuckley/Setup-MSBuild@v1
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+    
+    - name: Setup MSBuild path
+      uses: microsoft/setup-msbuild@v1.0.2
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+    - name: Restore NuGet packages
+      run: nuget restore
+
+    - name: Publish to folder
+      run: msbuild /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=./published/ /p:PackageAsSingleFile=false
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'lokalmusic'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7a158896d1284d0ba1050f3e5238c399 }}
+        package: ./published/
