@@ -14,9 +14,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-
+  
+    - name: Setup MSBuild.exe
+      # You may pin to the exact commit or the version.
+      # uses: warrenbuckley/Setup-MSBuild@1176db82e64cd53b4944f0e57c2abec104b4782d
+      uses: warrenbuckley/Setup-MSBuild@v1
+    
     - name: Setup MSBuild path
-      uses: microsoft/setup-msbuild@v1.0.0
+      uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
