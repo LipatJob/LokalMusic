@@ -75,4 +75,3 @@ C:\Users\lipat\source\IT114L\LokalMusic\LokalMusic\obj\Debug\LokalMusic.pdb
 C:\Users\lipat\source\IT114L\LokalMusic\LokalMusic\bin\DotNetEnv.dll
 C:\Users\lipat\source\IT114L\LokalMusic\LokalMusic\bin\System.Diagnostics.DiagnosticSource.dll
 C:\Users\lipat\source\IT114L\LokalMusic\LokalMusic\bin\System.Diagnostics.DiagnosticSource.xml
-C:\Users\lipat\source\IT114L\LokalMusic\LokalMusic\bin\.env
