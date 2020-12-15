@@ -5,6 +5,10 @@ name: Build and deploy ASP app to Azure Web App - lokalmusic
 
 env:
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  DB_USER: secrets.DB_USER
+  DB_PWD: secrets.DB_PWD
+  DB_HOST: secrets.DB_HOST
+  TEST_KEY: secrets.TEST_KEY
 
 on:
   push:
