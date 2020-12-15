@@ -38,12 +38,19 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.2
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-
+    
+    - name: Navigate to Workspace
+      run: cd $GITHUB_WORKSPACE
+      
+    - name: Create Build Directory
+      run: mkdir _build
+  
     - name: Restore NuGet packages
       run: nuget restore LokalMusic.sln
     
     - name: Publish to folder
-      run: msbuild LokalMusic.sln /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=./published/ /p:PackageAsSingleFile=false
+      run: | 
+        msbuild.exe LokalMusic.sln /nologo /nr:false /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="Release" /p:PublishUrl="../_build"
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
@@ -51,4 +58,4 @@ jobs:
         app-name: 'lokalmusic'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_7a158896d1284d0ba1050f3e5238c399 }}
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/LokalMusic'
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/_build'
