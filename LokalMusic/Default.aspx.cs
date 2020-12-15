@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +12,7 @@ namespace LokalMusic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            messageLbl.Text = System.Environment.GetEnvironmentVariable("TEST_KEY");
         }
     }
 }
