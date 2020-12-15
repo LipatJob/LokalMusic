@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace LokalMusic
 {
@@ -12,7 +14,14 @@ namespace LokalMusic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            messageLbl.Text = System.Environment.GetEnvironmentVariable("TEST_KEY");
+            string connectionString = ConfigurationManager.ConnectionStrings["lokalmusic-db"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                Console.WriteLine("State: {0}", connection.State);
+                Console.WriteLine("ConnectionTimeout: {0}",
+                    connection.ConnectionTimeout);
+            }
         }
     }
 }
