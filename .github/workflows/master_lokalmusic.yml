@@ -42,12 +42,6 @@ jobs:
     - name: Restore NuGet packages
       run: nuget restore LokalMusic.sln
     
-    - name: dotnet build and publish
-      run: |
-        dotnet restore
-        dotnet build --configuration Release
-        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/LokalMusic' 
-    
     - name: Publish to folder
       run: msbuild LokalMusic.sln /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=./published/ /p:PackageAsSingleFile=false
 
