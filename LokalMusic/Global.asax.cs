@@ -14,7 +14,6 @@ namespace LokalMusic
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
-            DotNetEnv.Env.Load();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }

@@ -10,7 +10,6 @@ namespace LokalMusic
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            DotNetEnv.Env.Load();
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
             routes.EnableFriendlyUrls(settings);
