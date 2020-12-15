@@ -1,0 +1,206 @@
+[33mcommit 43ce4263bd71cb2082c0795dd32652ea60f4723c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 11:46:41 2020 +0800
+
+    removed dotenv
+
+[33mcommit 4d853bbad25cba0ae8ef0a43bbbe2eaabe0ef62f[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 11:40:25 2020 +0800
+
+    removed dotenv
+
+[33mcommit 98ef82969d675b1bc7a039fd83ef403f1fc2104d[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 11:38:53 2020 +0800
+
+    added secrets
+
+[33mcommit ca3d88657d997330f261a226532e5febd4786e45[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 11:38:27 2020 +0800
+
+    added secrets
+
+[33mcommit 95b9fffa4ccd592aecefcf4f76b556421902ddd7[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 10:43:50 2020 +0800
+
+    Create .env
+
+[33mcommit 1a50275518dd9ec75df95f965e8237aa36cc52b8[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 10:13:41 2020 +0800
+
+    Remove dot env
+
+[33mcommit 30215f8245eb160d678960301a424dcd51811375[m
+Merge: 1c6e8f2 e57661c
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 10:06:39 2020 +0800
+
+    Merge branch 'master' of https://github.com/LipatJob/LokalMusic
+
+[33mcommit 1c6e8f2e81ec19cd60144a309c32f04ecf6fae56[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 10:06:18 2020 +0800
+
+    Remove dot env
+
+[33mcommit 2343f89b01298f3e9fe82eee4e14eeab7d831170[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 10:03:13 2020 +0800
+
+    rebuild
+
+[33mcommit e57661c31e250c5da4bfee852b15772033304af4[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 09:56:26 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit b70c2fe2618bcac710adef2612d241a3f7b00eac[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 09:47:01 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit 6234c930a1366fbe3a5d53fca7d0a3c8be91d757[m
+Merge: e09f1ef f597068
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 09:37:17 2020 +0800
+
+    Merge branch 'master' of https://github.com/LipatJob/LokalMusic
+
+[33mcommit e09f1ef1e613d8a3245f5d6f6f2de607e87d6083[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 09:36:17 2020 +0800
+
+    Drop files from .gitignore
+
+[33mcommit f5970680a91328a7382bd6e58c20f7b313193802[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 09:32:05 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit fbf4fc69a60225c7f7f8065d3a249361bde62e79[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 09:31:55 2020 +0800
+
+    Create .env
+
+[33mcommit 2845cefc38d54d6372e7d049008476f942c72322[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 09:27:43 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit 0875b7aa865c7a6154a597f2aed6e1d86a1f54aa[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 09:23:43 2020 +0800
+
+    removed env from build
+
+[33mcommit cb77c2965ff80f3e18618170f640b0eecea507fc[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 09:12:04 2020 +0800
+
+    added build to repo
+
+[33mcommit 16946a3e7ce282355eef1228441fcff47515e7b7[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 08:55:58 2020 +0800
+
+    Drop files from .gitignore
+
+[33mcommit 2adbb44ede5fbdda1cc8f1967406d6293552a373[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 08:51:16 2020 +0800
+
+    added dotenv
+
+[33mcommit 166879097a7a0b80db9908a42486cc6e5f3e8063[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 08:19:38 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit d5f23d0d053b86a4f20a640eff6d59169b50c018[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 07:44:30 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit 1551ec29c236cec926c7972902e0050e77c39bbd[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 07:43:32 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit 660fc95466a6efa3d67ad069be44cb8cd4c91a6d[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 07:37:58 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit 424a8a7bbfbc6213716d1e44d35ef46d24de3881[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 07:34:19 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit abf728a63ceed1711cf3ddf77b50ff832ed69ea3[m
+Merge: d70589f fff9aa3
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 07:29:38 2020 +0800
+
+    gerge branch 'master' of https://github.com/LipatJob/LokalMusic
+
+[33mcommit d70589f2d656575ea0b7dbc06168b019c63e5676[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 07:27:01 2020 +0800
+
+    for CI/CD
+
+[33mcommit fff9aa3713333902292623ecfdace95a557f0204[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Tue Dec 15 07:13:23 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit 9ae4ef5a21ad40f8e516aba4b982cbfe67cbe0db[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Mon Dec 14 20:57:56 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit a9a3ac6061f66903bcf488aad93c1586883dc796[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Mon Dec 14 20:55:08 2020 +0800
+
+    Update master_lokalmusic.yml
+
+[33mcommit 7000abf5cc1704b49620f0bc494cfbfe667649c1[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Mon Dec 14 20:43:36 2020 +0800
+
+    Add or update the App Service deployment workflow configuration from Azure Portal.
+
+[33mcommit 551e50a8cffe20f13aefaee79e0015fe6fc97c79[m
+Author: Azure App Service <donotreply@microsoft.com>
+Date:   Mon Dec 14 20:41:36 2020 +0800
+
+    Remove the App Service deployment workflow configuration from Azure Portal.
+
+[33mcommit 98d6e6ed9ed9fd0fc6ee3c733b8556256c636da6[m
+Author: Job Lipat <35028794+LipatJob@users.noreply.github.com>
+Date:   Mon Dec 14 20:37:22 2020 +0800
+
+    Add or update the App Service deployment workflow configuration from Azure Portal.
+
+[33mcommit 70573fd1716e35d353ccd1555f24dabe825722c4[m
+Author: LipatJob <35028794+LipatJob@users.noreply.github.com>
+Date:   Mon Dec 14 20:12:37 2020 +0800
+
+    initial commit
