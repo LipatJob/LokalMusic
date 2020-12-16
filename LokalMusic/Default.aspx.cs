@@ -22,6 +22,8 @@ namespace LokalMusic
                 Console.WriteLine("ConnectionTimeout: {0}",
                     connection.ConnectionTimeout);
             }
+
+            // Hello World
         }
     }
 }
