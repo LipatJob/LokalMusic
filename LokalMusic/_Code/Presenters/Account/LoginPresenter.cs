@@ -1,4 +1,5 @@
-﻿using LokalMusic.Code.Repositories.Account;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic.Code.Repositories.Account;
 using LokalMusic.Code.Views.Account;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,12 @@ namespace LokalMusic.Code.Presenters.Account
 
         public void Login()
         {
-            bool isLoginSuccessful = false; 
+            string userId = ""; //TODO: Get UserId from database
+            bool isLoginSuccessful = false; //TODO: Check 
 
-            if(isLoginSuccessful)
+            if (isLoginSuccessful)
             {
+                SessionHelper.SetLoginSession(userId);
                 view.RedirectToHomePage();
             }
             else
