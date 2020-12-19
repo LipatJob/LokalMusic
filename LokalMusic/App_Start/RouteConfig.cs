@@ -14,5 +14,11 @@ namespace LokalMusic
             settings.AutoRedirectMode = RedirectMode.Permanent;
             routes.EnableFriendlyUrls(settings);
         }
+
+        public static void RegisterCustomRoutes(RouteCollection routes)
+        {
+        }
+
+
     }
 }

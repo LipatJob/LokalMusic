@@ -15,6 +15,7 @@ namespace LokalMusic
         {
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RouteConfig.RegisterCustomRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
