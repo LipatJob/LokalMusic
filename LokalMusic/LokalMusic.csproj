@@ -488,7 +488,7 @@
     <Folder Include="Cart\" />
     <Folder Include="Creator\" />
     <Folder Include="Pages\" />
-    <Folder Include="_Code\Models\" />
+    <Folder Include="_Code\Models\Account\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
