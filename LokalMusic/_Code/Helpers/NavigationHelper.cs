@@ -12,6 +12,12 @@ namespace LokalMusic._Code.Helpers
             HttpContext.Current.Response.Redirect(url);
         }
 
+        public static string CreateParameters(params (string, string)[] parameters)
+        {
+            string[] parameterItems = parameters.Select(parameter => $"{HttpUtility.UrlEncode(parameter.Item1)}={parameter.Item2}").ToArray();
+            return string.Join("&",parameterItems);
+        }
+
         public static object GetRouteValue(string key)
         {
             return HttpContext.Current.Request.RequestContext.RouteData.Values[key];
