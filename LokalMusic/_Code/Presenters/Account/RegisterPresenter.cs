@@ -7,6 +7,8 @@ namespace LokalMusic._Code.Presenters.Account
 {
     public class RegisterPresenter
     {
-
+        public void Register()
+        {
+        }
     }
 }
