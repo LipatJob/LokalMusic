@@ -23,7 +23,6 @@ namespace LokalMusic._Code.Helpers
         public static string GetUsername()
         {
             if (IsLoggedIn() == false) { return "Guest"; }
-            // TODO: Refactor this part
             if(HttpContext.Current.Session[UsernameSessionName] != null) { return (string)HttpContext.Current.Session[UsernameSessionName]; }
 
             string username = GetUsernameFromDatabase();
@@ -34,16 +33,8 @@ namespace LokalMusic._Code.Helpers
         private static string GetUsernameFromDatabase()
         {
             string query = "SELECT Username FROM UserInfo WHERE UserId = @UserId;";
-            SqlDataReader data = null;
-            using (var connection = DbHelper.GetConnection())
-            {
-                var command = connection.CreateCommand();
-                command.CommandText = query;
-                command.Parameters.AddWithValue("UserId", UserId);
-                data = command.ExecuteReader();
-            }
-            string userType = (string)data["Username"];
-            return userType;
+            SqlDataReader data = DbHelper.QueryDatabase(query, ("UserId", UserId));
+            return (string) data["Username"];
         }
 
 
@@ -55,16 +46,8 @@ namespace LokalMusic._Code.Helpers
         private static string GetUserTypeFromDatabase()
         {
             string query = "SELECT TypeName FROM UserType WHERE UserTypeId = (SELECT UserTypeId FROM UserInfo WHERE UserId = @UserId);";
-            SqlDataReader data = null;
-            using (var connection = DbHelper.GetConnection())
-            {
-                var command = connection.CreateCommand();
-                command.CommandText = query;
-                command.Parameters.AddWithValue("UserId", UserId);
-                data = command.ExecuteReader();
-            }
-            string userType = (string) data["TypeName"];
-            return userType;
+            SqlDataReader data = DbHelper.QueryDatabase(query, ("UserId", UserId));
+            return (string) data["TypeName"];
         }
 
     }
