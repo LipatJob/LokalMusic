@@ -12,17 +12,8 @@ namespace LokalMusic.Code.Repositories.Account
         /// <returns> First value is whether the login attempt is successful and the second value is the id of the user. If it's -1 then the login attempt failed</returns>
         public (bool, int) GetLogin(string email, string password)
         {
-            SqlDataReader values;
             string commandText = "SELECT UserId FROM users WHERE email = @email AND password = @password";
-
-            using (var connection = DbHelper.GetConnection())
-            {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = commandText;
-                command.Parameters.AddWithValue("email", email);
-                command.Parameters.AddWithValue("password", password);
-                values = command.ExecuteReader();
-            }
+            SqlDataReader values = DbHelper.QueryDatabase(commandText, ("email",email), ("password", password));
 
             bool valid = values.HasRows;
             int userId = -1;
