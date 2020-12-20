@@ -13,12 +13,12 @@ namespace LokalMusic._Code.Helpers
             return HttpContext.Current.Session[USERID_KEY] != null;
         }
 
-        public static string GetUserId()
+        public static int GetUserId()
         {
-            return (string) HttpContext.Current.Session[USERID_KEY];
+            return (int) HttpContext.Current.Session[USERID_KEY];
         }
 
-        public static void SetLoginSession(string userId)
+        public static void SetLoginSession(int userId)
         {
             HttpContext.Current.Session[USERID_KEY] = userId;
         }

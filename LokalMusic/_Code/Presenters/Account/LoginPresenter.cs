@@ -20,8 +20,8 @@ namespace LokalMusic.Code.Presenters.Account
 
         public void Login()
         {
-            string userId = ""; //TODO: Get UserId from database
-            bool isLoginSuccessful = false; //TODO: Check 
+
+            (bool isLoginSuccessful, int userId) = repository.GetLogin(view.email, view.password);
 
             if (isLoginSuccessful)
             {

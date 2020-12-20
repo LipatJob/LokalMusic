@@ -9,10 +9,11 @@ namespace LokalMusic.Code.Repositories.Account
 {
     public class LoginRepository
     {
-        public bool AreLoginCredentialsValid(string email, string password)
+        /// <returns> First value is whether the login attempt is successful and the second value is the id of the user. If it's -1 then the login attempt failed</returns>
+        public (bool, int) GetLogin(string email, string password)
         {
-            SqlDataReader values = null;
-            string commandText = "SELECT COUNT(*) AS userscount FROM users WHERE email = @email AND password = @password";
+            SqlDataReader values;
+            string commandText = "SELECT UserId FROM users WHERE email = @email AND password = @password";
 
             using (var connection = DbHelper.GetConnection())
             {
@@ -23,7 +24,14 @@ namespace LokalMusic.Code.Repositories.Account
                 values = command.ExecuteReader();
             }
 
-            return (int)values.GetOrdinal("userscount") == 1;
+            bool valid = values.HasRows;
+            int userId = -1;
+            if (valid)
+            {
+                userId = (int) values["UserId"];
+            }
+
+            return (valid, userId);
         }
     }
 }
