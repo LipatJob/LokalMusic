@@ -25,7 +25,7 @@ namespace LokalMusic.Code.Presenters.Account
 
             if (isLoginSuccessful)
             {
-                SessionHelper.SetLoginSession(userId);
+                AuthenticationHelper.UserId = userId;
                 view.RedirectToHomePage();
             }
             else

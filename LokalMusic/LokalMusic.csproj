@@ -427,10 +427,11 @@
     <Content Include="Products\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="_Code\Helpers\AuthenticationHelper.cs" />
     <Compile Include="_Code\Helpers\DbHelper.cs" />
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
-    <Compile Include="_Code\Helpers\SessionHelper.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
+    <Compile Include="_Code\Presenters\Account\RegisterPresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginView.cs" />
     <Compile Include="Account\Default.aspx.cs">
