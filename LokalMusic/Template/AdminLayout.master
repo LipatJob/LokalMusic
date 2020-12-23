@@ -1,0 +1,11 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="AdminLayout.master.cs" Inherits="LokalMusic.Template.AdminLayout" %>
+
+<asp:Content ID="AdminLayout" ContentPlaceHolderID="MainContent" runat="server">
+
+    <%--Nav--%>
+
+    <div class="container body-content">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+</asp:Content>

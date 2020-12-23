@@ -427,6 +427,27 @@
     <Content Include="Products\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Template\AdminLayout.master.cs">
+      <DependentUpon>AdminLayout.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template\AdminLayout.master.designer.cs">
+      <DependentUpon>AdminLayout.master</DependentUpon>
+    </Compile>
+    <Compile Include="Template\CreatorLayout.master.cs">
+      <DependentUpon>CreatorLayout.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template\CreatorLayout.master.designer.cs">
+      <DependentUpon>CreatorLayout.master</DependentUpon>
+    </Compile>
+    <Compile Include="Template\StoreLayout.master.cs">
+      <DependentUpon>StoreLayout.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template\StoreLayout.master.designer.cs">
+      <DependentUpon>StoreLayout.master</DependentUpon>
+    </Compile>
     <Compile Include="_Code\Helpers\AuthenticationHelper.cs" />
     <Compile Include="_Code\Helpers\DbHelper.cs" />
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
@@ -495,6 +516,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Template\StoreLayout.master" />
+    <Content Include="Template\CreatorLayout.master" />
+    <Content Include="Template\AdminLayout.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
