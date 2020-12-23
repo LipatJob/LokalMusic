@@ -10,9 +10,9 @@ namespace LokalMusic.Code.Presenters.Account
 {
     public class LoginPresenter
     {
-        private ILoginView view;
+        private ILoginViewModel view;
         private LoginRepository repository;
-        public LoginPresenter(ILoginView view, LoginRepository repository)
+        public LoginPresenter(ILoginViewModel view, LoginRepository repository)
         {
             this.view = view;
             this.repository = repository;
@@ -21,16 +21,15 @@ namespace LokalMusic.Code.Presenters.Account
         public void Login()
         {
 
-            (bool isLoginSuccessful, int userId) = repository.GetLogin(view.email, view.password);
+            (bool isLoginSuccessful, int userId) = repository.GetLogin(view);
 
             if (isLoginSuccessful)
             {
                 AuthenticationHelper.UserId = userId;
-                view.RedirectToHomePage();
+                NavigationHelper.Redirect("~");
             }
             else
             {
-                view.ShowLoginErrorMessage();
             }
         }
     }

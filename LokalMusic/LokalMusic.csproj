@@ -455,7 +455,8 @@
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\RegisterPresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
-    <Compile Include="_Code\Views\Account\ILoginView.cs" />
+    <Compile Include="_Code\Repositories\Account\RegisterRepository.cs" />
+    <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -504,7 +505,7 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="_Code\Views\Account\IRegisterView.cs" />
+    <Compile Include="_Code\Views\Account\IRegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="About\" />

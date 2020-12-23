@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace LokalMusic.Code.Views.Account
 {
-    public interface ILoginView
+    public interface ILoginViewModel
     {
         string email { get; }
         string password { get; }
-        void ShowLoginErrorMessage();
-        void RedirectToHomePage();
-
     }
 }
