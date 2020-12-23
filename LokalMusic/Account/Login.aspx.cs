@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace LokalMusic.Webforms.Account
 {
-    public partial class Login : System.Web.UI.Page, ILoginView
+    public partial class Login : System.Web.UI.Page, ILoginViewModel
     {
         private LoginPresenter presenter;
         public Login()

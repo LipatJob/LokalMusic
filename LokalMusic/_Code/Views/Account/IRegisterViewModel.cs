@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace LokalMusic._Code.Views.Account
 {
-    interface IRegisterView
+    interface IRegisterViewModel
     {
         string Email { get; }
         string Password { get; }
         string ConfirmPassword { get; }
-
     }
 }
