@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Routing;
 
 namespace LokalMusic._Code.Helpers
 {
@@ -12,10 +13,15 @@ namespace LokalMusic._Code.Helpers
             HttpContext.Current.Response.Redirect(url);
         }
 
-        public static string CreateParameters(params (string key, string value)[] parameters)
+        public static string GetRouteUrl(string routeName, object routeParameters)
         {
-            string[] parameterItems = parameters.Select(parameter => $"{HttpUtility.UrlEncode(parameter.key)}={parameter.value}").ToArray();
-            return string.Join("&",parameterItems);
+            var dict = new RouteValueDictionary(routeParameters);
+            var data = RouteTable.Routes.GetVirtualPath(HttpContext.Current.Request.RequestContext, routeName, dict);
+            if (data != null)
+            {
+                return data.VirtualPath;
+            }
+            return null;
         }
 
         public static object GetRouteValue(string key)

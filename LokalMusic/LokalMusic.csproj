@@ -483,6 +483,7 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="_Code\Views\Account\IRegisterView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="About\" />
