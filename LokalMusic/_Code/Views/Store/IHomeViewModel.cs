@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LokalMusic._Code.Views.Store
 {
-    interface IHomeViewModel
+    public interface IHomeViewModel
     {
         // Model
     }
