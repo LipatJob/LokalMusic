@@ -420,6 +420,7 @@
     <Content Include="Account\Login.aspx">
       <BrowseToURL>~/Account/Login.aspx</BrowseToURL>
     </Content>
+    <Content Include="Store\Home.aspx" />
     <Content Include="Template\Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -427,6 +428,13 @@
     <Content Include="Products\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Store\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Store\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Template\AdminLayout.master.cs">
       <DependentUpon>AdminLayout.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -456,6 +464,8 @@
     <Compile Include="_Code\Presenters\Account\RegisterPresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
     <Compile Include="_Code\Repositories\Account\RegisterRepository.cs" />
+    <Compile Include="_Code\Presenters\Store\HomePresenter.cs" />
+    <Compile Include="_Code\Repositories\Store\HomeRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -506,6 +516,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
     <Compile Include="_Code\Views\Account\IRegisterViewModel.cs" />
+    <Compile Include="_Code\Views\Store\IHomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="About\" />
