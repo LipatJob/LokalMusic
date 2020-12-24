@@ -522,6 +522,7 @@
     <Folder Include="About\" />
     <Folder Include="Admin\" />
     <Folder Include="Cart\" />
+    <Folder Include="Content\Images\" />
     <Folder Include="Creator\" />
     <Folder Include="Pages\" />
     <Folder Include="_Code\Models\Account\" />

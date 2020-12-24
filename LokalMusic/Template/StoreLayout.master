@@ -3,7 +3,7 @@
 <asp:Content ID="StoreContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <%--Nav--%>
-
+    <p>Store Content</p>
     <div class="container body-content">
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
