@@ -15,6 +15,13 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+    <style>
+        nav {
+            background-color: #F6F6F6;
+            margin-top:-50px;
+        }
+    </style>
+
 </head>
 <body>
     <form runat="server">
@@ -41,8 +48,9 @@
         <div class="body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
+
             <hr />
-            <footer>
+            <footer class="container">
                 <p>&copy; <%: DateTime.Now.Year %> - Lokal</p>
             </footer>
         </div>

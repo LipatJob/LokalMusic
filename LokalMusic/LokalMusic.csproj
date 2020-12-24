@@ -280,6 +280,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\cart.png" />
+    <Content Include="Content\Images\Logo.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Account\Default.aspx" />
     <Content Include="Default.aspx" />
@@ -522,7 +524,6 @@
     <Folder Include="About\" />
     <Folder Include="Admin\" />
     <Folder Include="Cart\" />
-    <Folder Include="Content\Images\" />
     <Folder Include="Creator\" />
     <Folder Include="Pages\" />
     <Folder Include="_Code\Models\Account\" />
