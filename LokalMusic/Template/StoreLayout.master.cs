@@ -13,5 +13,10 @@ namespace LokalMusic.Template
         {
 
         }
+
+        protected void Search(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
