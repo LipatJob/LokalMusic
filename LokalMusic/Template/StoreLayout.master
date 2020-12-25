@@ -2,7 +2,58 @@
 
 <asp:Content ID="StoreContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <style>
+        .nav-link{
+            font-size: 18px;
+            font-weight: 500;
+            color: #5E5E5E;
+        }
+    </style>
+
     <%--Nav--%>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="../Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="">
+        </a>
+
+        <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link ml-xl-5" href="#">Catalogue</a>
+                </li>
+            </ul>
+
+            <div class="form-inline my-2 my-lg-0">
+                <asp:TextBox ID="SearchTxt" runat="server" CssClass="form-control mr-sm-2" PlaceHolder="Search"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="" ControlToValidate="SearchTxt"></asp:RequiredFieldValidator>
+                <asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="Search" CssClass="btn btn-light my-2 my-sm-0"/>
+            </div>
+
+            <%--Authentication--%>
+            <div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link ml-xl-5" href="#">Join or Login</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link ml-xl-5" href="#">
+                            <img src="../Content/Images/cart.png" width="25" height="25" class="d-inline-block align-top" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
 
     <div class="container body-content">
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
