@@ -37,7 +37,13 @@
             <div>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link ml-xl-5" href="#">Join or Login</a>
+                        <a class="nav-link" href="~/Account/Regsiter" runat="server">Join</a>
+                    </li>
+                    <li>
+                        <span class="nav-link">or<span/>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="~/Account/Login"  runat="server">Login</a>
                     </li>
                 </ul>
             </div>

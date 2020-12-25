@@ -11,11 +11,11 @@ namespace LokalMusic._Code.Presenters.Account
 {
     public class RegisterPresenter
     {
-        private RegisterRepository repository;
+        private RegisterFanRepository repository;
         private IRegisterModel model;
         private IRegisterViewModel view;
 
-        public RegisterPresenter(IRegisterViewModel view, IRegisterModel model, RegisterRepository repository)
+        public RegisterPresenter(IRegisterViewModel view, IRegisterModel model, RegisterFanRepository repository)
         {
             this.view = view;
             this.repository = repository;
