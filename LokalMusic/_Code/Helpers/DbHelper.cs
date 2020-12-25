@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -15,20 +16,31 @@ namespace LokalMusic.Code.Helpers
             return new SqlConnection(connectionString);
         }
 
-        public static SqlDataReader ExecuteQuery(string commandText, params (string name, object value)[] parameters)
+        public static void FillCommand(SqlCommand command,string commandText, params (string name, object value)[] parameters)
         {
-            SqlDataReader values;
-            using (var connection = GetConnection())
+            command.CommandText = commandText;
+            foreach (var parameter in parameters)
             {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = commandText;
-                foreach (var parameter in parameters)
-                {
-                    command.Parameters.AddWithValue(parameter.name, parameter.value);
-                }
-                values = command.ExecuteReader();
+                command.Parameters.AddWithValue(parameter.name, parameter.value);
             }
-            return values;
+        }
+
+        public static DataTable ExecuteDataTableQuery(string commandText, params (string name, object value)[] parameters) 
+        {
+            DataTable dataTable = new DataTable();
+            using(var connection = GetConnection())
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    FillCommand(command, commandText, parameters);
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dataTable);
+                    }
+
+                }
+            }
+            return dataTable;
         }
 
         public static int ExecuteCommand(string commandText, params (string name, object value)[] parameters) 
@@ -36,6 +48,8 @@ namespace LokalMusic.Code.Helpers
             int rowsAffected;
             using (var connection = GetConnection())
             {
+                connection.Open();
+
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = commandText;
                 foreach (var parameter in parameters)

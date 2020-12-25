@@ -21,6 +21,7 @@ namespace LokalMusic.Account.Register
         public string Username { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Password { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string ConfirmPassword { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ArtistName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         protected void Page_Load(object sender, EventArgs e)
         {
