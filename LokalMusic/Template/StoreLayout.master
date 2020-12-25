@@ -13,7 +13,7 @@
     <%--Nav--%>
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">
-            <img src="../Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="">
+            <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
         </a>
 
         <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,17 @@
             </div>
 
             <%--Authentication--%>
-            <div>
+            <% if (true) 
+            {%>
+                <div>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="~/Account/Collection" runat="server">Name</a>
+                        </li>
+                    </ul>
+                </div>
+            <%} else {%>
+              <div>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="~/Account/Regsiter" runat="server">Join</a>
@@ -47,12 +57,14 @@
                     </li>
                 </ul>
             </div>
+            <%}%>
+          
 
             <div>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link ml-xl-5" href="#">
-                            <img src="../Content/Images/cart.png" width="25" height="25" class="d-inline-block align-top" alt="">
+                            <img src="~/Content/Images/cart.png" width="25" height="25" class="d-inline-block align-top" alt="" runat="server">
                         </a>
                     </li>
                 </ul>
