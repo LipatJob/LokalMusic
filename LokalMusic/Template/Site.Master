@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - Lokal Music</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -19,6 +19,12 @@
         nav {
             background-color: #F6F6F6;
             margin-top:-50px;
+        }
+
+        footer{
+            position:fixed;
+            bottom:0px;
+            width:100%;
         }
     </style>
 
@@ -48,13 +54,18 @@
         <div class="body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-
-            <hr />
-            <footer class="container">
-                <p>&copy; <%: DateTime.Now.Year %> - Lokal</p>
-            </footer>
         </div>
 
+       
+
     </form>
+    
+    <footer >
+        <hr />
+        <div class="container">
+            <p>&copy; <%: DateTime.Now.Year %> - Lokal</p>
+        </div>
+    </footer>
+
 </body>
 </html>
