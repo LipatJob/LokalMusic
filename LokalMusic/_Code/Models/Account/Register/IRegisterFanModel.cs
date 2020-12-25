@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LokalMusic._Code.Models.Account
+namespace LokalMusic._Code.Models.Account.Register
 {
-    public interface IRegisterModel
+    public interface IRegisterFanModel
     {
         string Email { get; set; }
+        string ArtistName { get; set; }
         string Username { get; set; }
         string Password { get; set; }
         string ConfirmPassword { get; set; }

@@ -1,18 +1,18 @@
-﻿using LokalMusic._Code.Models.Account;
+﻿using LokalMusic._Code.Models.Account.Register;
 using LokalMusic.Code.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LokalMusic._Code.Repositories.Account
+namespace LokalMusic._Code.Repositories.Account.Register
 {
-    public class RegisterRepository
+    public class RegisterArtistRepository
     {
         const string FAN_TYPE_NAME = "FAN";
         const string ACTIVE_TYPE_NAME = "ACTIVE";
 
-        public bool RegisterFan(IRegisterModel view)
+        public bool RegisterFan(IRegisterArtistModel model)
         {
             int userTypeId = GetUserTypeId();
             int userStatusId = GetUserStatusId();
@@ -25,9 +25,9 @@ namespace LokalMusic._Code.Repositories.Account
                 query, 
                 ("userTypeId", userTypeId), 
                 ("userStatusId", userStatusId), 
-                ("email", view.Email), 
-                ("username", view.Username), 
-                ("password", view.Password), 
+                ("email", model.Email), 
+                ("username", model.Username), 
+                ("password", model.Password), 
                 ("dateRegistered", DateTime.Now));
             return true;
         }

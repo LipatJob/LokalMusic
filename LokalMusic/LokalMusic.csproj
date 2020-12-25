@@ -274,6 +274,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\Register\Artist.aspx" />
+    <Content Include="Account\Register\Fan.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -430,6 +432,20 @@
     <Content Include="Products\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\Register\Artist.aspx.cs">
+      <DependentUpon>Artist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register\Artist.aspx.designer.cs">
+      <DependentUpon>Artist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register\Fan.aspx.cs">
+      <DependentUpon>Fan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register\Fan.aspx.designer.cs">
+      <DependentUpon>Fan.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Store\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -463,11 +479,15 @@
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
     <Compile Include="_Code\Helpers\NavigationHelper.cs" />
     <Compile Include="_Code\Models\Account\ILoginModel.cs" />
-    <Compile Include="_Code\Models\Account\IRegisterModel.cs" />
+    <Compile Include="_Code\Models\Account\Register\IRegisterArtistModel.cs" />
+    <Compile Include="_Code\Models\Account\Register\IRegisterFanModel.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\RegisterPresenter.cs" />
+    <Compile Include="_Code\Presenters\Account\Register\RegisterArtistPresenter.cs" />
+    <Compile Include="_Code\Presenters\Account\Register\RegisterFanPresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
-    <Compile Include="_Code\Repositories\Account\RegisterRepository.cs" />
+    <Compile Include="_Code\Repositories\Account\Register\RegisterArtistRepository.cs" />
+    <Compile Include="_Code\Repositories\Account\Register\RegisterFanRepository.cs" />
     <Compile Include="_Code\Presenters\Store\HomePresenter.cs" />
     <Compile Include="_Code\Repositories\Store\HomeRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
@@ -519,15 +539,16 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="_Code\Views\Account\IRegisterViewModel.cs" />
+    <Compile Include="_Code\Views\Account\Register\IRegisterArtistViewModel.cs" />
+    <Compile Include="_Code\Views\Account\Register\IRegisterFanViewModel.cs" />
     <Compile Include="_Code\Views\Store\IHomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="About\" />
     <Folder Include="Admin\" />
     <Folder Include="Cart\" />
-    <Folder Include="Creator\" />
     <Folder Include="Pages\" />
+    <Folder Include="Publish\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
