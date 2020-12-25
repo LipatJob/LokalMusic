@@ -15,16 +15,21 @@ namespace LokalMusic.Code.Repositories.Account
         public (bool, int) GetLogin(ILoginModel model)
         {
             string commandText = "SELECT UserId FROM users WHERE email = @email AND password = @password";
-            SqlDataReader values = DbHelper.ExecuteQuery(commandText, ("email", model.Email), ("password", model.Password));
-
-            bool valid = values.HasRows;
-            int userId = -1;
-            if (valid)
+            using(var connection = DbHelper.GetConnection())
             {
-                userId = (int) values["UserId"];
-            }
+                var command = connection.CreateCommand();
+                DbHelper.FillCommand(command, commandText, ("email", model.Email), ("password", model.Password));
+                SqlDataReader values = command.ExecuteReader();
 
-            return (valid, userId);
+                bool valid = values.HasRows;
+                int userId = -1;
+                if (valid)
+                {
+                    userId = (int) values["UserId"];
+                }
+
+                return (valid, userId);
+            }
         }
     }
 }

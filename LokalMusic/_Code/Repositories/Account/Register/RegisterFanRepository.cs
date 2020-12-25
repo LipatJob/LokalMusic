@@ -19,7 +19,7 @@ namespace LokalMusic._Code.Repositories.Account.Register
 
             string query = 
                 $"INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered) " +
-                $"VALUES @userTypeId, @userStatusId, @email, @username, @password, @dateRegistered";
+                $"VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered)";
 
             DbHelper.ExecuteCommand(
                 query, 
@@ -32,33 +32,33 @@ namespace LokalMusic._Code.Repositories.Account.Register
             return true;
         }
 
-        public bool IsUniqueUsername(string username)
+        public bool IsUsernameUnique(string username)
         {
             string query = $"SELECT Username from UserInfo WHERE Username = '@username';";
-            var resultSet = DbHelper.ExecuteQuery(query, ("username", username));
-            return (int)resultSet["Username"] == 0;
+            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("username", username));
+            return resultSet.Rows.Count == 0;
         }
 
-        public bool IsUniqueEmail(string email)
+        public bool IsEmailUnique(string email)
         {
             string query = $"SELECT Email from UserInfo WHERE Email = '@email';";
-            var resultSet = DbHelper.ExecuteQuery(query, ("email", email));
-            return (int)resultSet["Email"] == 0;
+            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("email", email));
+            return resultSet.Rows.Count == 0;
         }
 
         private int GetUserTypeId()
         {
             // Query ID for user type
             string query = $"SELECT UserTypeId from UserType WHERE TypeName = @FanTypeName;";
-            var resultSet = DbHelper.ExecuteQuery(query, ("FanTypeName", FAN_TYPE_NAME));
-            return (int) resultSet["UserTypeId"];
+            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("FanTypeName", FAN_TYPE_NAME));
+            return (int) resultSet.Rows[0]["UserTypeId"];
         }
 
         private int GetUserStatusId()
         {
             string query = $"SELECT UserStatusId from UserStatus WHERE UserStatusName = @ActiveTypeName;";
-            var resultSet = DbHelper.ExecuteQuery(query, ("ActiveTypeName", ACTIVE_TYPE_NAME));
-            return (int)resultSet["UserStatusId"];
+            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("ActiveTypeName", ACTIVE_TYPE_NAME));
+            return (int) resultSet.Rows[0]["UserStatusId"];
         }
 
     }

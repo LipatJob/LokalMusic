@@ -16,13 +16,19 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <style>
-        
-        body{
+        html, body{
+            height:100%;
             margin:0;
             padding:0;
+        }
+
+        body{
             display:flex;
-            flex-direction: column;
-            min-height:100vh;
+            flex-direction:column;
+        }
+
+        .body-content{
+            flex: 1 0 auto;
         }
 
 
@@ -31,8 +37,7 @@
         }
 
         footer{
-            padding-top: 20px;
-            margin-top: auto;
+            flex-shrink: 0;
         }
 
     </style>
@@ -59,6 +64,8 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+
+
 
         <div class="body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
