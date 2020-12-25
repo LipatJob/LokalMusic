@@ -43,34 +43,32 @@
         <div class="form-group">
             <asp:Label Text="Username" runat="server" />
             <asp:TextBox ID="UsernameTxt" runat="server" CssClass="form-control"/>
-            <asp:CustomValidator id="UsernameTxtCv" ErrorMessage="Error Message" ControlToValidate="UsernameTxt" runat="server" OnServerValidate="UsernameTxtCv_ServerValidate" CssClass="validation-message"/>
+            <asp:CustomValidator id="UsernameTxtCv" ErrorMessage="Error Message" ControlToValidate="UsernameTxt" runat="server" OnServerValidate="UsernameTxtCv_ServerValidate" CssClass="validation-message" ValidateEmptyText="true" Display="Dynamic"/>
         </div>
 
         <div class="form-group">
             <asp:Label Text="Email" runat="server" />
             <asp:TextBox ID="EmailTxt" runat="server" CssClass="form-control" type="email"/>
-            <asp:CustomValidator id="EmailTxtCv" ErrorMessage="Error Message" ControlToValidate="EmailTxt" runat="server" OnServerValidate="EmailTxtCv_ServerValidate"  CssClass="validation-message"/>
+            <asp:CustomValidator id="EmailTxtCv" ErrorMessage="Error Message" ControlToValidate="EmailTxt" runat="server" OnServerValidate="EmailTxtCv_ServerValidate"  CssClass="validation-message"  ValidateEmptyText="true" Display="Dynamic"/>
         </div>
 
         <div class="form-group">
             <asp:Label Text="Password" runat="server" />
             <asp:TextBox ID="PasswordTxt" runat="server" CssClass="form-control" type="password"/>
-            <asp:CustomValidator id="PasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="PasswordTxt" runat="server" OnServerValidate="PasswordTxtCv_ServerValidate"  CssClass="validation-message"/>
+            <asp:CustomValidator id="PasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="PasswordTxt" runat="server" OnServerValidate="PasswordTxtCv_ServerValidate"  CssClass="validation-message"  ValidateEmptyText="true" Display="Dynamic"/>
         </div>
 
         <div class="form-group">
             <asp:Label Text="Confirm Password" runat="server" />
             <asp:TextBox ID="ConfirmPasswordTxt" runat="server" CssClass="form-control" type="password"/>
-            <asp:CustomValidator id="ConfirmPasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="ConfirmPasswordTxt" runat="server" OnServerValidate="ConfirmPasswordTxtCv_ServerValidate"  CssClass="validation-message"/>
+            <asp:CustomValidator id="ConfirmPasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="ConfirmPasswordTxt" runat="server" OnServerValidate="ConfirmPasswordTxtCv_ServerValidate"  CssClass="validation-message"  ValidateEmptyText="true" Display="Dynamic"/>
 
         </div>
         
         <div class="form-group">
             <asp:CheckBox runat="server" ID="TosCb"/>
             <label class="form-check-label" for="TosCb">I Agree to Lokal's Terms and Conditions</label>
-            <asp:CustomValidator id="TosCbCv" ErrorMessage="Please agree to our Terms and Conditions"  runat="server"  CssClass="validation-message" OnServerValidate="TosCbCv_ServerValidate"/>
-
-
+            <asp:CustomValidator id="TosCbCv" ErrorMessage="<br/>Please agree to our Terms and Conditions"  runat="server"  CssClass="validation-message" OnServerValidate="TosCbCv_ServerValidate"/>
         </div>
         <asp:Button ID="submitBtn" Text="Create an Account" runat="server" CssClass="btn btn-primary mb-3" OnClick="submitBtn_Click"/>
         <hr />
