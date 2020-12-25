@@ -18,8 +18,8 @@ namespace LokalMusic.Webforms.Account
             presenter = new LoginPresenter(this, new LoginRepository());
         }
 
-        public string email { get { return emailTxt.Text; } }
-        public string password { get { return passwordTxt.Text; } }
+        public string Email { get { return emailTxt.Text; } set { throw new NotImplementedException(); } }
+        public string Password { get { return passwordTxt.Text; } set { throw new NotImplementedException(); } }
 
         public void RedirectToHomePage()
         {

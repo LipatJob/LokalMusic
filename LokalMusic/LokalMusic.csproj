@@ -452,6 +452,8 @@
     <Compile Include="_Code\Helpers\DbHelper.cs" />
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
     <Compile Include="_Code\Helpers\NavigationHelper.cs" />
+    <Compile Include="_Code\Models\Account\ILoginModel.cs" />
+    <Compile Include="_Code\Models\Account\IRegisterModel.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\RegisterPresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
@@ -513,7 +515,6 @@
     <Folder Include="Cart\" />
     <Folder Include="Creator\" />
     <Folder Include="Pages\" />
-    <Folder Include="_Code\Models\Account\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

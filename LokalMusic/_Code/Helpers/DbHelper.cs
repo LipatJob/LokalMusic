@@ -15,7 +15,7 @@ namespace LokalMusic.Code.Helpers
             return new SqlConnection(connectionString);
         }
 
-        public static SqlDataReader QueryDatabase(string commandText, params (string name, object value)[] parameters)
+        public static SqlDataReader ExecuteQuery(string commandText, params (string name, object value)[] parameters)
         {
             SqlDataReader values;
             using (var connection = GetConnection())
@@ -29,6 +29,22 @@ namespace LokalMusic.Code.Helpers
                 values = command.ExecuteReader();
             }
             return values;
+        }
+
+        public static int ExecuteCommand(string commandText, params (string name, object value)[] parameters) 
+        {
+            int rowsAffected;
+            using (var connection = GetConnection())
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = commandText;
+                foreach (var parameter in parameters)
+                {
+                    command.Parameters.AddWithValue(parameter.name, parameter.value);
+                }
+                rowsAffected = command.ExecuteNonQuery();
+            }
+            return rowsAffected;
         }
     }
 }
