@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LokalMusic._Code.Models.Account;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace LokalMusic._Code.Views.Account
 {
-    interface IRegisterViewModel
+    public interface IRegisterViewModel : IRegisterModel
     {
-        string Email { get; }
-        string Password { get; }
-        string ConfirmPassword { get; }
+        
     }
 }
