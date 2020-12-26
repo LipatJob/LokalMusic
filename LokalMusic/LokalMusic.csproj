@@ -282,11 +282,11 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\testpicture3.jpg" />
-    <Content Include="Content\Images\testpicture2.png" />
     <Content Include="Content\Images\testpicture1.jpg" />
+    <Content Include="Content\Images\testpicture2.png" />
     <Content Include="Content\Images\cart.png" />
     <Content Include="Content\Images\Logo.png" />
+    <Content Include="Content\Images\testpicture3.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Account\Default.aspx" />
     <Content Include="Default.aspx" />
@@ -491,9 +491,6 @@
     <Compile Include="_Code\Models\Account\ILoginModel.cs" />
     <Compile Include="_Code\Models\Account\Register\IRegisterArtistModel.cs" />
     <Compile Include="_Code\Models\Account\Register\IRegisterFanModel.cs" />
-    <Compile Include="_Code\Models\Store\Album.cs" />
-    <Compile Include="_Code\Models\Store\Artist.cs" />
-    <Compile Include="_Code\Models\Store\Track.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterArtistPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterFanPresenter.cs" />
