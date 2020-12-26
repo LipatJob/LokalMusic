@@ -5,7 +5,7 @@
 
     <style>
         .nav-link{
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 500;
             color: #5E5E5E;
         }
@@ -28,7 +28,7 @@
                 </li>
             </ul>
 
-            <div class="form-inline my-2 my-lg-0">
+            <div class="form-inline my-2 my-lg-0 mr-xl-4">
                 <asp:TextBox ID="SearchTxt" runat="server" CssClass="form-control mr-sm-2" PlaceHolder="Search"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="" ControlToValidate="SearchTxt"></asp:RequiredFieldValidator>
                 <asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="Search" CssClass="btn btn-light my-2 my-sm-0"/>
@@ -51,7 +51,7 @@
                         <a class="nav-link" href="~/Account/Regsiter" runat="server">Join</a>
                     </li>
                     <li>
-                        <span class="nav-link">or<span/>
+                        <span class="nav-link">or</span>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="~/Account/Login"  runat="server">Login</a>
@@ -64,7 +64,7 @@
             <div>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link ml-xl-5" href="#">
+                        <a class="nav-link ml-xl-4" href="#">
                             <img src="~/Content/Images/cart.png" width="25" height="25" class="d-inline-block align-top" alt="" runat="server">
                         </a>
                     </li>
