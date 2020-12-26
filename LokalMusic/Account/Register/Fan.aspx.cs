@@ -42,7 +42,7 @@ namespace LokalMusic.Account.Register
             var validator = (CustomValidator)source;
             if(Username.Length < 5)
             {
-                validator.ErrorMessage = "Username must have atleast 5 characters";
+                validator.ErrorMessage = "Username must have at least 5 characters";
                 args.IsValid = false;
             }
             else if (presenter.IsUsernameUnique() == false)

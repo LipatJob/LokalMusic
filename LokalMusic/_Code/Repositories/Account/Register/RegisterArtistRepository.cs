@@ -9,49 +9,57 @@ namespace LokalMusic._Code.Repositories.Account.Register
 {
     public class RegisterArtistRepository
     {
-        const string FAN_TYPE_NAME = "ARTIST";
+        const string ACCOUNT_TYPE_NAME = "ARTIST";
         const string ACTIVE_TYPE_NAME = "ACTIVE";
 
-        public bool RegisterFan(IRegisterArtistModel model)
+        private IRegisterArtistModel model;
+        private int userId;
+
+        public bool RegisterArtist(IRegisterArtistModel model)
+        {
+            this.model = model;
+            CreateArtistAccount();
+            CreateArtistProfile();
+            return true;
+        }
+
+        private void CreateArtistAccount()
         {
             int userTypeId = GetUserTypeId();
             int userStatusId = GetUserStatusId();
 
-            string query = 
-                $"INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered) " +
-                $"VALUES @userTypeId, @userStatusId, @email, @username, @password, @dateRegistered";
+            string query =
+                "INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered) " +
+                "VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered) " +
+                "SELECT SCOPE_IDENTITY()";
 
-            DbHelper.ExecuteCommand(
-                query, 
-                ("userTypeId", userTypeId), 
-                ("userStatusId", userStatusId), 
-                ("email", model.Email), 
-                ("username", model.Username), 
-                ("password", model.Password), 
+            userId = DbHelper.ExecuteCommand(
+                query,
+                ("userTypeId", userTypeId),
+                ("userStatusId", userStatusId),
+                ("email", model.Email),
+                ("username", model.Username),
+                ("password", model.Password),
                 ("dateRegistered", DateTime.Now));
-            return true;
         }
 
-        public bool IsUniqueUsername(string username)
+        private void CreateArtistProfile()
         {
-            string query = $"SELECT Username from UserInfo WHERE Username = '@username';";
-            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("username", username));
-            return resultSet.Rows.Count == 0;
-        }
-
-        public bool IsUniqueEmail(string email)
-        {
-            string query = $"SELECT Email from UserInfo WHERE Email = '@email';";
-            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("email", email));
-            return resultSet.Rows.Count == 0;
+            string query =
+                "INSERT INTO ArtistInfo(UserId, ArtistName) VALUES " +
+                "(@UserId, @ArtistName)";
+            DbHelper.ExecuteCommand(
+                query,
+                ("UserId", userId),
+                ("ArtistName", model.ArtistName));
         }
 
         private int GetUserTypeId()
         {
             // Query ID for user type
-            string query = $"SELECT UserTypeId from UserType WHERE TypeName = @FanTypeName;";
-            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("FanTypeName", FAN_TYPE_NAME));
-            return (int) resultSet.Rows[0]["UserTypeId"];
+            string query = $"SELECT UserTypeId from UserType WHERE TypeName = @ArtistTypeName;";
+            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("ArtistTypeName", ACCOUNT_TYPE_NAME));
+            return (int)resultSet.Rows[0]["UserTypeId"];
         }
 
         private int GetUserStatusId()
@@ -60,6 +68,22 @@ namespace LokalMusic._Code.Repositories.Account.Register
             var resultSet = DbHelper.ExecuteDataTableQuery(query, ("ActiveTypeName", ACTIVE_TYPE_NAME));
             return (int)resultSet.Rows[0]["UserStatusId"];
         }
+
+        public bool IsUsernameUnique(string username)
+        {
+            string query = $"SELECT Username from UserInfo WHERE Username = @username;";
+            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("username", username));
+            return resultSet.Rows.Count == 0;
+        }
+
+        public bool IsEmailUnique(string email)
+        {
+            string query = $"SELECT Email from UserInfo WHERE Email = @email;";
+            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("email", email));
+            return resultSet.Rows.Count == 0;
+        }
+
+        
 
     }
 }

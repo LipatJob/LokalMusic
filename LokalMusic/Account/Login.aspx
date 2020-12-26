@@ -24,6 +24,10 @@
             display:flex;
             align-items:baseline;
         }
+
+        .validation-message{
+            color:red;
+        }
     </style>
 
     <div class="signin-form mx-auto">
@@ -35,19 +39,22 @@
             <small style="margin-left:auto; color:black;"> <a href="~/Account/Register/Fan" runat="server"> <u> or Create an Account</u></a> </small>
         </div>
 
+
+        <asp:CustomValidator ErrorMessage="Error Message" ControlToValidate="EmailTxt" runat="server" ID="loginCv" CssClass="validation-message"/>
         <div class="form-group">
             <asp:Label Text="Email" runat="server" />
-            <asp:TextBox ID="EmailTxt" runat="server" CssClass="form-control" type="email"/>
+            <asp:TextBox ID="EmailTxt" runat="server" CssClass="form-control" type="email" />
+            <asp:RequiredFieldValidator ErrorMessage="Please enter your Email" ControlToValidate="EmailTxt" runat="server" CssClass="validation-message"/>
         </div>
 
         <div class="form-group">
             <asp:Label Text="Password" runat="server" />
             <asp:TextBox ID="PasswordTxt" runat="server" CssClass="form-control" type="password"/>
+            <asp:RequiredFieldValidator ErrorMessage="Please enter your password" ControlToValidate="PasswordTxt" runat="server" CssClass="validation-message"/>
         </div>
 
         <div  style="display:flex; flex-direction: row;">
-            <a href="#"> <u>Forgot your Password</u> </a>
-            <asp:Button ID="submitBtn" Text="Sign In" runat="server" CssClass="btn btn-primary"  style="margin-left: auto; width:14ch;"/>
+            <asp:Button ID="submitBtn" Text="Sign In" runat="server" CssClass="btn btn-primary"  style="margin-left: auto; width:12ch;" OnClick="submitBtn_Click"/>
         </div>
         
     </div>

@@ -19,7 +19,7 @@ namespace LokalMusic.Code.Presenters.Account
             this.repository = repository;
         }
 
-        public void Login()
+        public bool Login()
         {
 
             (bool isLoginSuccessful, int userId) = repository.GetLogin(viewModel);
@@ -28,9 +28,11 @@ namespace LokalMusic.Code.Presenters.Account
             {
                 AuthenticationHelper.UserId = userId;
                 NavigationHelper.Redirect("~");
+                return true;
             }
             else
             {
+                return false;
             }
         }
     }

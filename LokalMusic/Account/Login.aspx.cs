@@ -21,23 +21,18 @@ namespace LokalMusic.Webforms.Account
         public string Email { get { return EmailTxt.Text; } set { throw new NotImplementedException(); } }
         public string Password { get { return PasswordTxt.Text; } set { throw new NotImplementedException(); } }
 
-        public void RedirectToHomePage()
-        {
-            Response.Redirect("~/");
-        }
-
-        public void ShowLoginErrorMessage()
-        {
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void submitBtn_Click(object sender, EventArgs e)
         {
-            presenter.Login();
+            bool success = presenter.Login();
+            if (success == false)
+            {
+                loginCv.IsValid = false;
+                loginCv.ErrorMessage = "Please check you email and password";
+            }
         }
     }
 }
