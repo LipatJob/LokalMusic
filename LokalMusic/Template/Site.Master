@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="LokalMusic.SiteMaster" %>
 
+
 <!DOCTYPE html>
 
 <html lang="en">

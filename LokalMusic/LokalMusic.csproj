@@ -276,6 +276,7 @@
   <ItemGroup>
     <Content Include="Account\Register\Artist.aspx" />
     <Content Include="Account\Register\Fan.aspx" />
+    <Content Include="Account\Signout.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -445,6 +446,13 @@
     </Compile>
     <Compile Include="Account\Register\Fan.aspx.designer.cs">
       <DependentUpon>Fan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Signout.aspx.cs">
+      <DependentUpon>Signout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Signout.aspx.designer.cs">
+      <DependentUpon>Signout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Store\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

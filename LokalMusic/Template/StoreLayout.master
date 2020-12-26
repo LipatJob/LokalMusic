@@ -4,7 +4,7 @@
 <asp:Content ID="StoreContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        .nav-link{
+        .nav-link {
             font-size: 18px;
             font-weight: 500;
             color: #5E5E5E;
@@ -17,7 +17,7 @@
             <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
         </a>
 
-        <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -31,35 +31,51 @@
             <div class="form-inline my-2 my-lg-0">
                 <asp:TextBox ID="SearchTxt" runat="server" CssClass="form-control mr-sm-2" PlaceHolder="Search"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="" ControlToValidate="SearchTxt"></asp:RequiredFieldValidator>
-                <asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="Search" CssClass="btn btn-light my-2 my-sm-0"/>
+                <asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="Search" CssClass="btn btn-light my-2 my-sm-0" />
             </div>
 
             <%--Authentication--%>
-            <% if (true) 
+            <% if (AuthenticationHelper.IsLoggedIn())
             {%>
-                <div>
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="~/Account/Collection" runat="server">Name</a>
-                        </li>
-                    </ul>
-                </div>
-            <%} else {%>
-              <div>
+            <div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="~/Account/Collection" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server">
+                            <% Response.Write(AuthenticationHelper.GetUsername()); %>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="~/Account/Collection" runat="server">Collection</a>
+                            <a class="dropdown-item" href="~/Account/Settings" runat="server">Account</a>
+                            <div class="dropdown-divider"></div>
+                            <% if (AuthenticationHelper.GetUserType() == "ARTIST")
+                            {%>
+                            <a class="dropdown-item" href="~/Publish/Albums" runat="server">Publish</a>
+                            <a class="dropdown-item" href="~/Publish/Sales" runat="server">Sales</a>
+                            <div class="dropdown-divider"></div>
+                            <%} %>
+                            <a class="dropdown-item" href="~/Account/Signout" runat="server">Sign out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <%}
+            else
+            {%>
+            <div>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/Account/Regsiter" runat="server">Join</a>
+                        <a class="nav-link" href="~/Account/Regsiter/Fan" runat="server">Join</a>
                     </li>
                     <li>
-                        <span class="nav-link">or<span/>
+                        <span class="nav-link">or<span />
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/Account/Login"  runat="server">Login</a>
+                        <a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>
                     </li>
                 </ul>
             </div>
             <%}%>
-          
+
 
             <div>
                 <ul class="navbar-nav mr-auto">
