@@ -45,20 +45,19 @@ namespace LokalMusic.Code.Helpers
 
         public static int ExecuteCommand(string commandText, params (string name, object value)[] parameters) 
         {
-            int rowsAffected;
+            int affectedRow;
             using (var connection = GetConnection())
             {
-                connection.Open();
-
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = commandText;
                 foreach (var parameter in parameters)
                 {
                     command.Parameters.AddWithValue(parameter.name, parameter.value);
                 }
-                rowsAffected = command.ExecuteNonQuery();
+                connection.Open();
+                affectedRow = Convert.ToInt32(command.ExecuteScalar());
             }
-            return rowsAffected;
+            return affectedRow;
         }
     }
 }

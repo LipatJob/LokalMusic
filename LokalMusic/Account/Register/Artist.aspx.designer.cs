@@ -15,13 +15,22 @@ namespace LokalMusic.Account.Register
     {
 
         /// <summary>
-        /// TextBox1 control.
+        /// ArtistNameTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox ArtistNameTxt;
+
+        /// <summary>
+        /// ArtistNameTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator ArtistNameTxtCv;
 
         /// <summary>
         /// UsernameTxt control.
@@ -33,6 +42,15 @@ namespace LokalMusic.Account.Register
         protected global::System.Web.UI.WebControls.TextBox UsernameTxt;
 
         /// <summary>
+        /// UsernameTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator UsernameTxtCv;
+
+        /// <summary>
         /// EmailTxt control.
         /// </summary>
         /// <remarks>
@@ -40,6 +58,15 @@ namespace LokalMusic.Account.Register
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EmailTxt;
+
+        /// <summary>
+        /// EmailTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator EmailTxtCv;
 
         /// <summary>
         /// PasswordTxt control.
@@ -51,6 +78,15 @@ namespace LokalMusic.Account.Register
         protected global::System.Web.UI.WebControls.TextBox PasswordTxt;
 
         /// <summary>
+        /// PasswordTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator PasswordTxtCv;
+
+        /// <summary>
         /// ConfirmPasswordTxt control.
         /// </summary>
         /// <remarks>
@@ -58,6 +94,15 @@ namespace LokalMusic.Account.Register
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ConfirmPasswordTxt;
+
+        /// <summary>
+        /// ConfirmPasswordTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator ConfirmPasswordTxtCv;
 
         /// <summary>
         /// TosCb control.
@@ -69,12 +114,21 @@ namespace LokalMusic.Account.Register
         protected global::System.Web.UI.WebControls.CheckBox TosCb;
 
         /// <summary>
-        /// submitBtn control.
+        /// TosCbCv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submitBtn;
+        protected global::System.Web.UI.WebControls.CustomValidator TosCbCv;
+
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }
