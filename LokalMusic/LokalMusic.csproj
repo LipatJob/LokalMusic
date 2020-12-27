@@ -276,7 +276,9 @@
   <ItemGroup>
     <Content Include="Account\Register\Artist.aspx" />
     <Content Include="Account\Register\Fan.aspx" />
+    <Content Include="Account\Settings.aspx" />
     <Content Include="Account\Signout.aspx" />
+    <Content Include="Account\WebService1.asmx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -286,7 +288,6 @@
     <Content Include="Content\Images\cart.png" />
     <Content Include="Content\Images\Logo.png" />
     <Content Include="Content\Site.css" />
-    <Content Include="Account\Default.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -447,12 +448,23 @@
     <Compile Include="Account\Register\Fan.aspx.designer.cs">
       <DependentUpon>Fan.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\Settings.aspx.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Settings.aspx.designer.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\Signout.aspx.cs">
       <DependentUpon>Signout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Account\Signout.aspx.designer.cs">
       <DependentUpon>Signout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\WebService1.asmx.cs">
+      <DependentUpon>WebService1.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Store\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -496,6 +508,7 @@
     <Compile Include="_Code\Models\Account\ILoginModel.cs" />
     <Compile Include="_Code\Models\Account\Register\IRegisterArtistModel.cs" />
     <Compile Include="_Code\Models\Account\Register\IRegisterFanModel.cs" />
+    <Compile Include="_Code\Models\Account\PaymentHistoryItem.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterArtistPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterFanPresenter.cs" />
@@ -503,15 +516,9 @@
     <Compile Include="_Code\Repositories\Account\Register\RegisterArtistRepository.cs" />
     <Compile Include="_Code\Repositories\Account\Register\RegisterFanRepository.cs" />
     <Compile Include="_Code\Presenters\Store\HomePresenter.cs" />
+    <Compile Include="_Code\Repositories\Account\SettingsRepository.cs" />
     <Compile Include="_Code\Repositories\Store\HomeRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
-    <Compile Include="Account\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Account\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
