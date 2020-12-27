@@ -285,8 +285,11 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\testpicture1.jpg" />
+    <Content Include="Content\Images\testpicture2.png" />
     <Content Include="Content\Images\cart.png" />
     <Content Include="Content\Images\Logo.png" />
+    <Content Include="Content\Images\testpicture3.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -518,6 +521,7 @@
     <Compile Include="_Code\Presenters\Store\HomePresenter.cs" />
     <Compile Include="_Code\Repositories\Account\SettingsRepository.cs" />
     <Compile Include="_Code\Repositories\Store\HomeRepository.cs" />
+    <Compile Include="_Code\Repositories\ProductRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -570,6 +574,7 @@
     <Folder Include="Cart\" />
     <Folder Include="Pages\" />
     <Folder Include="Publish\" />
+    <Folder Include="_Code\Repositories\Store\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
