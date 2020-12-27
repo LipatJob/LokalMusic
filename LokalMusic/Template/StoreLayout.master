@@ -64,10 +64,10 @@
             <div>
                 <ul class="navbar-nav ml-xl-4">
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/Account/Regsiter/Fan" runat="server">Join</a>
+                        <a class="nav-link" href="~/Account/Register/Fan" runat="server">Join</a>
                     </li>
                     <li>
-                        <span class="nav-link">or<span />
+                        <span class="nav-link">or</span>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>
