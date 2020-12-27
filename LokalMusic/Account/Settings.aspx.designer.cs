@@ -33,6 +33,24 @@ namespace LokalMusic.Account
         protected global::System.Web.UI.WebControls.TextBox EmailTxt;
 
         /// <summary>
+        /// successAlert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl successAlert;
+
+        /// <summary>
+        /// alertMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertMessage;
+
+        /// <summary>
         /// OldPasswordTxt control.
         /// </summary>
         /// <remarks>
@@ -40,6 +58,15 @@ namespace LokalMusic.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox OldPasswordTxt;
+
+        /// <summary>
+        /// OldPasswordTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator OldPasswordTxtCv;
 
         /// <summary>
         /// NewPasswordTxt control.
@@ -51,6 +78,15 @@ namespace LokalMusic.Account
         protected global::System.Web.UI.WebControls.TextBox NewPasswordTxt;
 
         /// <summary>
+        /// NewPasswordTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator NewPasswordTxtCv;
+
+        /// <summary>
         /// ConfirmNewPasswordTxt control.
         /// </summary>
         /// <remarks>
@@ -58,5 +94,23 @@ namespace LokalMusic.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ConfirmNewPasswordTxt;
+
+        /// <summary>
+        /// ConfirmNewPasswordTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator ConfirmNewPasswordTxtCv;
+
+        /// <summary>
+        /// submitBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button submitBtn;
     }
 }
