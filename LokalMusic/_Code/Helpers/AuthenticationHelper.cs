@@ -13,12 +13,12 @@ namespace LokalMusic._Code.Helpers
         private const string UsernameSessionName = "USERNAME";
 
 
-        public static int? UserId 
+        public static int UserId 
         {
             set { HttpContext.Current.Session[UserIdSessionName] = value; }
-            get { return (int?) HttpContext.Current.Session[UserIdSessionName]; }
+            get { return (int) (HttpContext.Current.Session[UserIdSessionName] ?? -1); }
         }
-        public static bool IsLoggedIn() { return UserId != null; }
+        public static bool IsLoggedIn() { return UserId != -1; }
 
         public static void ClearUserSession()
         {

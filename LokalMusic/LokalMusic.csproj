@@ -509,18 +509,19 @@
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
     <Compile Include="_Code\Helpers\NavigationHelper.cs" />
     <Compile Include="_Code\Models\Account\ILoginModel.cs" />
+    <Compile Include="_Code\Models\Account\ISettingsModel.cs" />
     <Compile Include="_Code\Models\Account\Register\IRegisterArtistModel.cs" />
     <Compile Include="_Code\Models\Account\Register\IRegisterFanModel.cs" />
     <Compile Include="_Code\Models\Account\PaymentHistoryItem.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterArtistPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterFanPresenter.cs" />
+    <Compile Include="_Code\Presenters\Account\SettingsPresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
     <Compile Include="_Code\Repositories\Account\Register\RegisterArtistRepository.cs" />
     <Compile Include="_Code\Repositories\Account\Register\RegisterFanRepository.cs" />
     <Compile Include="_Code\Presenters\Store\HomePresenter.cs" />
     <Compile Include="_Code\Repositories\Account\SettingsRepository.cs" />
-    <Compile Include="_Code\Repositories\Store\HomeRepository.cs" />
     <Compile Include="_Code\Repositories\ProductRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Login.aspx.cs">
@@ -564,6 +565,7 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="_Code\Views\Account\ISettingsViewModel.cs" />
     <Compile Include="_Code\Views\Account\Register\IRegisterArtistViewModel.cs" />
     <Compile Include="_Code\Views\Account\Register\IRegisterFanViewModel.cs" />
     <Compile Include="_Code\Views\Store\IHomeViewModel.cs" />
