@@ -1,12 +1,13 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="LokalMusic.SiteMaster" %>
 
+
 <!DOCTYPE html>
 
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - Lokal Music</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -14,6 +15,33 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <style>
+        html, body{
+            height:100%;
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            display:flex;
+            flex-direction:column;
+        }
+
+        .body-content{
+            flex: 1 0 auto;
+        }
+
+
+        nav {
+            background-color: #F6F6F6;
+        }
+
+        footer{
+            flex-shrink: 0;
+        }
+
+    </style>
 
 </head>
 <body>
@@ -38,15 +66,23 @@
             </Scripts>
         </asp:ScriptManager>
 
+
+
         <div class="body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
         </div>
 
+       
+
     </form>
+    
+    <footer >
+        <hr />
+        <div class="container">
+            <p>&copy; <%: DateTime.Now.Year %> - Lokal</p>
+        </div>
+    </footer>
+
 </body>
 </html>

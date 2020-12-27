@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LokalMusic._Code.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,11 @@ namespace LokalMusic
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public string GetRole()
+        {
+            return AuthenticationHelper.GetUserType();
         }
     }
 }

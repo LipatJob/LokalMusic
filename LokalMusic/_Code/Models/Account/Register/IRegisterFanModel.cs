@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace LokalMusic._Code.Views.Account
+namespace LokalMusic._Code.Models.Account.Register
 {
-    interface IRegisterView
+    public interface IRegisterFanModel
     {
         string Email { get; }
+        string Username { get; }
         string Password { get; }
         string ConfirmPassword { get; }
-
     }
 }
