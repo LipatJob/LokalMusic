@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Repositories.Store;
+﻿using LokalMusic._Code.Repositories;
+using LokalMusic._Code.Repositories.Store;
 using LokalMusic._Code.Views.Store;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,10 @@ namespace LokalMusic.Store
         // public Model ModelName { get {return this.modelName;} set { this.modelName = value; }
 
         private HomePresenter presenter;
-        private HomeRepository repository;
+        private ProductRepository repository;
         public Home()
         {
-            this.repository = new HomeRepository();
+            this.repository = new ProductRepository();
             this.presenter = new HomePresenter(this, this.repository);
         }
 

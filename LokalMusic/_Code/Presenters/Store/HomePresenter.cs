@@ -10,9 +10,9 @@ namespace LokalMusic._Code.Repositories.Store
     {
 
         private IHomeViewModel view;
-        private HomeRepository repository;
+        private ProductRepository repository;
 
-        public HomePresenter(IHomeViewModel view, HomeRepository repo)
+        public HomePresenter(IHomeViewModel view, ProductRepository repo)
         {
             this.view = view;
             this.repository = repo;
