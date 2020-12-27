@@ -23,6 +23,7 @@ namespace LokalMusic.Webforms.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            presenter.CheckAuthentication();
         }
 
         protected void submitBtn_Click(object sender, EventArgs e)

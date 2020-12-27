@@ -19,6 +19,14 @@ namespace LokalMusic.Code.Presenters.Account
             this.repository = repository;
         }
 
+        public void CheckAuthentication()
+        {
+            if (AuthenticationHelper.IsLoggedIn())
+            {
+                NavigationHelper.Redirect("~/Store/Home");
+            }
+        }
+
         public bool Login()
         {
 
@@ -27,7 +35,7 @@ namespace LokalMusic.Code.Presenters.Account
             if (isLoginSuccessful)
             {
                 AuthenticationHelper.UserId = userId;
-                NavigationHelper.Redirect("~");
+                NavigationHelper.Redirect("~/Store/Home");
                 return true;
             }
             else
