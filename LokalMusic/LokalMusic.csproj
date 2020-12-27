@@ -506,7 +506,7 @@
     <Compile Include="_Code\Repositories\Account\Register\RegisterArtistRepository.cs" />
     <Compile Include="_Code\Repositories\Account\Register\RegisterFanRepository.cs" />
     <Compile Include="_Code\Presenters\Store\HomePresenter.cs" />
-    <Compile Include="_Code\Repositories\Store\HomeRepository.cs" />
+    <Compile Include="_Code\Repositories\ProductRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -566,6 +566,7 @@
     <Folder Include="Cart\" />
     <Folder Include="Pages\" />
     <Folder Include="Publish\" />
+    <Folder Include="_Code\Repositories\Store\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
