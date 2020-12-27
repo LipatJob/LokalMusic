@@ -1,4 +1,5 @@
 ﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Account;
 using LokalMusic.Code.Repositories.Account;
 using LokalMusic.Code.Views.Account;
 using System;
@@ -10,27 +11,36 @@ namespace LokalMusic.Code.Presenters.Account
 {
     public class LoginPresenter
     {
-        private ILoginView view;
+        private ILoginViewModel viewModel;
         private LoginRepository repository;
-        public LoginPresenter(ILoginView view, LoginRepository repository)
+        public LoginPresenter(ILoginViewModel view, LoginRepository repository)
         {
-            this.view = view;
+            this.viewModel = view;
             this.repository = repository;
         }
 
-        public void Login()
+        public void CheckAuthentication()
+        {
+            if (AuthenticationHelper.IsLoggedIn())
+            {
+                NavigationHelper.Redirect("~/Store/Home");
+            }
+        }
+
+        public bool Login()
         {
 
-            (bool isLoginSuccessful, int userId) = repository.GetLogin(view.email, view.password);
+            (bool isLoginSuccessful, int userId) = repository.GetLogin(viewModel);
 
             if (isLoginSuccessful)
             {
                 AuthenticationHelper.UserId = userId;
-                view.RedirectToHomePage();
+                NavigationHelper.Redirect("~/Store/Home");
+                return true;
             }
             else
             {
-                view.ShowLoginErrorMessage();
+                return false;
             }
         }
     }

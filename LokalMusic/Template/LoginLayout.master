@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="LoginLayout.master.cs" Inherits="LokalMusic.Template.LoginLayout" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    
+    <style>
+        .nav-link{
+            font-size: 18px;
+            font-weight: 500;
+            color: #5E5E5E;
+        }
+    </style>
+
+    <%--Nav--%>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
+        </a>
+
+        <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <div class="container body-content">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+</asp:Content>
