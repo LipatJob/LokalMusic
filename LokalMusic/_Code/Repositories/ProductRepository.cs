@@ -16,15 +16,7 @@ namespace LokalMusic._Code.Repositories
 
         public void GetCompleteProductCatalogue()
         {
-            string query = "SELECT * " + 
-                           "FROM Track " +
-                           "INNER JOIN Product " +
-                           "ON Track.TrackId = Product.ProductId " +
-                           "INNER JOIN Album " +
-                           "ON Track.AlbumId = Album.AlbumId " +
-                           "INNER JOIN ArtistInfo " + 
-                           "ON Album.UserId = ArtistInfo.UserId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + ProductRepository.STATUS_PRODUCT_LISTED + "') ";
+            string query = "SELECT * FROM ArtistInfo";
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
@@ -36,9 +28,7 @@ namespace LokalMusic._Code.Repositories
                 for (int i = 0; i < values.Rows.Count-1; i++)
                 {
                     Artist artist = new Artist();
-
-                    Album tempAlbum = new Album();
-                    Track tempTrack = new Track();
+                    
                 }
             }
         }
