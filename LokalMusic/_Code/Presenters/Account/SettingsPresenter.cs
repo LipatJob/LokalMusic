@@ -31,6 +31,7 @@ namespace LokalMusic._Code.Presenters.Account
         public void ChangePassword()
         {
             repository.UpdatePassword(AuthenticationHelper.UserId, viewModel.NewPassword);
+            NavigationHelper.Redirect("~/Account/Settings?PasswordChanged=True");
         }
 
         public bool CheckOldPassword()

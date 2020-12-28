@@ -30,7 +30,6 @@
 
             <div class="form-inline my-2 my-lg-0">
                 <asp:TextBox ID="SearchTxt" runat="server" CssClass="form-control mr-sm-2" PlaceHolder="Search"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="" ControlToValidate="SearchTxt"></asp:RequiredFieldValidator>
                 <asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="Search" CssClass="btn btn-light my-2 my-sm-0" />
             </div>
 

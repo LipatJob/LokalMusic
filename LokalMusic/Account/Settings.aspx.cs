@@ -27,12 +27,25 @@ namespace LokalMusic.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             presenter.PageLoad();
+            
+            if(IsPasswordChanged())
+            {
+                ShowPasswordChangedMessage();
+            }
+        }
+
+        private bool IsPasswordChanged()
+        {
+            return Request.QueryString["PasswordChanged"] == "True";
+        }
+        private void ShowPasswordChangedMessage()
+        {
+            successAlert.Visible = true;
+            alertMessage.InnerText = "Successfully changed Password";
         }
 
         protected void OldPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            args.IsValid = true;
-            return;
             var validator = (CustomValidator)source;
             if(OldPassword.Length == 0)
             {
@@ -52,8 +65,6 @@ namespace LokalMusic.Account
 
         protected void NewPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            args.IsValid = true;
-            return;
             var validator = (CustomValidator)source;
             if (NewPassword.Length == 0)
             {
@@ -73,15 +84,13 @@ namespace LokalMusic.Account
 
         protected void ConfirmNewPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            args.IsValid = true;
-            return;
             var validator = (CustomValidator)source;
             if (ConfrimNewPassword.Length == 0)
             {
                 validator.ErrorMessage = "This is a required field";
                 args.IsValid = false;
             }
-            if (NewPassword != ConfrimNewPassword)
+            else if (NewPassword != ConfrimNewPassword)
             {
                 validator.ErrorMessage = "Password confirmation does not match";
                 args.IsValid = false;
@@ -97,15 +106,8 @@ namespace LokalMusic.Account
         {
             if(Page.IsValid)
             {
-                //presenter.ChangePassword();
-                ShowSuccessMessage();
+                presenter.ChangePassword();
             }
-        }
-
-        private void ShowSuccessMessage()
-        {
-            successAlert.Visible = true;
-            alertMessage.InnerText = "Successfully changed Password";
         }
     }
 }
