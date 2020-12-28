@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LokalMusic._Code.Models.Products;
+using LokalMusic.Code.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +11,9 @@ namespace LokalMusic._Code.Repositories
 {
     public class ProductRepository
     {
+
+        const string STATUS_PRODUCT_LISTED = "LISTED";
+
         public void GetCompleteProductCatalogue()
         {
             string query = "SELECT * " + 
@@ -19,7 +24,23 @@ namespace LokalMusic._Code.Repositories
                            "ON Track.AlbumId = Album.AlbumId " +
                            "INNER JOIN ArtistInfo " + 
                            "ON Album.UserId = ArtistInfo.UserId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') ";
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + ProductRepository.STATUS_PRODUCT_LISTED + "') ";
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            List<Artist> artists = new List<Artist>();
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count-1; i++)
+                {
+                    Artist artist = new Artist();
+
+                    Album tempAlbum = new Album();
+                    Track tempTrack = new Track();
+                }
+            }
         }
 
         public void GetProductByArtist(/*IArtistModel or Id or Name*/)
@@ -32,9 +53,17 @@ namespace LokalMusic._Code.Repositories
                            "ON Track.AlbumId = Album.AlbumId " +
                            "INNER JOIN ArtistInfo " +
                            "ON Album.UserId = ArtistInfo.UserId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
-                           "AND ArtistInfo.UserId = 0 " +
-                           "AND ArtistInfo.ArtistName = ' '";
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + ProductRepository.STATUS_PRODUCT_LISTED + "') " +
+                           "AND ArtistInfo.UserId = @UserId " +
+                           "AND ArtistInfo.ArtistName = @ArtistName";
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+
+            }
         }
 
         public void GetProductByAlbum(/*IAlbum or Id or Name*/)
@@ -47,9 +76,17 @@ namespace LokalMusic._Code.Repositories
                            "ON Track.AlbumId = Album.AlbumId " +
                            "INNER JOIN ArtistInfo " +
                            "ON Album.UserId = ArtistInfo.UserId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
-                           "AND Album.AlbumName = ' ' " +
-                           "AND Album.Album.Id = 0";
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + ProductRepository.STATUS_PRODUCT_LISTED + "') " +
+                           "AND Album.AlbumName = @AlbumName " +
+                           "AND Album.Album.Id = @AlbumId ";
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+
+            }
         }
 
         public void GetProductByTrack(/*ITrack or Id or Name*/)
@@ -62,9 +99,17 @@ namespace LokalMusic._Code.Repositories
                            "ON Track.AlbumId = Album.AlbumId " +
                            "INNER JOIN ArtistInfo " +
                            "ON Album.UserId = ArtistInfo.UserId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
-                           "AND Track.TrackName = ' ' " +
-                           "AND Track.TrackId = 0";
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + ProductRepository.STATUS_PRODUCT_LISTED + "') " +
+                           "AND Track.TrackName = @TrackName " +
+                           "AND Track.TrackId = @TrackId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+
+            }
         }
 
     }
