@@ -14,23 +14,115 @@ namespace LokalMusic._Code.Repositories
 
         const string STATUS_PRODUCT_LISTED = "LISTED";
 
-        public void GetCompleteProductCatalogue()
+        public List<Artist> GetCompleteProductCatalogue()
         {
+            List<Artist> artists = new List<Artist>();
+
             string query = "SELECT * FROM ArtistInfo";
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
 
-            List<Artist> artists = new List<Artist>();
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    Artist artist = new Artist(
+                        (int)values.Rows[i]["UserId"],
+                        values.Rows[i]["ArtistName"].ToString(),
+                        values.Rows[i]["Location"].ToString(),
+                        values.Rows[i]["Bio"].ToString());
+
+                    artist.Albums = GetAlbumsByUserId(artist.ArtistId);
+
+                    artists.Add(artist);                    
+                }
+            }
+
+            return artists.Count > 0 ? artists : null;
+        }
+
+        public List<Album> GetAlbumsByUserId(int userId)
+        {
+            List<Album> albums = new List<Album>();
+
+            string query = "SELECT * " +
+                           "FROM Album " +
+                           "INNER JOIN Product " +
+                           "ON Album.AlbumId = Product.ProductId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
+                           "AND Album.UserId = @UserId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
+            bool valid = values.Rows.Count > 0;
 
             if (valid)
             {
-                for (int i = 0; i < values.Rows.Count-1; i++)
+                for (int i = 0; i < values.Rows.Count; i++)
                 {
-                    Artist artist = new Artist();
-                    
+                    Album album = new Album(
+                        (int)values.Rows[i]["AlbumId"],
+                        (int)values.Rows[i]["AlbumCoverId"],
+                        values.Rows[i]["AlbumName"].ToString(),
+                        values.Rows[i]["Description"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["DateReleased"]),
+                        (int)values.Rows[i]["UserId"]);
+
+                    album.Tracks = GetTracksByAlbumId(album.AlbumId);
+
+                    albums.Add(album);
                 }
             }
+
+            return albums.Count > 0 ? albums : null;
+        }
+
+        public List<Track> GetTracksByAlbumId(int albumId)
+        {
+            List<Track> tracks = new List<Track>();
+
+            string query = "SELECT * " +
+                           "FROM Track " +
+                           "INNER JOIN Product " +
+                           "ON Track.TrackId = Product.ProductId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
+                           "AND AlbumId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    //TrackId = trackId;
+                    //AlbumId = albumId;
+                    //GenreId = genreId;
+                    //TrackFileId = trackFileId;
+                    //ClipFileId = clipFileId;
+
+                    //TrackName = trackName;
+                    //TrackDuration = trackDuration;
+                    //Description = description;
+                    //ClipDuration = clipDuration;
+
+                    Track track = new Track(
+                        (int)values.Rows[i]["TrackId"],
+                        (int)values.Rows[i]["AlbumId"],
+                        (int)values.Rows[i]["GenreId"],
+                        (int)values.Rows[i]["TrackFileId"],
+                        (int)values.Rows[i]["ClipFileId"],
+                        values.Rows[i]["TrackName"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["TrackDuration"]),
+                        values.Rows[i]["Description"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["ClipDuration"])
+                        );
+
+                    tracks.Add(track);
+                }
+            }
+
+            return tracks.Count > 0 ? tracks : null;
         }
 
         public void GetProductByArtist(/*IArtistModel or Id or Name*/)
@@ -52,7 +144,10 @@ namespace LokalMusic._Code.Repositories
 
             if (valid)
             {
+                for (int i = 0; i < values.Rows.Count - 1; i++)
+                {
 
+                }
             }
         }
 
