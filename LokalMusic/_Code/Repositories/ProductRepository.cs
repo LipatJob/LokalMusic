@@ -113,9 +113,9 @@ namespace LokalMusic._Code.Repositories
                         (int)values.Rows[i]["TrackFileId"],
                         (int)values.Rows[i]["ClipFileId"],
                         values.Rows[i]["TrackName"].ToString(),
-                        Convert.ToDateTime(values.Rows[i]["TrackDuration"]),
+                        TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()),
                         values.Rows[i]["Description"].ToString(),
-                        Convert.ToDateTime(values.Rows[i]["ClipDuration"])
+                        TimeSpan.Parse(values.Rows[i]["ClipDuration"].ToString())
                         );
 
                     tracks.Add(track);
