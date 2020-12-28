@@ -292,6 +292,7 @@
     <Content Include="Content\Images\testpicture3.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Fan\Collection.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -469,6 +470,13 @@
       <DependentUpon>WebService1.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Fan\Collection.aspx.cs">
+      <DependentUpon>Collection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fan\Collection.aspx.designer.cs">
+      <DependentUpon>Collection.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Store\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -513,15 +521,18 @@
     <Compile Include="_Code\Models\Account\Register\IRegisterArtistModel.cs" />
     <Compile Include="_Code\Models\Account\Register\IRegisterFanModel.cs" />
     <Compile Include="_Code\Models\Account\PaymentHistoryItem.cs" />
+    <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterArtistPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterFanPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\SettingsPresenter.cs" />
+    <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
     <Compile Include="_Code\Repositories\Account\Register\RegisterArtistRepository.cs" />
     <Compile Include="_Code\Repositories\Account\Register\RegisterFanRepository.cs" />
     <Compile Include="_Code\Presenters\Store\HomePresenter.cs" />
     <Compile Include="_Code\Repositories\Account\SettingsRepository.cs" />
+    <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
     <Compile Include="_Code\Repositories\ProductRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Login.aspx.cs">
@@ -577,6 +588,7 @@
     <Folder Include="Pages\" />
     <Folder Include="Publish\" />
     <Folder Include="_Code\Repositories\Store\" />
+    <Folder Include="_Code\Views\Fan\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
