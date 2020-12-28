@@ -22,6 +22,8 @@ namespace LokalMusic.Store
         {
             this.repository = new ProductRepository();
             this.presenter = new HomePresenter(this, this.repository);
+
+            repository.GetCompleteProductCatalogue();
         }
 
         protected void Page_Load(object sender, EventArgs e)
