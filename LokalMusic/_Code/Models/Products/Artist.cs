@@ -7,6 +7,14 @@ namespace LokalMusic._Code.Models.Products
 {
     public class Artist
     {
+        public Artist(int artistId, string artistName, string location, string bio)
+        {
+            ArtistId = artistId;
+            ArtistName = artistName;
+            Location = location;
+            Bio = bio;
+        }
+
         public int ArtistId { get; set; }
         public string ArtistName { get; set; }
         public string Location { get; set; }
