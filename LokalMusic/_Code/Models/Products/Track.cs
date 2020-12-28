@@ -12,7 +12,7 @@ namespace LokalMusic._Code.Models.Products
 
         }
 
-        public Track(int trackId, int albumId, int genreId, int trackFileId, int clipFileId, string trackName, DateTime trackDuration, string description, DateTime clipDuration)
+        public Track(int trackId, int albumId, int genreId, int trackFileId, int clipFileId, string trackName, TimeSpan trackDuration, string description, TimeSpan clipDuration)
         {
             TrackId = trackId;
             AlbumId = albumId;
@@ -32,9 +32,9 @@ namespace LokalMusic._Code.Models.Products
         public int ClipFileId { get; set; }
 
         public string TrackName { get; set; }
-        public DateTime TrackDuration { get; set; }
+        public TimeSpan TrackDuration { get; set; }
         public string Description { get; set; }
-        public DateTime ClipDuration { get; set; }
+        public TimeSpan ClipDuration { get; set; }
 
         // FileInfo
         // FileType?
