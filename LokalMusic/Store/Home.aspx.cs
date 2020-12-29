@@ -22,7 +22,7 @@ namespace LokalMusic.Store
         private ProductRepository repository;
 
         public List<Artist> topArtists;
-        public List<AlbumCollection> bestSellingAlbums;
+        public List<AlbumProduct> bestSellingAlbums;
 
         public Home()
         {

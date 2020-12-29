@@ -5,11 +5,11 @@ using System.Web;
 
 namespace LokalMusic._Code.Models.Store
 {
-    public class AlbumCollection
+    public class AlbumProduct
     {
-        public AlbumCollection() { }
+        public AlbumProduct() { }
 
-        public AlbumCollection(int albumId, string albumName, string description, DateTime dateReleased, decimal price, string producerName, DateTime dateAdded, int artistId, string artistName, string artistLocation, string bio, string fileName)
+        public AlbumProduct(int albumId, string albumName, string description, DateTime dateReleased, decimal price, string producerName, DateTime dateAdded, int artistId, string artistName, string artistLocation, string bio, string fileName)
         {
             AlbumId = albumId;
             AlbumName = albumName;

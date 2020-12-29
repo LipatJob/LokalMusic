@@ -20,7 +20,7 @@ namespace LokalMusic._Code.Repositories.Store
             this.repository = repo;
         }
 
-        public List<AlbumCollection> GetBestSellingAlbums()
+        public List<AlbumProduct> GetBestSellingAlbums()
         {
             return this.repository.GetAlbums();
         }
