@@ -30,6 +30,11 @@ namespace LokalMusic._Code.Repositories.Store
             return this.repository.GetArtists();
         }
 
+        public List<Track> GetFamousTracks()
+        {
+            return this.repository.GetTracks();
+        }
+
         public void Home()
         {
             //

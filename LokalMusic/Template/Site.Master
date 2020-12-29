@@ -86,12 +86,12 @@
 
     </form>
     
-    <footer >
+<%--    <footer >
         <hr />
         <div class="container">
             <p>&copy; <%: DateTime.Now.Year %> - Lokal</p>
         </div>
-    </footer>
+    </footer>--%>
 
 </body>
 </html>

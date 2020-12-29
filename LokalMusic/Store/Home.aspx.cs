@@ -23,6 +23,7 @@ namespace LokalMusic.Store
 
         public List<Artist> topArtists;
         public List<AlbumProduct> bestSellingAlbums;
+        public List<Track> famousTracks;
 
         public Home()
         {
@@ -33,6 +34,7 @@ namespace LokalMusic.Store
         {
             this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
             this.topArtists = this.presenter.GetTopArtists();
+            this.famousTracks = this.presenter.GetFamousTracks();
         }
 
         

@@ -9,6 +9,24 @@ namespace LokalMusic._Code.Models.Products
     {
         public Track(){ }
 
+        public Track(int trackId, string trackName, string description, TimeSpan trackDuration, TimeSpan clipDuration, DateTime dateAdded, DateTime dateReleased, decimal price, string producerName, string clipFileAddress, int artistId, string artistName, int albumId, string genre)
+        {
+            TrackId = trackId;
+            TrackName = trackName;
+            Description = description;
+            TrackDuration = trackDuration;
+            ClipDuration = clipDuration;
+            DateAdded = dateAdded;
+            DateReleased = dateReleased;
+            Price = price;
+            ProducerName = producerName;
+            ClipFileAddress = clipFileAddress;
+            ArtistId = artistId;
+            ArtistName = artistName;
+            AlbumId = albumId;
+            Genre = genre;
+        }
+
         public int TrackId { get; set; }
         public string TrackName { get; set; }
         public string Description { get; set; }
