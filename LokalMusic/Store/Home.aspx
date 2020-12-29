@@ -99,7 +99,6 @@
                                 <p><%Response.Write(album.AlbumName);%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%Response.Write(album.Price);%></p>
                                 <p class="by-artist float-right" style="color:#767676;"><%Response.Write(album.ArtistName);%></p>
-
                             </div>
                         </div>
                     </a>                    
