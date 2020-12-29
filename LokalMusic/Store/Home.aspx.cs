@@ -20,7 +20,8 @@ namespace LokalMusic.Store
 
         private HomePresenter presenter;
         private ProductRepository repository;
-        public List<Artist> lokalArtist;
+
+        public List<Artist> topArtists;
         public List<AlbumCollection> bestSellingAlbums;
 
         public Home()
@@ -31,6 +32,7 @@ namespace LokalMusic.Store
         protected void Page_Load(object sender, EventArgs e)
         {
             this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
+            this.topArtists = this.presenter.GetTopArtists();
         }
 
         

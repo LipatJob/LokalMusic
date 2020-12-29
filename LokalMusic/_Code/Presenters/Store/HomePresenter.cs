@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Models.Store;
+﻿using LokalMusic._Code.Models.Products;
+using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Views.Store;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,11 @@ namespace LokalMusic._Code.Repositories.Store
         public List<AlbumCollection> GetBestSellingAlbums()
         {
             return this.repository.GetAlbums();
+        }
+
+        public List<Artist> GetTopArtists()
+        {
+            return this.repository.GetArtists();
         }
 
         public void Home()
