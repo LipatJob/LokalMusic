@@ -17,6 +17,11 @@ namespace LokalMusic
 
         public static void RegisterCustomRoutes(RouteCollection routes)
         {
+            routes.MapPageRoute(
+                "Collection",
+                "Fan/{UserId}/Collection",
+                "~/Fan/Collection.aspx"
+            );
         }
 
 

@@ -12,6 +12,7 @@ namespace LokalMusic.Template
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CollectionLink.HRef = $"~/Fan/{AuthenticationHelper.UserId}/Collection";
         }
 
         protected void Search(object sender, EventArgs e)
