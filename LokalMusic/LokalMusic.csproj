@@ -432,7 +432,9 @@
     <Content Include="Account\Login.aspx">
       <BrowseToURL>~/Account/Login.aspx</BrowseToURL>
     </Content>
+    <Content Include="Store\AlbumsPage.aspx" />
     <Content Include="Store\Home.aspx" />
+    <Content Include="Store\TracksPage.aspx" />
     <Content Include="Template\Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -479,12 +481,26 @@
     <Compile Include="Fan\Collection.aspx.designer.cs">
       <DependentUpon>Collection.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Store\AlbumsPage.aspx.cs">
+      <DependentUpon>AlbumsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Store\AlbumsPage.aspx.designer.cs">
+      <DependentUpon>AlbumsPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Store\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Store\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Store\TracksPage.aspx.cs">
+      <DependentUpon>TracksPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Store\TracksPage.aspx.designer.cs">
+      <DependentUpon>TracksPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Template\AdminLayout.master.cs">
       <DependentUpon>AdminLayout.master</DependentUpon>
@@ -513,6 +529,13 @@
     </Compile>
     <Compile Include="Template\StoreLayout.master.designer.cs">
       <DependentUpon>StoreLayout.master</DependentUpon>
+    </Compile>
+    <Compile Include="Template\StoreLayoutWithSideNav.master.cs">
+      <DependentUpon>StoreLayoutWithSideNav.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template\StoreLayoutWithSideNav.master.designer.cs">
+      <DependentUpon>StoreLayoutWithSideNav.master</DependentUpon>
     </Compile>
     <Compile Include="_Code\Helpers\AuthenticationHelper.cs" />
     <Compile Include="_Code\Helpers\DbHelper.cs" />
@@ -603,6 +626,7 @@
     <Content Include="Template\CreatorLayout.master" />
     <Content Include="Template\AdminLayout.master" />
     <Content Include="Template\LoginLayout.master" />
+    <Content Include="Template\StoreLayoutWithSideNav.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

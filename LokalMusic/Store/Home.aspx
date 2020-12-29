@@ -138,7 +138,7 @@
     <div id="famous-tracks" class="container mt-4">
         <div class="row mb-4">
             <h5 class="my-auto">Famous Tracks</h5>
-            <a href="Store/ArtistPage.aspx" class="text-danger ml-2 view-all my-auto">View All</a>
+            <a href="Store/TracksPage.aspx" class="text-danger ml-2 view-all my-auto">View All</a>
         </div>
 
         <%--Track--%>
