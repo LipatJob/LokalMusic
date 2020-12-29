@@ -33,31 +33,76 @@ namespace LokalMusic.Account
         protected global::System.Web.UI.WebControls.TextBox EmailTxt;
 
         /// <summary>
-        /// FileUploadControl control.
+        /// changeProfilePictureAlert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadControl;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeProfilePictureAlert;
 
         /// <summary>
-        /// successAlert control.
+        /// changeProfilePictureMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl successAlert;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeProfilePictureMessage;
 
         /// <summary>
-        /// alertMessage control.
+        /// ProfilePictureImg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertMessage;
+        protected global::System.Web.UI.WebControls.Image ProfilePictureImg;
+
+        /// <summary>
+        /// ProfilePictureFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ProfilePictureFile;
+
+        /// <summary>
+        /// ProfilePictureFileCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator ProfilePictureFileCv;
+
+        /// <summary>
+        /// submitProfilePicture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button submitProfilePicture;
+
+        /// <summary>
+        /// changePasswordSuccessAlert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changePasswordSuccessAlert;
+
+        /// <summary>
+        /// changePasswordSuccessMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changePasswordSuccessMessage;
 
         /// <summary>
         /// OldPasswordTxt control.

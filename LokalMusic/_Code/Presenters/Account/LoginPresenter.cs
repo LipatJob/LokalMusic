@@ -1,13 +1,13 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Models.Account;
-using LokalMusic.Code.Repositories.Account;
-using LokalMusic.Code.Views.Account;
+using LokalMusic._Code.Repositories.Account;
+using LokalMusic._Code.Views.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LokalMusic.Code.Presenters.Account
+namespace LokalMusic._Code.Presenters.Account
 {
     public class LoginPresenter
     {

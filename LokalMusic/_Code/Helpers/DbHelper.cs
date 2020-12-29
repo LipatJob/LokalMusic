@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace LokalMusic.Code.Helpers
+namespace LokalMusic._Code.Helpers
 {
     public class DbHelper
     {

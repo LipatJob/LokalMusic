@@ -1,6 +1,6 @@
 ﻿using LokalMusic._Code.Models.Products;
 using LokalMusic._Code.Models.Store;
-using LokalMusic.Code.Helpers;
+using LokalMusic._Code.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

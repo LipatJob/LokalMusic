@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LokalMusic.Code.Views.Account
+namespace LokalMusic._Code.Views.Account
 {
     public interface ILoginViewModel : ILoginModel
     {

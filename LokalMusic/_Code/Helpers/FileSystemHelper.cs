@@ -9,32 +9,36 @@ namespace LokalMusic._Code.Helpers
 {
     public class FileSystemHelper
     {
-        public static bool TryUploadFile(string filename, string containerName, HttpPostedFile file)
+        public const string PICTURE_CONTAINER_NAME = "profilepictures";
+
+        public static bool TryUploadFile(string filename, string containerName, HttpPostedFile file, out string fileLocation)
         {
             try
             {
-                UploadFile(filename, containerName, file);
+                fileLocation = UploadFile(filename, containerName, file);
                 return true;
             }
             catch (Exception)
             {
+                fileLocation = "";
                 return false;
             }
         }
 
-        private static void UploadFile(string filename, string containerName, HttpPostedFile file)
+        public static string UploadFile(string filename, string containerName, HttpPostedFile file, bool overwrite = false)
         {
             BlobClient blobClient = GetBlobContainerClient(containerName).GetBlobClient(filename);
             using (var inputStream = file.InputStream)
             {
-                blobClient.Upload(inputStream);
+                blobClient.Upload(inputStream, overwrite: overwrite);
             }
+            return blobClient.Uri.AbsoluteUri;
         }
 
         private static BlobContainerClient GetBlobContainerClient(string containerName)
         {
             BlobServiceClient blobServiceClient = new BlobServiceClient(GetConnectionString());
-            BlobContainerClient containerClient = blobServiceClient.CreateBlobContainer(containerName);
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
             return containerClient;
         }
 

@@ -45,6 +45,11 @@ namespace LokalMusic._Code.Presenters.Account
             SettingsRepository repository = new SettingsRepository();
             return repository.GetPaymentHistory(AuthenticationHelper.UserId).ToList();
         }
+
+        public void UpdateProfilePicture()
+        {
+            repository.ChangeProfilePicture(AuthenticationHelper.UserId, viewModel.UploadedProfilePicture);
+        }
     }
 
 }
