@@ -19,7 +19,7 @@ namespace LokalMusic.Store
         // public Model ModelName { get {return this.modelName;} set { this.modelName = value; }
 
         private HomePresenter presenter;
-        private ProductRepository repository;
+        private StoreRepository repository;
 
         public List<Artist> topArtists;
         public List<AlbumProduct> bestSellingAlbums;
@@ -27,7 +27,7 @@ namespace LokalMusic.Store
 
         public Home()
         {
-            this.presenter = new HomePresenter(this, new ProductRepository());
+            this.presenter = new HomePresenter(this, new StoreRepository());
         }
 
         protected void Page_Load(object sender, EventArgs e)
