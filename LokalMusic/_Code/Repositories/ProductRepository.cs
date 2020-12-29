@@ -63,7 +63,7 @@ namespace LokalMusic._Code.Repositories
                     Album album = new Album(
                         (int)values.Rows[i]["AlbumId"],
                         (int)values.Rows[i]["AlbumCoverId"],
-                        values.Rows[i]["AlbumName"].ToString(),
+                        values.Rows[i]["ProductName"].ToString(),
                         values.Rows[i]["Description"].ToString(),
                         Convert.ToDateTime(values.Rows[i]["DateReleased"]),
                         (int)values.Rows[i]["UserId"]);
@@ -112,7 +112,7 @@ namespace LokalMusic._Code.Repositories
                         (int)values.Rows[i]["GenreId"],
                         (int)values.Rows[i]["TrackFileId"],
                         (int)values.Rows[i]["ClipFileId"],
-                        values.Rows[i]["TrackName"].ToString(),
+                        values.Rows[i]["ProductName"].ToString(),
                         TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()),
                         values.Rows[i]["Description"].ToString(),
                         TimeSpan.Parse(values.Rows[i]["ClipDuration"].ToString())

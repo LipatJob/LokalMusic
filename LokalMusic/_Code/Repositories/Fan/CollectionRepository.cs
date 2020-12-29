@@ -10,6 +10,19 @@ namespace LokalMusic._Code.Repositories.Fan
 {
     public class CollectionRepository
     {
+        public CollectionModel SetUserInformation(int userId)
+        {
+            string query = "SELECT Username, DateRegistered FROM UserInfo WHERE UserId = @UserId";
+            var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
+            var model = new CollectionModel()
+            {
+                Username = (string)result.Rows[0]["Username"],
+                DateRegistered = (DateTime)result.Rows[0]["DateRegistered"],
+                Collection = GetCollection(userId)
+            };
+            return model;
+        }
+
         public ICollection<CollectionItem> GetCollection(int userId)
         {
             List<CollectionItem> items = new List<CollectionItem>();
@@ -42,7 +55,7 @@ namespace LokalMusic._Code.Repositories.Fan
             foreach (DataRow row in result.Rows)
             {
                 items.Add(new CollectionItem() {
-                    CoverLink = (string)row["CoverLink"],
+                    CoverLink = (string)row["FileName"],
                     ProductName = (string)row["ProductName"],
                     ArtistName = (string)row["ArtistName"],
                     ProductType = (string)row["ProductName"],

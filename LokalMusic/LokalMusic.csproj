@@ -522,6 +522,7 @@
     <Compile Include="_Code\Models\Account\Register\IRegisterFanModel.cs" />
     <Compile Include="_Code\Models\Account\PaymentHistoryItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
+    <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
     <Compile Include="_Code\Models\Products\Album.cs" />
     <Compile Include="_Code\Models\Products\Artist.cs" />
     <Compile Include="_Code\Models\Products\Track.cs" />
