@@ -129,9 +129,9 @@ namespace LokalMusic._Code.Repositories
             return tracks.Count > 0 ? tracks : null;
         }
 
-        public List<AlbumCollection> GetAlbums()
+        public List<AlbumProduct> GetAlbums()
         {
-            List<AlbumCollection> albums = new List<AlbumCollection>();
+            List<AlbumProduct> albums = new List<AlbumProduct>();
 
             string query = "SELECT * " +
                            "FROM Product " +
@@ -150,7 +150,7 @@ namespace LokalMusic._Code.Repositories
             {
                 for (int i = 0; i < values.Rows.Count; i++)
                 {
-                    AlbumCollection album = new AlbumCollection(
+                    AlbumProduct album = new AlbumProduct(
                         (int)values.Rows[i]["AlbumId"],
                         values.Rows[i]["ProductName"].ToString(),
                         values.Rows[i]["Description"].ToString(),
@@ -170,6 +170,8 @@ namespace LokalMusic._Code.Repositories
 
             return albums.Count > 0 ? albums : null;
         }
+
+
 
         public void GetProductByArtist(/*IArtistModel or Id or Name*/)
         {
