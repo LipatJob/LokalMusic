@@ -26,7 +26,7 @@
             padding: 0px 3px 0px 3px;
         }
 
-        .view-all:hover, #best-selling-albums a:hover{
+        .view-all:hover, #best-selling-albums a:hover, #top-artists a:hover{
             text-decoration: none;
         }
 
@@ -109,10 +109,37 @@
     </div>
 
     <div id="top-artists" class="container mt-4">
-        <div class="row">
+        <div class="row mb-4">
             <h5 class="my-auto">Top Artists</h5>
             <a href="Store/ArtistPage.aspx" class="text-danger ml-2 view-all my-auto">View All</a>
         </div> 
+
+        <%--Artists--%>
+        <div class="row">   
+            
+            <%foreach (var artist in topArtists)
+            {%>
+                <div class="col-md-2">
+                    <a href="#" >
+                        <div class="card border-0">
+                            <img src="../Content/Images/default_artist_image.JPG" class="card-img-top" alt="artist-name"/>
+                            <div class="card-body">
+                                <p style="font-size: 15px;"><%Response.Write(artist.ArtistName);%></p>
+                                <p class=""><%Response.Write(artist.Bio);%></p>
+                            </div>
+                        </div>
+                    </a>                    
+                </div>
+            <%}%>
+        </div>
+
+    </div>
+
+    <div id="famous-tracks" class="container mt-4">
+        <div class="row mb-4">
+            <h5 class="my-auto">Famous Tracks</h5>
+            <a href="Store/ArtistPage.aspx" class="text-danger ml-2 view-all my-auto">View All</a>
+        </div>
     </div>
 
 </asp:Content>
