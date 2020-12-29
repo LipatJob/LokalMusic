@@ -8,12 +8,17 @@ namespace LokalMusic._Code.Models.Products
     public class Artist
     {
         public Artist() { }
-        public Artist(int artistId, string artistName, string location, string bio)
+
+        public Artist(int artistId, string artistName, string location, string bio, string email, string userName, DateTime dateRegistered, string profileImage)
         {
             ArtistId = artistId;
             ArtistName = artistName;
             Location = location;
             Bio = bio;
+            Email = email;
+            UserName = userName;
+            DateRegistered = dateRegistered;
+            ProfileImage = profileImage;
         }
 
         public int ArtistId { get; set; } // UserId

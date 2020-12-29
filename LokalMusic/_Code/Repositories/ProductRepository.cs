@@ -15,11 +15,17 @@ namespace LokalMusic._Code.Repositories
 
         const string STATUS_PRODUCT_LISTED = "LISTED";
 
-        public List<Artist> GetCompleteProductCatalogue()
+        public List<Artist> GetArtists(bool artistInfoOnly = true)
         {
             List<Artist> artists = new List<Artist>();
 
-            string query = "SELECT * FROM ArtistInfo";
+            string query = "SELECT * " +
+                           "FROM ArtistInfo " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "LEFT JOIN FileInfo " +
+                           "ON UserInfo.ProfileImageId = FileInfo.FileId " +
+                           "WHERE UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = 'ACTIVE')";
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
@@ -28,13 +34,20 @@ namespace LokalMusic._Code.Repositories
             {
                 for (int i = 0; i < values.Rows.Count; i++)
                 {
+
                     Artist artist = new Artist(
                         (int)values.Rows[i]["UserId"],
                         values.Rows[i]["ArtistName"].ToString(),
                         values.Rows[i]["Location"].ToString(),
-                        values.Rows[i]["Bio"].ToString());
+                        values.Rows[i]["Bio"].ToString(),
+                        values.Rows[i]["Email"].ToString(),
+                        values.Rows[i]["Username"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["DateRegistered"].ToString()),
+                        values.Rows[i]["FileName"].ToString()
+                        );
 
-                    artist.Albums = GetAlbumsByUserId(artist.ArtistId);
+                    if (!artistInfoOnly)
+                        artist.Albums = GetAlbumsByUserId(artist.ArtistId);
 
                     artists.Add(artist);                    
                 }
