@@ -68,6 +68,7 @@
             </div>
         </div>
         <hr />
+        <h3>Collection</h3>
         <div class="collection-container">
             <%foreach (var product in Model.Collection)
             {%>

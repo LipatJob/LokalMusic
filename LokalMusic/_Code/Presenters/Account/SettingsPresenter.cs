@@ -1,4 +1,5 @@
 ﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Account;
 using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
 using System;
@@ -39,6 +40,11 @@ namespace LokalMusic._Code.Presenters.Account
             return repository.CheckPassword(AuthenticationHelper.UserId, viewModel.OldPassword);
         }
 
+        public static List<PaymentHistoryItem> GetPaymentHistory()
+        {
+            SettingsRepository repository = new SettingsRepository();
+            return repository.GetPaymentHistory(AuthenticationHelper.UserId).ToList();
+        }
     }
 
 }

@@ -15,8 +15,7 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css"/> 
     <style>
         html, body{
             height:100%;
@@ -52,10 +51,7 @@
 </head>
 <body>
     <form runat="server">
-  
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server" EnablePageMethods="true">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -74,6 +70,8 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 
 
 

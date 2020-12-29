@@ -22,9 +22,14 @@
             max-width:400px;
         }
 
+        #purchaseHistoryGv{
+            width:100%;
+        }
+
     </style>
 
     <div class="container mt-3">
+        <h4>Account Settings</h4>
         <div class="row ">
             <div class="col-6">
                 <div class="item-group mx-auto">
@@ -84,13 +89,79 @@
                     </div>
                 </div>
             </div>
+        
+            
+        </div>
+        <hr />
+
+        <div class="row">
+            <h4>Purchase History</h4>
+            <div class="col-12">
+                <table class="table table-striped table-bordered table-hover dt-responsive" id="purchaseHistoryGv" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Time Purchased</th>
+                            <th>Items Purchased</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
     </div>
 
-    <script>
-        $(document).ready(function () {
-          bsCustomFileInput.init()
-        })
-    </script>
+     <script type="text/javascript">
+         $(function () {
+             bsCustomFileInput.init()
+
+             $.ajax({
+                 type: "POST",
+                 url: "/Account/Settings.aspx/GetPaymentHistory",
+                 data: '{}',
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: OnSuccess,
+                 failure: function (response) {
+                     alert(JSON.stringify(response));
+                 },
+                 error: function (response) {
+                     alert(JSON.stringify(response));
+                 }
+             });
+         });
+         function OnSuccess(response) {
+             $("#purchaseHistoryGv").DataTable(
+                 {
+                     bLengthChange: true,
+                     lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+                     bFilter: true,
+                     bSort: true,
+                     bPaginate: true,
+                     data: response.d,
+                     columns: [
+                         { 'data': 'TransactionId' },
+                         { 'data': 'FormattedDate', "width": "25%"},
+                         { 'data': 'ItemsPurchased', "width": "50%"},
+                         { 'data': 'Amount', "width": "25%"}],
+                     "columnDefs": [
+                         {
+                             "targets": [0],
+                             "visible": false,
+                             "searchable": false
+                         },
+                     ]
+                 });
+         };
+     </script>
 
 </asp:Content>

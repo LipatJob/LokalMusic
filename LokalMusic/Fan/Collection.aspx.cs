@@ -18,6 +18,7 @@ namespace LokalMusic.Fan
         {
             presenter = new CollectionPresenter(new CollectionRepository());
             presenter.InitializeModel();
+            Title = Model.Username;
         }
     }
 }
