@@ -22,6 +22,7 @@ namespace LokalMusic
                 "Fan/{UserId}/Collection",
                 "~/Fan/Collection.aspx"
             );
+
         }
 
 
