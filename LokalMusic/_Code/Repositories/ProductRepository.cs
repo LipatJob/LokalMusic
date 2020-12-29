@@ -1,4 +1,5 @@
 ﻿using LokalMusic._Code.Models.Products;
+using LokalMusic._Code.Models.Store;
 using LokalMusic.Code.Helpers;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,17 @@ namespace LokalMusic._Code.Repositories
 
         const string STATUS_PRODUCT_LISTED = "LISTED";
 
-        public List<Artist> GetCompleteProductCatalogue()
+        public List<Artist> GetArtists(bool artistInfoOnly = true)
         {
             List<Artist> artists = new List<Artist>();
 
-            string query = "SELECT * FROM ArtistInfo";
+            string query = "SELECT * " +
+                           "FROM ArtistInfo " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "LEFT JOIN FileInfo " +
+                           "ON UserInfo.ProfileImageId = FileInfo.FileId " +
+                           "WHERE UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = 'ACTIVE')";
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
@@ -27,13 +34,20 @@ namespace LokalMusic._Code.Repositories
             {
                 for (int i = 0; i < values.Rows.Count; i++)
                 {
+
                     Artist artist = new Artist(
                         (int)values.Rows[i]["UserId"],
                         values.Rows[i]["ArtistName"].ToString(),
                         values.Rows[i]["Location"].ToString(),
-                        values.Rows[i]["Bio"].ToString());
+                        values.Rows[i]["Bio"].ToString(),
+                        values.Rows[i]["Email"].ToString(),
+                        values.Rows[i]["Username"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["DateRegistered"].ToString()),
+                        values.Rows[i]["FileName"].ToString()
+                        );
 
-                    artist.Albums = GetAlbumsByUserId(artist.ArtistId);
+                    if (!artistInfoOnly)
+                        artist.Albums = GetAlbumsByUserId(artist.ArtistId);
 
                     artists.Add(artist);                    
                 }
@@ -66,7 +80,8 @@ namespace LokalMusic._Code.Repositories
                         values.Rows[i]["ProductName"].ToString(),
                         values.Rows[i]["Description"].ToString(),
                         Convert.ToDateTime(values.Rows[i]["DateReleased"]),
-                        (int)values.Rows[i]["UserId"]);
+                        (int)values.Rows[i]["UserId"],
+                        (double)values.Rows[i]["Price"]);
 
                     album.Tracks = GetTracksByAlbumId(album.AlbumId);
 
@@ -95,17 +110,6 @@ namespace LokalMusic._Code.Repositories
             {
                 for (int i = 0; i < values.Rows.Count; i++)
                 {
-                    //TrackId = trackId;
-                    //AlbumId = albumId;
-                    //GenreId = genreId;
-                    //TrackFileId = trackFileId;
-                    //ClipFileId = clipFileId;
-
-                    //TrackName = trackName;
-                    //TrackDuration = trackDuration;
-                    //Description = description;
-                    //ClipDuration = clipDuration;
-
                     Track track = new Track(
                         (int)values.Rows[i]["TrackId"],
                         (int)values.Rows[i]["AlbumId"],
@@ -123,6 +127,48 @@ namespace LokalMusic._Code.Repositories
             }
 
             return tracks.Count > 0 ? tracks : null;
+        }
+
+        public List<AlbumCollection> GetAlbums()
+        {
+            List<AlbumCollection> albums = new List<AlbumCollection>();
+
+            string query = "SELECT * " +
+                           "FROM Product " +
+                           "INNER JOIN Album " +
+                           "ON Product.ProductId = Album.AlbumId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN FileInfo " +
+                           "ON FileInfo.FileId = Album.AlbumCoverId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')";
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    AlbumCollection album = new AlbumCollection(
+                        (int)values.Rows[i]["AlbumId"],
+                        values.Rows[i]["ProductName"].ToString(),
+                        values.Rows[i]["Description"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["DateReleased"].ToString()),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+                        values.Rows[i]["ProducerName"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["DateAdded"].ToString()),
+                        (int)values.Rows[i]["UserId"],
+                        values.Rows[i]["ArtistName"].ToString(),
+                        values.Rows[i]["Location"].ToString(),
+                        values.Rows[i]["Bio"].ToString(),
+                        values.Rows[i]["FileName"].ToString());
+
+                    albums.Add(album);
+                }
+            }
+
+            return albums.Count > 0 ? albums : null;
         }
 
         public void GetProductByArtist(/*IArtistModel or Id or Name*/)

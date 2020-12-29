@@ -1,4 +1,6 @@
-﻿using LokalMusic._Code.Repositories;
+﻿using LokalMusic._Code.Models.Products;
+using LokalMusic._Code.Models.Store;
+using LokalMusic._Code.Repositories;
 using LokalMusic._Code.Repositories.Store;
 using LokalMusic._Code.Views.Store;
 using System;
@@ -18,22 +20,21 @@ namespace LokalMusic.Store
 
         private HomePresenter presenter;
         private ProductRepository repository;
+
+        public List<Artist> topArtists;
+        public List<AlbumCollection> bestSellingAlbums;
+
         public Home()
         {
-            this.repository = new ProductRepository();
-            this.presenter = new HomePresenter(this, this.repository);
-
-            repository.GetCompleteProductCatalogue();
+            this.presenter = new HomePresenter(this, new ProductRepository());
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.DisplayProducts();
+            this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
+            this.topArtists = this.presenter.GetTopArtists();
         }
 
-        private void DisplayProducts()
-        {
-            // bind model to html
-        }
+        
     }
 }
