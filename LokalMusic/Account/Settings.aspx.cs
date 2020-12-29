@@ -16,6 +16,7 @@ namespace LokalMusic.Account
 {
     public partial class Settings : System.Web.UI.Page, ISettingsViewModel
     {
+        private string[] validFileFormats = new[]{ ".jpg", ".png", ".gif" };
         SettingsPresenter presenter;
         public Settings()
         {
@@ -27,6 +28,9 @@ namespace LokalMusic.Account
         public string OldPassword { get => OldPasswordTxt.Text; }
         public string NewPassword { get => NewPasswordTxt.Text; }
         public string ConfrimNewPassword { get => ConfirmNewPasswordTxt.Text; }
+        public string ProfileImage { get => ProfilePictureImg.ImageUrl; set => ProfilePictureImg.ImageUrl = value; }
+
+        public HttpPostedFile UploadedProfilePicture => ProfilePictureFile.PostedFile;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,6 +40,16 @@ namespace LokalMusic.Account
             {
                 ShowPasswordChangedMessage();
             }
+            else if(IsProfileImageChanged())
+            {
+                ShowProfileImageChangedMessage();
+            }
+        }
+
+        private void ShowProfileImageChangedMessage()
+        {
+            changeProfilePictureAlert.Visible = true;
+            changeProfilePictureMessage.InnerText = "Successfully changed Password";
         }
 
         [WebMethod]
@@ -49,10 +63,16 @@ namespace LokalMusic.Account
         {
             return Request.QueryString["PasswordChanged"] == "True";
         }
+        private bool IsProfileImageChanged()
+        {
+            return Request.QueryString["ProfileImageChanged"] == "True";
+        }
+
+
         private void ShowPasswordChangedMessage()
         {
-            successAlert.Visible = true;
-            alertMessage.InnerText = "Successfully changed Password";
+            changePasswordSuccessAlert.Visible = true;
+            changePasswordSuccessMessage.InnerText = "Successfully changed Password";
         }
 
         protected void OldPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
@@ -119,6 +139,44 @@ namespace LokalMusic.Account
             {
                 presenter.ChangePassword();
             }
+        }
+
+        protected void submitProfilePicture_Click(object sender, EventArgs e)
+        {
+            if(Page.IsValid)
+            {
+                presenter.UpdateProfilePicture();
+            }
+        }
+
+        protected void ProfilePictureFileCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            var validator = (CustomValidator)source;
+            if(ProfilePictureFile.HasFile == false)
+            {
+                validator.ErrorMessage = "This is a required field";
+                args.IsValid = false;
+
+            }
+            else if(ProfilePictureFile.PostedFile.ContentLength > 10485760)
+            {
+                validator.ErrorMessage = "Please upload a file less than 10MB";
+                args.IsValid = false;
+            }
+            else if(validFileFormats.Contains(GetFileType(UploadedProfilePicture.FileName)) == false)
+            {
+                validator.ErrorMessage = "Please a an image";
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
+        private string GetFileType(string fileName)
+        {
+            return fileName.Substring(fileName.LastIndexOf('.'));
         }
     }
 }

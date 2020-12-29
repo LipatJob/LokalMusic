@@ -1,6 +1,6 @@
-﻿using LokalMusic.Code.Presenters.Account;
-using LokalMusic.Code.Repositories.Account;
-using LokalMusic.Code.Views.Account;
+﻿using LokalMusic._Code.Presenters.Account;
+using LokalMusic._Code.Repositories.Account;
+using LokalMusic._Code.Views.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
