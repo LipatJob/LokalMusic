@@ -278,7 +278,6 @@
     <Content Include="Account\Register\Fan.aspx" />
     <Content Include="Account\Settings.aspx" />
     <Content Include="Account\Signout.aspx" />
-    <Content Include="Account\WebService1.asmx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -467,10 +466,6 @@
     </Compile>
     <Compile Include="Account\Signout.aspx.designer.cs">
       <DependentUpon>Signout.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\WebService1.asmx.cs">
-      <DependentUpon>WebService1.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Fan\Collection.aspx.cs">
       <DependentUpon>Collection.aspx</DependentUpon>

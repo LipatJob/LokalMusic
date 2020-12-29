@@ -1,10 +1,14 @@
-﻿using LokalMusic._Code.Presenters.Account;
+﻿using LokalMusic._Code.Models.Account;
+using LokalMusic._Code.Presenters.Account;
 using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -32,6 +36,13 @@ namespace LokalMusic.Account
             {
                 ShowPasswordChangedMessage();
             }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static List<PaymentHistoryItem> GetPaymentHistory()
+        {
+            return SettingsPresenter.GetPaymentHistory();
         }
 
         private bool IsPasswordChanged()
