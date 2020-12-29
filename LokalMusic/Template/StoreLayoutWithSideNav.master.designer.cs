@@ -15,6 +15,33 @@ namespace LokalMusic.Template
     {
 
         /// <summary>
+        /// track_page control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor track_page;
+
+        /// <summary>
+        /// album_page control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor album_page;
+
+        /// <summary>
+        /// artist_page control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor artist_page;
+
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

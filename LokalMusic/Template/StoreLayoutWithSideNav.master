@@ -70,21 +70,23 @@
         <div class="text-center mt-3">
             <p>Display By</p>
             <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
-            <a href="../Store/TracksPage.aspx" class="side-links" id="track-page">Lokal Track</a>
-            <a href="../Store/AlbumsPage.aspx" class="side-links" id="album-page">Lokal Album</a>
-            <a href="" class="side-links" id="artist-page">Lokal Artists</a>
+            <a href="../Store/TracksPage.aspx" class="side-links" runat="server" id="track_page">Lokal Track</a>
+            <a href="../Store/AlbumsPage.aspx" class="side-links" runat="server" id="album_page">Lokal Album</a>
+            <a href="" class="side-links" runat="server" id="artist_page">Lokal Artists</a>
             <hr style="width: 150px; background:#525252;"/>
 
             <p class="mt-5">Sort By</p>
             <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
-            <a href="" class="side-links" id="sort-a-z">A to Z</a>
-            <a href="" class="side-links" id="sort-z-a">Z to A</a>
-            <a href="" class="side-links" id="recently-added">Recently Added</a>
+            <a href="" class="side-links" id="sort_a_z" onclick="sortClick('AZ')">A to Z</a>
+            <a href="" class="side-links" id="sort_z_a" onclick="sortClick('ZA')">Z to A</a>
+            <a href="" class="side-links" id="recently_added" onclick="sortClick('RA')">Recently Added</a>
 
             <hr style="margin-top:5px; width: 80px; background:#525252;"/>
-            <a href="" class="side-links" id="order-asc">Ascending</a>
-            <a href="" class="side-links" id="order-desc">Descending</a>
+            <a href="" class="side-links" id="order_asc" onclick="orderClick('ASC')">Ascending</a>
+            <a href="" class="side-links" id="order_desc" onclick="orderClick('DESC')">Descending</a>
             <hr style="width: 150px; background:#525252;"/>
+
+            <button class="btn btn-primary" onclick="s()">Filter</button>
         </div>
 
     </div>
@@ -96,15 +98,28 @@
     </div>
 
     <script>
-    function openNav() {
-      document.getElementById("product-display").style.width = "200px";
-      document.getElementById("main").style.marginLeft = "200px";
-    }
 
-    function closeNav() {
-      document.getElementById("product-display").style.width = "0";
-      document.getElementById("main").style.marginLeft = "0";
-    }
+        function sortClick(text) {
+            localStorage.setItem("sortby", text);
+        }
+
+        function orderClick(text) {
+            localStorage.setItem("orderby", text);
+        }
+
+        function s() {
+            alert("sort by" + localStorage.getItem("sortby") + " order by" + localStorage.getItem("orderby"));
+        }
+
+        function openNav() {
+          document.getElementById("product-display").style.width = "200px";
+          document.getElementById("main").style.marginLeft = "200px";
+        }
+
+        function closeNav() {
+          document.getElementById("product-display").style.width = "0";
+          document.getElementById("main").style.marginLeft = "0";
+        }
     </script>
 
 </asp:Content>
