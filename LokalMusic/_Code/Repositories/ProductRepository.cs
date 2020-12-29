@@ -83,7 +83,7 @@ namespace LokalMusic._Code.Repositories
                         (int)values.Rows[i]["UserId"],
                         (double)values.Rows[i]["Price"]);
 
-                    album.Tracks = GetTracksByAlbumId(album.AlbumId);
+                    //album.Tracks = GetTracksByAlbumId(album.AlbumId);
 
                     albums.Add(album);
                 }
@@ -92,42 +92,42 @@ namespace LokalMusic._Code.Repositories
             return albums.Count > 0 ? albums : null;
         }
 
-        public List<Track> GetTracksByAlbumId(int albumId)
-        {
-            List<Track> tracks = new List<Track>();
+        //public List<Track> GetTracksByAlbumId(int albumId)
+        //{
+        //    List<Track> tracks = new List<Track>();
 
-            string query = "SELECT * " +
-                           "FROM Track " +
-                           "INNER JOIN Product " +
-                           "ON Track.TrackId = Product.ProductId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
-                           "AND AlbumId = @AlbumId";
+        //    string query = "SELECT * " +
+        //                   "FROM Track " +
+        //                   "INNER JOIN Product " +
+        //                   "ON Track.TrackId = Product.ProductId " +
+        //                   "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
+        //                   "AND AlbumId = @AlbumId";
 
-            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
-            bool valid = values.Rows.Count > 0;
+        //    var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+        //    bool valid = values.Rows.Count > 0;
 
-            if (valid)
-            {
-                for (int i = 0; i < values.Rows.Count; i++)
-                {
-                    Track track = new Track(
-                        (int)values.Rows[i]["TrackId"],
-                        (int)values.Rows[i]["AlbumId"],
-                        (int)values.Rows[i]["GenreId"],
-                        (int)values.Rows[i]["TrackFileId"],
-                        (int)values.Rows[i]["ClipFileId"],
-                        values.Rows[i]["ProductName"].ToString(),
-                        TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()),
-                        values.Rows[i]["Description"].ToString(),
-                        TimeSpan.Parse(values.Rows[i]["ClipDuration"].ToString())
-                        );
+        //    if (valid)
+        //    {
+        //        for (int i = 0; i < values.Rows.Count; i++)
+        //        {
+        //            Track track = new Track(
+        //                (int)values.Rows[i]["TrackId"],
+        //                (int)values.Rows[i]["AlbumId"],
+        //                (int)values.Rows[i]["GenreId"],
+        //                (int)values.Rows[i]["TrackFileId"],
+        //                (int)values.Rows[i]["ClipFileId"],
+        //                values.Rows[i]["ProductName"].ToString(),
+        //                TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()),
+        //                values.Rows[i]["Description"].ToString(),
+        //                TimeSpan.Parse(values.Rows[i]["ClipDuration"].ToString())
+        //                );
 
-                    tracks.Add(track);
-                }
-            }
+        //            tracks.Add(track);
+        //        }
+        //    }
 
-            return tracks.Count > 0 ? tracks : null;
-        }
+        //    return tracks.Count > 0 ? tracks : null;
+        //}
 
         public List<AlbumProduct> GetAlbums()
         {
@@ -171,7 +171,54 @@ namespace LokalMusic._Code.Repositories
             return albums.Count > 0 ? albums : null;
         }
 
+        public List<Track> GetTracks()
+        {
+            List<Track> tracks = new List<Track>();
 
+            string query = "SELECT * " +
+                           "FROM Track " +
+                           "INNER JOIN Product " +
+                           "ON Track.TrackId = Product.ProductId " +
+                           "INNER JOIN Album " +
+                           "ON Track.AlbumId = Album.AlbumId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN Genre " +
+                           "ON Track.GenreId = Genre.GenreId " +
+                           "INNER JOIN FileInfo " +
+                           "ON Track.ClipFileID = FileInfo.FileId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')";
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    Track track = new Track(
+                        (int)values.Rows[i]["TrackId"],
+                        values.Rows[i]["ProductName"].ToString(),
+                        values.Rows[i]["Description"].ToString(),
+                        TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()),
+                        TimeSpan.Parse(values.Rows[i]["ClipDuration"].ToString()),
+                        Convert.ToDateTime(values.Rows[i]["DateAdded"].ToString()),
+                        Convert.ToDateTime(values.Rows[i]["DateReleased"].ToString()),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+                        values.Rows[i]["ProducerName"].ToString(),
+                        values.Rows[i]["FileName"].ToString(),
+                        (int)values.Rows[i]["UserId"],
+                        values.Rows[i]["ArtistName"].ToString(),
+                        (int)values.Rows[i]["AlbumId"],
+                        values.Rows[i]["GenreName"].ToString()
+                        );
+
+                    tracks.Add(track);
+                }
+            }
+
+                return tracks.Count > 0 ? tracks : null;
+        }
 
         public void GetProductByArtist(/*IArtistModel or Id or Name*/)
         {
