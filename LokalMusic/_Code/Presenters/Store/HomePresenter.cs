@@ -12,15 +12,15 @@ namespace LokalMusic._Code.Repositories.Store
     {
 
         private IHomeViewModel view;
-        private ProductRepository repository;
+        private StoreRepository repository;
 
-        public HomePresenter(IHomeViewModel view, ProductRepository repo)
+        public HomePresenter(IHomeViewModel view, StoreRepository repo)
         {
             this.view = view;
             this.repository = repo;
         }
 
-        public List<AlbumCollection> GetBestSellingAlbums()
+        public List<AlbumProduct> GetBestSellingAlbums()
         {
             return this.repository.GetAlbums();
         }
@@ -28,6 +28,11 @@ namespace LokalMusic._Code.Repositories.Store
         public List<Artist> GetTopArtists()
         {
             return this.repository.GetArtists();
+        }
+
+        public List<Track> GetFamousTracks()
+        {
+            return this.repository.GetTracks();
         }
 
         public void Home()

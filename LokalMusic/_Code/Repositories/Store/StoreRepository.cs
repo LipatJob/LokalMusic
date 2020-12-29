@@ -10,7 +10,7 @@ using System.Web;
 
 namespace LokalMusic._Code.Repositories
 {
-    public class ProductRepository
+    public class StoreRepository
     {
 
         const string STATUS_PRODUCT_LISTED = "LISTED";
@@ -100,8 +100,16 @@ namespace LokalMusic._Code.Repositories
                            "FROM Track " +
                            "INNER JOIN Product " +
                            "ON Track.TrackId = Product.ProductId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
-                           "AND AlbumId = @AlbumId";
+                           "INNER JOIN Album " +
+                           "ON Track.AlbumId = Album.AlbumId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN Genre " +
+                           "ON Track.GenreId = Genre.GenreId " +
+                           "INNER JOIN FileInfo " +
+                           "ON Track.ClipFileID = FileInfo.FileId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')" +
+                           "AND Track.AlbumId = @AlbumId";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
             bool valid = values.Rows.Count > 0;
@@ -112,15 +120,19 @@ namespace LokalMusic._Code.Repositories
                 {
                     Track track = new Track(
                         (int)values.Rows[i]["TrackId"],
-                        (int)values.Rows[i]["AlbumId"],
-                        (int)values.Rows[i]["GenreId"],
-                        (int)values.Rows[i]["TrackFileId"],
-                        (int)values.Rows[i]["ClipFileId"],
                         values.Rows[i]["ProductName"].ToString(),
-                        TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()),
                         values.Rows[i]["Description"].ToString(),
-                        TimeSpan.Parse(values.Rows[i]["ClipDuration"].ToString())
-                        );
+                        TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()),
+                        TimeSpan.Parse(values.Rows[i]["ClipDuration"].ToString()),
+                        Convert.ToDateTime(values.Rows[i]["DateAdded"].ToString()),
+                        Convert.ToDateTime(values.Rows[i]["DateReleased"].ToString()),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+                        values.Rows[i]["ProducerName"].ToString(),
+                        values.Rows[i]["FileName"].ToString(),
+                        (int)values.Rows[i]["UserId"],
+                        values.Rows[i]["ArtistName"].ToString(),
+                        (int)values.Rows[i]["AlbumId"],
+                        values.Rows[i]["GenreName"].ToString());
 
                     tracks.Add(track);
                 }
@@ -129,9 +141,9 @@ namespace LokalMusic._Code.Repositories
             return tracks.Count > 0 ? tracks : null;
         }
 
-        public List<AlbumCollection> GetAlbums()
+        public List<AlbumProduct> GetAlbums()
         {
-            List<AlbumCollection> albums = new List<AlbumCollection>();
+            List<AlbumProduct> albums = new List<AlbumProduct>();
 
             string query = "SELECT * " +
                            "FROM Product " +
@@ -150,7 +162,7 @@ namespace LokalMusic._Code.Repositories
             {
                 for (int i = 0; i < values.Rows.Count; i++)
                 {
-                    AlbumCollection album = new AlbumCollection(
+                    AlbumProduct album = new AlbumProduct(
                         (int)values.Rows[i]["AlbumId"],
                         values.Rows[i]["ProductName"].ToString(),
                         values.Rows[i]["Description"].ToString(),
@@ -171,8 +183,10 @@ namespace LokalMusic._Code.Repositories
             return albums.Count > 0 ? albums : null;
         }
 
-        public void GetProductByArtist(/*IArtistModel or Id or Name*/)
+        public List<Track> GetTracks()
         {
+            List<Track> tracks = new List<Track>();
+
             string query = "SELECT * " +
                            "FROM Track " +
                            "INNER JOIN Product " +
@@ -181,66 +195,41 @@ namespace LokalMusic._Code.Repositories
                            "ON Track.AlbumId = Album.AlbumId " +
                            "INNER JOIN ArtistInfo " +
                            "ON Album.UserId = ArtistInfo.UserId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + ProductRepository.STATUS_PRODUCT_LISTED + "') " +
-                           "AND ArtistInfo.UserId = @UserId " +
-                           "AND ArtistInfo.ArtistName = @ArtistName";
+                           "INNER JOIN Genre " +
+                           "ON Track.GenreId = Genre.GenreId " +
+                           "INNER JOIN FileInfo " +
+                           "ON Track.ClipFileID = FileInfo.FileId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')";
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
 
             if (valid)
             {
-                for (int i = 0; i < values.Rows.Count - 1; i++)
+                for (int i = 0; i < values.Rows.Count; i++)
                 {
+                    Track track = new Track(
+                        (int)values.Rows[i]["TrackId"],
+                        values.Rows[i]["ProductName"].ToString(),
+                        values.Rows[i]["Description"].ToString(),
+                        TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()),
+                        TimeSpan.Parse(values.Rows[i]["ClipDuration"].ToString()),
+                        Convert.ToDateTime(values.Rows[i]["DateAdded"].ToString()),
+                        Convert.ToDateTime(values.Rows[i]["DateReleased"].ToString()),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+                        values.Rows[i]["ProducerName"].ToString(),
+                        values.Rows[i]["FileName"].ToString(),
+                        (int)values.Rows[i]["UserId"],
+                        values.Rows[i]["ArtistName"].ToString(),
+                        (int)values.Rows[i]["AlbumId"],
+                        values.Rows[i]["GenreName"].ToString()
+                        );
 
+                    tracks.Add(track);
                 }
             }
-        }
 
-        public void GetProductByAlbum(/*IAlbum or Id or Name*/)
-        {
-            string query = "SELECT * " +
-                           "FROM Track " +
-                           "INNER JOIN Product " +
-                           "ON Track.TrackId = Product.ProductId " +
-                           "INNER JOIN Album " +
-                           "ON Track.AlbumId = Album.AlbumId " +
-                           "INNER JOIN ArtistInfo " +
-                           "ON Album.UserId = ArtistInfo.UserId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + ProductRepository.STATUS_PRODUCT_LISTED + "') " +
-                           "AND Album.AlbumName = @AlbumName " +
-                           "AND Album.Album.Id = @AlbumId ";
-
-            var values = DbHelper.ExecuteDataTableQuery(query);
-            bool valid = values.Rows.Count > 0;
-
-            if (valid)
-            {
-
-            }
-        }
-
-        public void GetProductByTrack(/*ITrack or Id or Name*/)
-        {
-            string query = "SELECT * " +
-                           "FROM Track " +
-                           "INNER JOIN Product " +
-                           "ON Track.TrackId = Product.ProductId " +
-                           "INNER JOIN Album " +
-                           "ON Track.AlbumId = Album.AlbumId " +
-                           "INNER JOIN ArtistInfo " +
-                           "ON Album.UserId = ArtistInfo.UserId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + ProductRepository.STATUS_PRODUCT_LISTED + "') " +
-                           "AND Track.TrackName = @TrackName " +
-                           "AND Track.TrackId = @TrackId";
-
-            var values = DbHelper.ExecuteDataTableQuery(query);
-            bool valid = values.Rows.Count > 0;
-
-            if (valid)
-            {
-
-            }
+                return tracks.Count > 0 ? tracks : null;
         }
 
     }

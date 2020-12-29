@@ -22,6 +22,19 @@ namespace LokalMusic
                 "Fan/{UserId}",
                 "~/Fan/Collection.aspx"
             );
+
+            routes.MapPageRoute(
+                "TrackPage",
+                "Store/Tracks/{SortBy}/{OrderBy}",
+                "~/Store/TracksPage.aspx"
+                );
+
+            routes.MapPageRoute(
+                "TrackDetails",
+                "Store/{ArtistName}/{AlbumId}/{TrackName}",
+                "~/Store/TracksPage.aspx"
+            );
+
         }
 
 
