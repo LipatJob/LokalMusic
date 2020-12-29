@@ -540,7 +540,7 @@
     <Compile Include="_Code\Presenters\Store\HomePresenter.cs" />
     <Compile Include="_Code\Repositories\Account\SettingsRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
-    <Compile Include="_Code\Repositories\ProductRepository.cs" />
+    <Compile Include="_Code\Repositories\Store\StoreRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -594,7 +594,6 @@
     <Folder Include="Cart\" />
     <Folder Include="Pages\" />
     <Folder Include="Publish\" />
-    <Folder Include="_Code\Repositories\Store\" />
     <Folder Include="_Code\Views\Fan\" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ using System.Web;
 
 namespace LokalMusic._Code.Repositories
 {
-    public class ProductRepository
+    public class StoreRepository
     {
 
         const string STATUS_PRODUCT_LISTED = "LISTED";
