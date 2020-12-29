@@ -26,8 +26,23 @@
             padding: 0px 3px 0px 3px;
         }
 
-        .view-all:hover{
+        .view-all:hover, #best-selling-albums a:hover{
             text-decoration: none;
+        }
+
+        .card-body{
+            margin: -14px -18px 0 -18px;
+        }
+
+        .card-body p {
+            color: black;
+            font-size: 13px;
+            font-weight: 500;
+            margin: 0 0 0 0;
+        }
+
+        .by-artist{
+            color:#808080;
         }
 
     </style>
@@ -66,10 +81,32 @@
     </div>
 
     <div id="best-selling-albums" class="container mt-4">
-        <div class="row">
+        <div class="row mb-4">
             <h5 class="my-auto">Bestselling Albums</h5>
             <a href="Store/AlbumPage.apsx" class="text-danger ml-2 view-all my-auto">View All</a>
-        </div> 
+        </div>
+
+        <%--Albums--%>
+        <div class="row">   
+            
+            <%foreach (var album in bestSellingAlbums)
+            {%>
+                <div class="col-md-2">
+                    <a href="#" >
+                        <div class="card border-0">
+                            <img src="../Content/Images/default_cover.jpg" class="card-img-top" alt="album-name"/>
+                            <div class="card-body">
+                                <p><%Response.Write(album.AlbumName);%></p>
+                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%Response.Write(album.Price);%></p>
+                                <p class="by-artist float-right" style="color:#767676;"><%Response.Write(album.ArtistName);%></p>
+
+                            </div>
+                        </div>
+                    </a>                    
+                </div>
+            <%}%>
+        </div>
+
     </div>
 
     <div id="top-artists" class="container mt-4">
