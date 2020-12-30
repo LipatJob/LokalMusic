@@ -43,7 +43,7 @@
                             <% Response.Write(AuthenticationHelper.GetUsername()); %>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="~/Collection" runat="server" id="CollectionLink">Collection</a>
+                            <a class="dropdown-item" href="" runat="server" id="CollectionLink">Collection</a>
                             <a class="dropdown-item" href="~/Account/Settings" runat="server">Settings</a>
                             <div class="dropdown-divider"></div>
                             <% if (AuthenticationHelper.GetUserType() == "ARTIST")

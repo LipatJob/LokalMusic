@@ -19,7 +19,7 @@ namespace LokalMusic
         {
             routes.MapPageRoute(
                 "Collection",
-                "Fan/{UserId}",
+                "Fan/{Username}",
                 "~/Fan/Collection.aspx"
             );
 

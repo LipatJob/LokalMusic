@@ -20,12 +20,12 @@ namespace LokalMusic._Code.Presenters.Fan
 
         public void InitializeModel()
         {
-            int userId;
-            if (int.TryParse((string)NavigationHelper.GetRouteValue("UserId"), out userId) == false)
+            string username = (string) NavigationHelper.GetRouteValue("Username");
+            if (username == null)
             {
                 NavigationHelper.Redirect("~");
             }
-            model = repository.SetUserInformation(userId);
+            model = repository.SetUserInformation(username);
         }
 
     }

@@ -49,6 +49,7 @@ namespace LokalMusic._Code.Presenters.Account
         public void UpdateProfilePicture()
         {
             repository.ChangeProfilePicture(AuthenticationHelper.UserId, viewModel.UploadedProfilePicture);
+            NavigationHelper.Redirect("~/Account/Settings?ProfileImageChanged=True");
         }
     }
 

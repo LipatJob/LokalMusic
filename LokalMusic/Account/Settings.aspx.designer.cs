@@ -33,24 +33,6 @@ namespace LokalMusic.Account
         protected global::System.Web.UI.WebControls.TextBox EmailTxt;
 
         /// <summary>
-        /// changeProfilePictureAlert control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeProfilePictureAlert;
-
-        /// <summary>
-        /// changeProfilePictureMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeProfilePictureMessage;
-
-        /// <summary>
         /// ProfilePictureImg control.
         /// </summary>
         /// <remarks>
@@ -69,6 +51,15 @@ namespace LokalMusic.Account
         protected global::System.Web.UI.WebControls.FileUpload ProfilePictureFile;
 
         /// <summary>
+        /// submitProfilePicture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button submitProfilePicture;
+
+        /// <summary>
         /// ProfilePictureFileCv control.
         /// </summary>
         /// <remarks>
@@ -78,13 +69,22 @@ namespace LokalMusic.Account
         protected global::System.Web.UI.WebControls.CustomValidator ProfilePictureFileCv;
 
         /// <summary>
-        /// submitProfilePicture control.
+        /// changeProfilePictureAlert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submitProfilePicture;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeProfilePictureAlert;
+
+        /// <summary>
+        /// changeProfilePictureMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeProfilePictureMessage;
 
         /// <summary>
         /// changePasswordSuccessAlert control.
