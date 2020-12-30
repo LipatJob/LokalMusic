@@ -536,6 +536,7 @@
     <Compile Include="_Code\Helpers\DbHelper.cs" />
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
     <Compile Include="_Code\Helpers\NavigationHelper.cs" />
+    <Compile Include="_Code\Helpers\ValidationHelper.cs" />
     <Compile Include="_Code\Models\Account\ILoginModel.cs" />
     <Compile Include="_Code\Models\Account\ISettingsModel.cs" />
     <Compile Include="_Code\Models\Account\Register\IRegisterArtistModel.cs" />

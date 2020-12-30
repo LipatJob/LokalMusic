@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Models.Account;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Account;
 using LokalMusic._Code.Presenters.Account;
 using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
@@ -45,12 +46,29 @@ namespace LokalMusic.Account
                 ShowProfileImageChangedMessage();
             }
         }
-
+        
+        private bool IsPasswordChanged()
+        {
+            return Request.QueryString["PasswordChanged"] == "True";
+        }
+        
+        private bool IsProfileImageChanged()
+        {
+            return Request.QueryString["ProfileImageChanged"] == "True";
+        }
+        
         private void ShowProfileImageChangedMessage()
         {
             changeProfilePictureAlert.Visible = true;
             changeProfilePictureMessage.InnerText = "Successfully changed Password";
         }
+        
+        private void ShowPasswordChangedMessage()
+        {
+            changePasswordSuccessAlert.Visible = true;
+            changePasswordSuccessMessage.InnerText = "Successfully changed Password";
+        }
+
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -59,40 +77,15 @@ namespace LokalMusic.Account
             return SettingsPresenter.GetPaymentHistory();
         }
 
-        private bool IsPasswordChanged()
-        {
-            return Request.QueryString["PasswordChanged"] == "True";
-        }
-        private bool IsProfileImageChanged()
-        {
-            return Request.QueryString["ProfileImageChanged"] == "True";
-        }
-
-
-        private void ShowPasswordChangedMessage()
-        {
-            changePasswordSuccessAlert.Visible = true;
-            changePasswordSuccessMessage.InnerText = "Successfully changed Password";
-        }
-
         protected void OldPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            var validator = (CustomValidator)source;
-            if(OldPassword.Length == 0)
-            {
-                validator.ErrorMessage = "This is a required field";
-                args.IsValid = false;
-            }
-            else if(presenter.CheckOldPassword() == false)
-            {
-                validator.ErrorMessage = "Please check your old password";
-                args.IsValid = false;
-            }
-            else
-            {
-                args.IsValid = true;
-            }
+
+            new ValidationHelper((IValidator)source, args)
+                .AddRule((ValidationHelper.IsNotEqualTo(OldPassword.Length, 0), "This is a required field"))
+                .AddRule((() => presenter.CheckOldPassword(), "Please check your old password"))
+                .Execute(); ;
         }
+
 
         protected void NewPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
@@ -112,6 +105,7 @@ namespace LokalMusic.Account
                 args.IsValid = true;
             }
         }
+
 
         protected void ConfirmNewPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
@@ -133,6 +127,7 @@ namespace LokalMusic.Account
             
         }
 
+
         protected void submitBtn_Click(object sender, EventArgs e)
         {
             if(Page.IsValid)
@@ -141,6 +136,7 @@ namespace LokalMusic.Account
             }
         }
 
+
         protected void submitProfilePicture_Click(object sender, EventArgs e)
         {
             if(Page.IsValid)
@@ -148,6 +144,7 @@ namespace LokalMusic.Account
                 presenter.UpdateProfilePicture();
             }
         }
+
 
         protected void ProfilePictureFileCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
@@ -181,6 +178,7 @@ namespace LokalMusic.Account
 
         private bool IsImageDimensionValid(HttpPostedFile file)
         {
+            file.InputStream.Position = 0;
             using (var myImage = System.Drawing.Image.FromStream(file.InputStream))
             {
                 return
@@ -191,6 +189,7 @@ namespace LokalMusic.Account
 
         private bool IsValidImage(HttpPostedFile file)
         {
+            file.InputStream.Position = 0;
             try
             {
                 if(validFileFormats.Contains(GetFileType(file.FileName)) == false)
