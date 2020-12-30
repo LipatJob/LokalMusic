@@ -10,10 +10,10 @@ namespace LokalMusic._Code.Repositories.Fan
 {
     public class CollectionRepository
     {
-        public CollectionModel SetUserInformation(int userId)
+        public CollectionModel SetUserInformation(string username)
         {
-            string query = "SELECT UserId, FileName, Username, DateRegistered FROM UserInfo LEFT JOIN FileInfo ON UserInfo.ProfileImageId = FileInfo.FileId WHERE UserId = @UserId";
-            var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
+            string query = "SELECT UserId, FileName, Username, DateRegistered FROM UserInfo LEFT JOIN FileInfo ON UserInfo.ProfileImageId = FileInfo.FileId WHERE Username = @Username";
+            var result = DbHelper.ExecuteDataTableQuery(query, ("Username", username));
             string profileImage = "~/Content/Images/Logo.png";
             if (result.Rows[0].IsNull("FileName") == false)
             {
@@ -25,7 +25,7 @@ namespace LokalMusic._Code.Repositories.Fan
                 ProfileImage = profileImage,
                 Username = (string)result.Rows[0]["Username"],
                 DateRegistered = (DateTime)result.Rows[0]["DateRegistered"],
-                Collection = GetCollection(userId)
+                Collection = GetCollection((int)result.Rows[0]["UserId"])
             };
             return model;
         }

@@ -64,14 +64,6 @@
 
                     <%-- Profile Picture --%>
                     <div>
-                        <%-- Profile Picture Changed Alert --%>
-                        <div id="changeProfilePictureAlert" class="alert alert-success" role="alert" runat="server" visible="false">
-                            <span id="changeProfilePictureMessage" runat="server"></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
                         <%-- Profile Picture Display--%>
                         <h5 class="mt-4">Profile Picture</h5>
                         <div class="change-profile-picture-container">
@@ -81,14 +73,23 @@
 
                                 <%-- Profile Picture File Upload--%>
                                 <div class="custom-file">
-                                    <asp:FileUpload runat="server" ID="ProfilePictureFile" CssClass="form-control-file custom-file-input" />
-                                    <asp:CustomValidator ID="ProfilePictureFileCv" ErrorMessage="Error Message" ControlToValidate="ProfilePictureFile" runat="server" ValidationGroup="ChangeProfilePicture" OnServerValidate="ProfilePictureFileCv_ServerValidate" CssClass="validation-message" Display="Dynamic" />
+                                    <asp:FileUpload runat="server" ID="ProfilePictureFile" CssClass="form-control-file custom-file-input" required accept="image/*"/>
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
 
                                 <%-- Submit Profile Picture--%>
                                 <asp:Button ID="submitProfilePicture" Text="Update Picture" runat="server" CssClass="btn btn-primary mt-2" Style="width: 100%" OnClick="submitProfilePicture_Click" ValidationGroup="ChangeProfilePicture" />
+                                <asp:CustomValidator ID="ProfilePictureFileCv" ErrorMessage="Error Message" ControlToValidate="ProfilePictureFile" runat="server" ValidationGroup="ChangeProfilePicture" OnServerValidate="ProfilePictureFileCv_ServerValidate" CssClass="validation-message" Display="Dynamic" />
+                                
                             </div>
+                        </div>
+
+                        <%-- Profile Picture Changed Alert --%>
+                        <div id="changeProfilePictureAlert" class="alert alert-success" role="alert" runat="server" visible="false">
+                            <span id="changeProfilePictureMessage" runat="server"></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     </div>
                 </div>

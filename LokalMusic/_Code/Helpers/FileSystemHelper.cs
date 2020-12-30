@@ -27,6 +27,7 @@ namespace LokalMusic._Code.Helpers
 
         public static string UploadFile(string filename, string containerName, HttpPostedFile file, bool overwrite = false)
         {
+            file.InputStream.Position = 0;
             BlobClient blobClient = GetBlobContainerClient(containerName).GetBlobClient(filename);
             using (var inputStream = file.InputStream)
             {
