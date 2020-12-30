@@ -73,7 +73,7 @@
 
                                 <%-- Profile Picture File Upload--%>
                                 <div class="custom-file">
-                                    <asp:FileUpload runat="server" ID="ProfilePictureFile" CssClass="form-control-file custom-file-input" required accept="image/*"/>
+                                    <asp:FileUpload runat="server" ID="ProfilePictureFile" CssClass="form-control-file custom-file-input" accept="image/*"/>
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
 
