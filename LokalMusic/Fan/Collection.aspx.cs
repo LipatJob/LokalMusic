@@ -19,6 +19,10 @@ namespace LokalMusic.Fan
             presenter = new CollectionPresenter(new CollectionRepository());
             presenter.InitializeModel();
             Title = Model.Username;
+            profilePicture.ImageUrl = Model.ProfileImage;
+
+            collectionItemRepeater.DataSource = Model.Collection;
+            collectionItemRepeater.DataBind();
         }
     }
 }

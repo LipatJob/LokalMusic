@@ -12,10 +12,17 @@ namespace LokalMusic._Code.Repositories.Fan
     {
         public CollectionModel SetUserInformation(int userId)
         {
-            string query = "SELECT Username, DateRegistered FROM UserInfo WHERE UserId = @UserId";
+            string query = "SELECT UserId, FileName, Username, DateRegistered FROM UserInfo LEFT JOIN FileInfo ON UserInfo.ProfileImageId = FileInfo.FileId WHERE UserId = @UserId";
             var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
+            string profileImage = "~/Content/Images/Logo.png";
+            if (result.Rows[0].IsNull("FileName") == false)
+            {
+                profileImage = (string)result.Rows[0]["FileName"];
+            }
             var model = new CollectionModel()
             {
+                UserId = (int)result.Rows[0]["UserId"],
+                ProfileImage = profileImage,
                 Username = (string)result.Rows[0]["Username"],
                 DateRegistered = (DateTime)result.Rows[0]["DateRegistered"],
                 Collection = GetCollection(userId)
