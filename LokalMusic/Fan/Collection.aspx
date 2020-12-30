@@ -1,26 +1,20 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="Collection.aspx.cs" Inherits="LokalMusic.Fan.Collection" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="Collection.aspx.cs" Inherits="LokalMusic.Fan.Collection" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-        .user-info-container{
-            display:flex;
-            flex-direction:row;
-            align-items:center;
-
+        .user-info-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
         }
 
-        .profile-picture{
-            width:140px; 
-            height:140px; 
-            object-fit:cover; 
-            border-radius:100%;
-            border-color:black;
-            border-width:2px;
-            border-style:solid;
-            margin:20px;
-        }
-
-        .user-info{
+        .profile-picture {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border: 2px solid black;
+            border-radius: 100%;
+            margin: 20px;
         }
 
         .collection-container {
@@ -38,13 +32,13 @@
             transition: 0.1s ease-out all;
         }
 
-        .item-link:link{
-            color:black;
-        }
+            .collection-item:hover {
+                transition: border 0.1s ease-in-out !important;
+                border: 1px dotted #ffbaba;
+            }
 
-        .collection-item:hover {
-            transition: border 0.1s ease-in-out !important;
-            border: 1px dotted #ffbaba;
+        .item-link:link {
+            color: black;
         }
 
         .item-picture {
@@ -59,27 +53,54 @@
             color: gray;
         }
     </style>
+
     <div class="container">
+        <%-- User Information --%>
         <div class="user-info-container">
-            <img src="~/Content/Images/Logo.png" alt="Alternate Text" class="profile-picture shadow" runat="server">
+            <%-- Profile Picture --%>
+            <asp:Image ImageUrl="imageurl" ID="profilePicture" class="profile-picture shadow" runat="server" />
+
+            <%-- User Information --%>
             <div class="user-info">
+                <%-- Username --%>
                 <h3><%Response.Write(Model.Username);%></h3>
+
+                <%-- Date Joined --%>
                 <p>Member Since: <%Response.Write(Model.DateRegistered.ToShortDateString());%></p>
+
+                <%-- Edit Profile Button --%>
+                <%if (Model.UserId == AuthenticationHelper.UserId)%>
+                <%{%>
+                <a href="~/Account/Settings" runat="server">
+                    <input type="button" name="name" value="Edit Profile" class="btn btn-primary" />
+                </a>
+                <%}%>
             </div>
         </div>
+
         <hr />
+
+        <%-- Collection --%>
         <h3>Collection</h3>
         <div class="collection-container">
-            <%foreach (var product in Model.Collection)
-            {%>
-            <a href="<%Response.Write(product.GetUrl);%>" class="item-link">
-                <div class="collection-item">
-                    <img src="<% Response.Write(product.CoverLink); %>" alt="Alternate Text" class="item-picture" />
-                    <b><% Response.Write(product.ProductName); %></b>
-                    <p>By <% Response.Write(product.ArtistName); %></p>
-                </div>
-            </a>
-            <%} %>
+            <asp:Repeater ID="collectionItemRepeater" runat="server">
+                <%-- Template for Collection Item --%>
+                <ItemTemplate>
+                    <%-- Like to Product Page --%>
+                    <a href='<%#Eval("GetUrl")%>' class="item-link">
+                        <div class="collection-item">
+                            <%-- Album Cover --%>
+                            <asp:Image ImageUrl='<%#Eval("CoverLink")%>' runat="server" class="item-picture" />
+
+                            <%-- Album/Track Name --%>
+                            <b><%#Eval("ProductName") %></b>
+
+                            <%-- Artist Name --%>
+                            <p>By <%#Eval("ArtistName")%></p>
+                        </div>
+                    </a>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
     </div>
 </asp:Content>
