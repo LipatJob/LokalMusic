@@ -21,7 +21,7 @@ namespace LokalMusic._Code.Repositories.Account.Register
                 $"INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered) " +
                 $"VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered)";
 
-            DbHelper.ExecuteCommand(
+            DbHelper.ExecuteScalar(
                 query, 
                 ("userTypeId", userTypeId), 
                 ("userStatusId", userStatusId), 
@@ -35,30 +35,26 @@ namespace LokalMusic._Code.Repositories.Account.Register
         public bool IsUsernameUnique(string username)
         {
             string query = $"SELECT Username from UserInfo WHERE Username = '@username';";
-            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("username", username));
-            return resultSet.Rows.Count == 0;
+            return DbHelper.ExecuteScalar(query, ("username", username)) == null;
         }
 
         public bool IsEmailUnique(string email)
         {
             string query = $"SELECT Email from UserInfo WHERE Email = '@email';";
-            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("email", email));
-            return resultSet.Rows.Count == 0;
+            return DbHelper.ExecuteScalar(query, ("email", email)) == null;
         }
 
         private int GetUserTypeId()
         {
             // Query ID for user type
             string query = $"SELECT UserTypeId from UserType WHERE TypeName = @FanTypeName;";
-            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("FanTypeName", FAN_TYPE_NAME));
-            return (int) resultSet.Rows[0]["UserTypeId"];
+            return (int) DbHelper.ExecuteScalar(query, ("FanTypeName", FAN_TYPE_NAME));
         }
 
         private int GetUserStatusId()
         {
             string query = $"SELECT UserStatusId from UserStatus WHERE UserStatusName = @ActiveTypeName;";
-            var resultSet = DbHelper.ExecuteDataTableQuery(query, ("ActiveTypeName", ACTIVE_TYPE_NAME));
-            return (int) resultSet.Rows[0]["UserStatusId"];
+            return (int) DbHelper.ExecuteScalar(query, ("ActiveTypeName", ACTIVE_TYPE_NAME));
         }
 
     }

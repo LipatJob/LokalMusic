@@ -30,9 +30,9 @@ namespace LokalMusic._Code.Presenters.Account
         public bool Login()
         {
 
-            (bool isLoginSuccessful, int userId) = repository.GetLogin(viewModel);
+            int userId = repository.GetLogin(viewModel);
 
-            if (isLoginSuccessful)
+            if (IsLoginSuccessful(userId))
             {
                 AuthenticationHelper.UserId = userId;
                 NavigationHelper.Redirect("~/Store/Home");
@@ -42,6 +42,11 @@ namespace LokalMusic._Code.Presenters.Account
             {
                 return false;
             }
+        }
+
+        private bool IsLoginSuccessful(int userId)
+        {
+            return userId != -1;
         }
     }
 }

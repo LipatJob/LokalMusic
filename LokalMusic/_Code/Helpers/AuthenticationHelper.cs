@@ -42,8 +42,7 @@ namespace LokalMusic._Code.Helpers
         private static string GetUsernameFromDatabase()
         {
             string query = "SELECT Username FROM UserInfo WHERE UserId = @UserId;";
-            var data = DbHelper.ExecuteDataTableQuery(query, ("UserId", UserId));
-            return (string)data.Rows[0]["Username"];
+            return (string)DbHelper.ExecuteScalar(query, ("UserId", UserId));
         }
 
 
@@ -60,8 +59,7 @@ namespace LokalMusic._Code.Helpers
         private static string GetUserTypeFromDatabase()
         {
             string query = "SELECT TypeName FROM UserType WHERE UserTypeId = (SELECT UserTypeId FROM UserInfo WHERE UserId = @UserId);";
-            var data = DbHelper.ExecuteDataTableQuery(query, ("UserId", UserId));
-            return (string)data.Rows[0]["TypeName"];
+            return (string) DbHelper.ExecuteScalar(query, ("UserId", UserId));
         }
 
     }
