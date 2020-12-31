@@ -96,7 +96,7 @@ namespace LokalMusic._Code.Repositories
         {
             List<Track> tracks = new List<Track>();
 
-            string query = "SELECT * " +
+            string query = "SELECT Track.TrackId, Product.ProductName, Track.Description, Track.TrackDuration, Track.ClipDuration, Product.DateAdded, Album.DateReleased, Product.Price, Album.ProducerName, FileInfo.FileName, ArtistInfo.UserId, ArtistInfo.ArtistName, Track.AlbumId, Genre.GenreName, AlbumProduct.ProductName as AlbumName " +
                            "FROM Track " +
                            "INNER JOIN Product " +
                            "ON Track.TrackId = Product.ProductId " +
@@ -108,7 +108,9 @@ namespace LokalMusic._Code.Repositories
                            "ON Track.GenreId = Genre.GenreId " +
                            "INNER JOIN FileInfo " +
                            "ON Track.ClipFileID = FileInfo.FileId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')" +
+                           "INNER JOIN Product as AlbumProduct " +
+                           "ON Track.AlbumId = AlbumProduct.ProductId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
                            "AND Track.AlbumId = @AlbumId";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
@@ -132,7 +134,8 @@ namespace LokalMusic._Code.Repositories
                         (int)values.Rows[i]["UserId"],
                         values.Rows[i]["ArtistName"].ToString(),
                         (int)values.Rows[i]["AlbumId"],
-                        values.Rows[i]["GenreName"].ToString());
+                        values.Rows[i]["GenreName"].ToString(),
+                        values.Rows[i]["AlbumName"].ToString());
 
                     tracks.Add(track);
                 }
@@ -187,7 +190,7 @@ namespace LokalMusic._Code.Repositories
         {
             List<Track> tracks = new List<Track>();
 
-            string query = "SELECT * " +
+            string query = "SELECT Track.TrackId, Product.ProductName, Track.Description, Track.TrackDuration, Track.ClipDuration, Product.DateAdded, Album.DateReleased, Product.Price, Album.ProducerName, FileInfo.FileName, ArtistInfo.UserId, ArtistInfo.ArtistName, Track.AlbumId, Genre.GenreName, AlbumProduct.ProductName as AlbumName " +
                            "FROM Track " +
                            "INNER JOIN Product " +
                            "ON Track.TrackId = Product.ProductId " +
@@ -195,10 +198,12 @@ namespace LokalMusic._Code.Repositories
                            "ON Track.AlbumId = Album.AlbumId " +
                            "INNER JOIN ArtistInfo " +
                            "ON Album.UserId = ArtistInfo.UserId " +
-                           "INNER JOIN Genre " +    
+                           "INNER JOIN Genre " +
                            "ON Track.GenreId = Genre.GenreId " +
                            "INNER JOIN FileInfo " +
                            "ON Track.ClipFileID = FileInfo.FileId " +
+                           "INNER JOIN Product as AlbumProduct " +
+                           "ON Track.AlbumId = AlbumProduct.ProductId " +
                            "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED') " +
                            "ORDER BY " + sortBy + " " + orderBy;
 
@@ -223,7 +228,8 @@ namespace LokalMusic._Code.Repositories
                         (int)values.Rows[i]["UserId"],
                         values.Rows[i]["ArtistName"].ToString(),
                         (int)values.Rows[i]["AlbumId"],
-                        values.Rows[i]["GenreName"].ToString()
+                        values.Rows[i]["GenreName"].ToString(),
+                        values.Rows[i]["AlbumName"].ToString()
                         );
 
                     tracks.Add(track);
