@@ -12,7 +12,7 @@ namespace LokalMusic.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(AuthenticationHelper.IsLoggedIn())
+            if(AuthenticationHelper.LoggedIn)
             {
                 AuthenticationHelper.ClearUserSession();
             }

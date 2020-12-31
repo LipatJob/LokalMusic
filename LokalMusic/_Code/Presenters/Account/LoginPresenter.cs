@@ -21,7 +21,7 @@ namespace LokalMusic._Code.Presenters.Account
 
         public void CheckAuthentication()
         {
-            if (AuthenticationHelper.IsLoggedIn())
+            if (AuthenticationHelper.LoggedIn)
             {
                 NavigationHelper.Redirect("~/Store/Home");
             }

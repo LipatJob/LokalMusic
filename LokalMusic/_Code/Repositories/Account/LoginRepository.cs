@@ -11,7 +11,6 @@ namespace LokalMusic._Code.Repositories.Account
 {
     public class LoginRepository
     {
-        /// <returns> First value is whether the login attempt is successful and the second value is the id of the user. If it's -1 then the login attempt failed</returns>
         public (bool, int) GetLogin(ILoginModel model)
         {
             string commandText = "SELECT UserId FROM UserInfo WHERE Email = @Email AND Password = @Password";

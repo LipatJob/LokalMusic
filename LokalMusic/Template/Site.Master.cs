@@ -15,9 +15,5 @@ namespace LokalMusic
 
         }
 
-        public string GetRole()
-        {
-            return AuthenticationHelper.GetUserType();
-        }
     }
 }

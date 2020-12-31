@@ -22,7 +22,7 @@ namespace LokalMusic._Code.Presenters.Account
 
         public void PageLoad()
         {
-            if(AuthenticationHelper.IsLoggedIn() == false)
+            if(AuthenticationHelper.LoggedIn == false)
             {
                 NavigationHelper.Redirect("~/Account/Login");
             }
