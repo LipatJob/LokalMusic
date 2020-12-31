@@ -79,52 +79,33 @@ namespace LokalMusic.Account
 
         protected void OldPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-
             new ValidationHelper((IValidator)source, args)
-                .AddRule((ValidationHelper.IsNotEqualTo(OldPassword.Length, 0), "This is a required field"))
-                .AddRule((() => presenter.CheckOldPassword(), "Please check your old password"))
-                .Execute(); ;
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(OldPassword), 
+                    errorMessage: "This is a required field")
+                .AddRule(
+                    rule: () => presenter.CheckOldPassword(),
+                    errorMessage: "Please check your old password")
+                .Validate();
         }
 
 
         protected void NewPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            var validator = (CustomValidator)source;
-            if (NewPassword.Length == 0)
-            {
-                validator.ErrorMessage = "This is a required field";
-                args.IsValid = false;
-            }
-            else if (NewPassword.Length < 5)
-            {
-                validator.ErrorMessage = "Password must be at least 5 characters";
-                args.IsValid = false;
-            }
-            else
-            {
-                args.IsValid = true;
-            }
+            ValidUtils.CreatePasswordValidator((IValidator)source, args, NewPassword).Validate();
         }
 
 
         protected void ConfirmNewPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            var validator = (CustomValidator)source;
-            if (ConfrimNewPassword.Length == 0)
-            {
-                validator.ErrorMessage = "This is a required field";
-                args.IsValid = false;
-            }
-            else if (NewPassword != ConfrimNewPassword)
-            {
-                validator.ErrorMessage = "Password confirmation does not match";
-                args.IsValid = false;
-            }
-            else
-            {
-                args.IsValid = true;
-            }
-            
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(ConfrimNewPassword),
+                    errorMessage: "This is a required field")
+                .AddRule(
+                    rule: () => NewPassword == ConfrimNewPassword,
+                    errorMessage: "Password confirmation does not match")
+                .Validate();
         }
 
 
@@ -148,32 +129,20 @@ namespace LokalMusic.Account
 
         protected void ProfilePictureFileCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            var validator = (CustomValidator)source;
-            Response.Write("<script> alert('Hello World') <script/>");
-            if(ProfilePictureFile.HasFile == false)
-            {
-                validator.ErrorMessage = "This is a required field";
-                args.IsValid = false;
-            }
-            else if(ProfilePictureFile.PostedFile.ContentLength > 10485760)
-            {
-                validator.ErrorMessage = "Please upload a file less than 10MB";
-                args.IsValid = false;
-            }
-            else if(IsValidImage(UploadedProfilePicture) == false)
-            {
-                validator.ErrorMessage = "Please select an image";
-                args.IsValid = false;
-            }
-            else if (IsImageDimensionValid(UploadedProfilePicture) == false)
-            {
-                validator.ErrorMessage = "Image must be at least 200px by 200px";
-                args.IsValid = false;
-            }
-            else
-            {
-                args.IsValid = true;
-            }
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: () => ProfilePictureFile.HasFile,
+                    errorMessage: "This is a required field")
+                .AddRule(
+                    rule: () => ProfilePictureFile.PostedFile.ContentLength < 10485760,
+                    errorMessage: "Please upload a file less than 10MB")
+                .AddRule(
+                    rule: () => IsValidImage(UploadedProfilePicture),
+                    errorMessage: "Please select a valid image")
+                .AddRule(
+                    rule: () => IsImageDimensionValid(UploadedProfilePicture),
+                    errorMessage: "Image must be at least 200px by 200px")
+                .Validate();
         }
 
         private bool IsImageDimensionValid(HttpPostedFile file)

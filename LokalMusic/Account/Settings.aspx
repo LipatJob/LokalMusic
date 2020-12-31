@@ -102,8 +102,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
-                <div class="item-group mx-auto">
+                <asp:Panel CssClass="item-group mx-auto" runat="server" DefaultButton="submitBtn">
                     <h5>Change Password</h5>
                     <div class="form-group">
                         <asp:Label Text="Old Password" runat="server" />
@@ -125,7 +124,7 @@
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
                         <asp:Button ID="submitBtn" Text="Change Password" runat="server" OnClick="submitBtn_Click" CssClass="btn btn-primary" ValidationGroup="ChangePassword" />
                     </div>
-                </div>
+                </asp:Panel>
             </div>
         </div>
 
