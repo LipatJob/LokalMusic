@@ -1,6 +1,5 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Models.Account;
-using LokalMusic._Code.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -32,7 +31,7 @@ namespace LokalMusic._Code.Repositories.Account
         public bool UpdatePassword(int userId, string newPassword)
         {
             string updatePasswordQuery = "UPDATE UserInfo SET Password = @Password WHERE UserId = @UserId";
-            DbHelper.ExecuteCommand(updatePasswordQuery, ("Password", newPassword), ("UserId", userId));
+            DbHelper.ExecuteScalar(updatePasswordQuery, ("Password", newPassword), ("UserId", userId));
             return true;
         }
 
@@ -45,8 +44,6 @@ namespace LokalMusic._Code.Repositories.Account
 
         public IList<PaymentHistoryItem> GetPaymentHistory(int? userId)
         {
-            var paymentHistory = new List<PaymentHistoryItem>();
-
             string productNameQuery = @"
 SELECT
 	[Transactions].TransactionId AS TransactionId,
@@ -63,17 +60,17 @@ GROUP BY [Transactions].TransactionId
 ORDER BY TransactionDate DESC;
 ";
             var result = DbHelper.ExecuteDataTableQuery(productNameQuery, ("UserId", userId));
-            foreach (DataRow row in result.Rows)
+
+            return result.AsEnumerable().Select((row) =>
             {
-                paymentHistory.Add(new PaymentHistoryItem()
+                return new PaymentHistoryItem()
                 {
                     TransactionId = (int)row["TransactionId"],
                     TransactionDate = (DateTime)row["TransactionDate"],
                     ItemsPurchased = (string)row["ItemsPurchased"],
                     Amount = (decimal)row["Amount"]
-                });
-            }
-            return paymentHistory;
+                };
+            }).ToList();
         }
 
         public void ChangeProfilePicture(int userId, HttpPostedFile file)
@@ -93,11 +90,11 @@ ORDER BY TransactionDate DESC;
         private void CreateNewProfilePicture(int userId, string fileName, HttpPostedFile file)
         {
             string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.PICTURE_CONTAINER_NAME, file, true);
-            int profileImageId = DbHelper.ExecuteCommand(
+            int profileImageId = (int) DbHelper.ExecuteScalar(
                 "INSERT INTO FileInfo(FileTypeId, FileName) VALUES((SELECT FileTypeId FROM FileType WHERE FileTypeName=@FileTypeName), @FileName) SELECT SCOPE_IDENTITY()",
                 ("FileTypeName", FileSystemHelper.PICTURE_CONTAINER_NAME),
                 ("FileName", fileLocation));
-            DbHelper.ExecuteCommand(
+            DbHelper.ExecuteScalar(
                 "UPDATE UserInfo SET ProfileImageId=@ProfileImageId WHERE UserId=@UserId",
                 ("ProfileImageId", profileImageId),
                 ("UserId", userId));
@@ -106,7 +103,7 @@ ORDER BY TransactionDate DESC;
         private void UpdateProfilePicture(int userId, string fileName, HttpPostedFile file)
         {
             string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.PICTURE_CONTAINER_NAME, file, true);
-            DbHelper.ExecuteCommand(
+            DbHelper.ExecuteScalar(
                 "UPDATE FileInfo SET FileName = @FileName WHERE FileId = (SELECT ProfileImageId FROM UserInfo WHERE UserId=@UserId)",
                 ("FileName", fileLocation),
                 ("UserId", userId));
@@ -115,8 +112,8 @@ ORDER BY TransactionDate DESC;
         private bool HasProfilePicture(int userId)
         {
             string query = "SELECT ProfileImageId FROM UserInfo WHERE UserId = @UserId";
-            var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
-            return (result.Rows[0].IsNull("ProfileImageId") == false);
+            var result = DbHelper.ExecuteScalar(query, ("UserId", userId));
+            return result != null;
         }
 
         

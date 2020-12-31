@@ -11,26 +11,18 @@ namespace LokalMusic._Code.Repositories.Account
 {
     public class LoginRepository
     {
-        public (bool, int) GetLogin(ILoginModel model)
+        public int GetLogin(ILoginModel model)
         {
             string commandText = "SELECT UserId FROM UserInfo WHERE Email = @Email AND Password = @Password";
-            var values = DbHelper.ExecuteDataTableQuery(commandText, ("Email", model.Email), ("Password", model.Password));
-
-            bool valid = values.Rows.Count == 1;
-            int userId = -1;
-            if (valid)
-            {
-                userId = (int)values.Rows[0]["UserId"];
-            }
-
-            return (valid, userId);
+            var userId = (int?)DbHelper.ExecuteScalar(commandText, ("Email", model.Email), ("Password", model.Password));
+            return userId ?? -1;
         }
 
         public bool IsCredentailsValid(ILoginModel model)
         {
             string commandText = "SELECT UserId FROM users WHERE email = @email AND password = @password";
-            var values = DbHelper.ExecuteDataTableQuery(commandText, ("email", model.Email), ("password", model.Password));
-            return values.Rows.Count == 1;
+            var userId = DbHelper.ExecuteScalar(commandText, ("Email", model.Email), ("Password", model.Password));
+            return userId != null;
         }
     }
 }

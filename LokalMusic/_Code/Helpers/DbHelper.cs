@@ -16,7 +16,7 @@ namespace LokalMusic._Code.Helpers
             return new SqlConnection(connectionString);
         }
 
-        public static void FillCommand(SqlCommand command,string commandText, params (string name, object value)[] parameters)
+        public static void FillCommand(SqlCommand command, string commandText, params (string name, object value)[] parameters)
         {
             command.CommandText = commandText;
             foreach (var parameter in parameters)
@@ -25,6 +25,10 @@ namespace LokalMusic._Code.Helpers
             }
         }
 
+        /// Safely executes a database query and returns a DataTable
+        /// - Stores data in memory
+        /// - Will slow website down if used in queries with large result sets 
+        /// - It is preferrable to manually create query code for large result set 
         public static DataTable ExecuteDataTableQuery(string commandText, params (string name, object value)[] parameters) 
         {
             DataTable dataTable = new DataTable();
@@ -37,27 +41,24 @@ namespace LokalMusic._Code.Helpers
                     {
                         adapter.Fill(dataTable);
                     }
-
                 }
             }
             return dataTable;
         }
 
-        public static int ExecuteCommand(string commandText, params (string name, object value)[] parameters) 
+        public static object ExecuteScalar(string commandText, params (string name, object value)[] parameters) 
         {
-            int affectedRow;
+            object result;
             using (var connection = GetConnection())
             {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = commandText;
-                foreach (var parameter in parameters)
+                using (var command = connection.CreateCommand())
                 {
-                    command.Parameters.AddWithValue(parameter.name, parameter.value);
+                    FillCommand(command, commandText, parameters);
+                    connection.Open();
+                    result = command.ExecuteScalar();
                 }
-                connection.Open();
-                affectedRow = Convert.ToInt32(command.ExecuteScalar());
             }
-            return affectedRow;
+            return result;
         }
     }
 }
