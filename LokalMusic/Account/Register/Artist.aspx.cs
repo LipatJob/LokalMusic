@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Presenters.Account.Register;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Presenters.Account.Register;
 using LokalMusic._Code.Repositories.Account.Register;
 using LokalMusic._Code.Views.Account.Register;
 using System;
@@ -18,11 +19,11 @@ namespace LokalMusic.Account.Register
         {
             presenter = new RegisterArtistPresenter(this, new RegisterArtistRepository());
         }
-        public string ArtistName { get => ArtistNameTxt.Text; set => throw new NotImplementedException(); }
-        public string Email { get => EmailTxt.Text; set => throw new NotImplementedException(); }
-        public string Username { get => UsernameTxt.Text; set => throw new NotImplementedException(); }
-        public string Password { get => PasswordTxt.Text; set => throw new NotImplementedException(); }
-        public string ConfirmPassword { get => ConfirmPasswordTxt.Text; set => throw new NotImplementedException(); }
+        public string ArtistName { get => ArtistNameTxt.Text; }
+        public string Email { get => EmailTxt.Text; }
+        public string Username { get => UsernameTxt.Text; }
+        public string Password { get => PasswordTxt.Text; }
+        public string ConfirmPassword { get => ConfirmPasswordTxt.Text; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,7 +32,14 @@ namespace LokalMusic.Account.Register
 
         protected void ArtistNameTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(ArtistName),
+                    errorMessage: "This is a required field")
+                .AddRule(
+                    rule: () => ArtistName.Length >= 3,
+                    errorMessage: "Artist name must be at least 3 letters long")
+                .Validate();
         }
 
         protected void submitBtn_Click(object sender, EventArgs e)
@@ -44,45 +52,26 @@ namespace LokalMusic.Account.Register
 
         protected void UsernameTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            var validator = (CustomValidator)source;
-            if (Username.Length < 5)
-            {
-                validator.ErrorMessage = "Username must have at least 5 characters";
-                args.IsValid = false;
-            }
-            else if (presenter.IsUsernameUnique() == false)
-            {
-                validator.ErrorMessage = "That username has already been taken";
-                args.IsValid = false;
-            }
-            else
-            {
-                args.IsValid = true;
-            }
+            ValidUtils.CreateUsernameValidator((IValidator)source, args, Username)
+                .AddRule(
+                    rule: () => presenter.IsUsernameUnique(),
+                    errorMessage: "That username has already been taken")
+                .Validate();
         }
 
         protected void EmailTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            var validator = (CustomValidator)source;
-            if (Email.Length == 0)
-            {
-                validator.ErrorMessage = "This is a required field";
-                args.IsValid = false;
-            }
-            if (IsValidEmailFormat(Email) == false)
-            {
-                validator.ErrorMessage = "Please enter a valid email";
-                args.IsValid = false;
-            }
-            else if (presenter.IsEmailUnique() == false)
-            {
-                validator.ErrorMessage = "Another account has already been associated with the email";
-                args.IsValid = false;
-            }
-            else
-            {
-                args.IsValid = true;
-            }
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(Email),
+                    errorMessage: "This is a required field")
+                .AddRule(
+                    rule: () => IsValidEmailFormat(Email),
+                    errorMessage: "Please enter a valid email")
+                .AddRule(
+                    rule: () => presenter.IsEmailUnique(),
+                    errorMessage: "Another account has already been associated with the email")
+                .Validate();
         }
 
         private bool IsValidEmailFormat(string email)
@@ -95,35 +84,19 @@ namespace LokalMusic.Account.Register
 
         protected void PasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            var validator = (CustomValidator)source;
-            if (Password.Length < 5)
-            {
-                validator.ErrorMessage = "Password must be at least 5 characters";
-                args.IsValid = false;
-            }
-            else
-            {
-                args.IsValid = true;
-            }
+            ValidUtils.CreatePasswordValidator((IValidator)source, args, Password).Validate();
         }
 
         protected void ConfirmPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            var validator = (CustomValidator)source;
-            if (Password.Length < 5)
-            {
-                validator.ErrorMessage = "Password must be at least 5 characters";
-                args.IsValid = false;
-            }
-            else if (ConfirmPassword != Password)
-            {
-                validator.ErrorMessage = "Confrim Password must match with Password";
-                args.IsValid = false;
-            }
-            else
-            {
-                args.IsValid = true;
-            }
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(ConfirmPassword),
+                    errorMessage: "This is a required field")
+                .AddRule(
+                    rule: () => ConfirmPassword == Password,
+                    errorMessage: "Password confirmation does not match")
+                .Validate();
         }
 
         protected void TosCbCv_ServerValidate(object source, ServerValidateEventArgs args)

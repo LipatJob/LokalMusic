@@ -12,17 +12,17 @@ namespace LokalMusic._Code.Helpers
     {
         private IValidator validator;
         private ServerValidateEventArgs args;
-        private IList<(Func<bool> command, string message)> rules;
+        private IList<ValidationRule> rules;
 
 
         public ValidationHelper(IValidator validator, ServerValidateEventArgs args)
         {
             this.validator = validator;
             this.args = args;
-            this.rules = new List<(Func<bool> command, string message)>();
+            this.rules = new List<ValidationRule>();
         }
 
-        public ValidationHelper AddRules(params (Func<bool> command, string message)[] rulesToAdd)
+        public ValidationHelper AddRules(params ValidationRule[] rulesToAdd)
         {
             foreach (var rule in rulesToAdd)
             {
@@ -31,62 +31,43 @@ namespace LokalMusic._Code.Helpers
             return this;
         }
 
-        public ValidationHelper AddRule((Func<bool> command, string message) rule)
+        public ValidationHelper AddRule(ValidationRule rule)
         {
             rules.Add(rule);
             return this;
         }
 
-        public void Execute()
+        public ValidationHelper AddRule(Func<bool> rule, string errorMessage)
+        {
+            rules.Add(new ValidationRule(rule, errorMessage));
+            return this;
+        }
+
+        public void Validate()
         {
             foreach (var rule in rules)
             {
-                if(rule.command() == false)
+                if(rule.Command() == false)
                 {
                     args.IsValid = false;
-                    validator.ErrorMessage = rule.message;
+                    validator.ErrorMessage = rule.ErrorMessage;
                     return;
                 }
             }
             args.IsValid = true;
         }
+    }
 
-        public static Func<bool> NotNull(object value)
+    public struct ValidationRule
+    {
+        public Func<bool> Command;
+        public string ErrorMessage;
+
+        public ValidationRule(Func<bool> command, string errorMessage)
         {
-            return () => value != null;
+            Command = command;
+            ErrorMessage = errorMessage;
         }
-
-        public static Func<bool> IsTrue<T>(bool value)
-        {
-            return () => value;
-        }
-
-        public static Func<bool> IsEqualTo<T>(T value1, T value2)
-        {
-            return () => value1.Equals(value2);
-        }
-
-        public static Func<bool> IsNotEqualTo<T>(T value1, T value2)
-        {
-            return () => !value1.Equals(value2);
-        }
-
-        public static Func<bool> I<T>(T value1, T value2)
-        {
-            return () => value1.Equals(value2);
-        }
-
-        public static Func<bool> InRange(IComparable value, IComparable min, IComparable max)
-        {
-            return () => value.CompareTo(min) >= 0 && value.CompareTo(max) <= 0;
-        }
-
-        public static Func<bool> IsValidRegex(string value, string pattern, RegexOptions options = RegexOptions.None)
-        {
-            return () => Regex.Match(value, pattern, options).Success;
-        }
-
-
     }
 
 }

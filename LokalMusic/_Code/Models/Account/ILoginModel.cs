@@ -7,7 +7,7 @@ namespace LokalMusic._Code.Models.Account
 {
     public interface ILoginModel
     {
-        string Email { get; set; }
-        string Password { get; set; }
+        string Email { get; }
+        string Password { get; }
     }
 }
