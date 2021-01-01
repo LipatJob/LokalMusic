@@ -30,10 +30,16 @@ namespace LokalMusic
                 );
 
             routes.MapPageRoute(
-                "TrackDetails",
-                "Store/{ArtistName}/{AlbumId}/{TrackName}",
-                "~/Store/TracksPage.aspx"
-            );
+                "AlbumPage",
+                "Store/Albums/{SortBy}/{OrderBy}",
+                "~/Store/AlbumsPage.aspx"
+                );
+
+            //routes.MapPageRoute(
+            //    "TrackDetails",
+            //    "Store/{ArtistName}/{AlbumId}/{TrackName}",
+            //    "~/Store/TracksPage.aspx"
+            //);
 
         }
 

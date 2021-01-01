@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-
-        #tracks-page {
+        .side-links  {
             color: #B82828;
             font-weight: 700;
             font-size:15px;
@@ -33,8 +32,8 @@
                         <ItemTemplate>
                             <tr class="text-center">
                                 <td class="float-right">
-                                    <img src="../Content/Images/default_cover.jpg" width="30" height="30" class="mx-auto"/>
-                                </td>
+                                    <img src="../Content/Images/default_cover.jpg" width="30" height="30" class="mx-auto" runat="server"/>
+                                </td>   
                                 <td class="emphasize"><%#Eval("TrackName") %></td>
                                 <td><%#Eval("AlbumName") %></td>
                                 <td><%#Eval("ArtistName") %></td>
@@ -43,7 +42,7 @@
                                 <td class="emphasize">₱<%#Eval("Price") %></td>
                                 <td>
                                     <a href="#">
-                                        <img src="../Content/Images/cart.png" class="" width="20" height="20"/>
+                                        <img src="../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
                                     </a>
                                 </td>
                             </tr>

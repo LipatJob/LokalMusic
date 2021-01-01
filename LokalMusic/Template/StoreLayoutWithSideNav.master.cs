@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LokalMusic._Code.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,9 @@ namespace LokalMusic.Template
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            tracks_page.HRef = $"~/Store/Tracks/{"RA"}/{"ASC"}";
+            albums_page.HRef = $"~/Store/Albums/{"RA"}/{"ASC"}";
+            //artist.HRef = $"~/Store/Tracks/{"RA"}/{"ASC"}";
         }
 
         

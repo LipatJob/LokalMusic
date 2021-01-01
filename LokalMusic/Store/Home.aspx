@@ -87,7 +87,7 @@
     <div id="best-selling-albums" class="container mt-4">
         <div class="row mb-4">
             <h5 class="my-auto">Bestselling Albums</h5>
-            <a href="AlbumsPage.aspx" class="text-danger ml-2 view-all my-auto">View All</a>
+            <a class="text-danger ml-2 view-all my-auto" id="albumViewAll" runat="server">View All</a>
         </div>
 
         <%--Albums--%>

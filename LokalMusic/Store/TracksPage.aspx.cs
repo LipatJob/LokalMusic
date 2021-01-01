@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Models.Products;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Products;
 using LokalMusic._Code.Presenters.Store;
 using LokalMusic._Code.Repositories;
 using LokalMusic._Code.Views.Store;
@@ -19,8 +20,13 @@ namespace LokalMusic.Store
         {
             this.presenter = new TracksPagePresenter(this, new StoreRepository());
 
-            // url Store/TracksPage/{SortBy}/{OrderBy}
-            this.tracks = presenter.GetTracks(/*sortby, orderby*/);
+            string sortby = (string)NavigationHelper.GetRouteValue("SortBy");
+            string orderby = (string)NavigationHelper.GetRouteValue("OrderBy");
+
+            if ((sortby == null || sortby == "") && (orderby == null || orderby == ""))
+                this.tracks = presenter.GetTracks();
+            else 
+                this.tracks = presenter.GetTracks(sortby, orderby);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
