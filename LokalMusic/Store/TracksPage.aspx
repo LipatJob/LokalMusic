@@ -30,7 +30,8 @@
                     <tr class="text-center font-weight-bold">
                         <td></td>
                         <td >Track Name</td>
-                        <td>Artist Name</td>
+                        <td>Album</td>
+                        <td>Artist</td>
                         <td>Genre </td>
                         <td>Track Duration</td>
                         <td>Price</td>
@@ -46,6 +47,7 @@
                                     <img src="../Content/Images/default_cover.jpg" width="30" height="30" class="mx-auto"/>
                                 </td>
                                 <td class="emphasize"><%#Eval("TrackName") %></td>
+                                <td><%#Eval("AlbumName") %></td>
                                 <td><%#Eval("ArtistName") %></td>
                                 <td><%#Eval("Genre") %></td>
                                 <td><%#Eval("TrackDuration") %></td>
