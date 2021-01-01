@@ -2,7 +2,7 @@
 
 <asp:Content ID="StoreContentWithSideNav" ContentPlaceHolderID="MainContent" runat="server">
 
-    <style>
+    <style type="text/css" scoped>
         /* The side navigation menu */
         .sidenav {
             height: 100%; /* 100% Full-height */
@@ -24,7 +24,6 @@
             font-size: 16px;
             padding: 8px 8px 8px 8px;
             text-decoration: none;
-            color: black;
             display: block;
             transition: 0.3s;
         }
@@ -37,6 +36,7 @@
         .sidenav .side-links{
             font-size: 13px;
             font-weight: 600;
+            color: black
         }
 
         /* Position and style the close button (top right corner) */
@@ -83,17 +83,17 @@
     <div id="product-display" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         
-        <div class="text-center mt-3">
+        <div class="text-center mt-3 linkContainer">
             <p>Display By</p>
             <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
-            <a href="../Store/TracksPage.aspx" class="side-links" id="tracks_page">Lokal Track</a>
-            <a href="../Store/AlbumsPage.aspx" class="side-links" id="albums_page">Lokal Album</a>
+            <a class="side-links" id="tracks_page" runat="server">Lokal Track</a>
+            <a class="side-links" id="albums_page" runat="server">Lokal Album</a>
             <a href="" class="side-links" id="artists_page">Lokal Artists</a>
             <hr style="width: 150px; background:#525252;"/>
 
             <p class="mt-5">Sort By</p>
             <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
-            <a href="" class="side-links" id="sort_a_z" onclick="sortClick('TN')">Track Name</a>
+            <a href="" class="side-links" id="sort_a_z" onclick="sortClick('TL')">Title</a>
             <a href="" class="side-links" id="sort_z_a" onclick="sortClick('PR')">Price</a>
             <a href="" class="side-links" id="recently_added" onclick="sortClick('RA')">Recently Added</a>
 

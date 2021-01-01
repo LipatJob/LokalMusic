@@ -22,7 +22,7 @@ namespace LokalMusic._Code.Presenters.Store
         {
             if (sortBy == "RA") sortBy = "DateAdded";
             else if (sortBy == "PR") sortBy = "Price";
-            else if (sortBy == "TN") sortBy = "ProductName";
+            else if (sortBy == "TL") sortBy = "ProductName";
 
             List<Track> tracks = this.repository.GetTracks(sortBy, orderBy);
 
