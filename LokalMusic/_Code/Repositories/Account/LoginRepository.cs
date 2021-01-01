@@ -16,13 +16,10 @@ namespace LokalMusic._Code.Repositories.Account
         {
             string commandText = @"
 SELECT UserId
-FROM [UserInfo]
+FROM [ActiveUserInfo]
 WHERE
     Email = @Email AND
-    Password = @Password AND
-    UserStatusId = (SELECT UserStatusId
-                    FROM UserStatus
-                    WHERE UserStatusName = @UserStatusName )";
+    Password = @Password";
             var userId = (int?)DbHelper.ExecuteScalar(
                 commandText,
                 ("Email", model.Email),

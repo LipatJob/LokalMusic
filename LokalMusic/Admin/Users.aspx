@@ -75,7 +75,7 @@
                         {
                             data: "ProfilePage",
                             render: function (data) {
-                                data = `<a href="${data}"> Product Page </a>`;
+                                data = `<a href="${data}"> Profile </a>`;
                                 return data;
                             }
                         },
