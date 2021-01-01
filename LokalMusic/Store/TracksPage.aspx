@@ -7,18 +7,7 @@
             color: #B82828;
             font-weight: 700;
             font-size:15px;
-        }
-
-        .emphasize {
-            color:#AA3A3A; 
-            font-weight: 700; 
-            font-size:16px;
-        }
-
-        thead{
-            font-family: Montserrat;
-            font-size: 15px;
-        }
+        } 
     </style>
 
     <div class="container">

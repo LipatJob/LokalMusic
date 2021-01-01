@@ -144,7 +144,7 @@ namespace LokalMusic._Code.Repositories
             return tracks.Count > 0 ? tracks : null;
         }
 
-        public List<AlbumProduct> GetAlbums()
+        public List<AlbumProduct> GetAlbums(string sortBy = "DateAdded", string orderBy = "ASC")
         {
             List<AlbumProduct> albums = new List<AlbumProduct>();
 
@@ -156,7 +156,8 @@ namespace LokalMusic._Code.Repositories
                            "ON Album.UserId = ArtistInfo.UserId " +
                            "INNER JOIN FileInfo " +
                            "ON FileInfo.FileId = Album.AlbumCoverId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')";
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')" +
+                           "ORDER BY " + sortBy + " " + orderBy;
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
@@ -186,7 +187,7 @@ namespace LokalMusic._Code.Repositories
             return albums.Count > 0 ? albums : null;
         }
 
-        public List<Track> GetTracks(string sortBy = "DateAdded", string orderBy = "DESC")
+        public List<Track> GetTracks(string sortBy = "DateAdded", string orderBy = "ASC")
         {
             List<Track> tracks = new List<Track>();
 

@@ -67,6 +67,17 @@
             font-size: 25px;
             font-family:Montserrat;
         }
+
+        .emphasize {
+            color:#AA3A3A; 
+            font-weight: 700; 
+            font-size:16px;
+        }
+
+        thead{
+            font-family: Montserrat;
+            font-size: 15px;
+        }
     </style>
 
     <div id="product-display" class="sidenav">
