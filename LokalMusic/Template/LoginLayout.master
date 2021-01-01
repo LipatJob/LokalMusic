@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="LoginLayout.master.cs" Inherits="LokalMusic.Template.LoginLayout" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    
+
     <style>
         .nav-link{
             font-size: 18px;

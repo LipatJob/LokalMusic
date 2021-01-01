@@ -22,6 +22,7 @@ namespace LokalMusic.Account
         public Settings()
         {
             presenter = new SettingsPresenter(this, new SettingsRepository());
+
         }
 
         public string Username { get => UsernameTxt.Text; set => UsernameTxt.Text = value; }

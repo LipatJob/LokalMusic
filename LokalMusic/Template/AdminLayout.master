@@ -1,50 +1,142 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="AdminLayout.master.cs" Inherits="LokalMusic.Template.AdminLayout" %>
 
 <asp:Content ID="AdminLayout" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <style>
+        .nav-header {
+            font: 700 20px verdana;
+        }
 
-    <%--Nav--%>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        #timer {
+            font-size: 20px;
+        }
 
-        <a class="navbar-brand" href="#">Navbar</a>
+        /* The side navigation menu */
+        .sidenav {
+            width: 200px; /* 0 width - change this with JavaScript */
+            z-index: 1; /* Stay on top */
+            background-color: #FAFAFA;
+            overflow-x: hidden; /* Disable horizontal scroll */
+            transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+        }
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            /* The navigation menu links */
+            .sidenav a, .sidenav p {
+                font-family: Montserrat;
+                font-weight: 700;
+                font-size: 16px;
+                padding: 8px 8px 8px 8px;
+                text-decoration: none;
+                color: black;
+                display: block;
+                transition: 0.3s;
+            }
 
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                /* When you mouse over the navigation links, change their color */
+                .sidenav a:hover {
+                }
+
+            .sidenav .side-links {
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            /* Position and style the close button (top right corner) */
+            .sidenav .closebtn {
+                height: 30px;
+                text-align: right;
+                font-size: 36px;
+                margin-left: 50px;
+                color: #F82B2B;
+                font-weight: 400;
+            }
+
+        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+            margin-left: 200px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+
+        h1 {
+            font-size: 25px;
+            font-family: Montserrat;
+        }
+
+        .side-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow:1;
+            height:100%;
+        }
+
+        .sidebar-active{
+            background-color: #D7D7D7;
+        }
+    </style>
+
+    <div style="display:flex; flex-direction:column; height:100vh">
+
+        <%--Nav--%>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#">
+                <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
+            </a>
             <ul class="navbar-nav">
-
-                <li class="nav-item active">
-                    <a class="nav-item nav-link active" runat="server" href="~/">Home</a>
-                </li>
-
                 <li class="nav-item">
-                    <a class="nav-item nav-link"  href="~/About">About</a>
+                    <span class="nav-header">Admin</span>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-item nav-link" href="~/Contact">Contact</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
-                    </a>
-
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-
             </ul>
+
+            <ul class="navbar-nav ml-auto mr-5">
+                <li class="nav-item">
+                    <span id="timer"></span>
+                </li>
+            </ul>
+        </nav>
+
+        <div style="display: flex; flex-direction: row; align-items: stretch; flex-grow:1">
+
+            <div id="product-display" class="sidenav">
+                <div class="text-center  side-container">
+                    <p class="side-links"><%Response.Write(AuthenticationHelper.Username); %></p>
+                    <hr style="width: 150px; background: #525252;" />
+                    <a href="~/Admin/Products" runat="server" class="side-links productsSideItem">Products</a>
+                    <a href="~/Admin/Users" runat="server" class="side-links usersSideItem">Users</a>
+                    <hr style="margin-top: auto; width: 150px; background: #525252;" />
+                    <a style="" href="~" class="pb-3" runat="server">Return to Store</a>
+                </div>
+            </div>
+
+
+            <div class="container body-content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            </div>
         </div>
 
-    </nav>
-
-    <div class="container body-content">
-        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
+
+
+    <script>
+        var span = document.getElementById('timer');
+
+        function time() {
+            var d = new Date();
+            span.textContent = moment().format("LT").toString() + " | " + moment().format("LL").toString();
+        }
+
+        setInterval(time, 1000);
+    </script>
 
 </asp:Content>
