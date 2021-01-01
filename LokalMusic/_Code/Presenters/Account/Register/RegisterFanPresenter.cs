@@ -22,7 +22,7 @@ namespace LokalMusic._Code.Presenters.Account.Register
 
         public void Register()
         {
-            //repository.RegisterFan(viewModel);
+            repository.RegisterFan(viewModel);
             NavigationHelper.Redirect("~/Account/Login");
         }
 

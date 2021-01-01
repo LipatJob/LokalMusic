@@ -28,35 +28,33 @@ namespace LokalMusic._Code.Repositories.Account
             model.Username = (string)query.Rows[0]["Username"];
         }
 
-        public bool UpdatePassword(int userId, string newPassword)
+        public void UpdatePassword(int userId, string newPassword)
         {
             string updatePasswordQuery = "UPDATE UserInfo SET Password = @Password WHERE UserId = @UserId";
             DbHelper.ExecuteScalar(updatePasswordQuery, ("Password", newPassword), ("UserId", userId));
-            return true;
         }
 
         public bool CheckPassword(int userId, string password)
         {
             string query = "SELECT UserId FROM UserInfo WHERE UserId = @UserId AND Password = @Password";
-            var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId), ("Password", password));
-            return result.Rows.Count == 1;
+            return DbHelper.ExecuteDataTableQuery(query, ("UserId", userId), ("Password", password)) != null;
         }
 
         public IList<PaymentHistoryItem> GetPaymentHistory(int? userId)
         {
             string productNameQuery = @"
 SELECT
-	[Transactions].TransactionId AS TransactionId,
+	[Transaction].TransactionId AS TransactionId,
 	MAX(TransactionDate) AS TransactionDate,
 	STRING_AGG(ProductName, ', ') AS ItemsPurchased,
-	SUM([Transactions].ActualAmountPaid) AS Amount
-FROM [Transactions]
-	INNER JOIN TransactionProducts ON
-		[Transactions].TransactionId = [TransactionProducts].TransactionId
+	SUM([Transaction].ActualAmountPaid) AS Amount
+FROM [Transaction]
+	INNER JOIN TransactionProduct ON
+		[Transaction].TransactionId = [TransactionProduct].TransactionId
 	INNER JOIN Product ON
-		[Product].ProductId = [TransactionProducts].ProductId
-WHERE [Transactions].UserId = @UserId
-GROUP BY [Transactions].TransactionId
+		[Product].ProductId = [TransactionProduct].ProductId
+WHERE [Transaction].UserId = @UserId
+GROUP BY [Transaction].TransactionId
 ORDER BY TransactionDate DESC;
 ";
             var result = DbHelper.ExecuteDataTableQuery(productNameQuery, ("UserId", userId));
@@ -112,8 +110,7 @@ ORDER BY TransactionDate DESC;
         private bool HasProfilePicture(int userId)
         {
             string query = "SELECT ProfileImageId FROM UserInfo WHERE UserId = @UserId";
-            var result = DbHelper.ExecuteScalar(query, ("UserId", userId));
-            return result != null;
+            return DbHelper.ExecuteScalar(query, ("UserId", userId)) != null;
         }
 
         
