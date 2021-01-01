@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="AdminLayout.master.cs" Inherits="LokalMusic.Template.AdminLayout" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="FinanceLayout.master.cs" Inherits="LokalMusic.Template.FinanceLayout" %>
 
 <asp:Content ID="AdminLayout" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
@@ -86,7 +86,7 @@
         }
     </style>
 
-    <div style="display:flex; flex-direction:column; height:100vh">
+    <div style="display:flex; flex-direction:column; height:100vh; max-height: 100vh;">
 
         <%--Nav--%>
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -95,7 +95,7 @@
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <span class="nav-header">Admin</span>
+                    <span class="nav-header">Finance</span>
                 </li>
             </ul>
 
@@ -110,10 +110,10 @@
 
             <div id="product-display" class="sidenav">
                 <div class="text-center  side-container">
-                    <p class="side-links mt-3"><%Response.Write(AuthenticationHelper.Username); %></p>
+                    <%-- %>p class="side-links mt-3"><%Response.Write(AuthenticationHelper.Username " "); %></ --%>
                     <hr style="width: 150px; background: #525252; margin-top:0px;" />
-                    <a href="~/Admin/Products" runat="server" class="side-links productsSideItem">Products</a>
-                    <a href="~/Admin/Users" runat="server" class="side-links usersSideItem">Users</a>
+                    <a href="~/Finance/Reports" runat="server" class="side-links productsSideItem">Reports</a>
+                    <a href="~/Finance/Receipts" runat="server" class="side-links usersSideItem">Receipts</a>
                     <hr style="margin-top: auto; width: 150px; background: #525252;" />
                     <a style="" href="~" class="pb-3" runat="server">Return to Store</a>
                 </div>
