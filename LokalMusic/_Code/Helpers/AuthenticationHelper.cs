@@ -11,7 +11,8 @@ namespace LokalMusic._Code.Helpers
     {
         public const string ADMIN_USER_TYPE = "ADMIN";
         public const string ARTIST_USER_TYPE = "ARTIST";
-
+        public const string FINANCE_USER_TYPE = "FINANCE";
+        public const string FAN_USER_TYPE = "FAN";
 
         private const string UserIdSessionName = "USERID";
         private const string UsernameSessionName = "USERNAME";
