@@ -9,9 +9,13 @@ namespace LokalMusic._Code.Helpers
 {
     public class AuthenticationHelper
     {
+        public const string ADMIN_USER_TYPE = "ADMIN";
+        public const string ARTIST_USER_TYPE = "ARTIST";
+        public const string FINANCE_USER_TYPE = "FINANCE";
+        public const string FAN_USER_TYPE = "FAN";
+
         private const string UserIdSessionName = "USERID";
         private const string UsernameSessionName = "USERNAME";
-
 
         public static int UserId
         {
@@ -38,23 +42,20 @@ namespace LokalMusic._Code.Helpers
             }
         }
 
-
         private static string GetUsernameFromDatabase()
         {
             string query = "SELECT Username FROM UserInfo WHERE UserId = @UserId;";
             return (string)DbHelper.ExecuteScalar(query, ("UserId", UserId));
         }
 
-
-        public static string UserType 
-        { 
+        public static string UserType
+        {
             get
             {
-                if (LoggedIn == false) { return "Guest"; }
+                if (LoggedIn == false) { return "GUEST"; }
                 return GetUserTypeFromDatabase();
             }
         }
-        
 
         private static string GetUserTypeFromDatabase()
         {
