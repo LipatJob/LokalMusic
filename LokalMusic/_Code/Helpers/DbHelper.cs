@@ -60,5 +60,20 @@ namespace LokalMusic._Code.Helpers
             }
             return result;
         }
+
+        public static int ExecuteNonQuery(string commandText, params (string name, object value)[] parameters)
+        {
+            int result;
+            using (var connection = GetConnection())
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    FillCommand(command, commandText, parameters);
+                    connection.Open();
+                    result = command.ExecuteNonQuery();
+                }
+            }
+            return result;
+        }
     }
 }

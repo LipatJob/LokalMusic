@@ -12,7 +12,7 @@ namespace LokalMusic._Code.Repositories.Account.Register
         const string FAN_TYPE_NAME = "FAN";
         const string ACTIVE_TYPE_NAME = "ACTIVE";
 
-        public bool RegisterFan(IRegisterFanModel model)
+        public void RegisterFan(IRegisterFanModel model)
         {
             int userTypeId = GetUserTypeId();
             int userStatusId = GetUserStatusId();
@@ -29,18 +29,17 @@ namespace LokalMusic._Code.Repositories.Account.Register
                 ("username", model.Username), 
                 ("password", model.Password), 
                 ("dateRegistered", DateTime.Now));
-            return true;
         }
 
         public bool IsUsernameUnique(string username)
         {
-            string query = $"SELECT Username from UserInfo WHERE Username = '@username';";
+            string query = $"SELECT Username from UserInfo WHERE Username = @username;";
             return DbHelper.ExecuteScalar(query, ("username", username)) == null;
         }
 
         public bool IsEmailUnique(string email)
         {
-            string query = $"SELECT Email from UserInfo WHERE Email = '@email';";
+            string query = $"SELECT Email from UserInfo WHERE Email = @email;";
             return DbHelper.ExecuteScalar(query, ("email", email)) == null;
         }
 

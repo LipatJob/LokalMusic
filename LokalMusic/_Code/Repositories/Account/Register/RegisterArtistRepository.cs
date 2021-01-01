@@ -15,12 +15,11 @@ namespace LokalMusic._Code.Repositories.Account.Register
         private IRegisterArtistModel model;
         private int userId;
 
-        public bool RegisterArtist(IRegisterArtistModel model)
+        public void RegisterArtist(IRegisterArtistModel model)
         {
             this.model = model;
             CreateArtistAccount();
             CreateArtistProfile();
-            return true;
         }
 
         private void CreateArtistAccount()
@@ -46,8 +45,8 @@ namespace LokalMusic._Code.Repositories.Account.Register
         private void CreateArtistProfile()
         {
             string query =
-                "INSERT INTO ArtistInfo(UserId, ArtistName) VALUES " +
-                "(@UserId, @ArtistName)";
+                "INSERT INTO ArtistInfo(UserId, ArtistName) " +
+                "VALUES (@UserId, @ArtistName)";
             DbHelper.ExecuteScalar(
                 query,
                 ("UserId", userId),

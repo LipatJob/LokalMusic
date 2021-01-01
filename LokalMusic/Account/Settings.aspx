@@ -96,31 +96,41 @@
             </div>
 
             <div class="col-6">
+                <%-- Change Password Success Alert --%>
                 <div id="changePasswordSuccessAlert" class="alert alert-success" role="alert" runat="server" visible="false">
                     <span id="changePasswordSuccessMessage" runat="server"></span>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <asp:Panel CssClass="item-group mx-auto" runat="server" DefaultButton="submitBtn">
+                    <%-- Group Header --%>
                     <h5>Change Password</h5>
+
+                     <%-- Old Password --%>
                     <div class="form-group">
                         <asp:Label Text="Old Password" runat="server" />
                         <asp:TextBox ID="OldPasswordTxt" runat="server" type="password" CssClass="form-control" />
                         <asp:CustomValidator ID="OldPasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="OldPasswordTxt" runat="server" OnServerValidate="OldPasswordTxtCv_ServerValidate" Display="Dynamic" ValidateEmptyText="True" CssClass="validation-message" ValidationGroup="ChangePassword" />
                     </div>
                     <hr />
+
+                    <%-- New Password --%>
                     <div class="form-group">
                         <asp:Label Text="New Password" runat="server" />
                         <asp:TextBox ID="NewPasswordTxt" runat="server" type="password" CssClass="form-control" />
                         <asp:CustomValidator ID="NewPasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="NewPasswordTxt" runat="server" OnServerValidate="NewPasswordTxtCv_ServerValidate" Display="Dynamic" ValidateEmptyText="True" CssClass="validation-message" ValidationGroup="ChangePassword" />
                     </div>
 
+                    <%-- Confirm New Password--%>
                     <div class="form-group">
                         <asp:Label Text="Confirm New Password" runat="server" />
                         <asp:TextBox ID="ConfirmNewPasswordTxt" runat="server" type="password" CssClass="form-control" />
                         <asp:CustomValidator ID="ConfirmNewPasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="ConfirmNewPasswordTxt" runat="server" OnServerValidate="ConfirmNewPasswordTxtCv_ServerValidate" Display="Dynamic" ValidateEmptyText="True" CssClass="validation-message" ValidationGroup="ChangePassword" />
                     </div>
+
+                    <%-- Change Password Button--%>
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
                         <asp:Button ID="submitBtn" Text="Change Password" runat="server" OnClick="submitBtn_Click" CssClass="btn btn-primary" ValidationGroup="ChangePassword" />
                     </div>

@@ -39,17 +39,17 @@ namespace LokalMusic._Code.Repositories.Fan
                     "[FileInfo].FileName AS FileName, " +
                     "[Product].ProductName AS ProductName, " +
                     "[ArtistInfo].ArtistName AS ArtistName, " +
-                    "[ProductTypes].TypeName AS ProductType, " +
+                    "[ProductType].TypeName AS ProductType, " +
                     "[ArtistInfo].UserId AS ArtistId, " +
                     "[Product].ProductId AS TrackId, " +
                     "[Album].AlbumId AS AlbumId " +
-                "FROM [Transactions] " +
-                    "INNER JOIN [TransactionProducts] ON " +
-                        "[Transactions].TransactionId = [TransactionProducts].TransactionId " +
+                "FROM [Transaction] " +
+                    "INNER JOIN [TransactionProduct] ON " +
+                        "[Transaction].TransactionId = [TransactionProduct].TransactionId " +
                     "INNER JOIN [Product] ON " +
-                        "[TransactionProducts].ProductId = [Product].ProductId " +
-                    "INNER JOIN [ProductTypes] ON " +
-                        "[ProductTypes].ProductTypeId = [Product].ProductTypeId " +
+                        "[TransactionProduct].ProductId = [Product].ProductId " +
+                    "INNER JOIN [ProductType] ON " +
+                        "[ProductType].ProductTypeId = [Product].ProductTypeId " +
                     "INNER JOIN [Album] ON " +
                         "[Album].AlbumId = [Product].ProductId " +
                     "INNER JOIN [ArtistInfo] ON " +
@@ -57,7 +57,7 @@ namespace LokalMusic._Code.Repositories.Fan
                     "INNER JOIN [FileInfo] ON " +
                         "[FileInfo].FileId = [Album].AlbumCoverID " +
                 "WHERE " +
-                    "[Transactions].UserId = @UserId";
+                    "[Transaction].UserId = @UserId";
             var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
             foreach (DataRow row in result.Rows)
             {
@@ -69,7 +69,7 @@ namespace LokalMusic._Code.Repositories.Fan
                     ArtistId = (int)row["ArtistId"],
                     TrackId = (int)row["TrackId"],
                     AlbumId = (int)row["AlbumId"],
-                }); ;
+                });
             }
             return items;
         }

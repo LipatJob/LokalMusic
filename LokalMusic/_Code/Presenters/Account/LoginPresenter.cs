@@ -13,9 +13,9 @@ namespace LokalMusic._Code.Presenters.Account
     {
         private ILoginViewModel viewModel;
         private LoginRepository repository;
-        public LoginPresenter(ILoginViewModel view, LoginRepository repository)
+        public LoginPresenter(ILoginViewModel viewModel, LoginRepository repository)
         {
-            this.viewModel = view;
+            this.viewModel = viewModel;
             this.repository = repository;
         }
 
@@ -46,7 +46,7 @@ namespace LokalMusic._Code.Presenters.Account
 
         private bool IsLoginSuccessful(int userId)
         {
-            return userId != -1;
+            return userId != LoginRepository.LOGIN_FAILED_ID;
         }
     }
 }
