@@ -589,6 +589,7 @@
     <Compile Include="_Code\Presenters\Admin\ProductsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
+    <Compile Include="_Code\Presenters\Store\AlbumsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\TracksPagePresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
     <Compile Include="_Code\Repositories\Account\Register\RegisterArtistRepository.cs" />
@@ -646,6 +647,7 @@
     <Compile Include="_Code\Views\Account\Register\IRegisterArtistViewModel.cs" />
     <Compile Include="_Code\Views\Account\Register\IRegisterFanViewModel.cs" />
     <Compile Include="_Code\Views\Store\IHomeViewModel.cs" />
+    <Compile Include="_Code\Views\Store\IAlbumsPage.cs" />
     <Compile Include="_Code\Views\Store\ITracksPage.cs" />
   </ItemGroup>
   <ItemGroup>
