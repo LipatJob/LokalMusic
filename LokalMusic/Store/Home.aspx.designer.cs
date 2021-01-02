@@ -33,6 +33,15 @@ namespace LokalMusic.Store
         protected global::System.Web.UI.WebControls.Repeater albumContainer;
 
         /// <summary>
+        /// artistViewAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor artistViewAll;
+
+        /// <summary>
         /// artistContainer control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace LokalMusic.Store
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater artistContainer;
+
+        /// <summary>
+        /// trackViewAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor trackViewAll;
 
         /// <summary>
         /// trackContainer control.
