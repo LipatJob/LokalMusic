@@ -75,12 +75,14 @@ namespace LokalMusic._Code.Repositories
 
         public List<AlbumSummary> GetSummarizedAlbum(string sortBy = "Price", string orderBy = "ASC")
         {
-            List<AlbumSummary> decimals = new List<AlbumSummary>();
+            List<AlbumSummary> albums = new List<AlbumSummary>();
 
-            string query = "SELECT AlbumId, UserId as ArtistId, ProductName as AlbumName, Price, ProducerName, FileInfo.FileName as AlbumCover, DateReleased " +
+            string query = "SELECT AlbumId, Album.UserId as ArtistId, ProductName as AlbumName, Price, ProducerName, FileInfo.FileName as AlbumCover, ArtistName, DateReleased " +
                            "FROM Product " +
                            "INNER JOIN Album " +
                            "ON Product.ProductId = AlbumId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
                            "INNER JOIN FileInfo " +
                            "On Album.AlbumCoverID = FileInfo.FileId " +
                            "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')" +
@@ -98,16 +100,20 @@ namespace LokalMusic._Code.Repositories
                         (int)values.Rows[i]["ArtistId"],
 
                         values.Rows[i]["AlbumName"].ToString(),
-                        Decimal.Parse(values.Rows[i]["Price"].ToString()),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
                         values.Rows[i]["ProducerName"].ToString(),
                         values.Rows[i]["AlbumCover"].ToString(),
 
+                        values.Rows[i]["ArtistName"].ToString(),
+
                         Convert.ToDateTime(values.Rows[i]["DateReleased"].ToString())
                         );
+
+                    albums.Add(album);
                 }
             }
 
-            return decimals.Count() > 0 ? decimals : null;
+            return albums.Count() > 0 ? albums : null;
         }
 
         public List<ArtistSummary> GetSummarizedArtist(string sortBy = "Price", string orderBy = "ASC")
@@ -135,6 +141,24 @@ namespace LokalMusic._Code.Repositories
             }
 
             return artist.Count() > 0 ? artist : null;
+        }
+
+        /* Specialized Queries */
+
+        public List<TrackSummary> GetHighestSoldTracks()
+        {
+            return this.GetSummarizedTracks();
+        }
+
+        public List<AlbumSummary> GetHighestSoldAlbums()
+        {
+            return this.GetSummarizedAlbum();
+        }
+
+        public List<ArtistSummary> GetMostPopularArtist()
+        {
+            // Most popular == artist that sold many albums
+            return this.GetSummarizedArtist();
         }
 
         /* Old */

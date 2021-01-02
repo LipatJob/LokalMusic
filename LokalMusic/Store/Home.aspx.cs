@@ -20,9 +20,9 @@ namespace LokalMusic.Store
 
         private HomePresenter presenter;
 
-        public List<Artist> topArtists;
-        public List<AlbumProduct> bestSellingAlbums;
-        public List<Track> famousTracks;
+        public List<ArtistSummary> topArtists;
+        public List<AlbumSummary> bestSellingAlbums;
+        public List<TrackSummary> famousTracks;
 
         public Home()
         {
@@ -33,10 +33,18 @@ namespace LokalMusic.Store
         {
             albumViewAll.HRef = $"~/Store/Albums/{"PR"}/{"DESC"}";
 
-
             this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
-            this.topArtists = this.presenter.GetTopArtists();
-            this.famousTracks = this.presenter.GetFamousTracks();
+            //this.topArtists = this.presenter.GetTopArtists();
+            //this.famousTracks = this.presenter.GetFamousTracks();
+
+            this.BindModels();
+        }
+
+        private void BindModels()
+        {
+            // Albums
+            albumContainer.DataSource = this.bestSellingAlbums;
+            albumContainer.DataBind();
         }
 
         
