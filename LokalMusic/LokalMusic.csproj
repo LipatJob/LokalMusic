@@ -297,6 +297,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Fan\Collection.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Finance\Reports.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
@@ -492,6 +493,13 @@
     <Compile Include="Fan\Collection.aspx.designer.cs">
       <DependentUpon>Collection.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Finance\Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Store\AlbumsPage.aspx.cs">
       <DependentUpon>AlbumsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -526,6 +534,13 @@
     </Compile>
     <Compile Include="Template\CreatorLayout.master.designer.cs">
       <DependentUpon>CreatorLayout.master</DependentUpon>
+    </Compile>
+    <Compile Include="Template\FinanceLayout.master.cs">
+      <DependentUpon>FinanceLayout.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template\FinanceLayout.master.designer.cs">
+      <DependentUpon>FinanceLayout.master</DependentUpon>
     </Compile>
     <Compile Include="Template\LoginLayout.master.cs">
       <DependentUpon>LoginLayout.master</DependentUpon>
@@ -584,6 +599,7 @@
     <Compile Include="_Code\Repositories\Admin\ProductsRepository.cs" />
     <Compile Include="_Code\Repositories\Admin\UsersRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
+    <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
     <Compile Include="_Code\Repositories\Store\StoreRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Login.aspx.cs">
@@ -650,6 +666,7 @@
     <Content Include="Template\AdminLayout.master" />
     <Content Include="Template\LoginLayout.master" />
     <Content Include="Template\StoreLayoutWithSideNav.master" />
+    <Content Include="Template\FinanceLayout.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
