@@ -35,7 +35,7 @@ namespace LokalMusic.Store
 
             this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
             this.topArtists = this.presenter.GetTopArtists();
-            //this.famousTracks = this.presenter.GetFamousTracks();
+            this.famousTracks = this.presenter.GetFamousTracks();
 
             this.BindModels();
         }
@@ -49,6 +49,10 @@ namespace LokalMusic.Store
             // Artist
             artistContainer.DataSource = this.topArtists;
             artistContainer.DataBind();
+
+            // Track
+            trackContainer.DataSource = this.famousTracks;
+            trackContainer.DataBind();
         }
 
         

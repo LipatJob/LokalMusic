@@ -67,6 +67,8 @@ namespace LokalMusic._Code.Repositories
 
                         values.Rows[i]["AlbumCover"].ToString()
                         );
+
+                    tracks.Add(track);
                 }
             }
 
