@@ -7,7 +7,7 @@ namespace LokalMusic._Code.Models.Store
 {
     public class AlbumSummary
     {
-        public AlbumSummary(int albumId, int artistId, string albumName, decimal price, string producerName, string albumCover, DateTime dateReleased)
+        public AlbumSummary(int albumId, int artistId, string albumName, decimal price, string producerName, string albumCover, string artistName, DateTime dateReleased)
         {
             AlbumId = albumId;
             ArtistId = artistId;
@@ -15,6 +15,7 @@ namespace LokalMusic._Code.Models.Store
             Price = price;
             ProducerName = producerName;
             AlbumCover = albumCover;
+            ArtistName = artistName;
             DateReleased = dateReleased;
         }
 
@@ -25,6 +26,8 @@ namespace LokalMusic._Code.Models.Store
         public Decimal Price { get; set; }
         public string ProducerName { get; set; }
         public string AlbumCover { get; set; }
+
+        public string ArtistName { get; set; }
 
         public DateTime DateReleased { get; set; }
 

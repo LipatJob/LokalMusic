@@ -91,21 +91,21 @@
         </div>
 
         <%--Albums--%>
-        <div class="row">   
-            
-            <%foreach (var album in bestSellingAlbums)
-            {%>
-                <div class="col-md-2">
-                    <div class="card border-0">
-                        <a href="#" ><img src="../Content/Images/default_cover.jpg" class="card-img-top" alt="album-name"/></a>    
-                        <div class="card-body">
-                            <p><%Response.Write(album.AlbumName);%></p>
-                            <p class="" style="color: #F82B2B; font-weight: 600;">₱<%Response.Write(album.Price);%></p>
-                            <p class="by-artist float-right" style="color:#767676;"><%Response.Write(album.ArtistName);%></p>
-                        </div>
-                    </div>        
-                </div>
-            <%}%>
+        <div class="row">
+            <asp:Repeater ID="albumContainer" runat="server">
+                <ItemTemplate>
+                    <div class="col-md-2">
+                        <div class="card border-0">
+                            <a href="#" ><img src="<%#Eval("AlbumCover") %>" class="card-img-top" alt="album-name"/></a>    
+                            <div class="card-body">
+                                <p><%#Eval("AlbumName")%></p>
+                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
+                                <p class="by-artist float-right" style="color:#767676;"><%#Eval("ArtistName")%></p>
+                            </div>
+                        </div>        
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
 
     </div>
@@ -119,7 +119,7 @@
         <%--Artists--%>
         <div class="row">   
             
-            <%foreach (var artist in topArtists)
+            <%--<%foreach (var artist in topArtists)
             {%>
                 <div class="col-md-2">
                     <div class="card border-0">
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                 </div>
-            <%}%>
+            <%}%>--%>
         </div>
 
     </div>
@@ -144,7 +144,7 @@
         <%--Track--%>
         <div class="row">   
             
-            <%foreach (var track in famousTracks)
+            <%--<%foreach (var track in famousTracks)
             {%>
                 <div class="col-md-2">
                     <div class="card border-0">
@@ -156,7 +156,7 @@
                         </div>
                     </div>            
                 </div>
-            <%}%>
+            <%}%>--%>
         </div>
     </div>
 

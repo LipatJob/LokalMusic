@@ -20,19 +20,19 @@ namespace LokalMusic._Code.Repositories.Store
             this.repository = repo;
         }
 
-        public List<AlbumProduct> GetBestSellingAlbums()
+        public List<AlbumSummary> GetBestSellingAlbums()
         {
-            return this.repository.GetAlbums();
+            return this.repository.GetHighestSoldAlbums();
         }
 
-        public List<Artist> GetTopArtists()
+        public List<ArtistSummary> GetTopArtists()
         {
-            return this.repository.GetArtists();
+            return this.repository.GetMostPopularArtist();
         }
 
-        public List<Track> GetFamousTracks()
+        public List<TrackSummary> GetFamousTracks()
         {
-            return this.repository.GetTracks();
+            return this.repository.GetHighestSoldTracks();
         }
 
         public void Home()
