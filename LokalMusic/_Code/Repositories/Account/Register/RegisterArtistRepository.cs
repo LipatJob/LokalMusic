@@ -1,16 +1,13 @@
-﻿using LokalMusic._Code.Models.Account.Register;
-using LokalMusic._Code.Helpers;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Account.Register;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Repositories.Account.Register
 {
     public class RegisterArtistRepository
     {
-        const string ACCOUNT_TYPE_NAME = "ARTIST";
-        const string ACTIVE_TYPE_NAME = "ACTIVE";
+        private const string ACCOUNT_TYPE_NAME = "ARTIST";
+        private const string ACTIVE_TYPE_NAME = "ACTIVE";
 
         private IRegisterArtistModel model;
         private int userId;
@@ -32,7 +29,7 @@ namespace LokalMusic._Code.Repositories.Account.Register
                 "VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered) " +
                 "SELECT SCOPE_IDENTITY()";
 
-            userId = (int) DbHelper.ExecuteScalar(
+            userId = (int)DbHelper.ExecuteScalar(
                 query,
                 ("userTypeId", userTypeId),
                 ("userStatusId", userStatusId),
@@ -76,8 +73,5 @@ namespace LokalMusic._Code.Repositories.Account.Register
             string query = $"SELECT Email from UserInfo WHERE Email = @email;";
             return DbHelper.ExecuteDataTableQuery(query, ("email", email)) != null;
         }
-
-        
-
     }
 }

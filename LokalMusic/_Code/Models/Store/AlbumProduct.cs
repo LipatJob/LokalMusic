@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Store
 {
     public class AlbumProduct
     {
-        public AlbumProduct() { }
+        public AlbumProduct()
+        {
+        }
 
         public AlbumProduct(int albumId, string albumName, string description, DateTime dateReleased, decimal price, string producerName, DateTime dateAdded, int artistId, string artistName, string artistLocation, string bio, string fileName)
         {
@@ -39,6 +38,5 @@ namespace LokalMusic._Code.Models.Store
         public string Bio { get; set; }
 
         public string FileName { get; set; }
-
     }
 }

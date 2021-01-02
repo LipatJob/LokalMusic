@@ -2,21 +2,19 @@
 using LokalMusic._Code.Models.Admin;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data;
+using System.Linq;
 
 namespace LokalMusic._Code.Repositories.Admin
 {
-	public class UsersRepository
-	{
-		private const string DEACTIVATED_USER_STATUS = "DEACTIVATED";
-		private const string ACTIVE_USER_STATUS = "ACTIVE";
+    public class UsersRepository
+    {
+        private const string DEACTIVATED_USER_STATUS = "DEACTIVATED";
+        private const string ACTIVE_USER_STATUS = "ACTIVE";
 
-
-		public IList<UsersItem> GetUsers()
-		{
-			string query =
+        public IList<UsersItem> GetUsers()
+        {
+            string query =
 @"
 SELECT
 	[UserInfo].UserId			AS UserId,
@@ -31,34 +29,33 @@ INNER JOIN [UserStatus] ON
 INNER JOIN [UserType] ON
 	[UserType].UserTypeId = [UserInfo].UserTypeId
 ";
-			return DbHelper.ExecuteDataTableQuery(query).AsEnumerable().Select((row) =>
-			{
-				return new UsersItem()
-				{
-					UserId = (int) row["UserId"],
-					Username = (string) row["Username"],
-					Email = (string) row["Email"],
-					DateRegistered = (DateTime) row["DateRegistered"],
-					UserType = (string) row["UserType"],
-					UserStatus = (string) row["UserStatus"],
+            return DbHelper.ExecuteDataTableQuery(query).AsEnumerable().Select((row) =>
+            {
+                return new UsersItem()
+                {
+                    UserId = (int)row["UserId"],
+                    Username = (string)row["Username"],
+                    Email = (string)row["Email"],
+                    DateRegistered = (DateTime)row["DateRegistered"],
+                    UserType = (string)row["UserType"],
+                    UserStatus = (string)row["UserStatus"],
+                };
+            }).ToList();
+        }
 
-				};
-			}).ToList();
-		}
+        public void DeactivateUserAccount(int userId)
+        {
+            ChangeUserStatus(userId, DEACTIVATED_USER_STATUS);
+        }
 
-		public void DeactivateUserAccount(int userId)
-		{
-			ChangeUserStatus(userId, DEACTIVATED_USER_STATUS);
-		}
+        public void ReactivateUserAccount(int userId)
+        {
+            ChangeUserStatus(userId, ACTIVE_USER_STATUS);
+        }
 
-		public void ReactivateUserAccount(int userId)
-		{
-			ChangeUserStatus(userId, ACTIVE_USER_STATUS);
-		}
-
-		public void ChangeUserStatus(int UserId, string userStatus)
-		{
-			string query =
+        public void ChangeUserStatus(int UserId, string userStatus)
+        {
+            string query =
 @"
 UPDATE [UserInfo]
 SET UserStatusId = (SELECT UserStatusId
@@ -66,10 +63,10 @@ SET UserStatusId = (SELECT UserStatusId
 					WHERE UserStatusName = @UserStatusName)
 WHERE UserId = @UserId
 ";
-			DbHelper.ExecuteNonQuery(
-				query,
-				("UserStatusName", userStatus),
-				("UserId", UserId));
-		}
-	}
+            DbHelper.ExecuteNonQuery(
+                query,
+                ("UserStatusName", userStatus),
+                ("UserId", UserId));
+        }
+    }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Helpers
 {
@@ -45,7 +41,7 @@ namespace LokalMusic._Code.Helpers
         public static DataTable ExecuteDataTableQuery(string commandText, params (string name, object value)[] parameters)
         {
             DataTable dataTable = new DataTable();
-            using(var connection = GetConnection())
+            using (var connection = GetConnection())
             {
                 using (var command = connection.CreateCommand())
                 {

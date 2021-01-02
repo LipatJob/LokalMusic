@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Products
 {
     public class Artist
     {
-        public Artist() { }
+        public Artist()
+        {
+        }
 
         public Artist(int artistId, string artistName, string location, string bio, string email, string userName, DateTime dateRegistered, string profileImage)
         {
