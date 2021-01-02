@@ -20,7 +20,7 @@ namespace LokalMusic._Code.Presenters.Store
 
         public List<AlbumProduct> GetAlbums(string sortBy = "RA", string orderBy = "ASC")
         {
-            if (sortBy == "RA") sortBy = "DateAdded";
+            if (sortBy == "RA") sortBy = "DateReleased";
             else if (sortBy == "PR") sortBy = "Price";
             else if (sortBy == "TN") sortBy = "ProductName";
 

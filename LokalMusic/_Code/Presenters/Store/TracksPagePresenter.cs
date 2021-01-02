@@ -18,7 +18,7 @@ namespace LokalMusic._Code.Presenters.Store
             this.repository = repo;
         }
 
-        public List<Track> GetTracks(string sortBy = "RA", string orderBy = "ASC")
+        public List<Track> GetTracks(string sortBy = "PR", string orderBy = "ASC")
         {
             if (sortBy == "RA") sortBy = "DateAdded";
             else if (sortBy == "PR") sortBy = "Price";

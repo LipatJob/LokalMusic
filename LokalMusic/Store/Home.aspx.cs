@@ -31,7 +31,10 @@ namespace LokalMusic.Store
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            albumViewAll.HRef = $"~/Store/Albums/{"PR"}/{"DESC"}";
+            // bind url to view links
+            albumViewAll.HRef = $"~/Store/Albums/{"PR"}/{"ASC"}";
+            //artistViewAll.HRef = $"~/Store/Artist/{"DA"}/{"DESC"}";
+            trackViewAll.HRef = $"~/Store/Tracks/{"PR"}/{"ASC"}";
 
             this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
             this.topArtists = this.presenter.GetTopArtists();

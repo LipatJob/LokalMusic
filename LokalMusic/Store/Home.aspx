@@ -113,7 +113,7 @@
     <div id="top-artists" class="container mt-4">
         <div class="row mb-4">
             <h5 class="my-auto">Top Artists</h5>
-            <a href="Store/ArtistPage.aspx" class="text-danger ml-2 view-all my-auto">View All</a>
+            <a href="Store/ArtistPage.aspx" class="text-danger ml-2 view-all my-auto" id="artistViewAll" runat="server">View All</a>
         </div> 
 
         <%--Artists--%>
@@ -138,7 +138,7 @@
     <div id="famous-tracks" class="container mt-4">
         <div class="row mb-4">
             <h5 class="my-auto">Famous Tracks</h5>
-            <a href="Store/TracksPage.aspx" class="text-danger ml-2 view-all my-auto">View All</a>
+            <a href="Store/TracksPage.aspx" class="text-danger ml-2 view-all my-auto" id="trackViewAll" runat="server">View All</a>
         </div>
 
         <%--Track--%>
@@ -157,19 +157,6 @@
                 </div>
                 </ItemTemplate>
             </asp:Repeater>
-            <%--<%foreach (var track in famousTracks)
-            {%>
-                <div class="col-md-2">
-                    <div class="card border-0">
-                        <a href="#" ><img src="../Content/Images/default_cover.jpg" class="card-img-top" alt="track-name"/></a>
-                        <div class="card-body">
-                            <p><%Response.Write(track.TrackName);%></p>
-                            <p class="" style="color: #F82B2B; font-weight: 600;">₱<%Response.Write(track.Price);%></p>
-                            <p class="by-artist float-right" style="color:#767676;"><%Response.Write(track.ArtistName);%></p>
-                        </div>
-                    </div>            
-                </div>
-            <%}%>--%>
         </div>
     </div>
 
