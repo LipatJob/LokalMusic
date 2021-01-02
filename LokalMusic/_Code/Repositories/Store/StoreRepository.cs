@@ -1,10 +1,8 @@
-﻿using LokalMusic._Code.Models.Products;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Products;
 using LokalMusic._Code.Models.Store;
-using LokalMusic._Code.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 // Author - Gene Garcia
 
@@ -12,8 +10,7 @@ namespace LokalMusic._Code.Repositories
 {
     public class StoreRepository
     {
-
-        const string STATUS_PRODUCT_LISTED = "LISTED";
+        private const string STATUS_PRODUCT_LISTED = "LISTED";
 
         public List<Artist> GetArtists(bool artistInfoOnly = true)
         {
@@ -34,7 +31,6 @@ namespace LokalMusic._Code.Repositories
             {
                 for (int i = 0; i < values.Rows.Count; i++)
                 {
-
                     Artist artist = new Artist(
                         (int)values.Rows[i]["UserId"],
                         values.Rows[i]["ArtistName"].ToString(),
@@ -237,8 +233,7 @@ namespace LokalMusic._Code.Repositories
                 }
             }
 
-                return tracks.Count > 0 ? tracks : null;
+            return tracks.Count > 0 ? tracks : null;
         }
-
     }
 }

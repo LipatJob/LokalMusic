@@ -1,17 +1,12 @@
-﻿using LokalMusic._Code.Models.Account;
-using LokalMusic._Code.Helpers;
-using LokalMusic._Code.Views.Account;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Account;
 
 namespace LokalMusic._Code.Repositories.Account
 {
     public class LoginRepository
     {
         public const int LOGIN_FAILED_ID = -1;
+
         public int GetLogin(ILoginModel model)
         {
             string commandText = @"

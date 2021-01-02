@@ -1,8 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Web;
 
 namespace LokalMusic._Code.Helpers
@@ -12,6 +10,7 @@ namespace LokalMusic._Code.Helpers
         public const string PICTURE_CONTAINER_NAME = "profilepictures";
 
         private const string CONNECTION_STRING_NAME = "lokalmusic-fs";
+
         public static string GetConnectionString()
         {
             return ConfigurationManager.AppSettings[CONNECTION_STRING_NAME];
@@ -27,7 +26,7 @@ namespace LokalMusic._Code.Helpers
         /// <returns>The URL of the file</returns>
         public static string UploadFile(string filename, string containerName, HttpPostedFile file, bool overwrite = false)
         {
-            if(file == null) { throw new ArgumentException("File must not be null"); }
+            if (file == null) { throw new ArgumentException("File must not be null"); }
 
             file.InputStream.Position = 0;
             BlobClient blobClient = GetBlobContainerClient(containerName).GetBlobClient(filename);

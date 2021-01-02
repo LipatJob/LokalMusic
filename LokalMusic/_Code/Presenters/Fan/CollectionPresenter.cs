@@ -1,10 +1,6 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Models.Fan;
 using LokalMusic._Code.Repositories.Fan;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Presenters.Fan
 {
@@ -20,13 +16,12 @@ namespace LokalMusic._Code.Presenters.Fan
 
         public void InitializeModel()
         {
-            string username = (string) NavigationHelper.GetRouteValue("Username");
+            string username = (string)NavigationHelper.GetRouteValue("Username");
             if (username == null)
             {
                 NavigationHelper.Redirect("~");
             }
             model = repository.SetUserInformation(username);
         }
-
     }
 }

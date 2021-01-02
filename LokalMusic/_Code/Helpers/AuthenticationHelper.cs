@@ -1,9 +1,4 @@
-﻿using LokalMusic._Code.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 namespace LokalMusic._Code.Helpers
 {
@@ -23,6 +18,7 @@ namespace LokalMusic._Code.Helpers
             set { HttpContext.Current.Session[UserIdSessionName] = value; }
             get { return (int)(HttpContext.Current.Session[UserIdSessionName] ?? -1); }
         }
+
         public static bool LoggedIn { get { return UserId != -1; } }
 
         public static void ClearUserSession()
@@ -46,7 +42,7 @@ namespace LokalMusic._Code.Helpers
         private static string GetUsernameFromDatabase()
         {
             string query = "SELECT Username FROM UserInfo WHERE UserId = @UserId;";
-            return (string) DbHelper.ExecuteScalar(query, ("UserId", UserId));
+            return (string)DbHelper.ExecuteScalar(query, ("UserId", UserId));
         }
 
         public static string UserType
@@ -61,8 +57,7 @@ namespace LokalMusic._Code.Helpers
         private static string GetUserTypeFromDatabase()
         {
             string query = "SELECT TypeName FROM UserType WHERE UserTypeId = (SELECT UserTypeId FROM UserInfo WHERE UserId = @UserId);";
-            return (string) DbHelper.ExecuteScalar(query, ("UserId", UserId));
+            return (string)DbHelper.ExecuteScalar(query, ("UserId", UserId));
         }
-
     }
 }
