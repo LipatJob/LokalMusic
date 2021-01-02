@@ -2,21 +2,19 @@
 using LokalMusic._Code.Models.Admin;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data;
+using System.Linq;
 
 namespace LokalMusic._Code.Repositories.Admin
 {
-	public class ProductsRepository
-	{
-		private const string UNLISTED_STATUS = "UNLISTED";
-		private const string LISTED_STATUS = "LISTED";
+    public class ProductsRepository
+    {
+        private const string UNLISTED_STATUS = "UNLISTED";
+        private const string LISTED_STATUS = "LISTED";
 
-
-		public IList<ProductItem> GetProducts()
-		{
-			string query = @"
+        public IList<ProductItem> GetProducts()
+        {
+            string query = @"
 SELECT
 	[AlbumTracks].ProductId,
 	[AlbumTracks].AlbumId,
@@ -53,43 +51,43 @@ INNER JOIN [ProductType] ON
 	[ProductType].ProductTypeId = [Product].ProductTypeId
 ORDER BY [Product].DateAdded DESC;
 ";
-			return DbHelper.ExecuteDataTableQuery(query).AsEnumerable().Select((row) =>
-			{
-				return new ProductItem()
-				{
-					AlbumId =  row.IsNull("AlbumId") ?  null : (int?) row["AlbumId"],
-					ProductId = (int) row["ProductId"],
-					ProductName = (string) row["ProductName"],
-					ArtistName = (string) row["ArtistName"],
-					DateListed = (DateTime) row["DateAdded"],
-					ProductType = (string) row["TypeName"],
-					ProductStatus = (string) row["StatusName"]
-				};
-			}).ToList();
-		}
+            return DbHelper.ExecuteDataTableQuery(query).AsEnumerable().Select((row) =>
+            {
+                return new ProductItem()
+                {
+                    AlbumId = row.IsNull("AlbumId") ? null : (int?)row["AlbumId"],
+                    ProductId = (int)row["ProductId"],
+                    ProductName = (string)row["ProductName"],
+                    ArtistName = (string)row["ArtistName"],
+                    DateListed = (DateTime)row["DateAdded"],
+                    ProductType = (string)row["TypeName"],
+                    ProductStatus = (string)row["StatusName"]
+                };
+            }).ToList();
+        }
 
-		public void RelistItem(int productId)
-		{
-			ChangeProductStatus(productId, LISTED_STATUS);
-		}
+        public void RelistItem(int productId)
+        {
+            ChangeProductStatus(productId, LISTED_STATUS);
+        }
 
-		public void UnlistItem(int productId)
-		{
-			ChangeProductStatus(productId, UNLISTED_STATUS);
-		}
+        public void UnlistItem(int productId)
+        {
+            ChangeProductStatus(productId, UNLISTED_STATUS);
+        }
 
-		public void ChangeProductStatus(int productId, string productStatus)
-		{
-			string query = @"
+        public void ChangeProductStatus(int productId, string productStatus)
+        {
+            string query = @"
 UPDATE [Product]
 SET ProductStatusId = (SELECT ProductStatusId
 						FROM [ProductStatus]
 						WHERE StatusName  = @ProductStatus)
 WHERE ProductId = @ProductId";
-			DbHelper.ExecuteNonQuery(
-				query,
-				("ProductStatus", productStatus),
-				("ProductId", productId));
-		}
-	}
+            DbHelper.ExecuteNonQuery(
+                query,
+                ("ProductStatus", productStatus),
+                ("ProductId", productId));
+        }
+    }
 }

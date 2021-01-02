@@ -1,11 +1,6 @@
 ﻿using LokalMusic._Code.Helpers;
-using LokalMusic._Code.Models.Account;
 using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Presenters.Account
 {
@@ -13,6 +8,7 @@ namespace LokalMusic._Code.Presenters.Account
     {
         private ILoginViewModel viewModel;
         private LoginRepository repository;
+
         public LoginPresenter(ILoginViewModel viewModel, LoginRepository repository)
         {
             this.viewModel = viewModel;
@@ -29,7 +25,6 @@ namespace LokalMusic._Code.Presenters.Account
 
         public bool Login()
         {
-
             int userId = repository.GetLogin(viewModel);
 
             if (IsLoginSuccessful(userId))

@@ -1,10 +1,7 @@
 ﻿using LokalMusic._Code.Models.Products;
 using LokalMusic._Code.Repositories;
 using LokalMusic._Code.Views.Store;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Presenters.Store
 {
@@ -12,6 +9,7 @@ namespace LokalMusic._Code.Presenters.Store
     {
         private ITracksPage view;
         private StoreRepository repository;
+
         public TracksPagePresenter(ITracksPage view, StoreRepository repo)
         {
             this.view = view;

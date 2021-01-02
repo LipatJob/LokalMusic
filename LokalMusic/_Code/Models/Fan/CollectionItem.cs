@@ -1,8 +1,4 @@
 ﻿using LokalMusic._Code.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Fan
 {
@@ -16,9 +12,9 @@ namespace LokalMusic._Code.Models.Fan
         public int TrackId { get; set; }
         public int AlbumId { get; set; }
 
-        public string GetUrl 
-        { 
-            get 
+        public string GetUrl
+        {
+            get
             {
                 string url;
                 if (ProductType == "ALBUM")
@@ -27,10 +23,10 @@ namespace LokalMusic._Code.Models.Fan
                 }
                 else
                 {
-                    url =  $"/Store/{ArtistId}/{AlbumId}/{TrackId}";
+                    url = $"/Store/{ArtistId}/{AlbumId}/{TrackId}";
                 }
                 return NavigationHelper.CreateAbsoluteUrl(url);
-            } 
+            }
         }
     }
 }

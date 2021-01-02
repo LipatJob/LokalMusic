@@ -1,10 +1,8 @@
-﻿using LokalMusic._Code.Models.Fan;
-using LokalMusic._Code.Helpers;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Fan;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Repositories.Fan
 {
@@ -61,7 +59,8 @@ namespace LokalMusic._Code.Repositories.Fan
             var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
             foreach (DataRow row in result.Rows)
             {
-                items.Add(new CollectionItem() {
+                items.Add(new CollectionItem()
+                {
                     CoverLink = (string)row["FileName"],
                     ProductName = (string)row["ProductName"],
                     ArtistName = (string)row["ArtistName"],

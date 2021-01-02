@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Account
 {
@@ -14,7 +11,5 @@ namespace LokalMusic._Code.Models.Account
         public string ItemsPurchased { get; set; }
         public decimal Amount { get; set; }
         public string FormattedDate { get { return TransactionDate.ToString("MM/dd/yyyy h:mm tt"); } }
-
-        
     }
 }

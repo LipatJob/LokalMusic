@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Routing;
 
@@ -8,12 +6,16 @@ namespace LokalMusic._Code.Helpers
 {
     public class NavigationHelper
     {
+        /// <summary>
+        /// Redirect the request to a new URL
+        /// </summary>
+        /// <param name="url">The URL where the request will be redirected</param>
         public static void Redirect(string url)
         {
             HttpContext.Current.Response.Redirect(url);
         }
 
-        public static string GetRouteUrl(string routeName, object routeParameters)
+        public static string GetParameterizedRoute(string routeName, object routeParameters)
         {
             var dict = new RouteValueDictionary(routeParameters);
             var data = RouteTable.Routes.GetVirtualPath(HttpContext.Current.Request.RequestContext, routeName, dict);

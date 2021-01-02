@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace LokalMusic._Code.Models.Account.Register
+﻿namespace LokalMusic._Code.Models.Account.Register
 {
     public interface IRegisterArtistModel
     {

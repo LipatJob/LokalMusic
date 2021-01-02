@@ -1,9 +1,4 @@
-﻿using LokalMusic._Code.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 namespace LokalMusic._Code.Helpers
 {
@@ -13,6 +8,7 @@ namespace LokalMusic._Code.Helpers
         public const string ARTIST_USER_TYPE = "ARTIST";
         public const string FINANCE_USER_TYPE = "FINANCE";
         public const string FAN_USER_TYPE = "FAN";
+        public const string GUEST_USER_TYPE = "GUEST";
 
         private const string UserIdSessionName = "USERID";
         private const string UsernameSessionName = "USERNAME";
@@ -22,7 +18,8 @@ namespace LokalMusic._Code.Helpers
             set { HttpContext.Current.Session[UserIdSessionName] = value; }
             get { return (int)(HttpContext.Current.Session[UserIdSessionName] ?? -1); }
         }
-        public static bool LoggedIn => UserId != -1;
+
+        public static bool LoggedIn { get { return UserId != -1; } }
 
         public static void ClearUserSession()
         {
@@ -33,7 +30,7 @@ namespace LokalMusic._Code.Helpers
         {
             get
             {
-                if (LoggedIn == false) { return "Guest"; }
+                if (LoggedIn == false) { return GUEST_USER_TYPE; }
                 if (HttpContext.Current.Session[UsernameSessionName] != null) { return (string)HttpContext.Current.Session[UsernameSessionName]; }
 
                 string username = GetUsernameFromDatabase();
@@ -52,7 +49,7 @@ namespace LokalMusic._Code.Helpers
         {
             get
             {
-                if (LoggedIn == false) { return "GUEST"; }
+                if (LoggedIn == false) { return GUEST_USER_TYPE; }
                 return GetUserTypeFromDatabase();
             }
         }
@@ -60,8 +57,7 @@ namespace LokalMusic._Code.Helpers
         private static string GetUserTypeFromDatabase()
         {
             string query = "SELECT TypeName FROM UserType WHERE UserTypeId = (SELECT UserTypeId FROM UserInfo WHERE UserId = @UserId);";
-            return (string) DbHelper.ExecuteScalar(query, ("UserId", UserId));
+            return (string)DbHelper.ExecuteScalar(query, ("UserId", UserId));
         }
-
     }
 }

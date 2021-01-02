@@ -2,10 +2,8 @@
 using LokalMusic._Code.Models.Account;
 using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Presenters.Account
 {
@@ -22,7 +20,7 @@ namespace LokalMusic._Code.Presenters.Account
 
         public void PageLoad()
         {
-            if(AuthenticationHelper.LoggedIn == false)
+            if (AuthenticationHelper.LoggedIn == false)
             {
                 NavigationHelper.Redirect("~/Account/Login");
             }
@@ -52,5 +50,4 @@ namespace LokalMusic._Code.Presenters.Account
             NavigationHelper.Redirect("~/Account/Settings?ProfileImageChanged=True");
         }
     }
-
 }

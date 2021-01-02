@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Products
 {
@@ -9,7 +7,6 @@ namespace LokalMusic._Code.Models.Products
     {
         public Album()
         {
-
         }
 
         public Album(int albumId, int albumCoverId, string albumName, string description, DateTime dateReleased, int userId, double price)
@@ -33,7 +30,6 @@ namespace LokalMusic._Code.Models.Products
         public double Price { get; set; }
 
         public List<Track> Tracks { get; set; }
-
 
         // FileInfo
     }
