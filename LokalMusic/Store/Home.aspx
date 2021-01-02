@@ -119,6 +119,20 @@
         <%--Artists--%>
         <div class="row">   
             
+            <asp:Repeater ID="artistContainer" runat="server">
+                <ItemTemplate>
+                    <div class="col-md-2">
+                        <div class="card border-0">
+                            <a href="#" ><img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top" alt="artist-name"/></a>    
+                            <div class="card-body">
+                                <p><%#Eval("ArtistName")%></p>
+                                <p style="font-weight: 400;"><%#Eval("Bio")%></p>
+                            </div>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+
             <%--<%foreach (var artist in topArtists)
             {%>
                 <div class="col-md-2">

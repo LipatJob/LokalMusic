@@ -116,9 +116,9 @@ namespace LokalMusic._Code.Repositories
             return albums.Count() > 0 ? albums : null;
         }
 
-        public List<ArtistSummary> GetSummarizedArtist(string sortBy = "Price", string orderBy = "ASC")
+        public List<ArtistSummary> GetSummarizedArtist(string sortBy = "DateJoined", string orderBy = "ASC")
         {
-            List<ArtistSummary> artist = new List<ArtistSummary>();
+            List<ArtistSummary> artists = new List<ArtistSummary>();
 
             string query = "SELECT ArtistInfo.UserId as ArtistId, ArtistName, Bio, UserInfo.DateRegistered as DateJoined, FileInfo.FileName as ArtistProfileImage " +
                            "FROM ArtistInfo " +
@@ -126,7 +126,7 @@ namespace LokalMusic._Code.Repositories
                            "ON ArtistInfo.UserId = UserInfo.UserId " +
                            "LEFT JOIN FileInfo " +
                            "ON UserInfo.ProfileImageId = FileInfo.FileId " +
-                           "WHERE UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '"+ STATUS_ARTIST_ACTIVE +"')" +
+                           "WHERE UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '"+ STATUS_ARTIST_ACTIVE +"') " +
                            "ORDER BY " + sortBy + " " + orderBy;
 
             var values = DbHelper.ExecuteDataTableQuery(query);
@@ -136,11 +136,26 @@ namespace LokalMusic._Code.Repositories
             {
                 for (int i = 0; i < values.Rows.Count; i++)
                 {
+                    ArtistSummary artist = new ArtistSummary(
+                        (int)values.Rows[i]["ArtistId"],
 
+                        values.Rows[i]["ArtistName"].ToString(),
+                        values.Rows[i]["Bio"].ToString(),
+
+                        Convert.ToDateTime(values.Rows[i]["DateJoined"].ToString()),
+
+                        values.Rows[i]["ArtistProfileImage"].ToString()
+                        );
+
+                    // if there is no profile image, temporarily set the physical location to default photo
+                    if (artist.ArtistProfileImage == "" || artist.ArtistProfileImage == null)
+                        artist.ArtistProfileImage = "../Content/Images/default_artist_image.JPG";
+
+                    artists.Add(artist);
                 }
             }
 
-            return artist.Count() > 0 ? artist : null;
+            return artists.Count() > 0 ? artists : null;
         }
 
         /* Specialized Queries */

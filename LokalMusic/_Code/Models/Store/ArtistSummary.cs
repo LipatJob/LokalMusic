@@ -7,6 +7,15 @@ namespace LokalMusic._Code.Models.Store
 {
     public class ArtistSummary
     {
+        public ArtistSummary(int artistId, string artistName, string bio, DateTime dateJoined, string artistProfileImage)
+        {
+            ArtistId = artistId;
+            ArtistName = artistName;
+            Bio = bio;
+            DateJoined = dateJoined;
+            ArtistProfileImage = artistProfileImage;
+        }
+
         public int ArtistId { get; set; }
 
         public string ArtistName { get; set; }

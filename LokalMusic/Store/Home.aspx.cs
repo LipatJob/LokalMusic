@@ -34,7 +34,7 @@ namespace LokalMusic.Store
             albumViewAll.HRef = $"~/Store/Albums/{"PR"}/{"DESC"}";
 
             this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
-            //this.topArtists = this.presenter.GetTopArtists();
+            this.topArtists = this.presenter.GetTopArtists();
             //this.famousTracks = this.presenter.GetFamousTracks();
 
             this.BindModels();
@@ -45,6 +45,10 @@ namespace LokalMusic.Store
             // Albums
             albumContainer.DataSource = this.bestSellingAlbums;
             albumContainer.DataBind();
+
+            // Artist
+            artistContainer.DataSource = this.topArtists;
+            artistContainer.DataBind();
         }
 
         
