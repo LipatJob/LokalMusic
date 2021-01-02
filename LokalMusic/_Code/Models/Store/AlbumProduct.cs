@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LokalMusic._Code.Models.Products;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -39,6 +40,8 @@ namespace LokalMusic._Code.Models.Store
         public string Bio { get; set; }
 
         public string FileName { get; set; }
+
+        public List<Track> Tracks { get; set; }
 
     }
 }
