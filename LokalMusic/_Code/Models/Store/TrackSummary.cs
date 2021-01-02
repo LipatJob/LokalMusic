@@ -7,6 +7,23 @@ namespace LokalMusic._Code.Models.Store
 {
     public class TrackSummary
     {
+        public TrackSummary(int trackId, int albumId, int artistId, string trackName, decimal price, DateTime dateAdded, string albumName, string artistName, string genre, string audioClip, TimeSpan audioClipDuration, TimeSpan audioDuration, string albumCover)
+        {
+            TrackId = trackId;
+            AlbumId = albumId;
+            ArtistId = artistId;
+            TrackName = trackName;
+            Price = price;
+            DateAdded = dateAdded;
+            AlbumName = albumName;
+            ArtistName = artistName;
+            Genre = genre;
+            AudioClip = audioClip;
+            AudioClipDuration = audioClipDuration;
+            AudioDuration = audioDuration;
+            AlbumCover = albumCover;
+        }
+
         public int TrackId { get; set; }
         public int AlbumId { get; set; }
         public int ArtistId { get; set; }
