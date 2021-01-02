@@ -24,7 +24,7 @@ namespace LokalMusic._Code.Presenters.Store
             else if (sortBy == "PR") sortBy = "Price";
             else if (sortBy == "TN") sortBy = "ProductName";
 
-            List<AlbumProduct> albums = this.repository.GetAlbums(sortBy, orderBy);
+            List<AlbumProduct> albums = this.repository.GetAlbums(sortBy, orderBy, true);
 
             return albums;
         }

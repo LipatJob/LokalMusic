@@ -144,7 +144,7 @@ namespace LokalMusic._Code.Repositories
             return tracks.Count > 0 ? tracks : null;
         }
 
-        public List<AlbumProduct> GetAlbums(string sortBy = "DateAdded", string orderBy = "ASC")
+        public List<AlbumProduct> GetAlbums(string sortBy = "DateAdded", string orderBy = "ASC", bool withTracks = false)
         {
             List<AlbumProduct> albums = new List<AlbumProduct>();
 
@@ -179,6 +179,9 @@ namespace LokalMusic._Code.Repositories
                         values.Rows[i]["Location"].ToString(),
                         values.Rows[i]["Bio"].ToString(),
                         values.Rows[i]["FileName"].ToString());
+
+                    if (withTracks)
+                        album.Tracks = this.GetTracksByAlbumId(album.AlbumId);
 
                     albums.Add(album);
                 }
