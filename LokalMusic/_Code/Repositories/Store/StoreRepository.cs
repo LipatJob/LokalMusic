@@ -49,7 +49,7 @@ namespace LokalMusic._Code.Repositories
                     if (!artistInfoOnly)
                         artist.Albums = GetAlbumsByUserId(artist.ArtistId);
 
-                    artists.Add(artist);                    
+                    artists.Add(artist);
                 }
             }
 

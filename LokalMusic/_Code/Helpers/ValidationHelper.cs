@@ -8,18 +8,22 @@ using System.Web.UI.WebControls;
 
 namespace LokalMusic._Code.Helpers
 {
+    /// <summary>
+    /// <code>
+    /// new ValidationHelper()
+    /// </code>
+    /// </summary>
     public class ValidationHelper
     {
+        private IList<ValidationRule> rules;
         private IValidator validator;
         private ServerValidateEventArgs args;
-        private IList<ValidationRule> rules;
-
 
         public ValidationHelper(IValidator validator, ServerValidateEventArgs args)
         {
+            this.rules = new List<ValidationRule>();
             this.validator = validator;
             this.args = args;
-            this.rules = new List<ValidationRule>();
         }
 
         public ValidationHelper AddRules(params ValidationRule[] rulesToAdd)
@@ -47,7 +51,7 @@ namespace LokalMusic._Code.Helpers
         {
             foreach (var rule in rules)
             {
-                if(rule.Command() == false)
+                if(rule.rule() == false)
                 {
                     args.IsValid = false;
                     validator.ErrorMessage = rule.ErrorMessage;
@@ -60,12 +64,12 @@ namespace LokalMusic._Code.Helpers
 
     public struct ValidationRule
     {
-        public Func<bool> Command;
+        public Func<bool> rule;
         public string ErrorMessage;
 
-        public ValidationRule(Func<bool> command, string errorMessage)
+        public ValidationRule(Func<bool> rule, string errorMessage)
         {
-            Command = command;
+            this.rule = rule;
             ErrorMessage = errorMessage;
         }
     }
