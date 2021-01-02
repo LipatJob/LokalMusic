@@ -117,8 +117,7 @@
         </div> 
 
         <%--Artists--%>
-        <div class="row">   
-            
+        <div class="row">
             <asp:Repeater ID="artistContainer" runat="server">
                 <ItemTemplate>
                     <div class="col-md-2">
@@ -132,19 +131,6 @@
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
-
-            <%--<%foreach (var artist in topArtists)
-            {%>
-                <div class="col-md-2">
-                    <div class="card border-0">
-                        <a href="#" ><img src="../Content/Images/default_artist_image.JPG" class="card-img-top" alt="artist-name"/></a>    
-                        <div class="card-body">
-                            <p><%Response.Write(artist.ArtistName);%></p>
-                            <p style="font-weight: 400;"><%Response.Write(artist.Bio);%></p>
-                        </div>
-                    </div>
-                </div>
-            <%}%>--%>
         </div>
 
     </div>
@@ -157,7 +143,20 @@
 
         <%--Track--%>
         <div class="row">   
-            
+            <asp:Repeater ID="trackContainer" runat="server">
+                <ItemTemplate>
+                    <div class="col-md-2">
+                    <div class="card border-0">
+                        <a href="#" ><img src="<%#Eval("AlbumCover")%>" class="card-img-top" alt="track-name"/></a>
+                        <div class="card-body">
+                            <p><%#Eval("TrackName")%></p>
+                            <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
+                            <p class="by-artist float-right" style="color:#767676;"><%#Eval("ArtistName")%></p>
+                        </div>
+                    </div>            
+                </div>
+                </ItemTemplate>
+            </asp:Repeater>
             <%--<%foreach (var track in famousTracks)
             {%>
                 <div class="col-md-2">
