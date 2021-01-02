@@ -14,6 +14,130 @@ namespace LokalMusic._Code.Repositories
     {
 
         const string STATUS_PRODUCT_LISTED = "LISTED";
+        const string STATUS_ARTIST_ACTIVE = "ACTIVE";
+
+        /* Summary Queries */
+
+        public List<TrackSummary> GetSummarizedTracks(string sortBy = "Price", string orderBy = "ASC")
+        {
+            List<TrackSummary> tracks = new List<TrackSummary>();
+
+            string query = "SELECT TrackId, Track.AlbumId, Album.UserId as ArtistId, TrackProduct.ProductName as TrackName, TrackProduct.Price, TrackProduct.DateAdded, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, GenreName as Genre, TrackFile.FileName as AudioClip, Track.ClipDuration as AudioClipDuration, Track.TrackDuration as AudioDuration, AlbumFile.FileName as AlbumCover " +
+                           "FROM Product as TrackProduct " +
+                           "INNER JOIN Track " +
+                           "ON TrackProduct.ProductId = Track.TrackId " +
+                           "INNER JOIN Album " +
+                           "ON Track.AlbumId = Album.AlbumId " +
+                           "INNER JOIN Product as AlbumProduct " +
+                           "ON Album.AlbumId = AlbumProduct.ProductId " +
+                           "INNER JOIN Genre " +
+                           "On Track.GenreId = Genre.GenreId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN FileInfo as AlbumFile " +
+                           "ON Album.AlbumCoverID = AlbumFile.FileId " +
+                           "INNER JOIN FileInfo as TrackFile " +
+                           "ON Track.ClipFileID = TrackFile.FileId " +
+                           "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_LISTED + "')" +
+                           "ORDER BY " + sortBy + " " + orderBy;
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    TrackSummary track = new TrackSummary(
+                        (int)values.Rows[i]["TrackId"],
+                        (int)values.Rows[i]["AlbumId"],
+                        (int)values.Rows[i]["ArtistId"],
+
+                        values.Rows[i]["TrackName"].ToString(),
+                        Decimal.Parse(values.Rows[i]["Price"].ToString()),
+                        Convert.ToDateTime(values.Rows[i]["DateAdded"].ToString()),
+                        values.Rows[i]["AlbumName"].ToString(),
+                        values.Rows[i]["ArtistName"].ToString(),
+
+                        values.Rows[i]["Genre"].ToString(),
+
+                        values.Rows[i]["AudioClip"].ToString(),
+                        TimeSpan.Parse(values.Rows[i]["AudioClipDuration"].ToString()),
+                        TimeSpan.Parse(values.Rows[i]["AudioDuration"].ToString()),
+
+                        values.Rows[i]["AlbumCover"].ToString()
+                        );
+                }
+            }
+
+            return tracks.Count() > 0 ? tracks : null;
+        }
+
+        public List<AlbumSummary> GetSummarizedAlbum(string sortBy = "Price", string orderBy = "ASC")
+        {
+            List<AlbumSummary> decimals = new List<AlbumSummary>();
+
+            string query = "SELECT AlbumId, UserId as ArtistId, ProductName as AlbumName, Price, ProducerName, FileInfo.FileName as AlbumCover, DateReleased " +
+                           "FROM Product " +
+                           "INNER JOIN Album " +
+                           "ON Product.ProductId = AlbumId " +
+                           "INNER JOIN FileInfo " +
+                           "On Album.AlbumCoverID = FileInfo.FileId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')" +
+                           "ORDER BY " + sortBy + " " + orderBy;
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    AlbumSummary album = new AlbumSummary(
+                        (int)values.Rows[i]["AlbumId"],
+                        (int)values.Rows[i]["ArtistId"],
+
+                        values.Rows[i]["AlbumName"].ToString(),
+                        Decimal.Parse(values.Rows[i]["Price"].ToString()),
+                        values.Rows[i]["ProducerName"].ToString(),
+                        values.Rows[i]["AlbumCover"].ToString(),
+
+                        Convert.ToDateTime(values.Rows[i]["DateReleased"].ToString())
+                        );
+                }
+            }
+
+            return decimals.Count() > 0 ? decimals : null;
+        }
+
+        public List<ArtistSummary> GetSummarizedArtist(string sortBy = "Price", string orderBy = "ASC")
+        {
+            List<ArtistSummary> artist = new List<ArtistSummary>();
+
+            string query = "SELECT ArtistInfo.UserId as ArtistId, ArtistName, Bio, UserInfo.DateRegistered as DateJoined, FileInfo.FileName as ArtistProfileImage " +
+                           "FROM ArtistInfo " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "LEFT JOIN FileInfo " +
+                           "ON UserInfo.ProfileImageId = FileInfo.FileId " +
+                           "WHERE UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '"+ STATUS_ARTIST_ACTIVE +"')" +
+                           "ORDER BY " + sortBy + " " + orderBy;
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+
+                }
+            }
+
+            return artist.Count() > 0 ? artist : null;
+        }
+
+        /* Old */
 
         public List<Artist> GetArtists(bool artistInfoOnly = true)
         {
