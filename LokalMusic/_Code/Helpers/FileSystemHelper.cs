@@ -1,8 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Web;
 
 namespace LokalMusic._Code.Helpers
@@ -11,22 +9,25 @@ namespace LokalMusic._Code.Helpers
     {
         public const string PICTURE_CONTAINER_NAME = "profilepictures";
 
-        public static bool TryUploadFile(string filename, string containerName, HttpPostedFile file, out string fileLocation)
+        private const string CONNECTION_STRING_NAME = "lokalmusic-fs";
+
+        public static string GetConnectionString()
         {
-            try
-            {
-                fileLocation = UploadFile(filename, containerName, file);
-                return true;
-            }
-            catch (Exception)
-            {
-                fileLocation = "";
-                return false;
-            }
+            return ConfigurationManager.AppSettings[CONNECTION_STRING_NAME];
         }
 
+        /// <summary>
+        /// Uploads file to BlobStorage and returns URL of file
+        /// </summary>
+        /// <param name="filename">The new name of the the after being uploaded</param>
+        /// <param name="containerName">The name of the container where the file will be uploaded</param>
+        /// <param name="file">Posted file from website</param>
+        /// <param name="overwrite">  Will overwrite file in container if true else will throw error on duplicate files</param>
+        /// <returns>The URL of the file</returns>
         public static string UploadFile(string filename, string containerName, HttpPostedFile file, bool overwrite = false)
         {
+            if (file == null) { throw new ArgumentException("File must not be null"); }
+
             file.InputStream.Position = 0;
             BlobClient blobClient = GetBlobContainerClient(containerName).GetBlobClient(filename);
             using (var inputStream = file.InputStream)
@@ -41,11 +42,6 @@ namespace LokalMusic._Code.Helpers
             BlobServiceClient blobServiceClient = new BlobServiceClient(GetConnectionString());
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
             return containerClient;
-        }
-
-        public static string GetConnectionString()
-        {
-            return ConfigurationManager.AppSettings["lokalmusic-fs"];
         }
     }
 }

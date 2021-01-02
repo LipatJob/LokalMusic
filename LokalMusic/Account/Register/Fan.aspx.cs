@@ -62,7 +62,7 @@ namespace LokalMusic.Account.Register
                 .Validate();
         }
 
-        private bool IsValidEmailFormat(string email) 
+        private bool IsValidEmailFormat(string email)
         {
             // source: http://thedailywtf.com/Articles/Validating_Email_Addresses.aspx
             Regex rx = new Regex(
