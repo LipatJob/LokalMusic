@@ -15,40 +15,31 @@ namespace LokalMusic.Webforms.Account
     {
 
         /// <summary>
-        /// emailLbl control.
+        /// loginCv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label emailLbl;
+        protected global::System.Web.UI.WebControls.CustomValidator loginCv;
 
         /// <summary>
-        /// emailTxt control.
+        /// EmailTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emailTxt;
+        protected global::System.Web.UI.WebControls.TextBox EmailTxt;
 
         /// <summary>
-        /// passwordLbl control.
+        /// PasswordTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label passwordLbl;
-
-        /// <summary>
-        /// passwordTxt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox passwordTxt;
+        protected global::System.Web.UI.WebControls.TextBox PasswordTxt;
 
         /// <summary>
         /// submitBtn control.

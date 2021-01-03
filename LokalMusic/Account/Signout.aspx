@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="LokalMusic.Webforms.Account.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Signout.aspx.cs" Inherits="LokalMusic.Account.Signout" %>
 
 <!DOCTYPE html>
 

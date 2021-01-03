@@ -1,0 +1,141 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="StoreLayoutWithSideNav.master.cs" Inherits="LokalMusic.Template.StoreLayoutWithSideNav" %>
+
+<asp:Content ID="StoreContentWithSideNav" ContentPlaceHolderID="MainContent" runat="server">
+
+    <style type="text/css" scoped>
+        /* The side navigation menu */
+        .sidenav {
+            height: 100%; /* 100% Full-height */
+            width: 200px; /* 0 width - change this with JavaScript */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Stay on top */
+            /*top: 0;*/ /* Stay at the top */
+            left: 0;
+            background-color: #FAFAFA;
+            overflow-x: hidden; /* Disable horizontal scroll */
+            padding-top: 60px; /* Place content 60px from the top */
+            transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+        }
+
+        /* The navigation menu links */
+        .sidenav a, .sidenav p {
+            font-family: Montserrat;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 8px 8px 8px 8px;
+            text-decoration: none;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+
+        }
+
+        .sidenav .side-links{
+            font-size: 13px;
+            font-weight: 600;
+            color: black
+        }
+
+        /* Position and style the close button (top right corner) */
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            color: #F82B2B;
+            font-weight: 400;
+        }
+
+        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+            margin-left: 200px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+
+        h1 {
+            font-size: 25px;
+            font-family:Montserrat;
+        }
+
+        .emphasize {
+            color:#AA3A3A; 
+            font-weight: 700; 
+            font-size:16px;
+        }
+
+        thead{
+            font-family: Montserrat;
+            font-size: 15px;
+        }
+    </style>
+
+    <div id="product-display" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+        <div class="text-center mt-3 linkContainer">
+            <p>Display By</p>
+            <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
+            <a class="side-links" id="tracks_page" runat="server">Lokal Track</a>
+            <a class="side-links" id="albums_page" runat="server">Lokal Album</a>
+            <a href="" class="side-links" id="artists_page">Lokal Artists</a>
+            <hr style="width: 150px; background:#525252;"/>
+
+            <p class="mt-5">Sort By</p>
+            <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
+            <a href="" class="side-links" id="sort_a_z" onclick="sortClick('TL')">Title</a>
+            <a href="" class="side-links" id="sort_z_a" onclick="sortClick('PR')">Price</a>
+            <a href="" class="side-links" id="recently_added" onclick="sortClick('RA')">Recently Added</a>
+
+            <hr style="margin-top:5px; width: 80px; background:#525252;"/>
+            <a href="" class="side-links" id="order_asc" onclick="orderClick('ASC')">Ascending</a>
+            <a href="" class="side-links" id="order_desc" onclick="orderClick('DESC')">Descending</a>
+            <hr style="width: 150px; background:#525252;"/>
+
+            <button class="btn btn-light" onclick="s()">Filter</button>
+        </div>
+
+    </div>
+
+
+    <div class="body-content" id="main">
+        <span onclick="openNav()">open</span>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+    <script>
+
+        function sortClick(text) {
+            localStorage.setItem("sortby", text);
+        }
+
+        function orderClick(text) {
+            localStorage.setItem("orderby", text);
+        }
+
+        function s() {
+            alert("sort by" + localStorage.getItem("sortby") + " order by" + localStorage.getItem("orderby"));
+        }
+
+        function openNav() {
+          document.getElementById("product-display").style.width = "200px";
+          document.getElementById("main").style.marginLeft = "200px";
+        }
+
+        function closeNav() {
+          document.getElementById("product-display").style.width = "0";
+          document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+
+</asp:Content>
