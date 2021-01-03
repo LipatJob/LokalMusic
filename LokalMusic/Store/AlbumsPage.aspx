@@ -24,13 +24,14 @@
     <div class="container">
         <h1 class="mb-4">Lokal Albums</h1>
 
-        <div class="p-5" style="background-color: #F4F4F4;">
+        <div class="pt-3 pb-2 pl-3 pr-3" style="background-color: #F4F4F4;">
 
             <asp:Repeater ID="albumContainer" runat="server">
                 <ItemTemplate>
 
                     <div class="card border-0 shadow-sm mb-3">
                         <div class="card-body">
+
                             <div class="row w-100">
                                 <div class="col-xl-3">
                                     <a href="#">
@@ -62,11 +63,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
                 </ItemTemplate>
             </asp:Repeater>
-
 
         </div>
 
