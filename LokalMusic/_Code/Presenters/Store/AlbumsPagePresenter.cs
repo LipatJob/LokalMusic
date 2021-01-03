@@ -31,7 +31,20 @@ namespace LokalMusic._Code.Presenters.Store
 
             List<AlbumSummary> albums = this.repository.GetSummarizedAlbum(sortBy, orderBy);
 
-            // foreach album get its track to get genre, track counts, track minutes
+            foreach (var album in albums)
+            {
+                List<TrackSummary> tracks = this.repository.GetSummarizedTracksByAlbumId(album.AlbumId);
+                album.TrackCount = tracks.Count;
+
+                double totalMinutes = 0;
+                tracks.ForEach(m =>{ totalMinutes += m.AudioDuration.TotalMinutes; });
+                album.TrackMinutes = System.Math.Round(totalMinutes, 2);
+
+                List<string> genres = new List<string>();
+                tracks.ForEach(m => genres.Add( m.Genre.Substring(0,1).ToUpper() + m.Genre.Substring(1).ToLower() ));
+
+                album.Genre = string.Join(", ", genres);
+            }
 
             return albums;
         }
