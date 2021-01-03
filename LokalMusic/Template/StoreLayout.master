@@ -1,0 +1,101 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="StoreLayout.master.cs" Inherits="LokalMusic.Template.StoreLayout" %>
+
+
+<asp:Content ID="StoreContent" ContentPlaceHolderID="MainContent" runat="server">
+
+    <style>
+        .nav-link {
+            font-size: 17px;
+            font-weight: 500;
+            color: #5E5E5E;
+        }
+    </style>
+
+    <%--Nav--%>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="../Store/Home.aspx" runat="server">
+            <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link ml-xl-5" href="#">Catalogue</a>
+                </li>
+            </ul>
+
+            <div class="form-inline my-2 my-lg-0">
+                <asp:TextBox ID="SearchTxt" runat="server" CssClass="form-control mr-sm-2" PlaceHolder="Search"></asp:TextBox>
+                <asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="Search" CssClass="btn btn-light my-2 my-sm-0" />
+            </div>
+
+            <%--Authentication--%>
+            <% if (AuthenticationHelper.LoggedIn)
+                {%>
+            <div>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown ml-xl-4">
+                        <a class="nav-link dropdown-toggle active" href="~/Account/Collection" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server">
+                            <% Response.Write(AuthenticationHelper.Username); %>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" runat="server" id="CollectionLink">Collection</a>
+                            <a class="dropdown-item" href="~/Account/Settings" runat="server">Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <% if (AuthenticationHelper.UserType == AuthenticationHelper.ARTIST_USER_TYPE)%>
+                            <%{%>
+                            <a class="dropdown-item" href="~/Publish/Albums" runat="server">Publish</a>
+                            <a class="dropdown-item" href="~/Publish/Sales" runat="server">Sales</a>
+                            <div class="dropdown-divider"></div>
+                            <%} %>
+                            <% else if (AuthenticationHelper.UserType == AuthenticationHelper.ADMIN_USER_TYPE)%>
+                            <%{%>
+                            <a class="dropdown-item" href="~/Admin/Products" runat="server">Admin</a>
+                            <div class="dropdown-divider"></div>
+                            <%} %>
+                            <a class="dropdown-item" href="~/Account/Signout" runat="server">Sign out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <%}
+                else
+                {%>
+            <div>
+                <ul class="navbar-nav ml-xl-4">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="~/Account/Register/Fan" runat="server">Join</a>
+                    </li>
+                    <li>
+                        <span class="nav-link">or</span>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>
+                    </li>
+                </ul>
+            </div>
+            <%}%>
+
+
+            <div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link ml-xl-4" href="#">
+                            <img src="~/Content/Images/cart.png" width="20" height="20" class="d-block my-auto" alt="" runat="server">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="body-content">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+</asp:Content>

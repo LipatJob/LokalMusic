@@ -1,34 +1,47 @@
-﻿using LokalMusic.Code.Repositories.Account;
-using LokalMusic.Code.Views.Account;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Repositories.Account;
+using LokalMusic._Code.Views.Account;
 
-namespace LokalMusic.Code.Presenters.Account
+namespace LokalMusic._Code.Presenters.Account
 {
     public class LoginPresenter
     {
-        private ILoginView view;
+        private ILoginViewModel viewModel;
         private LoginRepository repository;
-        public LoginPresenter(ILoginView view, LoginRepository repository)
+
+        public LoginPresenter(ILoginViewModel viewModel, LoginRepository repository)
         {
-            this.view = view;
+            this.viewModel = viewModel;
             this.repository = repository;
         }
 
-        public void Login()
+        public void CheckAuthentication()
         {
-            bool isLoginSuccessful = false; 
-
-            if(isLoginSuccessful)
+            if (AuthenticationHelper.LoggedIn)
             {
-                view.RedirectToHomePage();
+                NavigationHelper.Redirect("~/Store/Home");
+            }
+        }
+
+        public bool Login()
+        {
+            int userId = repository.GetLogin(viewModel);
+
+            if (IsLoginSuccessful(userId))
+            {
+                AuthenticationHelper.UserId = userId;
+                NavigationHelper.Redirect("~/Store/Home");
+                return true;
             }
             else
             {
-                view.ShowLoginErrorMessage();
+                return false;
             }
+        }
+
+        private bool IsLoginSuccessful(int userId)
+        {
+            return userId != LoginRepository.LOGIN_FAILED_ID;
         }
     }
 }

@@ -1,0 +1,142 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="FinanceLayout.master.cs" Inherits="LokalMusic.Template.FinanceLayout" %>
+
+<asp:Content ID="AdminLayout" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <style>
+        .nav-header {
+            font: 700 20px verdana;
+        }
+
+        #timer {
+            font-size: 20px;
+        }
+
+        /* The side navigation menu */
+        .sidenav {
+            width: 200px; /* 0 width - change this with JavaScript */
+            z-index: 1; /* Stay on top */
+            background-color: #FAFAFA;
+            overflow-x: hidden; /* Disable horizontal scroll */
+            transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+        }
+
+            /* The navigation menu links */
+            .sidenav a, .sidenav p {
+                font-family: Montserrat;
+                font-weight: 700;
+                font-size: 16px;
+                padding: 8px 8px 8px 8px;
+                text-decoration: none;
+                color: black;
+                display: block;
+                transition: 0.3s;
+            }
+
+                /* When you mouse over the navigation links, change their color */
+                .sidenav a:hover {
+                }
+
+            .sidenav .side-links {
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            /* Position and style the close button (top right corner) */
+            .sidenav .closebtn {
+                height: 30px;
+                text-align: right;
+                font-size: 36px;
+                margin-left: 50px;
+                color: #F82B2B;
+                font-weight: 400;
+            }
+
+        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+            margin-left: 200px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+
+        h1 {
+            font-size: 25px;
+            font-family: Montserrat;
+        }
+
+        .side-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow:1;
+            height:100%;
+        }
+
+        .sidebar-active{
+            background-color: #D7D7D7;
+        }
+    </style>
+
+    <div style="display:flex; flex-direction:column; height:100vh; max-height: 100vh;">
+
+        <%--Nav--%>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#">
+                <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <span class="nav-header">Finance</span>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto mr-5">
+                <li class="nav-item">
+                    <span id="timer"></span>
+                </li>
+            </ul>
+        </nav>
+
+        <div style="display: flex; flex-direction: row; align-items: stretch; flex-grow:1">
+
+            <div id="product-display" class="sidenav">
+                <div class="text-center  side-container">
+                    <%-- %>p class="side-links mt-3"><%Response.Write(AuthenticationHelper.Username " "); %></ --%>
+                    <hr style="width: 150px; background: #525252; margin-top:0px;" />
+                    <a href="~/Finance/Reports" runat="server" class="side-links productsSideItem">Reports</a>
+                    <a href="~/Finance/Receipts" runat="server" class="side-links usersSideItem">Receipts</a>
+                    <hr style="margin-top: auto; width: 150px; background: #525252;" />
+                    <a style="" href="~" class="pb-3" runat="server">Return to Store</a>
+                </div>
+            </div>
+
+
+            <div class="container body-content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        var span = document.getElementById('timer');
+
+        function time() {
+            var d = new Date();
+            span.textContent = moment().format("LT").toString() + " | " + moment().format("LL").toString();
+        }
+
+        setInterval(time, 1000);
+    </script>
+
+</asp:Content>
