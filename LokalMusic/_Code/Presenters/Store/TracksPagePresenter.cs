@@ -1,4 +1,5 @@
 ﻿using LokalMusic._Code.Models.Products;
+using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Repositories;
 using LokalMusic._Code.Views.Store;
 using System.Collections.Generic;
@@ -16,13 +17,14 @@ namespace LokalMusic._Code.Presenters.Store
             this.repository = repo;
         }
 
-        public List<Track> GetTracks(string sortBy = "PR", string orderBy = "ASC")
+        public List<TrackSummary> GetTracks(string sortBy = "S1", string orderBy = "ASC")
         {
-            if (sortBy == "RA") sortBy = "DateAdded";
-            else if (sortBy == "PR") sortBy = "Price";
-            else if (sortBy == "TL") sortBy = "ProductName";
+            if (sortBy == "S1") sortBy = "DateAdded";
+            else if (sortBy == "S2") sortBy = "TrackName";
+            else if (sortBy == "S3") sortBy = "Price";
+            else sortBy = "Price";
 
-            List<Track> tracks = this.repository.GetTracks(sortBy, orderBy);
+            List<TrackSummary> tracks = this.repository.GetSummarizedTracks(sortBy, orderBy);
 
             return tracks;
         }
