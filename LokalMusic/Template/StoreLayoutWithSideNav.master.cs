@@ -15,9 +15,9 @@ namespace LokalMusic.Template
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            tracks_page.HRef = $"~/Store/Tracks/{"RA"}/{"ASC"}";
-            albums_page.HRef = $"~/Store/Albums/{"RA"}/{"ASC"}";
-            //artist.HRef = $"~/Store/Tracks/{"RA"}/{"ASC"}";
+            tracks_page.HRef = $"~/Store/Tracks/{"S1"}/{"ASC"}";
+            albums_page.HRef = $"~/Store/Albums/{"S1"}/{"ASC"}";
+            artists_page.HRef = $"~/Store/Artists/{"S1"}/{"ASC"}";
         }
 
         

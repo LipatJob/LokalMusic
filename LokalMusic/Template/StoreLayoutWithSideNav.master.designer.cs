@@ -33,6 +33,15 @@ namespace LokalMusic.Template
         protected global::System.Web.UI.HtmlControls.HtmlAnchor albums_page;
 
         /// <summary>
+        /// artists_page control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor artists_page;
+
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>
