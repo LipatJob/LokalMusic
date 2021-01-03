@@ -6,11 +6,12 @@
         
         /* The side navigation menu */
         .sidenav {
+            
             height: 100%; /* 100% Full-height */
             width: 200px; /* 0 width - change this with JavaScript */
             position: fixed; /* Stay in place */
-            z-index: 1; /* Stay on top */
-            /*top: 0;*/ /* Stay at the top */
+            z-index: 0; /* Stay on top */
+            top: 2; /* Stay at the top */
             left: 0;
             background-color: #FAFAFA;
             overflow-x: hidden; /* Disable horizontal scroll */
@@ -81,7 +82,7 @@
         }
     </style>
 
-    <div id="product-display" class="sidenav">
+    <div id="product-display" class="sidenav sticky">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         
         <div class="text-center mt-3 linkContainer">
