@@ -44,14 +44,14 @@
 
                                     <div class="mt-5 mt-md-0 mt-sm-0 mt-0">
                                         <p style="font-size:13px; color: #8F8F8F; font-weight:400;"><%#Eval("TrackCount")%> tracks, <%#Eval("TrackMinutes") %> minutes</p>
-                                        <p style="font-size:13px; color: #8F8F8F; margin-top: -15px; font-weight:500;">released <%#Eval("DateReleased")%></p>
+                                        <p style="font-size:13px; color: #8F8F8F; margin-top: -15px; font-weight:500;">released <%#Eval("DateReleased", "{0:MMMM dd, yyyy}") %></p>
                                         <p style="font-size:13px; color: #C4C4C4; margin-top: -15px; font-weight:400;">Genre(s): <%#Eval("Genre")%></p>
                                     </div>                            
                                 </div>
 
                                 <div class="col-md-3 col-xl-3 col-md-6">
                                     <div class="float-right">
-                                        <h4 class="album-price"><%#Eval("Price")%></h4>
+                                        <h4 class="album-price">₱<%#Eval("Price")%></h4>
                                         <a href="" class="btn btn-danger float-right" style="background-color: #B82828; font-size: 12px; font-weight: 600">Add to Cart</a>
                                     </div>
                                 </div>

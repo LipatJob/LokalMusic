@@ -32,11 +32,11 @@ namespace LokalMusic._Code.Models.Store
         public DateTime DateReleased { get; set; }
 
         // processed in presenter
-        public List<string> Genre { get; set; }
+        public string Genre { get; set; }
 
         // processed in presenter, not in repository
         public int TrackCount { get; set; }
-        public int TrackMinutes { get; set; }
+        public double TrackMinutes { get; set; }
 
     }
 }
