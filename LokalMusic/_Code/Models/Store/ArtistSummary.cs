@@ -27,11 +27,13 @@ namespace LokalMusic._Code.Models.Store
         public string ArtistProfileImage { get; set; }
 
         // Processed in presenter
-        public List<string> Genres { get; set; }
+        public string Genre { get; set; }
 
         // Processed in presenter
         public int AlbumCount { get; set; }
         public int TrackTotalCount { get; set; }
+        public TrackSummary TrackTop1 { get; set; }
+        public TrackSummary TrackTop2 { get; set; }
 
 
     }
