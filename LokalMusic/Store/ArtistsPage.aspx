@@ -2,8 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+
     <div class="container">
-        <h1 class="mb-4">Lokal Albums</h1>
+        <h1 class="mb-4">Lokal Artists</h1>
 
     </div>
 

@@ -2,7 +2,8 @@
 
 <asp:Content ID="StoreContentWithSideNav" ContentPlaceHolderID="MainContent" runat="server">
 
-    <style type="text/css" scoped>
+    <style>
+        
         /* The side navigation menu */
         .sidenav {
             height: 100%; /* 100% Full-height */
@@ -29,8 +30,8 @@
         }
 
         /* When you mouse over the navigation links, change their color */
-        .sidenav a:hover {
-
+        .sidenav a:active, .sidenav a:after, .sidenav a:current {
+            color:red;
         }
 
         .sidenav .side-links{
@@ -86,9 +87,9 @@
         <div class="text-center mt-3 linkContainer">
             <p>Display By</p>
             <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
-            <a class="side-links" id="tracks_page" runat="server">Lokal Track</a>
-            <a class="side-links" id="albums_page" runat="server">Lokal Album</a>
-            <a class="side-links" id="artists_page" runat="server">Lokal Artists</a>
+            <a class="side-links" id="tracks_page" runat="server">Lokal Tracks</a>
+            <a class="side-links" id="albums_page" runat="server">Lokal Albums</a>
+            <a class="side-links" ID="artists_page" runat="server">Lokal Artists</a>
             <hr style="width: 150px; background:#525252;"/>
 
             <p class="mt-5">Sort By</p>
@@ -108,7 +109,7 @@
     </div>
 
 
-    <div class="body-content" id="main">
+    <div class="" id="main">
         <span onclick="openNav()">open</span>
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
