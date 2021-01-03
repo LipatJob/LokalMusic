@@ -54,7 +54,7 @@ namespace LokalMusic._Code.Repositories
                         (int)values.Rows[i]["ArtistId"],
 
                         values.Rows[i]["TrackName"].ToString(),
-                        Decimal.Parse(values.Rows[i]["Price"].ToString()),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
                         Convert.ToDateTime(values.Rows[i]["DateAdded"].ToString()),
                         values.Rows[i]["AlbumName"].ToString(),
                         values.Rows[i]["ArtistName"].ToString(),

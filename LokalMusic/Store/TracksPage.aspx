@@ -37,13 +37,13 @@
                             <ItemTemplate>
                                 <tr class="text-center">
                                     <td class="float-right">
-                                        <img src="../Content/Images/default_cover.jpg" width="30" height="30" class="mx-auto" runat="server"/>
+                                        <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto"/>
                                     </td>   
                                     <td class="emphasize"><%#Eval("TrackName") %></td>
                                     <td><%#Eval("AlbumName") %></td>
                                     <td><%#Eval("ArtistName") %></td>
                                     <td><%#Eval("Genre") %></td>
-                                    <td><%#Eval("TrackDuration") %></td>
+                                    <td><%#Eval("AudioDuration") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
                                     <td>
                                         <a href="#">
