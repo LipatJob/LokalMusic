@@ -24,6 +24,9 @@ namespace LokalMusic._Code.Presenters.Store
             else if (sortBy == "S3") sortBy = "Price";
             else sortBy = "Price";
 
+            if (orderBy != "ASC" && orderBy != "DESC")
+                orderBy = "ASC";
+
             List<TrackSummary> tracks = this.repository.GetSummarizedTracks(sortBy, orderBy);
 
             return tracks;
