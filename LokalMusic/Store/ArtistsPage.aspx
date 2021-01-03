@@ -48,7 +48,7 @@
                             <div class="row w-100">
                                 <div class="col-xl-3">
                                     <a href="#">
-                                        <img src=<%#Eval("ArtistProfileImage")%> alt="artist_cover" class="d-block mx-auto mb-xl-0 mb-sm-2" width="200" height="200"/>
+                                        <img src=<%#Eval("ArtistProfileImage")%> alt="artist_cover" class="d-block mx-auto mb-xl-0 mb-sm-2" width="200" height="200" runat="server"/>
                                     </a>
                                 </div>
 
@@ -79,7 +79,7 @@
 
                                                 <div class="col-3 mx-auto">
                                                     <%--link--%>
-                                                    <img src="../Content/Images/default_artist_image.JPG" width="45" height="45" class="mx-auto d-block" runat="server"/>
+                                                    <img src=<%#Eval("TrackTop1.AlbumCover")%> width="45" height="45" class="mx-auto d-block" runat="server" alt="track1"/>
                                                 </div>
                                             </div>
                                         </a>                                        
@@ -89,11 +89,11 @@
                                         <a href="">
                                             <div class="row mt-4">
                                                 <div class="col-9 text-right my-auto">
-                                                    <p class="my-auto track-title"><%#Eval("TrackTop2.TrackName") %></p>
+                                                    <p class="my-auto track-title"><%#Eval("TrackTop2.TrackName")%></p>
                                                 </div>
 
                                                 <div class="col-3 mx-auto">
-                                                    <img src="../Content/Images/default_artist_image.JPG" width="45" height="45" class="mx-auto d-block" runat="server"/>
+                                                    <img src=<%#Eval("TrackTop2.AlbumCover")%> width="45" height="45" class="mx-auto d-block" runat="server" alt="track2" />
                                                 </div>
                                             </div>
                                         </a>                                        
