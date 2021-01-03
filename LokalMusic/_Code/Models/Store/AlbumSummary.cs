@@ -35,7 +35,7 @@ namespace LokalMusic._Code.Models.Store
         public List<string> Genre { get; set; }
 
         // processed in presenter, not in repository
-        public int TrackCounts { get; set; }
+        public int TrackCount { get; set; }
         public int TrackMinutes { get; set; }
 
     }

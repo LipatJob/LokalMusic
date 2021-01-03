@@ -16,13 +16,22 @@ namespace LokalMusic._Code.Presenters.Store
             this.repository = repo;
         }
 
-        public List<AlbumProduct> GetAlbums(string sortBy = "RA", string orderBy = "ASC")
+        public List<AlbumSummary> GetAlbums(string sortBy = "S1", string orderBy = "ASC")
         {
-            if (sortBy == "RA") sortBy = "DateReleased";
-            else if (sortBy == "PR") sortBy = "Price";
-            else if (sortBy == "TN") sortBy = "ProductName";
+            sortBy = sortBy.ToUpper();
+            orderBy = orderBy.ToUpper();
 
-            List<AlbumProduct> albums = this.repository.GetAlbums(sortBy, orderBy, true);
+            if (sortBy == "S1") sortBy = "DateReleased";
+            else if (sortBy == "S2") sortBy = "AlbumName";
+            else if (sortBy == "S3") sortBy = "Price";
+            else sortBy = "Price";
+
+            if (orderBy != "ASC" && orderBy != "DESC")
+                orderBy = "ASC";
+
+            List<AlbumSummary> albums = this.repository.GetSummarizedAlbum(sortBy, orderBy);
+
+            // foreach album get its track to get genre, track counts, track minutes
 
             return albums;
         }
