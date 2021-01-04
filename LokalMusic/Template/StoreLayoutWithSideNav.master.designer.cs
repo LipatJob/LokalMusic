@@ -42,6 +42,51 @@ namespace LokalMusic.Template
         protected global::System.Web.UI.HtmlControls.HtmlAnchor artists_page;
 
         /// <summary>
+        /// sort1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button sort1;
+
+        /// <summary>
+        /// sort2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button sort2;
+
+        /// <summary>
+        /// sort3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button sort3;
+
+        /// <summary>
+        /// orderASC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button orderASC;
+
+        /// <summary>
+        /// orderDESC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button orderDESC;
+
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>
