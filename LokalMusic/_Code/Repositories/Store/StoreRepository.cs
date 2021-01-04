@@ -38,8 +38,11 @@ namespace LokalMusic._Code.Repositories
                            "ON Album.AlbumCoverID = AlbumFile.FileId " +
                            "INNER JOIN FileInfo as TrackFile " +
                            "ON Track.ClipFileID = TrackFile.FileId " +
-                           "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_LISTED + "')" +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
                            "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')" +
                            "ORDER BY " + sortBy + " " + orderBy;
 
             var values = DbHelper.ExecuteDataTableQuery(query);
@@ -96,8 +99,11 @@ namespace LokalMusic._Code.Repositories
                            "ON Album.AlbumCoverID = AlbumFile.FileId " +
                            "INNER JOIN FileInfo as TrackFile " +
                            "ON Track.ClipFileID = TrackFile.FileId " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
                            "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
                            "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')" +
                            "AND Track.AlbumId = @AlbumId";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
@@ -146,7 +152,10 @@ namespace LokalMusic._Code.Repositories
                            "ON Album.UserId = ArtistInfo.UserId " +
                            "INNER JOIN FileInfo " +
                            "On Album.AlbumCoverID = FileInfo.FileId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = 'LISTED')" +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "') " +
                            "ORDER BY " + sortBy + " " + orderBy;
 
             var values = DbHelper.ExecuteDataTableQuery(query);
