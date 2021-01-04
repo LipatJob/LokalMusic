@@ -235,7 +235,7 @@ namespace LokalMusic._Code.Repositories
         {
             return this.GetSummarizedTracks();
         }
-
+        
         public List<AlbumSummary> GetHighestSoldAlbums()
         {
             return this.GetSummarizedAlbum();
@@ -245,6 +245,67 @@ namespace LokalMusic._Code.Repositories
         {
             // Most popular == artist that sold many albums
             return this.GetSummarizedArtist();
+        }
+
+        public List<TrackSummary> GetTopTwoTracks( int artistId)
+        {
+            List<TrackSummary> tracks = new List<TrackSummary>();
+
+            string query = "SELECT TOP 2 TrackId, Track.AlbumId, Album.UserId as ArtistId, TrackProduct.ProductName as TrackName, TrackProduct.Price, TrackProduct.DateAdded, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, GenreName as Genre, TrackFile.FileName as AudioClip, Track.ClipDuration as AudioClipDuration, Track.TrackDuration as AudioDuration, AlbumFile.FileName as AlbumCover " +
+                           "FROM Product as TrackProduct " +
+                           "INNER JOIN Track " +
+                           "ON TrackProduct.ProductId = Track.TrackId " +
+                           "INNER JOIN Album " +
+                           "ON Track.AlbumId = Album.AlbumId " +
+                           "INNER JOIN Product as AlbumProduct " +
+                           "ON Album.AlbumId = AlbumProduct.ProductId " +
+                           "INNER JOIN Genre " +
+                           "On Track.GenreId = Genre.GenreId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN FileInfo as AlbumFile " +
+                           "ON Album.AlbumCoverID = AlbumFile.FileId " +
+                           "INNER JOIN FileInfo as TrackFile " +
+                           "ON Track.ClipFileID = TrackFile.FileId " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')" +
+                           "And Album.UserId = @ArtistId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    TrackSummary track = new TrackSummary(
+                        (int)values.Rows[i]["TrackId"],
+                        (int)values.Rows[i]["AlbumId"],
+                        (int)values.Rows[i]["ArtistId"],
+
+                        values.Rows[i]["TrackName"].ToString(),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+                        Convert.ToDateTime(values.Rows[i]["DateAdded"].ToString()),
+                        values.Rows[i]["AlbumName"].ToString(),
+                        values.Rows[i]["ArtistName"].ToString(),
+
+                        values.Rows[i]["Genre"].ToString(),
+
+                        values.Rows[i]["AudioClip"].ToString(),
+                        TimeSpan.Parse(values.Rows[i]["AudioClipDuration"].ToString()),
+                        TimeSpan.Parse(values.Rows[i]["AudioDuration"].ToString()),
+
+                        values.Rows[i]["AlbumCover"].ToString()
+                        );
+
+                    tracks.Add(track);
+                }
+            }
+
+            return tracks.Count() > 0 ? tracks : null;
         }
 
         /* Old */
