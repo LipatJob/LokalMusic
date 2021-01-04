@@ -26,19 +26,25 @@ namespace LokalMusic
             routes.MapPageRoute(
                 "TrackPage",
                 "Store/Tracks/{SortBy}/{OrderBy}",
-                "~/Store/TracksPage.aspx"
+                "~/Store/TracksPage.aspx",
+                false,
+                new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
                 );
 
             routes.MapPageRoute(
                 "AlbumPage",
                 "Store/Albums/{SortBy}/{OrderBy}",
-                "~/Store/AlbumsPage.aspx"
+                "~/Store/AlbumsPage.aspx",
+                false,
+                new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
                 );
 
             routes.MapPageRoute(
                 "ArtistPage",
                 "Store/Artists/{SortBy}/{OrderBy}",
-                "~/Store/ArtistsPage.aspx"
+                "~/Store/ArtistsPage.aspx",
+                false,
+                new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
                 );
 
             //routes.MapPageRoute(
