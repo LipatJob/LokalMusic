@@ -25,7 +25,7 @@ namespace LokalMusic._Code.Presenters.Store
             if (sortBy == "S1") sortBy = "DateJoined";
             else if (sortBy == "S2") sortBy = "ArtistName";
             //else if (sortBy == "S3") sortBy = "Price"; NO PRICE FIELD IN ARTISTS
-            else sortBy = "Price";
+            else sortBy = "ArtistName";
 
             if (orderBy != "ASC" && orderBy != "DESC")
                 orderBy = "ASC";
