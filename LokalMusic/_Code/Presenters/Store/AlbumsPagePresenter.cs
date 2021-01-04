@@ -16,18 +16,18 @@ namespace LokalMusic._Code.Presenters.Store
             this.repository = repo;
         }
 
-        public List<AlbumSummary> GetAlbums(string sortBy = "S1", string orderBy = "ASC")
+        public List<AlbumSummary> GetAlbums(string sortBy = "s1", string orderBy = "asc")
         {
-            sortBy = sortBy.ToUpper();
-            orderBy = orderBy.ToUpper();
+            sortBy = sortBy.ToLower();
+            orderBy = orderBy.ToLower();
 
-            if (sortBy == "S1") sortBy = "DateReleased";
-            else if (sortBy == "S2") sortBy = "AlbumName";
-            else if (sortBy == "S3") sortBy = "Price";
+            if (sortBy == "s1") sortBy = "DateReleased";
+            else if (sortBy == "s2") sortBy = "AlbumName";
+            else if (sortBy == "s3") sortBy = "Price";
             else sortBy = "Price";
 
-            if (orderBy != "ASC" && orderBy != "DESC")
-                orderBy = "ASC";
+            if (orderBy != "asc" && orderBy != "desc")
+                orderBy = "asc";
 
             List<AlbumSummary> albums = this.repository.GetSummarizedAlbum(sortBy, orderBy);
 
