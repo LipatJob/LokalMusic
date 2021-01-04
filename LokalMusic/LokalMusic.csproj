@@ -586,10 +586,6 @@
     <Compile Include="_Code\Models\Admin\ProductItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
-    <Compile Include="_Code\Models\Products\Album.cs" />
-    <Compile Include="_Code\Models\Products\Artist.cs" />
-    <Compile Include="_Code\Models\Products\Track.cs" />
-    <Compile Include="_Code\Models\Store\AlbumProduct.cs" />
     <Compile Include="_Code\Models\Store\AlbumSummary.cs" />
     <Compile Include="_Code\Models\Store\ArtistSummary.cs" />
     <Compile Include="_Code\Models\Store\TrackSummary.cs" />
@@ -668,6 +664,7 @@
     <Folder Include="Cart\" />
     <Folder Include="Pages\" />
     <Folder Include="Publish\" />
+    <Folder Include="Store\Details\" />
     <Folder Include="_Code\Views\Admin\" />
     <Folder Include="_Code\Views\Fan\" />
   </ItemGroup>
@@ -717,6 +714,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties content_4bootstrap-reboot_1min_1css_1map__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

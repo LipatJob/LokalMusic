@@ -3,10 +3,7 @@ using LokalMusic._Code.Presenters.Account.Register;
 using LokalMusic._Code.Repositories.Account.Register;
 using LokalMusic._Code.Views.Account.Register;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
