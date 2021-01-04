@@ -39,6 +39,7 @@ namespace LokalMusic._Code.Repositories
                            "INNER JOIN FileInfo as TrackFile " +
                            "ON Track.ClipFileID = TrackFile.FileId " +
                            "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_LISTED + "')" +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
                            "ORDER BY " + sortBy + " " + orderBy;
 
             var values = DbHelper.ExecuteDataTableQuery(query);
@@ -96,6 +97,7 @@ namespace LokalMusic._Code.Repositories
                            "INNER JOIN FileInfo as TrackFile " +
                            "ON Track.ClipFileID = TrackFile.FileId " +
                            "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')" +
                            "AND Track.AlbumId = @AlbumId";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
