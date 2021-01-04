@@ -67,9 +67,9 @@
                                     </div>                            
                                 </div>
                                     
-                                <div class="col-md-3 col-xl-3 col-md-6 text-right top-tracks">
+                                <div class="col-md-3 col-xl-3 col-md-6 text-right top-tracks <%# Eval("TrackTop1") == null ? "invisible" : "" %>">
                                     <h5 class="">Top Tracks</h5>
-                                    
+
                                     <div class="">
                                         <a href="">
                                             <div class="row mt-4">
@@ -85,7 +85,7 @@
                                         </a>                                        
                                     </div>
 
-                                    <div class="">
+                                    <div class="<%# Eval("TrackTop2") == null ? "invisible" : "" %>">
                                         <a href="">
                                             <div class="row mt-4">
                                                 <div class="col-9 text-right my-auto">
