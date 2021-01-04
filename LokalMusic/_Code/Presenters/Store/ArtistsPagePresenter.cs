@@ -1,10 +1,7 @@
 ﻿using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Repositories;
 using LokalMusic.Store;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Presenters.Store
 {

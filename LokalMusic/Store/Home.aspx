@@ -21,8 +21,8 @@
 
             border:solid;
             border-width: 1px;
-            border-color: red;
-
+            border-color: #dc3545 ;
+            border-radius: 5px;
             padding: 0px 3px 0px 3px;
         }
 
@@ -31,7 +31,7 @@
         }
 
         img:hover{
-            border: 2px dotted red;
+            border: 1px solid #F82B2B;
         }
 
         .card-body{
