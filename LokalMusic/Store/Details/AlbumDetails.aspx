@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-<style>
+    <style>
         #img-bottom p {
             color: #969696;
             font-size: 13px;

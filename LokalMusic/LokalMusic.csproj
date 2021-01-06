@@ -437,6 +437,7 @@
     <Content Include="Store\AlbumsPage.aspx" />
     <Content Include="Store\ArtistsPage.aspx" />
     <Content Include="Store\Details\AlbumDetails.aspx" />
+    <Content Include="Store\Details\ArtistDetails.aspx" />
     <Content Include="Store\Details\TrackDetails.aspx" />
     <Content Include="Store\Home.aspx" />
     <Content Include="Store\TracksPage.aspx" />
@@ -523,6 +524,13 @@
     </Compile>
     <Compile Include="Store\Details\AlbumDetails.aspx.designer.cs">
       <DependentUpon>AlbumDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Store\Details\ArtistDetails.aspx.cs">
+      <DependentUpon>ArtistDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Store\Details\ArtistDetails.aspx.designer.cs">
+      <DependentUpon>ArtistDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Store\Details\TrackDetails.aspx.cs">
       <DependentUpon>TrackDetails.aspx</DependentUpon>
@@ -616,6 +624,7 @@
     <Compile Include="_Code\Presenters\Store\AlbumsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\ArtistsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\Details\AlbumDetailsPresenter.cs" />
+    <Compile Include="_Code\Presenters\Store\Details\ArtistDetailsPresenter.cs" />
     <Compile Include="_Code\Presenters\Store\Details\TrackDetailsPresenter.cs" />
     <Compile Include="_Code\Presenters\Store\TracksPagePresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
