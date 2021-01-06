@@ -1,19 +1,19 @@
-﻿<%@ Page Title="Lokal Track" Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="TrackDetails.aspx.cs" Inherits="LokalMusic.Store.Details.TrackDetails" %>
+﻿<%@ Page Title="Lokal Album" Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="AlbumDetails.aspx.cs" Inherits="LokalMusic.Store.Details.AlbumDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <style>
+<style>
         #img-bottom p {
             color: #969696;
             font-size: 13px;
         }
 
-        #track-img img{
+        #album-img img{
             min-width: 200px;
             min-height: 10px;
         }
 
-        #track-name{
+        #album-name{
             color: #B82828;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight:600;
@@ -28,14 +28,10 @@
             font-size: 23px;
         }
 
-        #album-name, #artist-name{
+         #artist-name{
             font-size:16px;
             color: #3C3C3C;
             font-weight: 600;
-        }
-
-        #album-name{
-            margin-top: -15px;
         }
 
         #artist-name{
@@ -57,7 +53,7 @@
             text-decoration: none;
         }
 
-        #track-description p {
+        #album-description p {
             line-height: 30px;
         }
 
@@ -69,7 +65,7 @@
     </style>
 
     <div class="container">
-        <h1 class="mb-5  mt-5">Lokal Track</h1>
+        <h1 class="mb-5  mt-5">Lokal Album</h1>
 
         <div class="row">
 
@@ -82,32 +78,21 @@
 
                 <div class="mt-3"  id="img-bottom">
                     <div class="row mx-auto d-block">
-                        <p class="float-left">2:05 minutes</p>
+                        <p class="float-left">5 tracks, 30 minutes</p>
                         <p class="float-right">genre(s): Pop</p>
-                    </div>
-                     
-                    <%--Player--%>
-                    <div class="row mx-auto d-block">
-                        <audio controls src="https://lokalmusicfs.blob.core.windows.net/songs/wiimusic.mp3" class="w-100">
-                        </audio>
                     </div>
                 </div>
             </div>
+
 
             <%--Description--%>
             <div class="col-md-9 w-100">
 
                 <div class="row w-100 ml-2">
-                    <h3 id="track-name" class="">Lorem ipsum</h3>
+                    <h3 id="album-name" class="">Lorem ipsum</h3>
                     <p id="price" class="ml-auto">₱350.00</p> 
                 </div>
 
-                <div class="row ml-2">
-                    <p id="album-name">
-                        <span class="sub">album:</span> 
-                        <a href="" class="redirect-link">Dolor sit amet</a> <%--GetURL--%>
-                    </p>
-                </div>
                 
                 <div class="row ml-2">
                     <p id="artist-name">
@@ -116,7 +101,7 @@
                     </p>
                 </div>
 
-                <div class="row ml-2 mt-2" id="track-description">
+                <div class="row ml-2 mt-2" id="album-description">
                     <p>
                         Proin mattis in nunc et placerat. Donec sagittis velit accumsan imperdiet ornare. Quisque ut lorem vel diam facilisis rutrum sed in arcu. Donec sit amet aliquam sapien. Nunc sit amet nisi interdum, aliquam turpis eu, rhoncus metus. Integer lacinia tortor id nulla volutpat eleifend. Aliquam erat volutpat. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec varius imperdiet tempus. Phasellus commodo porttitor iaculis. Nunc hendrerit nulla ac porttitor sodales. Nunc vel dui in libero finibus maximus. Phasellus elementum consequat erat eu luctus.
                     </p>
@@ -138,6 +123,9 @@
             </div>
 
         </div>
+
+        <%--list of tracks--%>
+
     </div>
 
 </asp:Content>
