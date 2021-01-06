@@ -436,6 +436,7 @@
     </Content>
     <Content Include="Store\AlbumsPage.aspx" />
     <Content Include="Store\ArtistsPage.aspx" />
+    <Content Include="Store\Details\TrackDetails.aspx" />
     <Content Include="Store\Home.aspx" />
     <Content Include="Store\TracksPage.aspx" />
     <Content Include="Template\Site.Master" />
@@ -515,6 +516,13 @@
     <Compile Include="Store\ArtistsPage.aspx.designer.cs">
       <DependentUpon>ArtistsPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Store\Details\TrackDetails.aspx.cs">
+      <DependentUpon>TrackDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Store\Details\TrackDetails.aspx.designer.cs">
+      <DependentUpon>TrackDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Store\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -588,6 +596,7 @@
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
     <Compile Include="_Code\Models\Store\AlbumSummary.cs" />
     <Compile Include="_Code\Models\Store\ArtistSummary.cs" />
+    <Compile Include="_Code\Models\Store\Details\Track.cs" />
     <Compile Include="_Code\Models\Store\TrackSummary.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterArtistPresenter.cs" />
@@ -598,6 +607,7 @@
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
     <Compile Include="_Code\Presenters\Store\AlbumsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\ArtistsPagePresenter.cs" />
+    <Compile Include="_Code\Presenters\Store\Details\TrackDetailsPresenter.cs" />
     <Compile Include="_Code\Presenters\Store\TracksPagePresenter.cs" />
     <Compile Include="_Code\Repositories\Account\LoginRepository.cs" />
     <Compile Include="_Code\Repositories\Account\Register\RegisterArtistRepository.cs" />
@@ -664,9 +674,10 @@
     <Folder Include="Cart\" />
     <Folder Include="Pages\" />
     <Folder Include="Publish\" />
-    <Folder Include="Store\Details\" />
+    <Folder Include="_Code\Repositories\Store\ProductDetails\" />
     <Folder Include="_Code\Views\Admin\" />
     <Folder Include="_Code\Views\Fan\" />
+    <Folder Include="_Code\Views\Store\Details\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
