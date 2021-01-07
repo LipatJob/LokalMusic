@@ -612,6 +612,8 @@
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
     <Compile Include="_Code\Models\Store\AlbumSummary.cs" />
     <Compile Include="_Code\Models\Store\ArtistSummary.cs" />
+    <Compile Include="_Code\Models\Store\Details\Album.cs" />
+    <Compile Include="_Code\Models\Store\Details\Artist.cs" />
     <Compile Include="_Code\Models\Store\Details\Track.cs" />
     <Compile Include="_Code\Models\Store\TrackSummary.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
