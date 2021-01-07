@@ -126,6 +126,36 @@
 
         <%--list of tracks--%>
 
+        <h5 class="mt-4">Album's Tracks</h5>
+
+        <div class="p-3 mt-4" style="background-color: #F4F4F4;">
+            <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="text-center font-weight-bold">
+                            <td >Track Name</td>
+                            <td>Genre</td>
+                            <td>Price</td>
+                            <td>Add to Cart</td>
+                        </tr>
+                    </thead>
+                
+                    <tbody>
+                        <tr class="text-center">
+                            <td class="emphasize">Track Name</td>
+                            <td>Genre</td>
+                            <td class="emphasize">₱</td>
+                            <td>
+                                <a href="#"> <%-- GetUrl --%>
+                                    <img src="../../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
 </asp:Content>
