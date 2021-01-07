@@ -126,7 +126,7 @@
 
         <%--list of tracks--%>
 
-        <h5 class="mt-4">Album's Tracks</h5>
+        <h5 class="mt-4" style="color:#7A7A7A; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Album's Tracks</h5>
 
         <div class="p-3 mt-4" style="background-color: #F4F4F4;">
             <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
