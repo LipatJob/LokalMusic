@@ -1,4 +1,5 @@
 ﻿using LokalMusic._Code.Presenters.Store.Details;
+using LokalMusic._Code.Repositories.Store.ProductDetails;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace LokalMusic.Store.Details
 
         public ArtistDetails()
         {
-            this.presenter = new ArtistDetailsPresenter();
+            this.presenter = new ArtistDetailsPresenter(new ProductDetailsRepository());
         }
 
         protected void Page_Load(object sender, EventArgs e)
