@@ -638,6 +638,7 @@
     <Compile Include="_Code\Repositories\Admin\UsersRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
+    <Compile Include="_Code\Repositories\Store\ProductDetails\ProductDetailsRepository.cs" />
     <Compile Include="_Code\Repositories\Store\StoreRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Login.aspx.cs">
@@ -694,7 +695,6 @@
     <Folder Include="Cart\" />
     <Folder Include="Pages\" />
     <Folder Include="Publish\" />
-    <Folder Include="_Code\Repositories\Store\ProductDetails\" />
     <Folder Include="_Code\Views\Admin\" />
     <Folder Include="_Code\Views\Fan\" />
     <Folder Include="_Code\Views\Store\Details\" />
