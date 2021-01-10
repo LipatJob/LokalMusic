@@ -152,6 +152,67 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
         // List queries
 
+        public List<Track> GetTracksOfAlbum(int albumId, int artistId)
+        {
+            List<Track> tracks = new List<Track>();
+
+            string query = "SELECT Track.TrackId, Album.AlbumId, ArtistInfo.UserId as ArtistId, Product.ProductName as TrackName, Product.Price, Track.TrackDuration as AudioDuration, TrackAudioFile.FileName as AudioAddress, Product.DateAdded, Track.Description, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, Album.DateReleased as AlbumReleaseDate, AlbumFile.FileName as AlbumCover " +
+                           "FROM Product " +
+                           "INNER JOIN Track " +
+                           "ON Product.ProductId = Track.TrackId " +
+                           "INNER JOIN FileInfo as TrackAudioFile " +
+                           "ON Track.ClipFileID = TrackAudioFile.FileId " +
+                           "INNER JOIN Album " +
+                           "ON Track.AlbumId = Album.AlbumId " +
+                           "INNER JOIN FileInfo as AlbumFile " +
+                           "ON Album.AlbumCoverID = AlbumFile.FileId " +
+                           "INNER JOIN Product as AlbumProduct " +
+                           "ON AlbumProduct.ProductId = Track.AlbumId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "LEFT JOIN FileInfo as ArtistImageFile " +
+                           "ON UserInfo.ProfileImageId = ArtistImageFile.FileId " +
+                           "WHERE Album.AlbumId = @AlbumId AND ArtistInfo.UserId = @ArtistId " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId), ("ArtistId", artistId));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    Track track = new Track(
+                        (int)values.Rows[0]["TrackId"],
+                        (int)values.Rows[0]["AlbumId"],
+                        (int)values.Rows[0]["ArtistId"],
+
+                        values.Rows[0]["TrackName"].ToString(),
+                        Decimal.Round(Decimal.Parse(values.Rows[0]["Price"].ToString()), 2),
+                        TimeSpan.Parse(values.Rows[0]["AudioDuration"].ToString()),
+                        values.Rows[0]["AudioAddress"].ToString(),
+                        Convert.ToDateTime(values.Rows[0]["DateAdded"].ToString()),
+
+                        values.Rows[0]["Description"].ToString(),
+
+                        values.Rows[0]["AlbumName"].ToString(),
+                        values.Rows[0]["ArtistName"].ToString(),
+                        Convert.ToDateTime(values.Rows[0]["AlbumReleaseDate"].ToString()),
+
+                        values.Rows[0]["AlbumCover"].ToString()
+                        );
+
+                    tracks.Add(track);
+                }
+            }
+
+            return tracks;
+        }
+
         public List<Album> GetAlbumsOfArtist(int artistId)
         {
             List<Album> albums = new List<Album>();
