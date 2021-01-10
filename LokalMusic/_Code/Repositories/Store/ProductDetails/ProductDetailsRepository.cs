@@ -19,12 +19,14 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
         {
             Track trackDetails = null;
 
-            string query = "SELECT Track.TrackId, Album.AlbumId, ArtistInfo.UserId as ArtistId, Product.ProductName as TrackName, Product.Price, Track.TrackDuration as AudioDuration, TrackAudioFile.FileName as AudioAddress, Product.DateAdded, Track.Description, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, Album.DateReleased as AlbumReleaseDate, AlbumFile.FileName as AlbumCover " +
+            string query = "SELECT Genre.GenreName as Genre, Track.TrackId, Album.AlbumId, ArtistInfo.UserId as ArtistId, Product.ProductName as TrackName, Product.Price, Track.TrackDuration as AudioDuration, TrackAudioFile.FileName as AudioAddress, Product.DateAdded, Track.Description, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, Album.DateReleased as AlbumReleaseDate, AlbumFile.FileName as AlbumCover " +
                            "FROM Product " +
                            "INNER JOIN Track " +
                            "ON Product.ProductId = Track.TrackId " +
                            "INNER JOIN FileInfo as TrackAudioFile " +
                            "ON Track.ClipFileID = TrackAudioFile.FileId " +
+                           "INNER JOIN Genre " +
+                           "ON Track.GenreId = Genre.GenreId " +
                            "INNER JOIN Album " +
                            "ON Track.AlbumId = Album.AlbumId " +
                            "INNER JOIN FileInfo as AlbumFile " +
@@ -64,7 +66,9 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                     values.Rows[0]["ArtistName"].ToString(),
                     Convert.ToDateTime(values.Rows[0]["AlbumReleaseDate"].ToString()),
 
-                    values.Rows[0]["AlbumCover"].ToString()
+                    values.Rows[0]["AlbumCover"].ToString(),
+
+                    values.Rows[0]["Genre"].ToString()
                     );
             }
 
@@ -156,12 +160,14 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
         {
             List<Track> tracks = new List<Track>();
 
-            string query = "SELECT Track.TrackId, Album.AlbumId, ArtistInfo.UserId as ArtistId, Product.ProductName as TrackName, Product.Price, Track.TrackDuration as AudioDuration, TrackAudioFile.FileName as AudioAddress, Product.DateAdded, Track.Description, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, Album.DateReleased as AlbumReleaseDate, AlbumFile.FileName as AlbumCover " +
+            string query = "SELECT Genre.GenreName as Genre, Track.TrackId, Album.AlbumId, ArtistInfo.UserId as ArtistId, Product.ProductName as TrackName, Product.Price, Track.TrackDuration as AudioDuration, TrackAudioFile.FileName as AudioAddress, Product.DateAdded, Track.Description, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, Album.DateReleased as AlbumReleaseDate, AlbumFile.FileName as AlbumCover " +
                            "FROM Product " +
                            "INNER JOIN Track " +
                            "ON Product.ProductId = Track.TrackId " +
                            "INNER JOIN FileInfo as TrackAudioFile " +
                            "ON Track.ClipFileID = TrackAudioFile.FileId " +
+                           "INNER JOIN Genre " +
+                           "ON Track.GenreId = Genre.GenreId " +
                            "INNER JOIN Album " +
                            "ON Track.AlbumId = Album.AlbumId " +
                            "INNER JOIN FileInfo as AlbumFile " +
@@ -187,23 +193,24 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                 for (int i = 0; i < values.Rows.Count; i++)
                 {
                     Track track = new Track(
-                        (int)values.Rows[0]["TrackId"],
-                        (int)values.Rows[0]["AlbumId"],
-                        (int)values.Rows[0]["ArtistId"],
+                        (int)values.Rows[i]["TrackId"],
+                        (int)values.Rows[i]["AlbumId"],
+                        (int)values.Rows[i]["ArtistId"],
 
-                        values.Rows[0]["TrackName"].ToString(),
-                        Decimal.Round(Decimal.Parse(values.Rows[0]["Price"].ToString()), 2),
-                        TimeSpan.Parse(values.Rows[0]["AudioDuration"].ToString()),
-                        values.Rows[0]["AudioAddress"].ToString(),
-                        Convert.ToDateTime(values.Rows[0]["DateAdded"].ToString()),
+                        values.Rows[i]["TrackName"].ToString(),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+                        TimeSpan.Parse(values.Rows[i]["AudioDuration"].ToString()),
+                        values.Rows[i]["AudioAddress"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["DateAdded"].ToString()),
 
-                        values.Rows[0]["Description"].ToString(),
+                        values.Rows[i]["Description"].ToString(),
 
-                        values.Rows[0]["AlbumName"].ToString(),
-                        values.Rows[0]["ArtistName"].ToString(),
-                        Convert.ToDateTime(values.Rows[0]["AlbumReleaseDate"].ToString()),
+                        values.Rows[i]["AlbumName"].ToString(),
+                        values.Rows[i]["ArtistName"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["AlbumReleaseDate"].ToString()),
 
-                        values.Rows[0]["AlbumCover"].ToString()
+                        values.Rows[i]["AlbumCover"].ToString(),
+                        values.Rows[i]["Genre"].ToString()
                         );
 
                     tracks.Add(track);

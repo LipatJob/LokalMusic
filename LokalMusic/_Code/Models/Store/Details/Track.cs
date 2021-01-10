@@ -7,7 +7,7 @@ namespace LokalMusic._Code.Models.Store.Details
 {
     public class Track
     {
-        public Track(int trackId, int albumId, int artistId, string trackName, decimal price, TimeSpan audioDuration, string audioAddress, DateTime dateAdded, string description, string albumName, string artistName, DateTime albumReleaseDate, string albumCover)
+        public Track(int trackId, int albumId, int artistId, string trackName, decimal price, TimeSpan audioDuration, string audioAddress, DateTime dateAdded, string description, string albumName, string artistName, DateTime albumReleaseDate, string albumCover, string genre)
         {
             TrackId = trackId;
             AlbumId = albumId;
@@ -22,6 +22,7 @@ namespace LokalMusic._Code.Models.Store.Details
             ArtistName = artistName;
             AlbumReleaseDate = albumReleaseDate;
             AlbumCover = albumCover;
+            Genre = genre;
         }
 
         public int TrackId { get; set; }
@@ -42,8 +43,7 @@ namespace LokalMusic._Code.Models.Store.Details
 
         public string AlbumCover { get; set; }
 
-        // processed in presenter
-        public string Genres { get; set; }
+        public string Genre { get; set; }
 
 
     }
