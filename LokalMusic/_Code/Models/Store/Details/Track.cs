@@ -43,7 +43,7 @@ namespace LokalMusic._Code.Models.Store.Details
         public string AlbumCover { get; set; }
 
         // processed in presenter
-        public string Genre { get; set; }
+        public string Genres { get; set; }
 
 
     }
