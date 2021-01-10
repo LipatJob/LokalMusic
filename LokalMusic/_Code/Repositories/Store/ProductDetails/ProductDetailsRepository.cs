@@ -13,6 +13,8 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
         const string STATUS_PRODUCT_LISTED = "LISTED";
         const string STATUS_ARTIST_ACTIVE = "ACTIVE";
 
+        // Main queries for details
+
         public Track GetTrackDetails(int trackId, int albumId, int artistId)
         {
             Track trackDetails = null;
@@ -145,6 +147,58 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
             return artistDetails;
         }
+
+        // End Main queries for details
+
+        // List queries
+
+        public List<Album> GetAlbumsOfArtist(int artistId)
+        {
+            List<Album> albums = null;
+
+            string query = "SELECT Album.AlbumId, ArtistInfo.UserId as ArtistId, Product.ProductName as AlbumName, Price, Album.Description, Album.DateReleased as ReleaseDate, FileInfo.FileName as AlbumCover, ArtistInfo.ArtistName " +
+                           "FROM Album " +
+                           "INNER JOIN Product " +
+                           "ON Album.AlbumId = Product.ProductId " +
+                           "INNER JOIN FileInfo " +
+                           "ON Album.AlbumCoverID = FileInfo.FileId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "WHERE ArtistInfo.UserId = @ArtistId " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')  " +
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    Album album = new Album(
+                        (int)values.Rows[i]["AlbumId"],
+                        (int)values.Rows[i]["ArtistId"],
+
+                        values.Rows[i]["AlbumName"].ToString(),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+                        values.Rows[i]["Description"].ToString(),
+                        Convert.ToDateTime(values.Rows[i]["ReleaseDate"].ToString()),
+
+                        values.Rows[i]["AlbumCover"].ToString(),
+
+                        values.Rows[i]["ArtistName"].ToString()
+                        );
+
+                    albums.Add(album);
+                }
+            }
+
+            return albums;
+        }
+
+        // End List queries
 
     }
 }
