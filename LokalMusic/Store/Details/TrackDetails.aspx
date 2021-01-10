@@ -86,7 +86,7 @@
                         <div class="mt-3"  id="img-bottom">
                             <div class="row mx-auto d-block">
                                 <p class="float-left"><%#Eval("AudioDuration") %> minutes</p>
-                                <p class="float-right">genre(s): <%#Eval("Genres") %></p>
+                                <p class="float-right">genre: <%#Eval("Genre") %></p>
                             </div>
                      
                             <%--Player--%>

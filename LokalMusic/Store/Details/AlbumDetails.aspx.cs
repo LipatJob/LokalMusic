@@ -14,6 +14,7 @@ namespace LokalMusic.Store.Details
     {
         protected AlbumDetailsPresenter presenter;
         protected Album albumDetails;
+        protected List<Track> tracks;
 
         public AlbumDetails()
         {
@@ -21,6 +22,7 @@ namespace LokalMusic.Store.Details
 
             //urk
             this.albumDetails = this.presenter.GetAlbumDetails(4, 6);
+            this.tracks = this.presenter.GetTracksOfAlbum(4, 6);
 
         }
 
@@ -30,6 +32,9 @@ namespace LokalMusic.Store.Details
             temp.Add(this.albumDetails);
             albumContainer.DataSource = temp;
             albumContainer.DataBind();
+
+            tracksContainer.DataSource = this.tracks;
+            tracksContainer.DataBind();
         }
     }
 }
