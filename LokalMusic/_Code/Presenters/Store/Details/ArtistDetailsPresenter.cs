@@ -20,5 +20,10 @@ namespace LokalMusic._Code.Presenters.Store.Details
         {
             return this.repository.GetArtistDetails(artistId);
         }
+
+        public List<Album> GetAlbumsOfArtist(int artistId)
+        {
+            return this.repository.GetAlbumsOfArtist(artistId);
+        }
     }
 }

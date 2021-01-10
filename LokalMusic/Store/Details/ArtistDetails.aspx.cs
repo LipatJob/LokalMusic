@@ -15,12 +15,14 @@ namespace LokalMusic.Store.Details
 
         protected ArtistDetailsPresenter presenter;
         protected Artist artistDetails;
+        protected List<Album> albums;
 
         public ArtistDetails()
         {
             this.presenter = new ArtistDetailsPresenter(new ProductDetailsRepository());
 
             this.artistDetails = this.presenter.GetArtistDetails(6);
+            this.albums = this.presenter.GetAlbumsOfArtist(6);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -29,6 +31,9 @@ namespace LokalMusic.Store.Details
             temp.Add(this.artistDetails);
             artistContainer.DataSource = temp;
             artistContainer.DataBind();
+
+            albumsContainer.DataSource = this.albums;
+            albumsContainer.DataBind();
         }
     }
 }

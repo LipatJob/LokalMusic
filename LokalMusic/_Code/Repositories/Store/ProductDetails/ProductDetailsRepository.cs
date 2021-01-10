@@ -154,7 +154,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
         public List<Album> GetAlbumsOfArtist(int artistId)
         {
-            List<Album> albums = null;
+            List<Album> albums = new List<Album>();
 
             string query = "SELECT Album.AlbumId, ArtistInfo.UserId as ArtistId, Product.ProductName as AlbumName, Price, Album.Description, Album.DateReleased as ReleaseDate, FileInfo.FileName as AlbumCover, ArtistInfo.ArtistName " +
                            "FROM Album " +

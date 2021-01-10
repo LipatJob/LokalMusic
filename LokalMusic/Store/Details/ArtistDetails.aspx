@@ -106,14 +106,10 @@
 
         <h5 class="mt-4" style="color:#7A7A7A; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Artist's Albums</h5>
 
-        <asp:Repeater ID="albumsContainer" runat="server">
-            <ItemTemplate>
-            </ItemTemplate>
-        </asp:Repeater>
-
         <div class="p-3 mt-4" style="background-color: #F4F4F4;">
             <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
                 <table class="table table-hover">
+
                     <thead>
                         <tr class="text-center font-weight-bold">
                             <td></td>
@@ -125,20 +121,29 @@
                     </thead>
                 
                     <tbody>
-                        <tr class="text-center h-100 my-auto">
-                            <td class="">
-                                <img src="~/Content/Images/default_cover.jpg" width="35" height="35" class="mx-auto" runat="server" style="margin: -5px;"/>
-                            </td> 
-                            <td class="emphasize">Track Name</td>
-                            <td>Genre</td>
-                            <td class="emphasize">₱</td>
-                            <td>
-                                <a href="#"> <%-- GetUrl --%>
-                                    <img src="../../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
-                                </a>
-                            </td>
-                        </tr>
+
+                        <asp:Repeater ID="albumsContainer" runat="server">
+                            <ItemTemplate>
+
+                                <tr class="text-center h-100 my-auto">
+                                    <td class="">
+                                        <img src=<%#Eval("AlbumCover") %> width="35" height="35" class="mx-auto" runat="server" style="margin: -5px;"/>
+                                    </td> 
+                                    <td class="emphasize"><%#Eval("AlbumName") %></td>
+                                    <td><%#Eval("Genres") %></td>
+                                    <td class="emphasize">₱<%#Eval("Price") %></td>
+                                    <td>
+                                        <a href="#"> <%-- GetUrl --%>
+                                            <img src="../../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            </ItemTemplate>
+                        </asp:Repeater>
+
                     </tbody>
+
                 </table>
             </div>
         </div>
