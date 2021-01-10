@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Presenters.Store.Details;
+﻿using LokalMusic._Code.Models.Store.Details;
+using LokalMusic._Code.Presenters.Store.Details;
 using LokalMusic._Code.Repositories.Store.ProductDetails;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,21 @@ namespace LokalMusic.Store.Details
     {
 
         protected ArtistDetailsPresenter presenter;
+        protected Artist artistDetails;
 
         public ArtistDetails()
         {
             this.presenter = new ArtistDetailsPresenter(new ProductDetailsRepository());
+
+            this.artistDetails = this.presenter.GetArtistDetails(6);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            List<Artist> temp = new List<Artist>();
+            temp.Add(this.artistDetails);
+            artistContainer.DataSource = temp;
+            artistContainer.DataBind();
         }
     }
 }

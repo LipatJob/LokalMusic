@@ -118,8 +118,8 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                            "FROM ArtistInfo " +
                            "INNER JOIN UserInfo " +
                            "ON ArtistInfo.UserId = UserInfo.UserId " +
-                           "LEFT JOIN FileType " +
-                           "ON UserInfo.ProfileImageId = FileType.FileTypeId " +
+                           "LEFT JOIN FileInfo " +
+                           "ON UserInfo.ProfileImageId = FileInfo.FileId " +
                            "WHERE UserInfo.UserId = @ArtistId " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
@@ -138,6 +138,9 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
                     values.Rows[0]["ArtistImage"].ToString()
                     );
+
+                if (artistDetails.ArtistImage == "")
+                    artistDetails.ArtistImage = "~/Content/Images/default_artist_image.JPG";
             }
 
             return artistDetails;
