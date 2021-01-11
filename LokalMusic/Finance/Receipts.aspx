@@ -35,19 +35,33 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Receipt Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Transaction ID <span id="TransactionId"></span></p>
-                    <p>Username <span id="Username"></span></p>
-                    <p>Transaction Date <span id="TransactionDate"></span></p>
-                    <div id="products">
+                    <p><b>Transaction ID: </b><span id="TransactionId"></span></p>
+                    <p><b>Username : </b><span id="Username"></span></p>
+                    <p><b>Transaction Date : </b><span id="TransactionDate"></span></p>
 
-                    </div>
-                    <p>Amount Paid <span id="AmountPaid"></span></p>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td><b>Amount Paid</b></td>
+                                <td><b><span id="AmountPaid"></span></b></td>
+                            </tr>
+                        </tfoot>
+                    </table>
 
                 </div>
                 <div class="modal-footer">
@@ -94,7 +108,7 @@
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
-                                return `<button class="btn btn-primary" onclick="ViewReceipt(${row["TransactionId"]}, this); return false;">View Receipt</button></a>`;
+                                return `<button class="btn btn-primary" onclick="ViewReceipt(${row["TransactionId"]}, this); return false;">Receipt Details</button></a>`;
                             },
                             "width": "15%"
 
@@ -117,7 +131,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: `{receiptId: '${transactionId}'}`,
-                success: (data)=> ShowReceiptModal(data["d"]),
+                success: (data) => ShowReceiptModal(data["d"]),
                 error: function (data) {
                     alert(JSON.stringify(data));
                 }
@@ -131,8 +145,9 @@
             $("#TransactionDate").text(data["FormattedDate"]);
             $("#TransactionId").text(data["TransactionId"]);
             $("#AmountPaid").text(data["AmountPaid"]);
+            $("#products").html("");
             data["Products"].forEach((productItem) => {
-                $("#products").append(`<p>${productItem["ProductName"]}</p><p>${productItem["AmountPaid"]}</p>  `)
+                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["AmountPaid"]}</td> </tr>`)
             });
         }
 
