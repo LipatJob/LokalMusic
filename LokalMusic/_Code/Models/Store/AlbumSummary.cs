@@ -35,5 +35,13 @@ namespace LokalMusic._Code.Models.Store
         public int TrackCount { get; set; }
         public double TrackMinutes { get; set; }
 
+        public string DetailsUrl
+        {
+            get
+            {
+                return $"~/Store/" + this.ArtistId + "/" + this.AlbumId;
+            }
+        }
+
     }
 }
