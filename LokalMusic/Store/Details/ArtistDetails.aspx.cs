@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Models.Store.Details;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Store.Details;
 using LokalMusic._Code.Presenters.Store.Details;
 using LokalMusic._Code.Repositories.Store.ProductDetails;
 using System;
@@ -21,8 +22,32 @@ namespace LokalMusic.Store.Details
         {
             this.presenter = new ArtistDetailsPresenter(new ProductDetailsRepository());
 
-            this.artistDetails = this.presenter.GetArtistDetails(6);
-            this.albums = this.presenter.GetAlbumsOfArtist(6);
+            this.HandleUrlRequest();
+        }
+
+        private void HandleUrlRequest()
+        {
+            string urlParam = "";
+            int parsedParam = 0;
+
+            urlParam = (string)NavigationHelper.GetRouteValue("ArtistId");
+
+            if (urlParam == "" || urlParam == null) { this.InvalidRequest(); }
+
+            int.TryParse(urlParam, out parsedParam);   
+
+            // call presenter to update model
+            this.artistDetails = this.presenter.GetArtistDetails(parsedParam);
+
+            if (this.artistDetails == null)
+                this.InvalidRequest();
+            else
+                this.albums = this.presenter.GetAlbumsOfArtist(parsedParam);
+        }
+
+        private void InvalidRequest()
+        {
+            NavigationHelper.Redirect("~/Store/ArtistsPage.aspx");
         }
 
         protected void Page_Load(object sender, EventArgs e)

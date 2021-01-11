@@ -96,7 +96,7 @@
                 <ItemTemplate>
                     <div class="col-md-2">
                         <div class="card border-0">
-                            <a href="#" ><img src="<%#Eval("AlbumCover") %>" class="card-img-top" alt="album-name"/></a>    
+                            <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("AlbumCover") %>" class="card-img-top" alt="album-name"/></a>    
                             <div class="card-body">
                                 <p><%#Eval("AlbumName")%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
@@ -122,7 +122,7 @@
                 <ItemTemplate>
                     <div class="col-md-2">
                         <div class="card border-0">
-                            <a href="#" ><img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top" alt="artist-name"/></a>    
+                            <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top" alt="artist-name"/></a>    
                             <div class="card-body">
                                 <p><%#Eval("ArtistName")%></p>
                                 <p style="font-weight: 400;"><%#Eval("Bio")%></p>
@@ -147,7 +147,7 @@
                 <ItemTemplate>
                     <div class="col-md-2">
                     <div class="card border-0">
-                        <a href="#" ><img src="<%#Eval("AlbumCover")%>" class="card-img-top" alt="track-name"/></a>
+                        <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("AlbumCover")%>" class="card-img-top" alt="track-name"/></a>
                         <div class="card-body">
                             <p><%#Eval("TrackName")%></p>
                             <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
