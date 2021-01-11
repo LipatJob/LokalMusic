@@ -32,17 +32,13 @@ namespace LokalMusic.Store.Details
             urlParams.Add((string)NavigationHelper.GetRouteValue("AlbumId"));
             urlParams.Add((string)NavigationHelper.GetRouteValue("ArtistId"));
 
-            if (urlParams.Count != 3) { this.InvalidRequest(); }
-            else
+            int tempParam = 0;
+            foreach (string param in urlParams)
             {
-                int tempParam = 0;
-                foreach (string param in urlParams)
-                {
-                    int.TryParse(param, out tempParam);
-                    parsedParams.Add( tempParam );
+                int.TryParse(param, out tempParam);
+                parsedParams.Add( tempParam );
 
-                    tempParam = 0;
-                }
+                tempParam = 0;
             }
 
             // call presenter to update model
