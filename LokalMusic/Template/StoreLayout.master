@@ -20,6 +20,20 @@
             font-weight: 700; 
             font-size:16px;
         }
+
+        img:hover{
+            border: 1px solid #F82B2B;
+        }
+
+        .titleLink{
+            color: #B82828;
+            font-weight: 700;
+        }
+
+        .titleLink:hover{
+            text-decoration: none;
+            color: #ff7171;
+        }
     </style>
 
     <%--Nav--%>

@@ -30,10 +30,6 @@
             text-decoration: none;
         }
 
-        img:hover{
-            border: 1px solid #F82B2B;
-        }
-
         .card-body{
             margin: -14px -18px 0 -18px;
         }

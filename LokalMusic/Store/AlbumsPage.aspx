@@ -20,10 +20,6 @@
             font-size: 28px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        a:hover{
-            text-decoration: none;
-        }
     </style>
 
     <div class="container">
@@ -45,7 +41,7 @@
                                 </div>
 
                                 <div class="col-md-6 col-md-6">
-                                    <a href=<%#Eval("DetailsUrl") %> runat="server"><h4 class="album-title"><%#Eval("AlbumName")%></h4></a>
+                                    <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink"><h4 class="album-title"><%#Eval("AlbumName")%></h4></a>
                                     <p style="font-size:14px; color: #5E5E5E; margin-top: -10px; font-weight:400;"><%#Eval("ArtistName")%></p>
                                     
                                     <div class="pt-xl-3"></div>
