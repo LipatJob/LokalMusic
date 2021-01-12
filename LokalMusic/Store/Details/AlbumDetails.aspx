@@ -134,7 +134,7 @@
 
         <div class="p-3 mt-4" style="background-color: #F4F4F4;">
             <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
-                <table class="table table-hover">
+                <table class="table table-striped">
 
                     <thead>
                         <tr class="text-center font-weight-bold">
@@ -150,7 +150,11 @@
                             <ItemTemplate>
 
                                 <tr class="text-center">
-                                    <td class="emphasize"><%#Eval("TrackName") %></td>
+                                    <td class="emphasize">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
+                                            <%#Eval("TrackName") %>
+                                        </a>
+                                    </td>
                                     <td><%#Eval("Genre") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
                                     <td>

@@ -108,7 +108,7 @@
 
         <div class="p-3 mt-4" style="background-color: #F4F4F4;">
             <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
-                <table class="table table-hover">
+                <table class="table table-striped">
 
                     <thead>
                         <tr class="text-center font-weight-bold">
@@ -127,9 +127,15 @@
 
                                 <tr class="text-center h-100 my-auto">
                                     <td class="">
-                                        <img src=<%#Eval("AlbumCover") %> width="35" height="35" class="mx-auto" runat="server" style="margin: -5px;"/>
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server">
+                                            <img src=<%#Eval("AlbumCover") %> width="35" height="35" class="mx-auto" runat="server" style="margin: -5px;"/>
+                                        </a>
                                     </td> 
-                                    <td class="emphasize"><%#Eval("AlbumName") %></td>
+                                    <td class="emphasize">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
+                                            <%#Eval("AlbumName") %>
+                                        </a>
+                                    </td>
                                     <td><%#Eval("Genres") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
                                     <td>
