@@ -12,14 +12,6 @@
             font-size: 13px;
         }
 
-        a{
-            color:#B82828;
-        }
-
-        a:hover{
-            text-decoration: none;
-            color:#a20a0a;
-        }
     </style>
 
     <div class="container">
@@ -47,10 +39,12 @@
                             <ItemTemplate>
                                 <tr class="text-center">
                                     <td class="float-right">
-                                        <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto"/>
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank">
+                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto"/>
+                                        </a>
                                     </td>   
                                     <td class="emphasize">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank" class="titleLink">
                                             <%#Eval("TrackName") %>
                                         </a>
                                     </td>
