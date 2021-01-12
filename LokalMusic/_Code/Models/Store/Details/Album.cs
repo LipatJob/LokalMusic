@@ -34,7 +34,7 @@ namespace LokalMusic._Code.Models.Store.Details
         // processed in presenter
         public string Genres { get; set; }
         public int TrackCount { get; set; }
-        public int MinuteCount { get; set; }
+        public double MinuteCount { get; set; }
 
         public string AlbumArtistUrl
         {

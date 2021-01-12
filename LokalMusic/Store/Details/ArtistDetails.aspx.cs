@@ -23,6 +23,7 @@ namespace LokalMusic.Store.Details
             this.presenter = new ArtistDetailsPresenter(new ProductDetailsRepository());
 
             this.HandleUrlRequest();
+            (this.artistDetails, this.albums) = this.presenter.DetermineAlbumSummaries(artistDetails, albums);
         }
 
         private void HandleUrlRequest()

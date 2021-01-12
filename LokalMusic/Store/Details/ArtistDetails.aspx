@@ -113,7 +113,7 @@
                     <thead>
                         <tr class="text-center font-weight-bold">
                             <td></td>
-                            <td >Track Name</td>
+                            <td >Album Name</td>
                             <td>Genres</td>
                             <td>Price</td>
                             <td>Add to Cart</td>
