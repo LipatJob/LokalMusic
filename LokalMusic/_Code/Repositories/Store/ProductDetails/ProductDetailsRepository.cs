@@ -268,5 +268,59 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
         // End List queries
 
+        // Non-core additional queries
+
+        public string GetAlbumGenres(int albumId)
+        {
+            List<string> genreList = new List<string>();
+
+            string query = "SELECT GenreName as Genre " +
+                           "FROM Product " +
+                           "INNER JOIN Album " +
+                           "ON Product.ProductId = Album.AlbumId " +
+                           "INNER JOIN Track " +
+                           "ON Album.AlbumId = Track.AlbumId " +
+                           "INNER JOIN Genre " +
+                           "ON Track.GenreId = Genre.GenreId " +
+                           "WHERE Album.AlbumId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    genreList.Add( values.Rows[i]["Genre"].ToString().Substring(0,1).ToUpper() + values.Rows[i]["Genre"].ToString().Substring(1).ToLower());
+                }
+            }
+
+            return string.Join(", ", genreList.Distinct().ToList());
+        }
+
+        public int GetTrackCount(int albumId)
+        {
+            int trackCount = 0;
+
+            string query = "SELECT COUNT(Track.TrackId) as TrackCount " +
+                           "FROM Product " +
+                           "INNER JOIN Album " +
+                           "ON Product.ProductId = Album.AlbumId " +
+                           "INNER JOIN Track " +
+                           "ON Album.AlbumId = Track.AlbumId " +
+                           "WHERE Album.AlbumId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                int.TryParse(values.Rows[0]["TrackCount"].ToString(), out trackCount);
+            }
+
+            return trackCount;
+        }
+
+        // End Non-core additional queries
     }
 }

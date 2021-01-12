@@ -25,5 +25,27 @@ namespace LokalMusic._Code.Presenters.Store.Details
         {
             return this.repository.GetTracksOfAlbum( albumId, artistId);
         }
+
+        public Album DetermineTrackSummaries(Album album, List<Track> tracks)
+        {
+            // concat genres
+            // determine track count
+            // determine total track length
+
+            if (tracks.Count <= 0 || album == null)
+                return album;
+
+            List<string> genres = new List<string>();
+            tracks.ForEach(m => {
+                genres.Add(m.Genre.Substring(0, 1).ToUpper() + m.Genre.Substring(1).ToLower());
+                album.MinuteCount += m.AudioDuration.TotalMinutes;
+            } );
+
+            album.Genres = string.Join(", ", genres.Distinct().ToList());
+            album.TrackCount = tracks.Count;
+
+            return album;
+        }
+
     }
 }
