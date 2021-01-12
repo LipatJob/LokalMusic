@@ -11,6 +11,15 @@
         thead tr td {
             font-size: 13px;
         }
+
+        a{
+            color:#B82828;
+        }
+
+        a:hover{
+            text-decoration: none;
+            color:#a20a0a;
+        }
     </style>
 
     <div class="container">
@@ -18,7 +27,7 @@
 
         <div class="pt-4 pb-4 pl-3 pr-3" style="background-color: #F4F4F4;">
             <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
-                <table class="table table-hover">
+                <table class="table table-striped">
                     <thead>
                         <tr class="text-center font-weight-bold">
                             <td></td>
@@ -33,13 +42,18 @@
                     </thead>
                 
                     <tbody>
+
                         <asp:Repeater ID="trackContainer" runat="server">
                             <ItemTemplate>
                                 <tr class="text-center">
                                     <td class="float-right">
                                         <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto"/>
                                     </td>   
-                                    <td class="emphasize"><%#Eval("TrackName") %></td>
+                                    <td class="emphasize">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank">
+                                            <%#Eval("TrackName") %>
+                                        </a>
+                                    </td>
                                     <td><%#Eval("AlbumName") %></td>
                                     <td><%#Eval("ArtistName") %></td>
                                     <td><%#Eval("Genre") %></td>
@@ -51,8 +65,10 @@
                                         </a>
                                     </td>
                                 </tr>
+                                </a>
                             </ItemTemplate>
                         </asp:Repeater>
+
                     </tbody>
                 </table>
             </div>
