@@ -68,7 +68,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
                     values.Rows[0]["AlbumCover"].ToString(),
 
-                    values.Rows[0]["Genre"].ToString()
+                    values.Rows[0]["Genre"].ToString().Substring(0, 1) + values.Rows[0]["Genre"].ToString().Substring(1).ToLower()
                     );
             }
 
@@ -210,7 +210,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                         Convert.ToDateTime(values.Rows[i]["AlbumReleaseDate"].ToString()),
 
                         values.Rows[i]["AlbumCover"].ToString(),
-                        values.Rows[i]["Genre"].ToString()
+                        values.Rows[i]["Genre"].ToString().Substring(0,1) + values.Rows[i]["Genre"].ToString().Substring(1).ToLower()
                         );
 
                     tracks.Add(track);
