@@ -45,6 +45,18 @@ namespace LokalMusic._Code.Models.Store.Details
 
         public string Genre { get; set; }
 
+        public string TrackAlbumUrl { 
+            get {
+                return $"~/Store/" + this.ArtistId + "/" + this.AlbumId;
+            } 
+        }
 
+        public string TrackArtistUrl
+        {
+            get
+            {
+                return $"~/Store/" + this.ArtistId;
+            }
+        }
     }
 }

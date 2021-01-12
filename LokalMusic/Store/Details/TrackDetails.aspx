@@ -108,14 +108,14 @@
                         <div class="row ml-2">
                             <p id="album-name">
                                 <span class="sub">album:</span> 
-                                <a href="" class="redirect-link"><%#Eval("AlbumName") %></a> <%--GetURL--%>
+                                <a href=<%#Eval("TrackAlbumUrl") %> class="redirect-link" target="_blank" runat="server"><%#Eval("AlbumName") %></a>
                             </p>
                         </div>
                 
                         <div class="row ml-2">
                             <p id="artist-name">
                                 <span class="sub">by</span> 
-                                <a href="" class="redirect-link"><%#Eval("ArtistName") %></a><%--GetURL--%>
+                                <a href=<%#Eval("TrackArtistUrl") %> class="redirect-link" target="_blank" runat="server"><%#Eval("ArtistName") %></a>
                             </p>
                         </div>
 
