@@ -108,7 +108,7 @@
                         <div class="row ml-2">
                             <p id="album-name">
                                 <span class="sub">album:</span> 
-                                <a href=<%#Eval("TrackAlbumUrl") %> class="redirect-link" target="_blank" runat="server"><%#Eval("AlbumName") %></a>
+                                <a href=<%#Eval("TrackAlbumUrl") %> class="redirect-link" runat="server"><%#Eval("AlbumName") %></a>
                             </p>
                         </div>
                 
