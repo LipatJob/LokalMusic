@@ -297,6 +297,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Fan\Collection.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Finance\Receipts.aspx" />
     <Content Include="Finance\Reports.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Publish\Artist.aspx" />
@@ -499,6 +500,13 @@
     <Compile Include="Fan\Collection.aspx.designer.cs">
       <DependentUpon>Collection.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Finance\Receipts.aspx.cs">
+      <DependentUpon>Receipts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\Receipts.aspx.designer.cs">
+      <DependentUpon>Receipts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Finance\Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -626,11 +634,13 @@
     <Compile Include="_Code\Models\Admin\ProductItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
-    <Compile Include="_Code\Models\Publish\SalesItem.cs" />
-    <Compile Include="_Code\Models\Publish\SalesModel.cs" />
-    <Compile Include="_Code\Models\Publish\SalesProduct.cs" />
+    <Compile Include="_Code\Models\Finance\ReceiptListItem.cs" />
+    <Compile Include="_Code\Models\Finance\ReceiptModel.cs" />
+    <Compile Include="_Code\Models\Finance\ReceiptProductItem.cs" />
     <Compile Include="_Code\Models\Store\AlbumSummary.cs" />
     <Compile Include="_Code\Models\Store\ArtistSummary.cs" />
+    <Compile Include="_Code\Models\Store\Details\Album.cs" />
+    <Compile Include="_Code\Models\Store\Details\Artist.cs" />
     <Compile Include="_Code\Models\Store\Details\Track.cs" />
     <Compile Include="_Code\Models\Store\TrackSummary.cs" />
     <Compile Include="_Code\Presenters\Account\LoginPresenter.cs" />
@@ -640,7 +650,7 @@
     <Compile Include="_Code\Presenters\Admin\ProductsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
-    <Compile Include="_Code\Presenters\Publish\SalesPresenter.cs" />
+    <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
     <Compile Include="_Code\Presenters\Store\AlbumsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\ArtistsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\Details\AlbumDetailsPresenter.cs" />
@@ -655,8 +665,9 @@
     <Compile Include="_Code\Repositories\Admin\ProductsRepository.cs" />
     <Compile Include="_Code\Repositories\Admin\UsersRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
+    <Compile Include="_Code\Repositories\Finance\ReceiptsRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
-    <Compile Include="_Code\Repositories\Publish\SalesRepository.cs" />
+    <Compile Include="_Code\Repositories\Store\ProductDetails\ProductDetailsRepository.cs" />
     <Compile Include="_Code\Repositories\Store\StoreRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
     <Compile Include="Account\Login.aspx.cs">
@@ -712,7 +723,7 @@
     <Folder Include="About\" />
     <Folder Include="Cart\" />
     <Folder Include="Pages\" />
-    <Folder Include="_Code\Repositories\Store\ProductDetails\" />
+    <Folder Include="Publish\" />
     <Folder Include="_Code\Views\Admin\" />
     <Folder Include="_Code\Views\Fan\" />
     <Folder Include="_Code\Views\Store\Details\" />

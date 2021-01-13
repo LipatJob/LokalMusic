@@ -20,6 +20,8 @@ namespace LokalMusic
                 "~/Fan/Collection.aspx"
             );
 
+            // Products Page
+
             routes.MapPageRoute(
                 "TrackPage",
                 "Store/Tracks/{SortBy}/{OrderBy}",
@@ -44,11 +46,26 @@ namespace LokalMusic
                 new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
                 );
 
-            //routes.MapPageRoute(
-            //    "TrackDetails",
-            //    "Store/{ArtistName}/{AlbumId}/{TrackName}",
-            //    "~/Store/TracksPage.aspx"
-            //);
+            // End Products Page
+
+            // Product Details
+
+            routes.MapPageRoute(
+                "TrackDetails",
+                "Store/{ArtistId}/{AlbumId}/{TrackID}",
+                "~/Store/Details/TrackDetails.aspx");
+
+            routes.MapPageRoute(
+                "AlbumDetails",
+                "Store/{ArtistId}/{AlbumId}",
+                "~/Store/Details/AlbumDetails.aspx");
+
+            routes.MapPageRoute(
+                "ArtistDetails",
+                "Store/{ArtistId}",
+                "~/Store/Details/ArtistDetails.aspx");
+
+            // End Product Details
 
         }
 
