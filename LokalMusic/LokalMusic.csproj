@@ -637,6 +637,9 @@
     <Compile Include="_Code\Models\Finance\ReceiptListItem.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptModel.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptProductItem.cs" />
+    <Compile Include="_Code\Models\Publish\SalesItem.cs" />
+    <Compile Include="_Code\Models\Publish\SalesModel.cs" />
+    <Compile Include="_Code\Models\Publish\SalesProduct.cs" />
     <Compile Include="_Code\Models\Store\AlbumSummary.cs" />
     <Compile Include="_Code\Models\Store\ArtistSummary.cs" />
     <Compile Include="_Code\Models\Store\Details\Album.cs" />
@@ -651,6 +654,7 @@
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
     <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
+    <Compile Include="_Code\Presenters\Publish\SalesPresenter.cs" />
     <Compile Include="_Code\Presenters\Store\AlbumsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\ArtistsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\Details\AlbumDetailsPresenter.cs" />
@@ -667,6 +671,7 @@
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReceiptsRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
+    <Compile Include="_Code\Repositories\Publish\SalesRepository.cs" />
     <Compile Include="_Code\Repositories\Store\ProductDetails\ProductDetailsRepository.cs" />
     <Compile Include="_Code\Repositories\Store\StoreRepository.cs" />
     <Compile Include="_Code\Views\Account\ILoginViewModel.cs" />
@@ -723,7 +728,6 @@
     <Folder Include="About\" />
     <Folder Include="Cart\" />
     <Folder Include="Pages\" />
-    <Folder Include="Publish\" />
     <Folder Include="_Code\Views\Admin\" />
     <Folder Include="_Code\Views\Fan\" />
     <Folder Include="_Code\Views\Store\Details\" />
