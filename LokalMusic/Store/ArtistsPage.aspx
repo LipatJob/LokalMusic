@@ -47,7 +47,7 @@
 
                             <div class="row w-100">
                                 <div class="col-xl-3">
-                                    <a href="#">
+                                    <a href=<%#Eval("DetailsUrl") %> runat="server">
                                         <img src=<%#Eval("ArtistProfileImage")%> alt="artist_cover" class="d-block mx-auto mb-xl-0 mb-sm-2" width="200" height="200" runat="server"/>
                                     </a>
                                 </div>
@@ -61,7 +61,7 @@
                                         <p style="font-size:13px; color: #8F8F8F; font-weight:400;"><%#Eval("AlbumCount")%> album(s), <%#Eval("TrackTotalCount") %> track(s)</p>
                                         <p style="font-size:13px; color: #8F8F8F; margin-top: -15px; font-weight:500;">joined <%#Eval("DateJoined", "{0:MMMM dd, yyyy}") %></p>
                                         <p style="font-size:13px; color: #CF2A2A; margin-top: -15px; font-weight:500;">
-                                            <a href="" class="creatorProfileLink" style="color: #CF2A2A;">https://Lokal/Artists/<%#Eval("ArtistName") %></a>
+                                            <a href=<%#Eval("DetailsUrl") %> runat="server" class="creatorProfileLink" style="color: #CF2A2A;">https://lokal.azurewebsites.net/Store/<%#Eval("ArtistName") %></a>
                                         </p>                                        
                                         <p style="font-size:13px; color: #C4C4C4; margin-top: -15px; font-weight:400;">Genre(s): <%#Eval("Genre")%></p>
                                     </div>                            
@@ -71,7 +71,7 @@
                                     <h5 class="">Top Tracks</h5>
 
                                     <div class="">
-                                        <a href="">
+                                        <a href=<%#Eval("TrackTop1.DetailsUrl") %> runat="server">
                                             <div class="row mt-4">
                                                 <div class="col-9 text-right my-auto">
                                                     <p class="my-auto track-title"><%#Eval("TrackTop1.TrackName") %></p>
@@ -86,7 +86,7 @@
                                     </div>
 
                                     <div class="<%# Eval("TrackTop2") == null ? "invisible" : "" %>">
-                                        <a href="">
+                                        <a href=<%#Eval("TrackTop2.DetailsUrl") %> runat="server">
                                             <div class="row mt-4">
                                                 <div class="col-9 text-right my-auto">
                                                     <p class="my-auto track-title"><%#Eval("TrackTop2.TrackName")%></p>

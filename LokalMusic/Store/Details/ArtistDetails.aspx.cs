@@ -1,4 +1,7 @@
-﻿using LokalMusic._Code.Presenters.Store.Details;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Store.Details;
+using LokalMusic._Code.Presenters.Store.Details;
+using LokalMusic._Code.Repositories.Store.ProductDetails;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +15,51 @@ namespace LokalMusic.Store.Details
     {
 
         protected ArtistDetailsPresenter presenter;
+        protected Artist artistDetails;
+        protected List<Album> albums;
 
         public ArtistDetails()
         {
-            this.presenter = new ArtistDetailsPresenter();
+            this.presenter = new ArtistDetailsPresenter(new ProductDetailsRepository());
+
+            this.HandleUrlRequest();
+            (this.artistDetails, this.albums) = this.presenter.DetermineAlbumSummaries(artistDetails, albums);
+        }
+
+        private void HandleUrlRequest()
+        {
+            string urlParam = "";
+            int parsedParam = 0;
+
+            urlParam = (string)NavigationHelper.GetRouteValue("ArtistId");
+
+            if (urlParam == "" || urlParam == null) { this.InvalidRequest(); }
+
+            int.TryParse(urlParam, out parsedParam);   
+
+            // call presenter to update model
+            this.artistDetails = this.presenter.GetArtistDetails(parsedParam);
+
+            if (this.artistDetails == null)
+                this.InvalidRequest();
+            else
+                this.albums = this.presenter.GetAlbumsOfArtist(parsedParam);
+        }
+
+        private void InvalidRequest()
+        {
+            NavigationHelper.Redirect("~/Store/ArtistsPage.aspx");
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            List<Artist> temp = new List<Artist>();
+            temp.Add(this.artistDetails);
+            artistContainer.DataSource = temp;
+            artistContainer.DataBind();
 
+            albumsContainer.DataSource = this.albums;
+            albumsContainer.DataBind();
         }
     }
 }

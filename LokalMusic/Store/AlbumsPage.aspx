@@ -35,13 +35,13 @@
 
                             <div class="row w-100">
                                 <div class="col-xl-3">
-                                    <a href="#">
+                                    <a href=<%#Eval("DetailsUrl") %> runat="server">
                                         <img src=<%#Eval("AlbumCover")%> alt="album_cover" class="d-block mx-auto mb-xl-0 mb-sm-2" width="200" height="200"/>
                                     </a>
                                 </div>
 
                                 <div class="col-md-6 col-md-6">
-                                    <h4 class="album-title"><%#Eval("AlbumName")%></h4>
+                                    <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink"><h4 class="album-title"><%#Eval("AlbumName")%></h4></a>
                                     <p style="font-size:14px; color: #5E5E5E; margin-top: -10px; font-weight:400;"><%#Eval("ArtistName")%></p>
                                     
                                     <div class="pt-xl-3"></div>

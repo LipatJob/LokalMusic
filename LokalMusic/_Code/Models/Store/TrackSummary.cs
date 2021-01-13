@@ -39,5 +39,11 @@ namespace LokalMusic._Code.Models.Store
 
         public string AlbumCover { get; set; }
 
+        public string DetailsUrl { 
+            get { 
+                return $"~/Store/" + this.ArtistId + "/" + this.AlbumId + "/" + this.TrackId;
+            } 
+        }
+
     }
 }

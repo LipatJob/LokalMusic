@@ -69,62 +69,107 @@
 
         <div class="row">
 
-            <%--Image--%>
-            <div class="col-md-3">
+            <asp:Repeater ID="albumContainer" runat="server">
+                <ItemTemplate>
 
-                <div class="w-100" id="album-img">
-                    <img src="../../Content/Images/default_cover.jpg" runat="server" class="mx-auto d-block shadow rounded border w-100"/>
-                </div>
+                    <%--Image--%>
+                    <div class="col-md-3">
 
-                <div class="mt-3"  id="img-bottom">
-                    <div class="row mx-auto d-block">
-                        <p class="float-left">5 tracks, 30 minutes</p>
-                        <p class="float-right">genre(s): Pop</p>
-                    </div>
-                </div>
-            </div>
+                        <div class="w-100" id="album-img">
+                            <img src=<%#Eval("AlbumCover") %> class="mx-auto d-block shadow rounded border w-100"/>
+                        </div>
 
-
-            <%--Description--%>
-            <div class="col-md-9 w-100">
-
-                <div class="row w-100 ml-2">
-                    <h3 id="album-name" class="">Lorem ipsum</h3>
-                    <p id="price" class="ml-auto">₱350.00</p> 
-                </div>
-
-                
-                <div class="row ml-2">
-                    <p id="artist-name">
-                        <span class="sub">by</span> 
-                        <a href="" class="redirect-link">Tim Cook</a><%--GetURL--%>
-                    </p>
-                </div>
-
-                <div class="row ml-2 mt-2" id="album-description">
-                    <p>
-                        Proin mattis in nunc et placerat. Donec sagittis velit accumsan imperdiet ornare. Quisque ut lorem vel diam facilisis rutrum sed in arcu. Donec sit amet aliquam sapien. Nunc sit amet nisi interdum, aliquam turpis eu, rhoncus metus. Integer lacinia tortor id nulla volutpat eleifend. Aliquam erat volutpat. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec varius imperdiet tempus. Phasellus commodo porttitor iaculis. Nunc hendrerit nulla ac porttitor sodales. Nunc vel dui in libero finibus maximus. Phasellus elementum consequat erat eu luctus.
-                    </p>
-                </div>
-
-
-                <div class="row ml-2 mt-sm-3">
-                    <div class="col-sm-6">
-                        <p id="date-released">released January 2, 2021</p>
-                    </div>
-
-                    <div class="col-sm-6 w-100">
-                        <%--GetURL--%>
-                        <div class="text-right">
-                            <a href="" class="btn btn-danger" style="background-color: #B82828; font-size: 12px; font-weight: 600">Add to Cart</a>     
+                        <div class="mt-3"  id="img-bottom">
+                            <div class="row mx-auto d-block">
+                                <p class="float-left"><%#Eval("TrackCount") %> tracks, <%#Eval("MinuteCount") %> minutes</p>
+                                <p class="float-right">genre(s): <%#Eval("Genres") %></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+
+                    <%--Description--%>
+                    <div class="col-md-9 w-100">
+
+                        <div class="row w-100 ml-2">
+                            <h3 id="album-name" class=""><%#Eval("AlbumName") %></h3>
+                            <p id="price" class="ml-auto">₱<%#Eval("Price") %></p> 
+                        </div>
+
+                
+                        <div class="row ml-2">
+                            <p id="artist-name">
+                                <span class="sub">by</span> 
+                                <a href=<%#Eval("AlbumArtistUrl") %> runat="server" class="redirect-link"><%#Eval("ArtistName") %></a><%--GetURL--%>
+                            </p>
+                        </div>
+
+                        <div class="row ml-2 mt-2" id="album-description">
+                            <p><%#Eval("Description") %></p>
+                        </div>
+
+
+                        <div class="row ml-2 mt-sm-3">
+                            <div class="col-sm-6">
+                                <p id="date-released">released <%#Eval("ReleaseDate", "{0:MMMM dd, yyyy}") %></p>
+                            </div>
+
+                            <div class="col-sm-6 w-100">
+                                <%--GetURL--%>
+                                <div class="text-right">
+                                    <a href="" class="btn btn-danger" style="background-color: #B82828; font-size: 12px; font-weight: 600">Add to Cart</a>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </ItemTemplate>
+            </asp:Repeater>
 
         </div>
 
         <%--list of tracks--%>
+
+        <h5 class="mt-4" style="color:#7A7A7A; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Album's Tracks</h5>
+
+        <div class="p-3 mt-4" style="background-color: #F4F4F4;">
+            <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
+                <table class="table table-striped">
+
+                    <thead>
+                        <tr class="text-center font-weight-bold">
+                            <td >Track Name</td>
+                            <td>Genre</td>
+                            <td>Price</td>
+                            <td>Add to Cart</td>
+                        </tr>
+                    </thead>
+                
+                    <tbody>
+                        <asp:Repeater ID="tracksContainer" runat="server">
+                            <ItemTemplate>
+
+                                <tr class="text-center">
+                                    <td class="emphasize">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
+                                            <%#Eval("TrackName") %>
+                                        </a>
+                                    </td>
+                                    <td><%#Eval("Genre") %></td>
+                                    <td class="emphasize">₱<%#Eval("Price") %></td>
+                                    <td>
+                                        <a href="#"> <%-- GetUrl --%>
+                                            <img src="../../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     </div>
 
