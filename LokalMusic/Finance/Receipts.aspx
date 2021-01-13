@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template/FinanceLayout.master" AutoEventWireup="true" CodeBehind="Receipts.aspx.cs" Inherits="LokalMusic.Finance.Receipts" %>
+﻿<%@ Page Title="Receipts" Language="C#" MasterPageFile="~/Template/FinanceLayout.master" AutoEventWireup="true" CodeBehind="Receipts.aspx.cs" Inherits="LokalMusic.Finance.Receipts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div>

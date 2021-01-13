@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template/FinanceLayout.master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="LokalMusic.Finance.Reports" %>
+﻿<%@ Page Title="Finance Report" Language="C#" MasterPageFile="~/Template/FinanceLayout.master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="LokalMusic.Finance.Reports" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -70,18 +70,18 @@
     </style>
     <div class="items-container">
         <div class="items-header">
-            <h2>Reports</h2>
+            <h2>Finance Report</h2>
             <div class="date-selection-container">
-                <div>
+                <div class="mx-2">
                     <label for="startDate">Start Date </label>
-                    <input type="date" name="startDate" id="startDate"/>
+                    <input type="date" name="startDate" id="startDate" class="form-control"/>
                 </div>
 
-                <div>
+                <div class="mx-2">
                     <label for="endDate">End Date </label>
-                    <input type="date" name="endDate" id="endDate" />
+                    <input type="date" name="endDate" id="endDate" class="form-control"/>
                 </div>
-                <div>
+                <div class="mx-2">
                     <label for="frequency">Frequency</label>
                     <select class="date-range-selector form-control" name="frequency" id="frequency">
                         <option class="dropdown-item" value="WEEKLY">Weekly</option>
