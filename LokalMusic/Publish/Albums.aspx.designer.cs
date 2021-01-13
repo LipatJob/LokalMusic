@@ -7,56 +7,65 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LokalMusic.Template
+namespace LokalMusic.Publish
 {
 
 
-    public partial class StoreLayout
+    public partial class Albums
     {
 
         /// <summary>
-        /// SearchTxt control.
+        /// ArtistName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchTxt;
+        protected global::System.Web.UI.WebControls.Label ArtistName;
 
         /// <summary>
-        /// SearchBtn control.
+        /// addAlbumBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchBtn;
+        protected global::System.Web.UI.WebControls.Button addAlbumBtn;
 
         /// <summary>
-        /// navbarDropdown control.
+        /// albumCover control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navbarDropdown;
+        protected global::System.Web.UI.WebControls.Image albumCover;
 
         /// <summary>
-        /// CollectionLink control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor CollectionLink;
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// MainContent control.
+        /// Button2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Button Button2;
+
+        /// <summary>
+        /// AlbumItemRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater AlbumItemRepeater;
     }
 }
