@@ -605,6 +605,20 @@
     <Compile Include="Template\LoginLayout.master.designer.cs">
       <DependentUpon>LoginLayout.master</DependentUpon>
     </Compile>
+    <Compile Include="Template\PublishLayout.master.cs">
+      <DependentUpon>PublishLayout.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template\PublishLayout.master.designer.cs">
+      <DependentUpon>PublishLayout.master</DependentUpon>
+    </Compile>
+    <Compile Include="Template\StoreLayout.master.cs">
+      <DependentUpon>StoreLayout.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template\StoreLayout.master.designer.cs">
+      <DependentUpon>StoreLayout.master</DependentUpon>
+    </Compile>
     <Compile Include="Template\StoreLayoutWithSideNav.master.cs">
       <DependentUpon>StoreLayoutWithSideNav.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -630,6 +644,8 @@
     <Compile Include="_Code\Models\Finance\ReceiptListItem.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptModel.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptProductItem.cs" />
+    <Compile Include="_Code\Models\Publish\AlbumsItem.cs" />
+    <Compile Include="_Code\Models\Publish\AlbumsModel.cs" />
     <Compile Include="_Code\Models\Publish\SalesItem.cs" />
     <Compile Include="_Code\Models\Publish\SalesModel.cs" />
     <Compile Include="_Code\Models\Publish\SalesProduct.cs" />
@@ -645,6 +661,7 @@
     <Compile Include="_Code\Presenters\Account\SettingsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\ProductsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
+    <Compile Include="_Code\Presenters\Publish\AlbumsPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
     <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\SalesPresenter.cs" />
@@ -664,6 +681,7 @@
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReceiptsRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
+    <Compile Include="_Code\Repositories\Publish\AlbumsRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\SalesRepository.cs" />
     <Compile Include="_Code\Repositories\Store\ProductDetails\ProductDetailsRepository.cs" />
     <Compile Include="_Code\Repositories\Store\StoreRepository.cs" />
@@ -733,6 +751,8 @@
     <Content Include="Template\LoginLayout.master" />
     <Content Include="Template\StoreLayoutWithSideNav.master" />
     <Content Include="Template\FinanceLayout.master" />
+    <Content Include="Template\StoreLayout.master" />
+    <Content Include="Template\PublishLayout.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

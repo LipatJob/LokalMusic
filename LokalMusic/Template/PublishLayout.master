@@ -1,0 +1,21 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="PublishLayout.master.cs" Inherits="LokalMusic.Template.PublishLayout" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <style>
+        .btn-publish{
+            background-color: #525252;
+            color: white;
+        }
+
+        .btn-publish:hover{
+            background-color: #3e3e3e;
+            color: white;
+        }
+    </style>
+
+    <div class="body-content">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+</asp:Content>
