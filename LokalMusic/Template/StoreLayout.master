@@ -16,8 +16,8 @@
         }
 
         .emphasize {
-            color:#AA3A3A; 
-            font-weight: 700; 
+            color:#AA3A3A;
+            font-weight: 700;
             font-size:16px;
         }
 
@@ -82,14 +82,19 @@
                             <a class="dropdown-item" href="~/Admin/Products" runat="server">Admin</a>
                             <div class="dropdown-divider"></div>
                             <%} %>
+                            <% else if (AuthenticationHelper.UserType == AuthenticationHelper.FINANCE_USER_TYPE)%>
+                            <%{%>
+                            <a class="dropdown-item" href="~/Finance/Reports" runat="server">Finance</a>
+                            <div class="dropdown-divider"></div>
+                            <%} %>
                             <a class="dropdown-item" href="~/Account/Signout" runat="server">Sign out</a>
                         </div>
                     </li>
                 </ul>
             </div>
             <%}
-                else
-                {%>
+            else
+            {%>
             <div>
                 <ul class="navbar-nav ml-xl-4">
                     <li class="nav-item active">
