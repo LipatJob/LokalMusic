@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Sales History" Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="Sales.aspx.cs" Inherits="LokalMusic.Publish.Sales" %>
+﻿<%@ Page Title="Sales History" Language="C#" MasterPageFile="~/Template/PublishLayout.master" AutoEventWireup="true" CodeBehind="Sales.aspx.cs" Inherits="LokalMusic.Publish.Sales" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container" style="margin-top:60px">
         <div>
