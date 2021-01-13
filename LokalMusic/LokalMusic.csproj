@@ -299,6 +299,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Finance\Reports.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Publish\Artist.aspx" />
     <Content Include="Publish\Sales.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
@@ -504,6 +505,13 @@
     </Compile>
     <Compile Include="Finance\Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Publish\Artist.aspx.cs">
+      <DependentUpon>Artist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publish\Artist.aspx.designer.cs">
+      <DependentUpon>Artist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Publish\Sales.aspx.cs">
       <DependentUpon>Sales.aspx</DependentUpon>
