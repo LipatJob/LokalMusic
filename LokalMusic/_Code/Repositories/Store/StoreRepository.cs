@@ -61,7 +61,7 @@ namespace LokalMusic._Code.Repositories
                         values.Rows[i]["AlbumName"].ToString(),
                         values.Rows[i]["ArtistName"].ToString(),
 
-                        values.Rows[i]["Genre"].ToString(),
+                        values.Rows[i]["Genre"].ToString().Substring(0, 1) + values.Rows[i]["Genre"].ToString().Substring(1).ToLower(),
 
                         values.Rows[i]["AudioClip"].ToString(),
                         TimeSpan.Parse(values.Rows[i]["AudioClipDuration"].ToString()),
@@ -290,7 +290,7 @@ namespace LokalMusic._Code.Repositories
                         values.Rows[i]["AlbumName"].ToString(),
                         values.Rows[i]["ArtistName"].ToString(),
 
-                        values.Rows[i]["Genre"].ToString(),
+                        values.Rows[0]["Genre"].ToString().Substring(0, 1) + values.Rows[0]["Genre"].ToString().Substring(1).ToLower(),
 
                         values.Rows[i]["AudioClip"].ToString(),
                         TimeSpan.Parse(values.Rows[i]["AudioClipDuration"].ToString()),

@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace LokalMusic._Code.Models.Store
+namespace LokalMusic._Code.Models.Store.Details
 {
-    public class AlbumSummary
+    public class Album
     {
-        public AlbumSummary(int albumId, int artistId, string albumName, decimal price, string producerName, string albumCover, string artistName, DateTime dateReleased)
+        public Album(int albumId, int artistId, string albumName, decimal price, string description, DateTime releaseDate, string albumCover, string artistName)
         {
             AlbumId = albumId;
             ArtistId = artistId;
             AlbumName = albumName;
             Price = price;
-            ProducerName = producerName;
+            Description = description;
+            ReleaseDate = releaseDate;
             AlbumCover = albumCover;
             ArtistName = artistName;
-            DateReleased = dateReleased;
         }
 
         public int AlbumId { get; set; }
@@ -21,19 +24,25 @@ namespace LokalMusic._Code.Models.Store
 
         public string AlbumName { get; set; }
         public Decimal Price { get; set; }
-        public string ProducerName { get; set; }
+        public string Description { get; set; }
+        public DateTime ReleaseDate { get; set; }
+
         public string AlbumCover { get; set; }
 
         public string ArtistName { get; set; }
 
-        public DateTime DateReleased { get; set; }
-
         // processed in presenter
-        public string Genre { get; set; }
-
-        // processed in presenter, not in repository
+        public string Genres { get; set; }
         public int TrackCount { get; set; }
-        public double TrackMinutes { get; set; }
+        public double MinuteCount { get; set; }
+
+        public string AlbumArtistUrl
+        {
+            get
+            {
+                return $"~/Store/" + this.ArtistId;
+            }
+        }
 
         public string DetailsUrl
         {
@@ -42,6 +51,5 @@ namespace LokalMusic._Code.Models.Store
                 return $"~/Store/" + this.ArtistId + "/" + this.AlbumId;
             }
         }
-
     }
 }
