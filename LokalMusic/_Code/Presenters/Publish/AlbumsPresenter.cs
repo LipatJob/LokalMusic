@@ -20,6 +20,18 @@ namespace LokalMusic._Code.Presenters
             this.repository = repository;
         }
 
+        public void PageLoad()
+        {
+            if (AuthenticationHelper.LoggedIn == false)
+            {
+                NavigationHelper.Redirect("~/Account/Login");
+            }
+            else if (AuthenticationHelper.UserType != AuthenticationHelper.ARTIST_USER_TYPE)
+            {
+                NavigationHelper.Redirect("~");
+            }
+        }
+
         public AlbumsModel GetAlbumsModel()
         {
             return new AlbumsModel()
