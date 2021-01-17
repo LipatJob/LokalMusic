@@ -14,8 +14,10 @@ namespace LokalMusic.Publish
     {
         private AlbumsPresenter Presenter;
         public AlbumsModel Model { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Presenter.PageLoad();
             Model = Presenter.GetAlbumsModel();
             ArtistName.Text = Model.ArtistName;
             AlbumItemRepeater.DataSource = Model.AlbumsItems;

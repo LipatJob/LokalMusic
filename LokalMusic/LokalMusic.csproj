@@ -302,6 +302,7 @@
     <Content Include="Global.asax" />
     <Content Include="Publish\Albums.aspx" />
     <Content Include="Publish\Sales.aspx" />
+    <Content Include="Publish\Album\Tracks.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -528,6 +529,13 @@
     <Compile Include="Publish\Sales.aspx.designer.cs">
       <DependentUpon>Sales.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Publish\Album\Tracks.aspx.cs">
+      <DependentUpon>Tracks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publish\Album\Tracks.aspx.designer.cs">
+      <DependentUpon>Tracks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Store\AlbumsPage.aspx.cs">
       <DependentUpon>AlbumsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -646,6 +654,8 @@
     <Compile Include="_Code\Models\Finance\ReceiptProductItem.cs" />
     <Compile Include="_Code\Models\Publish\AlbumsItem.cs" />
     <Compile Include="_Code\Models\Publish\AlbumsModel.cs" />
+    <Compile Include="_Code\Models\Publish\Albums\TracksItem.cs" />
+    <Compile Include="_Code\Models\Publish\Albums\TracksModel.cs" />
     <Compile Include="_Code\Models\Publish\SalesItem.cs" />
     <Compile Include="_Code\Models\Publish\SalesModel.cs" />
     <Compile Include="_Code\Models\Publish\SalesProduct.cs" />
@@ -664,6 +674,7 @@
     <Compile Include="_Code\Presenters\Publish\AlbumsPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
     <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
+    <Compile Include="_Code\Presenters\Publish\Albums\TracksPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\SalesPresenter.cs" />
     <Compile Include="_Code\Presenters\Store\AlbumsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\ArtistsPagePresenter.cs" />
@@ -682,6 +693,7 @@
     <Compile Include="_Code\Repositories\Finance\ReceiptsRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\AlbumsRepository.cs" />
+    <Compile Include="_Code\Repositories\Publish\Albums\TracksRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\SalesRepository.cs" />
     <Compile Include="_Code\Repositories\Store\ProductDetails\ProductDetailsRepository.cs" />
     <Compile Include="_Code\Repositories\Store\StoreRepository.cs" />
