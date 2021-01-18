@@ -22,7 +22,7 @@
                             <td style="vertical-align: middle">Genre: <%#Eval("Genre") %><br />Duration: <%#Eval("Duration") %></td>
                             <td style="vertical-align: middle">Sales: <%#Eval("SalesCount") %><br />Price: <%#Eval("Price","{0:N}") %></td>
                             <td style="vertical-align: middle">
-                                <asp:Button ID="EditBtn" runat="server" Text="Edit" CssClass="btn btn-publish" />
+                                <asp:Button ID="EditBtn" runat="server" Text="Edit" CssClass="btn btn-publish" PostBackUrl='<%#Eval("EditURL") %>' />
                             </td>
                         </tr>
                     </ItemTemplate>

@@ -14,11 +14,20 @@ namespace LokalMusic._Code.Repositories.Publish
         {
             string query = @"
 SELECT
+Product.ProductId,
 FileInfo.FileName AS AlbumCoverLink,
 Product.ProductName AS AlbumName,
 Product.DateAdded,
 Album.ProducerName AS Producer,
-Product.Price
+Product.Price,
+(SELECT 
+COUNT(TrackId) AS TrackCount
+FROM Track
+WHERE Track.AlbumId = Album.AlbumId) AS TrackCount,
+(SELECT
+COUNT(TransactionId) 
+FROM TransactionProduct
+WHERE TransactionProduct.ProductId = Album.AlbumId) AS SalesCount
 FROM Product
 RIGHT JOIN Album ON
 Product.ProductId = Album.AlbumId
@@ -33,15 +42,14 @@ WHERE Album.UserId = @ArtistId
             foreach (DataRow row in result.Rows)
             {
                 Items.Add(new AlbumsItem() {
+                    AlbumId = (int)row["ProductId"],
                     AlbumCoverLink = (string)row["AlbumCoverLink"],
                     AlbumName = (string)row["AlbumName"],
                     DateAdded = (DateTime)row["DateAdded"],
-                    TrackCount = 9,
                     Producer = (string)row["Producer"],
-                    SalesCount = 12,
                     Price = (decimal)row["Price"],
-                    TracksURL = "~",
-                    EditURL = "~"
+                    TrackCount = (int)row["TrackCount"],
+                    SalesCount = (int)row["SalesCount"]
                 });
             }
 
