@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Models.Publish.Albums;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Publish.Albums;
 using LokalMusic._Code.Presenters.Publish.Albums;
 using LokalMusic._Code.Repositories.Publish.Albums;
 using System;
@@ -24,6 +25,9 @@ namespace LokalMusic.Publish
             AlbumName.Text = Model.AlbumName;
             TrackItemRepeater.DataSource = Model.TracksItems;
             TrackItemRepeater.DataBind();
+
+            int AlbumId = int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
+            addAlbumBtn.PostBackUrl = "~/Publish/Album/" + AlbumId + "/Track/Add";
         }
 
         public Tracks()

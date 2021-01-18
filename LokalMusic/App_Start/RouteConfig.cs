@@ -67,6 +67,15 @@ namespace LokalMusic
 
             // End Product Details
 
+            // Publish/Tracks Page
+
+            routes.MapPageRoute(
+                "Tracks",
+                "Publish/Album/{AlbumId}",
+                "~/Publish/Album/Tracks.aspx"
+                );
+
+            // End Publish/Tracks Page
         }
 
 
