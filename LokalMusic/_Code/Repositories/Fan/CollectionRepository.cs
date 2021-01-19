@@ -32,30 +32,25 @@ namespace LokalMusic._Code.Repositories.Fan
         {
             List<CollectionItem> items = new List<CollectionItem>();
 
-            string query =
-                "SELECT " +
-                    "[FileInfo].FileName AS FileName, " +
-                    "[Product].ProductName AS ProductName, " +
-                    "[ArtistInfo].ArtistName AS ArtistName, " +
-                    "[ProductType].TypeName AS ProductType, " +
-                    "[ArtistInfo].UserId AS ArtistId, " +
-                    "[Product].ProductId AS TrackId, " +
-                    "[Album].AlbumId AS AlbumId " +
-                "FROM [Transaction] " +
-                    "INNER JOIN [TransactionProduct] ON " +
-                        "[Transaction].TransactionId = [TransactionProduct].TransactionId " +
-                    "INNER JOIN [Product] ON " +
-                        "[TransactionProduct].ProductId = [Product].ProductId " +
-                    "INNER JOIN [ProductType] ON " +
-                        "[ProductType].ProductTypeId = [Product].ProductTypeId " +
-                    "INNER JOIN [Album] ON " +
-                        "[Album].AlbumId = [Product].ProductId " +
-                    "INNER JOIN [ArtistInfo] ON " +
-                        "[ArtistInfo].UserId = [Album].UserId " +
-                    "INNER JOIN [FileInfo] ON " +
-                        "[FileInfo].FileId = [Album].AlbumCoverID " +
-                "WHERE " +
-                    "[Transaction].UserId = @UserId";
+            string query = @"
+SELECT
+	[FileInfo].FileName AS [FileName],
+	[Product].ProductName AS ProductName,
+	[ArtistInfo].ArtistName AS ArtistName,
+	[ProductType].TypeName AS ProductType,
+	[ArtistInfo].UserId AS ArtistId,
+	[Product].ProductId AS TrackId,
+	[Album].AlbumId AS AlbumId
+FROM [Transaction]
+	INNER JOIN [TransactionProduct] ON [Transaction].TransactionId = [TransactionProduct].TransactionId
+	INNER JOIN [Product] ON [TransactionProduct].ProductId = [Product].ProductId
+	INNER JOIN [ProductType] ON [ProductType].ProductTypeId = [Product].ProductTypeId
+	INNER JOIN [Album] ON [Album].AlbumId = [Product].ProductId
+	INNER JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
+	INNER JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
+WHERE
+	[Transaction].UserId = @UserId
+";
             var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
             foreach (DataRow row in result.Rows)
             {
