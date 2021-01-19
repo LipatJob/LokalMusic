@@ -24,10 +24,10 @@ namespace LokalMusic._Code.Repositories.Account.Register
             int userTypeId = GetUserTypeId();
             int userStatusId = GetUserStatusId();
 
-            string query =
-                "INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered) " +
-                "VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered) " +
-                "SELECT CONVERT(int, SCOPE_IDENTITY())";
+            string query = @"
+INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered)
+VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered)
+SELECT CONVERT(int, SCOPE_IDENTITY())";
 
             userId = (int) DbHelper.ExecuteScalar(
                 query,
@@ -41,9 +41,7 @@ namespace LokalMusic._Code.Repositories.Account.Register
 
         private void CreateArtistProfile()
         {
-            string query =
-                "INSERT INTO ArtistInfo(UserId, ArtistName) " +
-                "VALUES (@UserId, @ArtistName)";
+            string query =@"INSERT INTO ArtistInfo(UserId, ArtistName) VALUES (@UserId, @ArtistName)";
             DbHelper.ExecuteScalar(
                 query,
                 ("UserId", userId),
@@ -52,25 +50,25 @@ namespace LokalMusic._Code.Repositories.Account.Register
 
         private int GetUserTypeId()
         {
-            string query = $"SELECT UserTypeId from UserType WHERE TypeName = @ArtistTypeName;";
+            string query = "SELECT UserTypeId from UserType WHERE TypeName = @ArtistTypeName;";
             return (int)DbHelper.ExecuteScalar(query, ("ArtistTypeName", ACCOUNT_TYPE_NAME));
         }
 
         private int GetUserStatusId()
         {
-            string query = $"SELECT UserStatusId from UserStatus WHERE UserStatusName = @ActiveTypeName;";
+            string query = "SELECT UserStatusId from UserStatus WHERE UserStatusName = @ActiveTypeName;";
             return (int)DbHelper.ExecuteScalar(query, ("ActiveTypeName", ACTIVE_TYPE_NAME));
         }
 
         public bool IsUsernameUnique(string username)
         {
-            string query = $"SELECT Username from UserInfo WHERE Username = @username;";
+            string query = "SELECT Username from UserInfo WHERE Username = @username;";
             return DbHelper.ExecuteScalar(query, ("username", username)) == null;
         }
 
         public bool IsEmailUnique(string email)
         {
-            string query = $"SELECT Email from UserInfo WHERE Email = @email;";
+            string query = "SELECT Email from UserInfo WHERE Email = @email;";
             return DbHelper.ExecuteScalar(query, ("email", email)) == null;
         }
     }
