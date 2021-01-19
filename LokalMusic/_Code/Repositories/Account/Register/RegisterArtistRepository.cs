@@ -27,9 +27,9 @@ namespace LokalMusic._Code.Repositories.Account.Register
             string query =
                 "INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered) " +
                 "VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered) " +
-                "SELECT SCOPE_IDENTITY()";
+                "SELECT CONVERT(int, SCOPE_IDENTITY())";
 
-            userId = (int)DbHelper.ExecuteScalar(
+            userId = (int) DbHelper.ExecuteScalar(
                 query,
                 ("userTypeId", userTypeId),
                 ("userStatusId", userStatusId),
@@ -65,13 +65,13 @@ namespace LokalMusic._Code.Repositories.Account.Register
         public bool IsUsernameUnique(string username)
         {
             string query = $"SELECT Username from UserInfo WHERE Username = @username;";
-            return DbHelper.ExecuteDataTableQuery(query, ("username", username)) != null;
+            return DbHelper.ExecuteScalar(query, ("username", username)) == null;
         }
 
         public bool IsEmailUnique(string email)
         {
             string query = $"SELECT Email from UserInfo WHERE Email = @email;";
-            return DbHelper.ExecuteDataTableQuery(query, ("email", email)) != null;
+            return DbHelper.ExecuteScalar(query, ("email", email)) == null;
         }
     }
 }
