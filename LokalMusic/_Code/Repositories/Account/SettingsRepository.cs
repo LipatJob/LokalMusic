@@ -36,7 +36,7 @@ namespace LokalMusic._Code.Repositories.Account
         public bool CheckPassword(int userId, string password)
         {
             string query = "SELECT UserId FROM UserInfo WHERE UserId = @UserId AND Password = @Password";
-            return DbHelper.ExecuteDataTableQuery(query, ("UserId", userId), ("Password", password)) != null;
+            return DbHelper.ExecuteScalar(query, ("UserId", userId), ("Password", password)) != null;
         }
 
         public IList<PaymentHistoryItem> GetPaymentHistory(int? userId)
