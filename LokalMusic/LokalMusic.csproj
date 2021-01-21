@@ -439,6 +439,7 @@
     <Content Include="Account\Login.aspx">
       <BrowseToURL>~/Account/Login.aspx</BrowseToURL>
     </Content>
+    <Content Include="Store\AddToCartService.asmx" />
     <Content Include="Store\AlbumsPage.aspx" />
     <Content Include="Store\ArtistsPage.aspx" />
     <Content Include="Store\Details\AlbumDetails.aspx" />
@@ -543,6 +544,10 @@
     </Compile>
     <Compile Include="Publish\Album\Tracks.aspx.designer.cs">
       <DependentUpon>Tracks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Store\AddToCartService.asmx.cs">
+      <DependentUpon>AddToCartService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Store\AlbumsPage.aspx.cs">
       <DependentUpon>AlbumsPage.aspx</DependentUpon>

@@ -25,8 +25,8 @@ namespace LokalMusic._Code.Presenters.Cart
         public static int AddTrackToCart(int trackId, int albumId, int artistId)
         {
 
-            if (!AuthenticationHelper.LoggedIn)
-                return ADD_TO_CART_LOGIN;
+            //if (!AuthenticationHelper.LoggedIn)
+            //    return ADD_TO_CART_LOGIN;
 
             return 0;
         }
@@ -43,17 +43,17 @@ namespace LokalMusic._Code.Presenters.Cart
         public static string GetAddToCartMessage(int category)
         {
             if (category == ADD_TO_CART_SUCCESS)
-                return "";
+                return "Added to cart.";
             else if (category == ADD_TO_CART_BOUGHT)
-                return "";
+                return "You have already bought this product.";
             else if (category == ADD_TO_CART_EXISTING)
-                return "";
+                return "Product is already in your cart.";
             else if (category == ADD_TO_CART_ERROR)
-                return "";
+                return "Unable to add to cart. Try again later.";
             else if (category == ADD_TO_CART_LOGIN)
-                return "";
+                return "Please login first.";
             else
-                return "";
+                return "Something went wrong. Try again.";
         }
 
         // End Add to Cart static function
