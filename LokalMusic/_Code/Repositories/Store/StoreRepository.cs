@@ -74,7 +74,7 @@ namespace LokalMusic._Code.Repositories
                 }
             }
 
-            return tracks.Count() > 0 ? tracks : null;
+            return tracks;
         }
 
         public List<TrackSummary> GetSummarizedTracksByAlbumId(int albumId)
@@ -135,7 +135,7 @@ namespace LokalMusic._Code.Repositories
                 }
             }
 
-            return tracks.Count() > 0 ? tracks : null;
+            return tracks;
         }
 
         public List<AlbumSummary> GetSummarizedAlbum(string sortBy = "Price", string orderBy = "ASC")
@@ -181,7 +181,7 @@ namespace LokalMusic._Code.Repositories
                 }
             }
 
-            return albums.Count() > 0 ? albums : null;
+            return albums;
         }
 
         public List<ArtistSummary> GetSummarizedArtist(string sortBy = "DateJoined", string orderBy = "ASC")
@@ -223,7 +223,7 @@ namespace LokalMusic._Code.Repositories
                 }
             }
 
-            return artists.Count() > 0 ? artists : null;
+            return artists;
         }
 
 
@@ -303,7 +303,7 @@ namespace LokalMusic._Code.Repositories
                 }
             }
 
-            return tracks.Count() > 0 ? tracks : null;
+            return tracks;
         }
 
     }
