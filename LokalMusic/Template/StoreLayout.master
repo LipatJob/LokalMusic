@@ -34,6 +34,11 @@
             text-decoration: none;
             color: #ff7171;
         }
+
+        button {
+            border: none;
+            background: none;
+        }
     </style>
 
     <%--Nav--%>
@@ -127,5 +132,26 @@
     <div class="body-content">
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
+
+    <%--AJAX Add to Cart--%>
+    <script>
+        function AddTrackToCart(trackId) {
+            $.ajax({
+                type: "POST",
+                url: "/Store/AddToCartService.asmx/AddTrackToCart",
+                contentType: "application/json; charset=utf-8",
+                data: "{ 'trackId' : '" + trackId + "'}",
+                //data: JSON.stringify(trackId),
+                dataType: "json",
+                success: function (message) {
+                    alert("Success " + message.d);
+                },
+                error: function () {
+                    alert("An Error has occured");
+                }
+            });
+            return false;
+        }
+    </script>
 
 </asp:Content>
