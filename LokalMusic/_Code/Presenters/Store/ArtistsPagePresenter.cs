@@ -33,6 +33,9 @@ namespace LokalMusic._Code.Presenters.Store
 
             foreach (var artist in artists)
             {
+                if (artist == null)
+                    break;
+
                 List<TrackSummary> tracks = this.repository.GetTopTwoTracks(artist.ArtistId);
 
                 if (tracks != null)

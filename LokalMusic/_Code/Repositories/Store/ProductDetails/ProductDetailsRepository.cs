@@ -72,7 +72,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                     );
             }
 
-            return trackDetails;
+            return trackDetails != null ? trackDetails : new Track();
         }
 
         public Album GetAlbumDetails(int albumId, int artistId)
@@ -113,7 +113,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                     );
             }
 
-            return albumDetails;
+            return albumDetails != null ? albumDetails : new Album(); ;
         }
 
         public Artist GetArtistDetails(int artistId)
@@ -149,7 +149,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                     artistDetails.ArtistImage = "~/Content/Images/default_artist_image.JPG";
             }
 
-            return artistDetails;
+            return artistDetails != null ? artistDetails : new Artist();
         }
 
         // End Main queries for details
