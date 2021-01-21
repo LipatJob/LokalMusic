@@ -40,7 +40,7 @@
                                 <tr class="text-center">
                                     <td class="float-right">
                                         <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank">
-                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto"/>
+                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable"/>
                                         </a>
                                     </td>   
                                     <td class="emphasize">

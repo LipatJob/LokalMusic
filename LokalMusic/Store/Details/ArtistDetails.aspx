@@ -128,7 +128,7 @@
                                 <tr class="text-center h-100 my-auto">
                                     <td class="">
                                         <a href=<%#Eval("DetailsUrl") %> runat="server">
-                                            <img src=<%#Eval("AlbumCover") %> width="35" height="35" class="mx-auto" runat="server" style="margin: -5px;"/>
+                                            <img src=<%#Eval("AlbumCover") %> width="35" height="35" class="mx-auto img-hoverable" runat="server" style="margin: -5px;"/>
                                         </a>
                                     </td> 
                                     <td class="emphasize">
