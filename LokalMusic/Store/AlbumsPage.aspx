@@ -58,7 +58,7 @@
                                     
                                     <div class="mt-xl-4 pt-xl-5 mt-md-5">
                                         <%--GetURL--%>
-                                        <a href="" class="btn btn-danger mt-xl-5 mt-md-3" style="background-color: #B82828; font-size: 12px; font-weight: 600">Add to Cart</a>                                      
+                                        <a class="btn btn-danger mt-xl-5 mt-md-3" style="background-color: #B82828; font-size: 12px; font-weight: 600"  onclick='AddToCart(<%#Eval("AlbumId")%>); return false;'>Add to Cart</a>     
                                     </div>
                                 </div>
                             </div>
