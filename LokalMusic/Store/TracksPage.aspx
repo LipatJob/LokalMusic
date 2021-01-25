@@ -44,7 +44,7 @@
                                         </a>
                                     </td>   
                                     <td class="emphasize">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank" class="titleLink">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank" class="titleLink">\
                                             <%#Eval("TrackName") %>
                                         </a>
                                     </td>
