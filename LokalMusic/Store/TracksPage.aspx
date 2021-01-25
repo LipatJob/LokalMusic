@@ -54,7 +54,7 @@
                                     <td><%#Eval("AudioDuration") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
                                     <td>
-                                        <button onclick='AddTrackToCart(<%#Eval("TrackId")%>); return false;'>
+                                        <button onclick='AddToCart(<%#Eval("TrackId")%>); return false;'>
                                             <img src="../Content/Images/cart.png" class="" width="20" height="20" runat="server" />
                                         </button>
                                     </td>

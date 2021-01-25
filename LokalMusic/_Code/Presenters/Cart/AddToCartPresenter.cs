@@ -22,22 +22,16 @@ namespace LokalMusic._Code.Presenters.Cart
 
         // Start Add to Cart static function
 
-        public static int AddTrackToCart(int trackId, int albumId, int artistId)
+        public static int AddProductToCart(int productId)
         {
 
-            //if (!AuthenticationHelper.LoggedIn)
-            //    return ADD_TO_CART_LOGIN;
+            //if (AuthenticationHelper.LoggedIn)
+            //{
+            //    return 1;
 
-            return 0;
-        }
+            //}
+            /*else*/ return ADD_TO_CART_LOGIN;
 
-        public static int AddAlbumToCart(int albumId, int artistId)
-        {
-
-            if (!AuthenticationHelper.LoggedIn)
-                return ADD_TO_CART_LOGIN;
-
-            return 0;
         }
 
         public static string GetAddToCartMessage(int category)
