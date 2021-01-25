@@ -139,9 +139,9 @@
                                     <td><%#Eval("Genres") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
                                     <td>
-                                        <a href="#"> <%-- GetUrl --%>
+                                        <button onclick='AddToCart(<%#Eval("AlbumId")%>); return false;'> <%-- GetUrl --%>
                                             <img src="../../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
 

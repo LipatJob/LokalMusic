@@ -132,7 +132,7 @@
                             <div class="col-sm-6 w-100">
                                 <%--GetURL--%>
                                 <div class="text-right">
-                                    <a href="" class="btn btn-danger" style="background-color: #B82828; font-size: 12px; font-weight: 600">Add to Cart</a>     
+                                    <a href="" class="btn btn-danger" style="background-color: #B82828; font-size: 12px; font-weight: 600" onclick='AddToCart(<%#Eval("TrackId")%>); return false;'>Add to Cart</a>     
                                 </div>
                             </div>
                         </div>
