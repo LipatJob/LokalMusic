@@ -44,7 +44,7 @@
                                         </a>
                                     </td>   
                                     <td class="emphasize">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank" class="titleLink">\
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank" class="titleLink">
                                             <%#Eval("TrackName") %>
                                         </a>
                                     </td>
@@ -53,7 +53,7 @@
                                     <td><%#Eval("Genre") %></td>
                                     <td><%#Eval("AudioDuration") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
-                                    <td>
+                                    <td><%#Eval("TrackId")%>
                                         <button onclick='AddToCart(<%#Eval("TrackId")%>); return false;'>
                                             <img src="../Content/Images/cart.png" class="" width="20" height="20" runat="server" />
                                         </button>
