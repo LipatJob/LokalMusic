@@ -25,12 +25,13 @@ namespace LokalMusic._Code.Presenters.Cart
         public static int AddProductToCart(int productId)
         {
 
-            //if (AuthenticationHelper.LoggedIn)
-            //{
-            //    return 1;
-
-            //}
-            /*else*/ return ADD_TO_CART_LOGIN;
+            if (AuthenticationHelper.LoggedIn)
+            {
+                Console.WriteLine("success");
+                return 1;
+            }
+            Console.WriteLine("success");
+            return ADD_TO_CART_LOGIN;
 
         }
 
