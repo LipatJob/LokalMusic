@@ -7,6 +7,7 @@ namespace LokalMusic._Code.Models.Store.Details
 {
     public class Artist
     {
+        public Artist() { }
         public Artist(int artistId, string artistName, string bio, string location, DateTime dateJoined, string artistImage)
         {
             ArtistId = artistId;

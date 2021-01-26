@@ -33,7 +33,14 @@ namespace LokalMusic._Code.Presenters.Store
 
             foreach (var album in albums)
             {
+                if (album == null)
+                    break;
+
                 List<TrackSummary> tracks = this.repository.GetSummarizedTracksByAlbumId(album.AlbumId);
+
+                if (tracks == null)
+                    break;
+
                 album.TrackCount = tracks.Count;
 
                 double totalMinutes = 0;

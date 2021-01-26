@@ -14,34 +14,33 @@ namespace LokalMusic._Code.Repositories.Publish
         {
             string query = @"
 SELECT
-Product.ProductId,
-FileInfo.FileName AS AlbumCoverLink,
-Product.ProductName AS AlbumName,
-Product.DateAdded,
-Album.ProducerName AS Producer,
-Product.Price,
-(SELECT 
-COUNT(TrackId) AS TrackCount
-FROM Track
-WHERE Track.AlbumId = Album.AlbumId) AS TrackCount,
-(SELECT
-COUNT(TransactionId) 
-FROM TransactionProduct
-WHERE TransactionProduct.ProductId = Album.AlbumId) AS SalesCount
+    Product.ProductId,
+    FileInfo.FileName AS AlbumCoverLink,
+    Product.ProductName AS AlbumName,
+    Product.DateAdded,
+    Album.ProducerName AS Producer,
+    Product.Price,
+    (SELECT
+        COUNT(TrackId) AS TrackCount
+    FROM Track
+    WHERE Track.AlbumId = Album.AlbumId) AS TrackCount,
+    (SELECT
+        COUNT(TransactionId)
+    FROM TransactionProduct
+    WHERE TransactionProduct.ProductId = Album.AlbumId) AS SalesCount
 FROM Product
-RIGHT JOIN Album ON
-Product.ProductId = Album.AlbumId
-LEFT JOIN FileInfo ON
-Album.AlbumCoverID = FileInfo.FileId
+    RIGHT JOIN Album ON Product.ProductId = Album.AlbumId
+    LEFT JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
 WHERE Album.UserId = @ArtistId
 ";
 
             var result = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
 
-            var Items = new List<AlbumsItem>();
+            var items = new List<AlbumsItem>();
             foreach (DataRow row in result.Rows)
             {
-                Items.Add(new AlbumsItem() {
+                items.Add(new AlbumsItem()
+                {
                     AlbumId = (int)row["ProductId"],
                     AlbumCoverLink = (string)row["AlbumCoverLink"],
                     AlbumName = (string)row["AlbumName"],
@@ -53,7 +52,7 @@ WHERE Album.UserId = @ArtistId
                 });
             }
 
-            return Items;
+            return items;
         }
 
         public string GetArtistName(int artistId)

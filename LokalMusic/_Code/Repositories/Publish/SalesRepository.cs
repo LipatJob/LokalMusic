@@ -14,35 +14,28 @@ namespace LokalMusic._Code.Repositories.Publish
         {
             string query = @"
 SELECT
-TransactionProduct.TransactionId,
-MAX([Transaction].TransactionDate) AS Date,
-MAX(UserInfo.Username) AS Customer,
-STRING_AGG(Product.ProductName + '(' + ProductType.TypeName + ')' , ', ') AS Products,
-SUM(TransactionProduct.AmountPaid) AS TotalPrice
+    TransactionProduct.TransactionId,
+    MAX([Transaction].TransactionDate) AS Date,
+    MAX(UserInfo.Username) AS Customer,
+    STRING_AGG(Product.ProductName + '(' + ProductType.TypeName + ')' , ', ') AS Products,
+    SUM(TransactionProduct.AmountPaid) AS TotalPrice
 FROM Product
-LEFT JOIN Track ON
-Track.TrackId = Product.ProductId
-LEFT JOIN Album ON
-Album.AlbumId = COALESCE(Track.AlbumId, Product.ProductId)
-LEFT JOIN ArtistInfo ON
-ArtistInfo.UserId = Album.UserId
-RIGHT JOIN TransactionProduct ON
-Product.ProductId = TransactionProduct.ProductId
-LEFT JOIN [Transaction] ON
-TransactionProduct.TransactionId = [Transaction].TransactionId
-LEFT JOIN UserInfo ON
-[Transaction].UserId = UserInfo.UserId
-LEFT JOIN ProductType ON
-Product.ProductTypeId = ProductType.ProductTypeId
+    LEFT JOIN Track ON Track.TrackId = Product.ProductId
+    LEFT JOIN Album ON Album.AlbumId = COALESCE(Track.AlbumId, Product.ProductId)
+    LEFT JOIN ArtistInfo ON ArtistInfo.UserId = Album.UserId
+    RIGHT JOIN TransactionProduct ON Product.ProductId = TransactionProduct.ProductId
+    LEFT JOIN [Transaction] ON TransactionProduct.TransactionId = [Transaction].TransactionId
+    LEFT JOIN UserInfo ON [Transaction].UserId = UserInfo.UserId
+    LEFT JOIN ProductType ON Product.ProductTypeId = ProductType.ProductTypeId
 WHERE ArtistInfo.UserId = @ArtistId
 GROUP BY TransactionProduct.TransactionId
 ";
             var result = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
 
-            var Items = new List<SalesItem>();
+            var items = new List<SalesItem>();
             foreach (DataRow row in result.Rows)
             {
-                Items.Add(new SalesItem()
+                items.Add(new SalesItem()
                 {
                     TransactionID = (int)row["TransactionId"],
                     Date = (DateTime)row["Date"],
@@ -52,7 +45,7 @@ GROUP BY TransactionProduct.TransactionId
                 });
             }
 
-            return Items;
+            return items;
         }
 
         public string GetArtistName(int artistId)

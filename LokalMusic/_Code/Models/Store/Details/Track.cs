@@ -7,6 +7,8 @@ namespace LokalMusic._Code.Models.Store.Details
 {
     public class Track
     {
+
+        public Track() { }
         public Track(int trackId, int albumId, int artistId, string trackName, decimal price, TimeSpan audioDuration, string audioAddress, DateTime dateAdded, string description, string albumName, string artistName, DateTime albumReleaseDate, string albumCover, string genre)
         {
             TrackId = trackId;
