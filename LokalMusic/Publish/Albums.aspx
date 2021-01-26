@@ -10,7 +10,9 @@
 
         <div style="margin-top:30px" class="d-flex justify-content-between">
             <h4>Albums</h4>
-            <asp:LinkButton ID="addAlbumBtn" runat="server" CssClass="btn btn-publish" PostBackUrl="~/Publish/Album/Add">Add Album</asp:LinkButton>
+            <a href="~/Publish/Album/Add" runat="server">
+                <input type="button" name="addAlbumBtn" class="btn btn-publish" value="Add Album" />
+            </a>
         </div>
         <div>
             <table id="albumTable" class="table table-striped table-hover dt-responsive" style="margin-top:30px"> 
@@ -22,8 +24,13 @@
                             <td style="vertical-align: middle">Tracks: <%#Eval("TrackCount") %><br />Producer: <%#Eval("Producer") %></td>
                             <td style="vertical-align: middle">Sales: <%#Eval("SalesCount") %><br />Price: <%#Eval("Price","{0:N}") %></td>
                             <td style="vertical-align: middle">
-                                <asp:LinkButton ID="TracksBtn" runat="server" CssClass="btn btn-publish" PostBackUrl='<%#Eval("TracksURL") %>'>Tracks</asp:LinkButton>&emsp;
-                                <asp:LinkButton ID="EditBtn" runat="server" CssClass="btn btn-publish">Edit</asp:LinkButton>
+                                <a href='<%#Eval("TracksURL") %>' runat="server">
+                                    <input type="button" name="TracksBtn" class="btn btn-publish" value="Tracks" />
+                                </a>
+                                &emsp;
+                                <a href='<%#Eval("EditURL") %>' runat="server">
+                                    <input type="button" name="EditBtn" class="btn btn-publish" value="Edit" />
+                                </a>
                             </td>
                         </tr>
                     </ItemTemplate>
