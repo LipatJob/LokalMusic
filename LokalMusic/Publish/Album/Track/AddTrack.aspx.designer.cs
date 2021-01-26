@@ -15,22 +15,22 @@ namespace LokalMusic.Publish.Album.Track
     {
 
         /// <summary>
-        /// ArtistName control.
+        /// artistName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ArtistName;
+        protected global::System.Web.UI.WebControls.Label artistName;
 
         /// <summary>
-        /// AlbumName control.
+        /// albumName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AlbumName;
+        protected global::System.Web.UI.WebControls.Label albumName;
 
         /// <summary>
         /// viewTracks control.
