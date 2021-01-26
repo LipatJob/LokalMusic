@@ -40,7 +40,7 @@
                                 <tr class="text-center">
                                     <td class="float-right">
                                         <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank">
-                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto"/>
+                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable"/>
                                         </a>
                                     </td>   
                                     <td class="emphasize">
@@ -54,9 +54,9 @@
                                     <td><%#Eval("AudioDuration") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
                                     <td>
-                                        <a href="#"> <%-- GetUrl --%>
-                                            <img src="../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
-                                        </a>
+                                        <button onclick='AddToCart(<%#Eval("TrackId")%>); return false;'>
+                                            <img src="../Content/Images/cart.png" class="" width="20" height="20" runat="server" />
+                                        </button>
                                     </td>
                                 </tr>
                                 </a>

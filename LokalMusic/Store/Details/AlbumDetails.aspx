@@ -117,7 +117,7 @@
                             <div class="col-sm-6 w-100">
                                 <%--GetURL--%>
                                 <div class="text-right">
-                                    <a href="" class="btn btn-danger" style="background-color: #B82828; font-size: 12px; font-weight: 600">Add to Cart</a>     
+                                    <a href="" class="btn btn-danger" style="background-color: #B82828; font-size: 12px; font-weight: 600" onclick='AddToCart(<%#Eval("AlbumId")%>); return false;'>Add to Cart</a>     
                                 </div>
                             </div>
                         </div>
@@ -158,9 +158,9 @@
                                     <td><%#Eval("Genre") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
                                     <td>
-                                        <a href="#"> <%-- GetUrl --%>
+                                        <button onclick='AddToCart(<%#Eval("TrackId")%>); return false;'> <%-- GetUrl --%>
                                             <img src="../../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
 

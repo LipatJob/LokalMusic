@@ -36,7 +36,7 @@
                             <div class="row w-100">
                                 <div class="col-xl-3">
                                     <a href=<%#Eval("DetailsUrl") %> runat="server">
-                                        <img src=<%#Eval("AlbumCover")%> alt="album_cover" class="d-block mx-auto mb-xl-0 mb-sm-2" width="200" height="200"/>
+                                        <img src=<%#Eval("AlbumCover")%> alt="album_cover" class="d-block mx-auto mb-xl-0 mb-sm-2 img-hoverable" width="200" height="200"/>
                                     </a>
                                 </div>
 
@@ -58,7 +58,7 @@
                                     
                                     <div class="mt-xl-4 pt-xl-5 mt-md-5">
                                         <%--GetURL--%>
-                                        <a href="" class="btn btn-danger mt-xl-5 mt-md-3" style="background-color: #B82828; font-size: 12px; font-weight: 600">Add to Cart</a>                                      
+                                        <a class="btn btn-danger mt-xl-5 mt-md-3" style="background-color: #B82828; font-size: 12px; font-weight: 600"  onclick='AddToCart(<%#Eval("AlbumId")%>); return false;'>Add to Cart</a>     
                                     </div>
                                 </div>
                             </div>

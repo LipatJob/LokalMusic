@@ -23,8 +23,7 @@ SELECT
 	 FROM TransactionProduct
 	 WHERE [TransactionProduct].TransactionId = [Transaction].TransactionId) AS AmountPaid
 FROM [Transaction]
-LEFT JOIN [UserInfo] ON
-	[UserInfo].UserId = [Transaction].UserId
+	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [Transaction].UserId
 ORDER BY [Transaction].TransactionDate DESC;";
 
 			var receipts = new List<ReceiptListItem>();
@@ -55,8 +54,7 @@ SELECT
 	 FROM TransactionProduct
 	 WHERE [TransactionProduct].TransactionId = [Transaction].TransactionId) AS AmountPaid
 FROM [Transaction]
-LEFT JOIN [UserInfo] ON
-	[UserInfo].UserId = [Transaction].UserId
+	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [Transaction].UserId
 WHERE [Transaction].TransactionId = @TransactionId;";
 			var modelResult = DbHelper.ExecuteDataTableQuery(modelQuery, ("TransactionId", receiptId)).Rows[0];
 			var model = new ReceiptModel()
@@ -73,10 +71,8 @@ SELECT
 	[Product].ProductName + ' (' + [ProductType].TypeName+')' AS ProductName,
 	[TransactionProduct].AmountPaid
 FROM [TransactionProduct]
-LEFT JOIN [Product] ON
-	[Product].ProductId = [TransactionProduct].ProductId
-LEFT JOIN [ProductType] ON
-	[Product].ProductTypeId = [ProductType].ProductTypeId
+	LEFT JOIN [Product] ON [Product].ProductId = [TransactionProduct].ProductId
+	LEFT JOIN [ProductType] ON [Product].ProductTypeId = [ProductType].ProductTypeId
 WHERE [TransactionProduct].TransactionId = @TransactionId";
 			var productsResult = DbHelper.ExecuteDataTableQuery(productsQuery, ("TransactionId", receiptId));
             foreach (var row in productsResult.AsEnumerable())

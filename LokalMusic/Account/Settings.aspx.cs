@@ -46,7 +46,6 @@ namespace LokalMusic.Account
                 ShowProfileImageChangedMessage();
             }
         }
-        
         private bool IsPasswordChanged()
         {
             return Request.QueryString["PasswordChanged"] == "True";

@@ -14,27 +14,23 @@ namespace LokalMusic._Code.Repositories.Publish.Albums
         {
             string query = @"
 SELECT
-Product.ProductId AS TrackId,
-Track.AlbumId,
-FileInfo.[FileName] AS TrackCoverLink,
-Product.ProductName AS TrackName,
-Product.DateAdded,
-Genre.GenreName AS Genre,
-Track.TrackDuration AS Duration,
-Product.Price,
-(SELECT
-COUNT(TransactionId) 
-FROM TransactionProduct
-WHERE TransactionProduct.ProductId = Track.TrackId) AS SalesCount
+    Product.ProductId AS TrackId,
+    Track.AlbumId,
+    FileInfo.[FileName] AS TrackCoverLink,
+    Product.ProductName AS TrackName,
+    Product.DateAdded,
+    Genre.GenreName AS Genre,
+    Track.TrackDuration AS Duration,
+    Product.Price,
+    (SELECT
+        COUNT(TransactionId)
+    FROM TransactionProduct
+    WHERE TransactionProduct.ProductId = Track.TrackId) AS SalesCount
 FROM Track
-LEFT JOIN Album
-ON Track.AlbumId = Album.AlbumId
-LEFT JOIN Product
-ON Track.TrackId = Product.ProductId
-LEFT JOIN FileInfo
-ON Album.AlbumCoverID = FileInfo.FileId
-LEFT JOIN Genre
-ON Track.GenreId = Genre.GenreId
+    LEFT JOIN Album ON Track.AlbumId = Album.AlbumId
+    LEFT JOIN Product ON Track.TrackId = Product.ProductId
+    LEFT JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
+    LEFT JOIN Genre ON Track.GenreId = Genre.GenreId
 WHERE Album.AlbumId = @AlbumId
 ";
 

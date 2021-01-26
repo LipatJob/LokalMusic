@@ -3,6 +3,7 @@ using LokalMusic._Code.Presenters.Account.Register;
 using LokalMusic._Code.Repositories.Account.Register;
 using LokalMusic._Code.Views.Account.Register;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -53,6 +54,9 @@ namespace LokalMusic.Account.Register
                 .AddRule(
                     rule: () => presenter.IsUsernameUnique(),
                     errorMessage: "That username has already been taken")
+                .AddRule(
+                    rule: () => !Username.Any(e => Char.IsWhiteSpace(e)),
+                    errorMessage: "Username may not contain whitespace")
                 .Validate();
         }
 

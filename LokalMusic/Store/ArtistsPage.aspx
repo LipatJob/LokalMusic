@@ -48,7 +48,7 @@
                             <div class="row w-100">
                                 <div class="col-xl-3">
                                     <a href=<%#Eval("DetailsUrl") %> runat="server">
-                                        <img src=<%#Eval("ArtistProfileImage")%> alt="artist_cover" class="d-block mx-auto mb-xl-0 mb-sm-2" width="200" height="200" runat="server"/>
+                                        <img src=<%#Eval("ArtistProfileImage")%> alt="artist_cover" class="d-block mx-auto mb-xl-0 mb-sm-2 img-hoverable" width="200" height="200" runat="server"/>
                                     </a>
                                 </div>
 
@@ -79,7 +79,7 @@
 
                                                 <div class="col-3 mx-auto">
                                                     <%--link--%>
-                                                    <img src=<%#Eval("TrackTop1.AlbumCover")%> width="45" height="45" class="mx-auto d-block" runat="server" alt="track1"/>
+                                                    <img src=<%#Eval("TrackTop1.AlbumCover")%> width="45" height="45" class="mx-auto d-block img-hoverable" runat="server" alt="track1"/>
                                                 </div>
                                             </div>
                                         </a>                                        
@@ -93,7 +93,7 @@
                                                 </div>
 
                                                 <div class="col-3 mx-auto">
-                                                    <img src=<%#Eval("TrackTop2.AlbumCover")%> width="45" height="45" class="mx-auto d-block" runat="server" alt="track2" />
+                                                    <img src=<%#Eval("TrackTop2.AlbumCover")%> width="45" height="45" class="mx-auto d-block img-hoverable" runat="server" alt="track2" />
                                                 </div>
                                             </div>
                                         </a>                                        
