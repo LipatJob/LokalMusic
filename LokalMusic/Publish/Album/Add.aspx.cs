@@ -39,7 +39,8 @@ namespace LokalMusic.Publish.Album
         {
             if (albumCoverFile.HasFile)
             {
-                string fileLocation = FileSystemHelper.UploadFile(albumCoverFile.PostedFile.FileName, FileSystemHelper.PICTURE_CONTAINER_NAME, albumCoverFile.PostedFile, true);
+                string fileName = AuthenticationHelper.UserId.ToString() + "_" + albumCoverFile.PostedFile.FileName;
+                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.PICTURE_CONTAINER_NAME, albumCoverFile.PostedFile, true);
                 AlbumCover = fileLocation;
             }
         }
@@ -61,6 +62,7 @@ namespace LokalMusic.Publish.Album
             dateReleasedTxt.Text = "";
             producerTxt.Text = "";
             priceTxt.Text = "";
+            albumCoverPreview.ImageUrl = @"~\Content\Images\default_cover.jpg";
         }
     }
 }

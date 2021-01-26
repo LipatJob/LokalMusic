@@ -10,12 +10,12 @@
 
     <div class="container" style="margin-top:60px;margin-bottom:100px;">
         <div>
-            <h1><strong><asp:Label ID="ArtistName" runat="server" Text="Artist/Band Name"></asp:Label></strong></h1>
+            <h1><strong><asp:Label ID="artistName" runat="server" Text="Artist/Band Name"></asp:Label></strong></h1>
             <hr />
         </div>
 
         <div style="margin-top:30px" class="d-flex justify-content-between">
-            <h4><asp:Label ID="AlbumName" runat="server" Text="Album Name"></asp:Label> - Add Track</h4>
+            <h4><asp:Label ID="albumName" runat="server" Text="Album Name"></asp:Label> - Add Track</h4>
             <a id="viewTracks" runat="server">
                 <input type="button" name="viewTracksBtn" class="btn btn-publish" value="View Tracks" />
             </a>
@@ -51,7 +51,7 @@
                     <asp:FileUpload ID="trackFile" runat="server" />
                 </div>
                 <div>
-                    <asp:Button ID="uploadTrackFileBtn" runat="server" Text="Upload Track File" CssClass="btn btn-publish" />
+                    <asp:Button ID="uploadTrackFileBtn" runat="server" Text="Upload Track File" CssClass="btn btn-publish" OnClick="uploadTrackFileBtn_Click" />
                 </div>
 
                 <p style="margin-top:50px">Clip File</p>
@@ -62,16 +62,16 @@
                     <asp:FileUpload ID="clipFile" runat="server" />
                 </div>
                 <div>
-                    <asp:Button ID="uploadClipFileBtn" runat="server" Text="Upload Clip File" CssClass="btn btn-publish" />
+                    <asp:Button ID="uploadClipFileBtn" runat="server" Text="Upload Clip File" CssClass="btn btn-publish" OnClick="uploadClipFileBtn_Click" />
                 </div>
             </div>            
         </div>
 
         <div class="row float-right">
             <div class="col-12">
-                <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" />
+                <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" OnClick="cancelBtn_Click" />
                 &emsp;
-                <asp:Button ID="addBtn" runat="server" Text="Add" CssClass="btn btn-publish" />
+                <asp:Button ID="addBtn" runat="server" Text="Add" CssClass="btn btn-publish" OnClick="addBtn_Click" />
             </div>
         </div>
     
