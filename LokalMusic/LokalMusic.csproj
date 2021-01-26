@@ -302,6 +302,7 @@
     <Content Include="Global.asax" />
     <Content Include="Publish\Albums.aspx" />
     <Content Include="Publish\Album\Add.aspx" />
+    <Content Include="Publish\Album\Track\AddTrack.aspx" />
     <Content Include="Publish\Sales.aspx" />
     <Content Include="Publish\Album\Tracks.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -530,6 +531,13 @@
     <Compile Include="Publish\Album\Add.aspx.designer.cs">
       <DependentUpon>Add.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Publish\Album\Track\AddTrack.aspx.cs">
+      <DependentUpon>AddTrack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publish\Album\Track\AddTrack.aspx.designer.cs">
+      <DependentUpon>AddTrack.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Publish\Sales.aspx.cs">
       <DependentUpon>Sales.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -662,6 +670,7 @@
     <Compile Include="_Code\Models\Finance\ReceiptProductItem.cs" />
     <Compile Include="_Code\Models\Publish\AlbumsItem.cs" />
     <Compile Include="_Code\Models\Publish\AlbumsModel.cs" />
+    <Compile Include="_Code\Models\Publish\Album\AddAlbumModel.cs" />
     <Compile Include="_Code\Models\Publish\Album\TracksItem.cs" />
     <Compile Include="_Code\Models\Publish\Album\TracksModel.cs" />
     <Compile Include="_Code\Models\Publish\SalesItem.cs" />
@@ -682,6 +691,7 @@
     <Compile Include="_Code\Presenters\Publish\AlbumsPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
     <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
+    <Compile Include="_Code\Presenters\Publish\Album\AddAlbumPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\Album\TracksPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\SalesPresenter.cs" />
     <Compile Include="_Code\Presenters\Store\AlbumsPagePresenter.cs" />
@@ -701,6 +711,7 @@
     <Compile Include="_Code\Repositories\Finance\ReceiptsRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\AlbumsRepository.cs" />
+    <Compile Include="_Code\Repositories\Publish\Album\AddAlbumRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\Album\TracksRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\SalesRepository.cs" />
     <Compile Include="_Code\Repositories\Store\ProductDetails\ProductDetailsRepository.cs" />
@@ -750,6 +761,7 @@
     <Compile Include="_Code\Views\Account\ISettingsViewModel.cs" />
     <Compile Include="_Code\Views\Account\Register\IRegisterArtistViewModel.cs" />
     <Compile Include="_Code\Views\Account\Register\IRegisterFanViewModel.cs" />
+    <Compile Include="_Code\Views\Publish\IAddAlbumViewModel.cs" />
     <Compile Include="_Code\Views\Store\IArtistsPage.cs" />
     <Compile Include="_Code\Views\Store\IHomeViewModel.cs" />
     <Compile Include="_Code\Views\Store\IAlbumsPage.cs" />

@@ -22,6 +22,10 @@
             background-color: #E2E2E2;
             color: #525252;
         }
+
+        a:hover{
+            text-decoration: none;
+        }
     </style>
 
     <div class="body-content">
