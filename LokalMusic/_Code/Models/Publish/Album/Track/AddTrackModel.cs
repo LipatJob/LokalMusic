@@ -21,10 +21,10 @@ namespace LokalMusic._Code.Models.Publish.Album.Track
 
         string TrackFile { get; set; }
         
-        TimeSpan TrackFileDuration { get; }
+        TimeSpan TrackFileDuration { get; set; }
 
         string ClipFile { get; set; }
 
-        TimeSpan ClipFileDuration { get; }
+        TimeSpan ClipFileDuration { get; set; }
     }
 }

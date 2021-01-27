@@ -27,10 +27,10 @@ namespace LokalMusic.Publish.Album.Track
         public string Genre { get => genreTxt.Text; }
         public string Description { get => descriptionTxt.Text; }
         public decimal Price { get => decimal.Parse(priceTxt.Text); }
-        public string TrackFile { get; set; }
-        public TimeSpan TrackFileDuration { get; }
-        public string ClipFile { get; set; }
-        public TimeSpan ClipFileDuration { get; }
+        public string TrackFile { get => trackSource.Src; set => trackSource.Src = value; }
+        public TimeSpan TrackFileDuration { get; set; }
+        public string ClipFile { get => clipSource.Src; set => clipSource.Src = value; }
+        public TimeSpan ClipFileDuration { get; set; }
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -43,12 +43,24 @@ namespace LokalMusic.Publish.Album.Track
 
         protected void uploadTrackFileBtn_Click(object sender, EventArgs e)
         {
-
+            if (trackFile.HasFile)
+            {
+                string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
+                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile, true);
+                TrackFile = fileLocation;
+                TrackFileDuration = new TimeSpan(0, 2, 45);
+            }
         }
 
         protected void uploadClipFileBtn_Click(object sender, EventArgs e)
         {
-
+            if (clipFile.HasFile)
+            {
+                string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
+                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile, true);
+                TrackFile = fileLocation;
+                TrackFileDuration = new TimeSpan(0, 1, 0);
+            }
         }
 
         protected void addBtn_Click(object sender, EventArgs e)
