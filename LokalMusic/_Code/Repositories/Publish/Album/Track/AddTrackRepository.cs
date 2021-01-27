@@ -9,7 +9,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album.Track
 {
     public class AddTrackRepository
     {
-        public void GetArtistName(int artistId, AddTrackModel model)
+        public void GetArtistName(int artistId, IAddTrackModel model)
         {
             string query = "SELECT ArtistName FROM ArtistInfo WHERE UserId = @ArtistId;";
             var result = DbHelper.ExecuteScalar(query, ("ArtistId", artistId));
@@ -17,7 +17,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album.Track
             model.ArtistName = result.ToString();
         }
 
-        public void GetAlbumName(int albumId, AddTrackModel model)
+        public void GetAlbumName(int albumId, IAddTrackModel model)
         {
             string query = "SELECT ProductName FROM Product WHERE ProductId = @AlbumId;";
             var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
@@ -25,7 +25,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album.Track
             model.AlbumName = result.ToString();
         }
 
-        public void AddTrack(AddTrackModel model, int albumId)
+        public void AddTrack(IAddTrackModel model, int albumId)
         {
             int trackId = AddToProduct(model);
             //int trackFileId = AddTrackFile(model);
@@ -47,7 +47,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album.Track
                 ("clipDuration", model.ClipFileDuration));
         }
 
-        private int AddToProduct(AddTrackModel model)
+        private int AddToProduct(IAddTrackModel model)
         {
             string query = @"
 INSERT INTO Product(ProductTypeId,ProductStatusId,DateAdded,Price,ProductName)
@@ -67,7 +67,7 @@ AND DateAdded = (SELECT MAX(DateAdded) FROM Product WHERE ProductName = @trackNa
             return int.Parse(result);
         }
 
-        private int AddTrackFile(AddTrackModel model)
+        private int AddTrackFile(IAddTrackModel model)
         {
             string query = @"
 INSERT INTO FileInfo(FileTypeId,FileName)
@@ -82,7 +82,7 @@ WHERE FileName = @trackFile
             return int.Parse(result);
         }
 
-        private int AddClipFile(AddTrackModel model)
+        private int AddClipFile(IAddTrackModel model)
         {
             string query = @"
 INSERT INTO FileInfo(FileTypeId,FileName)
@@ -97,7 +97,7 @@ WHERE FileName = @clipFile
             return int.Parse(result);
         }
 
-        private int AddToGenre(AddTrackModel model)
+        private int AddToGenre(IAddTrackModel model)
         {
             var genreId = DbHelper.ExecuteScalar(
                 "SELECT GenreId FROM Genre WHERE GenreName = @genre",

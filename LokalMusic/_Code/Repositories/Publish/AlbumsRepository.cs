@@ -14,6 +14,7 @@ namespace LokalMusic._Code.Repositories.Publish
         {
             string query = @"
 SELECT
+    Product.ProductStatusId,
     Product.ProductId,
     FileInfo.FileName AS AlbumCoverLink,
     Product.ProductName AS AlbumName,
@@ -39,17 +40,20 @@ WHERE Album.UserId = @ArtistId
             var items = new List<AlbumsItem>();
             foreach (DataRow row in result.Rows)
             {
-                items.Add(new AlbumsItem()
+                if ((int)row["ProductStatusId"] == 1)
                 {
-                    AlbumId = (int)row["ProductId"],
-                    AlbumCoverLink = (string)row["AlbumCoverLink"],
-                    AlbumName = (string)row["AlbumName"],
-                    DateAdded = (DateTime)row["DateAdded"],
-                    Producer = (string)row["Producer"],
-                    Price = (decimal)row["Price"],
-                    TrackCount = (int)row["TrackCount"],
-                    SalesCount = (int)row["SalesCount"]
-                });
+                    items.Add(new AlbumsItem()
+                    {
+                        AlbumId = (int)row["ProductId"],
+                        AlbumCoverLink = (string)row["AlbumCoverLink"],
+                        AlbumName = (string)row["AlbumName"],
+                        DateAdded = (DateTime)row["DateAdded"],
+                        Producer = (string)row["Producer"],
+                        Price = (decimal)row["Price"],
+                        TrackCount = (int)row["TrackCount"],
+                        SalesCount = (int)row["SalesCount"]
+                    });
+                }
             }
 
             return items;
@@ -58,15 +62,9 @@ WHERE Album.UserId = @ArtistId
         public string GetArtistName(int artistId)
         {
             string query = "SELECT ArtistName FROM ArtistInfo WHERE UserId = @ArtistId;";
-            var result = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
+            var result = DbHelper.ExecuteScalar(query, ("ArtistId", artistId));
 
-            var artistName = "";
-            foreach (DataRow row in result.Rows)
-            {
-                artistName = (string)row["ArtistName"];
-            }
-
-            return artistName;
+            return result.ToString();
         }
     }
 }
