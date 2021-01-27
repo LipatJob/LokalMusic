@@ -28,8 +28,10 @@ namespace LokalMusic._Code.Repositories.Publish.Album.Track
         public void AddTrack(AddTrackModel model, int albumId)
         {
             int trackId = AddToProduct(model);
-            int trackFileId = AddTrackFile(model);
-            int clipFileId = AddClipFile(model);
+            //int trackFileId = AddTrackFile(model);
+            //int clipFileId = AddClipFile(model);
+            int trackFileId = 4;
+            int clipFileId = 5;
             int genreId = AddToGenre(model);
 
             string query = "INSERT INTO Track VALUES(@trackId,@albumId,@genreId,@trackFileId,@clipFileId,@trackDuration,@description,@clipDuration)";

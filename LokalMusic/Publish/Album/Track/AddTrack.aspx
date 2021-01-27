@@ -8,7 +8,7 @@
         }
     </style>
 
-    <div class="container" style="margin-top:60px;margin-bottom:100px;">
+    <div class="container" style="margin-top:60px;margin-bottom:140px;">
         <div>
             <h1><strong><asp:Label ID="artistName" runat="server" Text="Artist/Band Name"></asp:Label></strong></h1>
             <hr />
@@ -45,7 +45,8 @@
             <div class="col-4">
                 <p>Track File</p>
                 <div style="margin-bottom:20px;">
-                    
+                    <audio controls id="trackSource" src="" runat="server">
+                    </audio>
                 </div>
                 <div style="margin-bottom:20px;">
                     <asp:FileUpload ID="trackFile" runat="server" />
@@ -56,7 +57,8 @@
 
                 <p style="margin-top:50px">Clip File</p>
                 <div style="margin-bottom:20px;">
-                    
+                    <audio controls id="clipSource" src="" runat="server">
+                    </audio>
                 </div>
                 <div style="margin-bottom:20px;">
                     <asp:FileUpload ID="clipFile" runat="server" />
@@ -67,7 +69,7 @@
             </div>            
         </div>
 
-        <div class="row float-right">
+        <div class="row float-right" style="margin-top: 40px">
             <div class="col-12">
                 <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" OnClick="cancelBtn_Click" />
                 &emsp;

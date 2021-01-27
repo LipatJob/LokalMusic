@@ -78,6 +78,15 @@ namespace LokalMusic.Publish.Album.Track
         protected global::System.Web.UI.WebControls.TextBox priceTxt;
 
         /// <summary>
+        /// trackSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAudio trackSource;
+
+        /// <summary>
         /// trackFile control.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace LokalMusic.Publish.Album.Track
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button uploadTrackFileBtn;
+
+        /// <summary>
+        /// clipSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAudio clipSource;
 
         /// <summary>
         /// clipFile control.
