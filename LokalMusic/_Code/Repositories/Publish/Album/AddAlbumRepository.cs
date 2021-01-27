@@ -10,7 +10,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album
 {
     public class AddAlbumRepository
     {
-        public void GetArtistName(int artistId, AddAlbumModel model)
+        public void GetArtistName(int artistId, IAddAlbumModel model)
         {
             string query = "SELECT ArtistName FROM ArtistInfo WHERE UserId = @ArtistId;";
             var result = DbHelper.ExecuteScalar(query, ("ArtistId", artistId));
@@ -18,7 +18,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album
             model.ArtistName = result.ToString();
         }
 
-        public int AddAlbum(AddAlbumModel model, int userId)
+        public int AddAlbum(IAddAlbumModel model, int userId)
         {
             int albumId = AddToProduct(model);
             int albumCoverId = AddToFile(model);
@@ -27,7 +27,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album
             return albumId;
         }
 
-        private int AddToProduct(AddAlbumModel model)
+        private int AddToProduct(IAddAlbumModel model)
         {
             string query = @"
 INSERT INTO Product(ProductTypeId,ProductStatusId,DateAdded,Price,ProductName)
@@ -49,7 +49,7 @@ AND DateAdded = (SELECT MAX(DateAdded) FROM Product WHERE ProductName = @albumNa
             return int.Parse(result);
         }
 
-        private int AddToFile(AddAlbumModel model)
+        private int AddToFile(IAddAlbumModel model)
         {
             string query = @"
 INSERT INTO FileInfo(FileTypeId,FileName)
@@ -65,7 +65,7 @@ WHERE FileName = @albumCover
             return int.Parse(result);
         }
 
-        private void AddToAlbum(AddAlbumModel model, int albumId, int albumCoverId, int userId)
+        private void AddToAlbum(IAddAlbumModel model, int albumId, int albumCoverId, int userId)
         {
             string query = "INSERT INTO Album VALUES " +
                 "(@albumId,@albumCoverId,@description,@dateReleased,@producer,@userId)";

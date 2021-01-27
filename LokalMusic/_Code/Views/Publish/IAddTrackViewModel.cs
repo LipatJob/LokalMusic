@@ -6,7 +6,7 @@ using System.Web;
 
 namespace LokalMusic._Code.Views.Publish
 {
-    public interface IAddTrackViewModel : AddTrackModel
+    public interface IAddTrackViewModel : IAddTrackModel
     {
     }
 }

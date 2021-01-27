@@ -10,9 +10,15 @@
 
         <div style="margin-top:30px" class="d-flex justify-content-between">
             <h4><asp:Label ID="AlbumName" runat="server" Text="Album Name"></asp:Label> - Tracks</h4>
-            <a id="addTrack" href="~/Publish/Album/Add" runat="server">
-                <input type="button" name="addTrackBtn" class="btn btn-publish" value="Add Track" />
-            </a>
+            <div>
+                <a href="~/Publish/Albums" runat="server">
+                    <input type="button" name="viewAlbumsBtn" class="btn btn-publish" value="View Albums" />
+                </a>
+                &emsp;
+                <a id="addTrack" href="~/Publish/Album/Add" runat="server">
+                    <input type="button" name="addTrackBtn" class="btn btn-publish" value="Add Track" />
+                </a>
+            </div>
         </div>
         <div>
             <table id="albumTable" class="table table-striped table-hover dt-responsive" style="margin-top:30px"> 

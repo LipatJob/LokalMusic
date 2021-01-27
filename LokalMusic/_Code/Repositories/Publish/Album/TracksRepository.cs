@@ -14,6 +14,7 @@ namespace LokalMusic._Code.Repositories.Publish.Albums
         {
             string query = @"
 SELECT
+    Product.ProductStatusId,
     Product.ProductId AS TrackId,
     Track.AlbumId,
     FileInfo.[FileName] AS TrackCoverLink,
@@ -39,18 +40,21 @@ WHERE Album.AlbumId = @AlbumId
             var Items = new List<TracksItem>();
             foreach (DataRow row in result.Rows)
             {
-                Items.Add(new TracksItem()
+                if ((int)row["ProductStatusId"] == 1)
                 {
-                    TrackId = (int)row["TrackId"],
-                    AlbumId = (int)row["AlbumId"],
-                    TrackCoverLink = (string)row["TrackCoverLink"],
-                    TrackName = (string)row["TrackName"],
-                    DateAdded = (DateTime)row["DateAdded"],
-                    Genre = (string)row["Genre"],
-                    Duration = (TimeSpan)row["Duration"],
-                    Price = (decimal)row["Price"],
-                    SalesCount = (int)row["SalesCount"]
-                });
+                    Items.Add(new TracksItem()
+                    {
+                        TrackId = (int)row["TrackId"],
+                        AlbumId = (int)row["AlbumId"],
+                        TrackCoverLink = (string)row["TrackCoverLink"],
+                        TrackName = (string)row["TrackName"],
+                        DateAdded = (DateTime)row["DateAdded"],
+                        Genre = (string)row["Genre"],
+                        Duration = (TimeSpan)row["Duration"],
+                        Price = (decimal)row["Price"],
+                        SalesCount = (int)row["SalesCount"]
+                    });
+                }
             }
 
             return Items;
