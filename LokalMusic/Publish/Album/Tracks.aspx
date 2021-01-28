@@ -10,7 +10,9 @@
 
         <div style="margin-top:30px" class="d-flex justify-content-between">
             <h4><asp:Label ID="AlbumName" runat="server" Text="Album Name"></asp:Label> - Tracks</h4>
-            <asp:Button ID="addAlbumBtn" runat="server" Text="Add Track" CssClass="btn btn-publish" />
+            <a id="addTrack" href="~/Publish/Album/Add" runat="server">
+                <input type="button" name="addTrackBtn" class="btn btn-publish" value="Add Track" />
+            </a>
         </div>
         <div>
             <table id="albumTable" class="table table-striped table-hover dt-responsive" style="margin-top:30px"> 
@@ -22,7 +24,9 @@
                             <td style="vertical-align: middle">Genre: <%#Eval("Genre") %><br />Duration: <%#Eval("Duration") %></td>
                             <td style="vertical-align: middle">Sales: <%#Eval("SalesCount") %><br />Price: <%#Eval("Price","{0:N}") %></td>
                             <td style="vertical-align: middle">
-                                <asp:Button ID="EditBtn" runat="server" Text="Edit" CssClass="btn btn-publish" PostBackUrl='<%#Eval("EditURL") %>' />
+                                <a href='<%#Eval("EditURL") %>' runat="server">
+                                    <input type="button" name="EditBtn" class="btn btn-publish" value="Edit" />
+                                </a>
                             </td>
                         </tr>
                     </ItemTemplate>

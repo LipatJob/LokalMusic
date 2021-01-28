@@ -12,6 +12,20 @@
             background-color: #3e3e3e;
             color: white;
         }
+        
+        .btn-publish-light{
+            background-color: #EAEAEA;
+            color: #525252;
+        }
+
+        .btn-publish-light:hover{
+            background-color: #E2E2E2;
+            color: #525252;
+        }
+
+        a:hover{
+            text-decoration: none;
+        }
     </style>
 
     <div class="body-content">

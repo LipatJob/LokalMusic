@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LokalMusic.Publish.Album
+namespace LokalMusic.Publish.Album.Track
 {
 
 
-    public partial class Add
+    public partial class AddTrack
     {
 
         /// <summary>
@@ -24,13 +24,40 @@ namespace LokalMusic.Publish.Album
         protected global::System.Web.UI.WebControls.Label artistName;
 
         /// <summary>
-        /// albumNameTxt control.
+        /// albumName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox albumNameTxt;
+        protected global::System.Web.UI.WebControls.Label albumName;
+
+        /// <summary>
+        /// viewTracks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor viewTracks;
+
+        /// <summary>
+        /// trackNameTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox trackNameTxt;
+
+        /// <summary>
+        /// genreTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox genreTxt;
 
         /// <summary>
         /// descriptionTxt control.
@@ -42,24 +69,6 @@ namespace LokalMusic.Publish.Album
         protected global::System.Web.UI.WebControls.TextBox descriptionTxt;
 
         /// <summary>
-        /// dateReleasedTxt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dateReleasedTxt;
-
-        /// <summary>
-        /// producerTxt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox producerTxt;
-
-        /// <summary>
         /// priceTxt control.
         /// </summary>
         /// <remarks>
@@ -69,31 +78,58 @@ namespace LokalMusic.Publish.Album
         protected global::System.Web.UI.WebControls.TextBox priceTxt;
 
         /// <summary>
-        /// albumCoverPreview control.
+        /// trackSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image albumCoverPreview;
+        protected global::System.Web.UI.HtmlControls.HtmlAudio trackSource;
 
         /// <summary>
-        /// albumCoverFile control.
+        /// trackFile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload albumCoverFile;
+        protected global::System.Web.UI.WebControls.FileUpload trackFile;
 
         /// <summary>
-        /// uploadPictureBtn control.
+        /// uploadTrackFileBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button uploadPictureBtn;
+        protected global::System.Web.UI.WebControls.Button uploadTrackFileBtn;
+
+        /// <summary>
+        /// clipSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAudio clipSource;
+
+        /// <summary>
+        /// clipFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload clipFile;
+
+        /// <summary>
+        /// uploadClipFileBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button uploadClipFileBtn;
 
         /// <summary>
         /// cancelBtn control.
