@@ -33,12 +33,12 @@ namespace LokalMusic._Code.Presenters.Publish.Album
 
             AlbumId = int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
             editAlbumRepository.GetArtistName(AuthenticationHelper.UserId, viewModel);
-            LoadAlbumModel();
+            LoadAlbumDetails();
         }
 
-        public void LoadAlbumModel()
+        public void LoadAlbumDetails()
         {
-            editAlbumRepository.GetAlbumModel(viewModel, AlbumId);
+            editAlbumRepository.GetAlbumDetails(viewModel, AlbumId);
         }
 
         public void EditAlbum()

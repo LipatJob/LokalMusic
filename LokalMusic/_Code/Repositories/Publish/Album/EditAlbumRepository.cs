@@ -2,6 +2,7 @@
 using LokalMusic._Code.Models.Publish.Album;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -17,7 +18,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album
             model.ArtistName = result.ToString();
         }
 
-        public void GetAlbumModel(IEditAlbumModel model, int albumId)
+        public void GetAlbumDetails(IEditAlbumModel model, int albumId)
         {
             string query = @"
 SELECT Product.ProductName AS AlbumName,
@@ -57,15 +58,10 @@ DateReleased = @dateReleased,
 ProducerName = @producer
 WHERE AlbumId = @albumId
 
-SELECT 
-Album.AlbumCoverID,
-FileInfo.FileName
-FROM Album
-LEFT JOIN FileInfo
-ON Album.AlbumCoverID = FileInfo.FileId
+SELECT AlbumCoverID FROM Album
 WHERE AlbumId = @albumId
 ";
-            var result = DbHelper.ExecuteDataTableQuery(
+            var result = DbHelper.ExecuteScalar(
                 query,
                 ("price", model.Price),
                 ("albumName", model.AlbumName),
@@ -75,19 +71,23 @@ WHERE AlbumId = @albumId
                 ("producer", model.Producer)
                 );
 
-            int albumCoverId = int.Parse(result.Rows[0]["AlbumCoverId"].ToString());
-
-            if ((string)result.Rows[0]["FileName"] != model.AlbumCover)
-            {
-                string query2 = "UPDATE FileInfo SET FileName = @albumCover WHERE FileId = @albumCoverId";
-                DbHelper.ExecuteScalar(query2, ("albumCover", model.AlbumCover), ("albumCoverId", albumCoverId));
-            }
+            int albumCoverId = (int)result;
+            string query2 = "UPDATE FileInfo SET FileName = @albumCover WHERE FileId = @albumCoverId";
+            DbHelper.ExecuteScalar(query2, ("albumCover", model.AlbumCover), ("albumCoverId", albumCoverId));
         }
 
         public void UnlistAlbum(int albumId)
         {
-            string query = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @albumId";
-            DbHelper.ExecuteScalar(query, ("albumId", albumId));
+            string query = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @albumId" +
+                "SELECT TrackId FROM Track WHERE AlbumId = @albumId";
+            var result = DbHelper.ExecuteDataTableQuery(query, ("albumId", albumId));
+
+            foreach (DataRow row in result.Rows)
+            {
+                int trackId = (int)row["TrackId"];
+                string query2 = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @trackId";
+                DbHelper.ExecuteScalar(query2, ("trackId", trackId));
+            }
         }
     }
 }

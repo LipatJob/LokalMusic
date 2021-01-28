@@ -40,7 +40,7 @@ namespace LokalMusic.Publish.Album
             if (albumCoverFile.HasFile)
             {
                 string fileName = AuthenticationHelper.UserId.ToString() + "_" + albumCoverFile.PostedFile.FileName;
-                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.ALBUMCOVER_CONTAINER_NAME, albumCoverFile.PostedFile, true);
+                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.ALBUMCOVER_CONTAINER_NAME, albumCoverFile.PostedFile);
                 AlbumCover = fileLocation;
             }
         }
