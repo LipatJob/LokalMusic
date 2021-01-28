@@ -304,6 +304,7 @@
     <Content Include="Publish\Album\Add.aspx" />
     <Content Include="Publish\Album\Edit.aspx" />
     <Content Include="Publish\Album\Track\AddTrack.aspx" />
+    <Content Include="Publish\Album\Track\EditTrack.aspx" />
     <Content Include="Publish\Sales.aspx" />
     <Content Include="Publish\Album\Tracks.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -547,6 +548,13 @@
     <Compile Include="Publish\Album\Track\AddTrack.aspx.designer.cs">
       <DependentUpon>AddTrack.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Publish\Album\Track\EditTrack.aspx.cs">
+      <DependentUpon>EditTrack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publish\Album\Track\EditTrack.aspx.designer.cs">
+      <DependentUpon>EditTrack.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Publish\Sales.aspx.cs">
       <DependentUpon>Sales.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -688,6 +696,7 @@
     <Compile Include="_Code\Models\Publish\Album\TracksItem.cs" />
     <Compile Include="_Code\Models\Publish\Album\TracksModel.cs" />
     <Compile Include="_Code\Models\Publish\Album\Track\IAddTrackModel.cs" />
+    <Compile Include="_Code\Models\Publish\Album\Track\IEditTrackModel.cs" />
     <Compile Include="_Code\Models\Publish\SalesItem.cs" />
     <Compile Include="_Code\Models\Publish\SalesModel.cs" />
     <Compile Include="_Code\Models\Publish\SalesProduct.cs" />
@@ -711,6 +720,7 @@
     <Compile Include="_Code\Presenters\Publish\Album\EditAlbumPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\Album\TracksPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\Album\Track\AddTrackPresenter.cs" />
+    <Compile Include="_Code\Presenters\Publish\Album\Track\EditTrackPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\SalesPresenter.cs" />
     <Compile Include="_Code\Presenters\Store\AlbumsPagePresenter.cs" />
     <Compile Include="_Code\Presenters\Store\ArtistsPagePresenter.cs" />
@@ -734,6 +744,7 @@
     <Compile Include="_Code\Repositories\Publish\Album\EditAlbumRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\Album\TracksRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\Album\Track\AddTrackRepository.cs" />
+    <Compile Include="_Code\Repositories\Publish\Album\Track\EditTrackRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\SalesRepository.cs" />
     <Compile Include="_Code\Repositories\Store\ProductDetails\ProductDetailsRepository.cs" />
     <Compile Include="_Code\Repositories\Store\StoreRepository.cs" />
@@ -785,6 +796,7 @@
     <Compile Include="_Code\Views\Publish\IAddAlbumViewModel.cs" />
     <Compile Include="_Code\Views\Publish\IAddTrackViewModel.cs" />
     <Compile Include="_Code\Views\Publish\IEditAlbumViewModel.cs" />
+    <Compile Include="_Code\Views\Publish\IEditTrackViewModel.cs" />
     <Compile Include="_Code\Views\Store\IArtistsPage.cs" />
     <Compile Include="_Code\Views\Store\IHomeViewModel.cs" />
     <Compile Include="_Code\Views\Store\IAlbumsPage.cs" />

@@ -87,6 +87,12 @@ namespace LokalMusic
                 "~/Publish/Album/Edit.aspx"
                 );
 
+            routes.MapPageRoute(
+                "EditTrack",
+                "Publish/Album/{AlbumId}/Track/{TrackId}/Edit",
+                "~/Publish/Album/Track/EditTrack.aspx"
+                );
+
             // End Publish Pages
         }
 
