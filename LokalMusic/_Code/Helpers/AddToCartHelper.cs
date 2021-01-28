@@ -1,13 +1,12 @@
-﻿using LokalMusic._Code.Helpers;
-using LokalMusic._Code.Repositories.Cart;
+﻿using LokalMusic._Code.Repositories.Cart;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LokalMusic._Code.Presenters.Cart
+namespace LokalMusic._Code.Helpers
 {
-    public class AddToCartPresenter
+    public class AddToCartHelper
     {
 
         public const int ADD_TO_CART_ERROR = 0;
@@ -16,18 +15,10 @@ namespace LokalMusic._Code.Presenters.Cart
         public const int ADD_TO_CART_BOUGHT = 3;
         public const int ADD_TO_CART_LOGIN = 4;
 
-        private CartRepository repository;
+        private static CartRepository repo = new CartRepository();
 
-        public AddToCartPresenter(CartRepository repo)
-        {
-            this.repository = repo;
-        }
-
-        // Start Add to Cart static function
-        // Create CartHelper
         public static int AddProductToCart(int productId)
         {
-            CartRepository repo = new CartRepository();
 
             if (!AuthenticationHelper.LoggedIn)
                 return ADD_TO_CART_LOGIN;
@@ -38,6 +29,8 @@ namespace LokalMusic._Code.Presenters.Cart
             if (repo.IsProductBought(productId, AuthenticationHelper.UserId))
                 return ADD_TO_CART_BOUGHT;
 
+            // if album is added, remove all of its tracks in the database; or,
+            // formulate an sql query that will not obtain cart product tracks, if its album are retrieved
             if (repo.AddToCart(productId, AuthenticationHelper.UserId) == 0)
                 return ADD_TO_CART_ERROR;
 
@@ -60,7 +53,6 @@ namespace LokalMusic._Code.Presenters.Cart
                 return "Something went wrong. Try again.";
         }
 
-        // End Add to Cart static function
 
     }
 }
