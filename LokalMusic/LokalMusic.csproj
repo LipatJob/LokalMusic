@@ -280,6 +280,7 @@
     <Content Include="Account\Signout.aspx" />
     <Content Include="Admin\Products.aspx" />
     <Content Include="Admin\Users.aspx" />
+    <Content Include="Cart\CartPage.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -499,6 +500,13 @@
     <Compile Include="Admin\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Cart\CartPage.aspx.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cart\CartPage.aspx.designer.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Fan\Collection.aspx.cs">
       <DependentUpon>Collection.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -671,6 +679,7 @@
     <Compile Include="Template\StoreLayoutWithSideNav.master.designer.cs">
       <DependentUpon>StoreLayoutWithSideNav.master</DependentUpon>
     </Compile>
+    <Compile Include="_Code\Helpers\AddToCartHelper.cs" />
     <Compile Include="_Code\Helpers\AuthenticationHelper.cs" />
     <Compile Include="_Code\Helpers\DbHelper.cs" />
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
@@ -684,6 +693,9 @@
     <Compile Include="_Code\Models\Account\PaymentHistoryItem.cs" />
     <Compile Include="_Code\Models\Admin\UsersItem.cs" />
     <Compile Include="_Code\Models\Admin\ProductItem.cs" />
+    <Compile Include="_Code\Models\Cart\CartAlbum.cs" />
+    <Compile Include="_Code\Models\Cart\CartArtist.cs" />
+    <Compile Include="_Code\Models\Cart\CartTrack.cs" />
     <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptListItem.cs" />
@@ -712,7 +724,7 @@
     <Compile Include="_Code\Presenters\Account\SettingsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\ProductsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
-    <Compile Include="_Code\Presenters\Cart\AddToCartPresenter.cs" />
+    <Compile Include="_Code\Presenters\Cart\CartPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\AlbumsPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
     <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
