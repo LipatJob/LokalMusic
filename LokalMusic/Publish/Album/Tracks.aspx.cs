@@ -27,7 +27,7 @@ namespace LokalMusic.Publish
             TrackItemRepeater.DataBind();
 
             int AlbumId = int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
-            addAlbumBtn.PostBackUrl = "~/Publish/Album/" + AlbumId + "/Track/Add";
+            addTrack.HRef = "~/Publish/Album/" + AlbumId + "/Track/Add";
         }
 
         public Tracks()

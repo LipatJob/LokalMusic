@@ -8,6 +8,9 @@ namespace LokalMusic._Code.Helpers
     public class FileSystemHelper
     {
         public const string PICTURE_CONTAINER_NAME = "profilepictures";
+        public const string ALBUMCOVER_CONTAINER_NAME = "albumcover";
+        public const string TRACKS_CONTAINER_NAME = "tracks";
+        public const string CLIPS_CONTAINER_NAME = "clips";
 
         private const string CONNECTION_STRING_NAME = "lokalmusic-fs";
 
