@@ -78,10 +78,10 @@ WHERE AlbumId = @albumId
 
         public void UnlistAlbum(int albumId)
         {
-            string query = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @albumId" +
+            string query = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @albumId " +
                 "SELECT TrackId FROM Track WHERE AlbumId = @albumId";
             var result = DbHelper.ExecuteDataTableQuery(query, ("albumId", albumId));
-
+            
             foreach (DataRow row in result.Rows)
             {
                 int trackId = (int)row["TrackId"];
