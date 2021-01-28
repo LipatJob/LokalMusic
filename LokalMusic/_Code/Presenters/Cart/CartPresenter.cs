@@ -8,13 +8,10 @@ namespace LokalMusic._Code.Presenters.Cart
 {
     public class CartPresenter
     {
-        private CartRepository repository;
-        public CartPresenter(CartRepository repo)
+        public CartPresenter()
         {
-            this.repository = repo;
+
         }
-
-
 
     }
 }

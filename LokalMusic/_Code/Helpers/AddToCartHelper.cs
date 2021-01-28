@@ -15,7 +15,6 @@ namespace LokalMusic._Code.Helpers
         public const int ADD_TO_CART_BOUGHT = 3;
         public const int ADD_TO_CART_LOGIN = 4;
 
-        private static CartRepository repo = new CartRepository();
 
         public static int AddProductToCart(int productId)
         {
@@ -23,15 +22,15 @@ namespace LokalMusic._Code.Helpers
             if (!AuthenticationHelper.LoggedIn)
                 return ADD_TO_CART_LOGIN;
 
-            if (repo.IsInCart(productId, AuthenticationHelper.UserId))
+            if (AddToCartRepository.IsInCart(productId, AuthenticationHelper.UserId))
                 return ADD_TO_CART_EXISTING;
 
-            if (repo.IsProductBought(productId, AuthenticationHelper.UserId))
+            if (AddToCartRepository.IsProductBought(productId, AuthenticationHelper.UserId))
                 return ADD_TO_CART_BOUGHT;
 
             // if album is added, remove all of its tracks in the database; or,
             // formulate an sql query that will not obtain cart product tracks, if its album are retrieved
-            if (repo.AddToCart(productId, AuthenticationHelper.UserId) == 0)
+            if (AddToCartRepository.AddToCart(productId, AuthenticationHelper.UserId) == 0)
                 return ADD_TO_CART_ERROR;
 
             return ADD_TO_CART_SUCCESS;

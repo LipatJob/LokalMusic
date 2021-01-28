@@ -6,17 +6,17 @@ using System.Web;
 
 namespace LokalMusic._Code.Repositories.Cart
 {
-    public class CartRepository
+    public class AddToCartRepository
     {
 
-        public bool IsInCart(int productId, int userId)
+        public static bool IsInCart(int productId, int userId)
         {
             string query = "SELECT * FROM UserCart WHERE UserId = @UserId AND ProductId = @ProductId"; // listed artist album or track
 
             return DbHelper.ExecuteScalar(query, ("UserId", userId), ("ProductId", productId)) != null ? true : false;
         }
 
-        public bool IsProductBought(int productId, int userId)
+        public static bool IsProductBought(int productId, int userId)
         {
             string query = "SELECT * FROM OrderInfo WHERE UserId = @UserId AND ProductId = @ProductId"; // check in OrderInfo and ProducTOrder
 
@@ -24,13 +24,13 @@ namespace LokalMusic._Code.Repositories.Cart
             return false;
         }
 
-        public int AddToCart(int productId, int userId)
+        public static int AddToCart(int productId, int userId)
         {
             string query = "INSERT INTO UserCart (ProductId, UserId) VALUES (@ProductId, @UserId)";
             return DbHelper.ExecuteNonQuery(query, ("ProductId", productId), ("UserId", userId));
         }
 
-        public int RemoveFromCart(int productId, int userId)
+        public static int RemoveFromCart(int productId, int userId)
         {
             return 0;
         }
