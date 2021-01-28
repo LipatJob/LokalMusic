@@ -728,6 +728,7 @@
     <Compile Include="_Code\Repositories\Admin\ProductsRepository.cs" />
     <Compile Include="_Code\Repositories\Admin\UsersRepository.cs" />
     <Compile Include="_Code\Repositories\Cart\AddToCartRepository.cs" />
+    <Compile Include="_Code\Repositories\Cart\CartRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReceiptsRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />

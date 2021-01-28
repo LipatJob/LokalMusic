@@ -11,14 +11,14 @@ namespace LokalMusic._Code.Models.Cart
         {
         }
 
-        public CartAlbum(int albumId, int artistId, string albumName, string artistName, decimal price, string albumCoverAddres)
+        public CartAlbum(int albumId, int artistId, string albumName, string artistName, decimal price, string albumCoverAddress)
         {
             AlbumId = albumId;
             ArtistId = artistId;
             AlbumName = albumName;
             ArtistName = artistName;
             Price = price;
-            AlbumCoverAddres = albumCoverAddres;
+            AlbumCoverAddress = albumCoverAddress;
         }
 
         public int AlbumId { get; set; }
@@ -28,7 +28,7 @@ namespace LokalMusic._Code.Models.Cart
         public string ArtistName { get; set; }
         public Decimal Price { get; set; }
 
-        public string AlbumCoverAddres { get; set; }
+        public string AlbumCoverAddress { get; set; }
 
         public int TrackCount { get; set; }
         public int TrackTotalMinutes { get; set; }
