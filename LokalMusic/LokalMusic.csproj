@@ -280,6 +280,7 @@
     <Content Include="Account\Signout.aspx" />
     <Content Include="Admin\Products.aspx" />
     <Content Include="Admin\Users.aspx" />
+    <Content Include="Cart\CartPage.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -495,6 +496,13 @@
     </Compile>
     <Compile Include="Admin\Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cart\CartPage.aspx.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cart\CartPage.aspx.designer.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Fan\Collection.aspx.cs">
       <DependentUpon>Collection.aspx</DependentUpon>
