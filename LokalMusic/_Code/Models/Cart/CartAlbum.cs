@@ -7,6 +7,19 @@ namespace LokalMusic._Code.Models.Cart
 {
     public class CartAlbum
     {
+        public CartAlbum()
+        {
+        }
+
+        public CartAlbum(int albumId, int artistId, string albumName, string artistName, decimal price, string albumCoverAddres)
+        {
+            AlbumId = albumId;
+            ArtistId = artistId;
+            AlbumName = albumName;
+            ArtistName = artistName;
+            Price = price;
+            AlbumCoverAddres = albumCoverAddres;
+        }
 
         public int AlbumId { get; set; }
         public int ArtistId { get; set; }
