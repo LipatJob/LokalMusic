@@ -38,6 +38,8 @@ namespace LokalMusic._Code.Presenters.Cart
             if (repo.IsProductBought(productId, AuthenticationHelper.UserId))
                 return ADD_TO_CART_BOUGHT;
 
+            // if album is added, remove all of its tracks in the database; or,
+            // formulate an sql query that will not obtain cart product tracks, if its album are retrieved
             if (repo.AddToCart(productId, AuthenticationHelper.UserId) == 0)
                 return ADD_TO_CART_ERROR;
 
