@@ -655,6 +655,7 @@
     <Compile Include="Template\StoreLayoutWithSideNav.master.designer.cs">
       <DependentUpon>StoreLayoutWithSideNav.master</DependentUpon>
     </Compile>
+    <Compile Include="_Code\Helpers\AddToCartHelper.cs" />
     <Compile Include="_Code\Helpers\AuthenticationHelper.cs" />
     <Compile Include="_Code\Helpers\DbHelper.cs" />
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
@@ -692,7 +693,6 @@
     <Compile Include="_Code\Presenters\Account\SettingsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\ProductsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
-    <Compile Include="_Code\Presenters\Cart\AddToCartPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\AlbumsPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
     <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
@@ -773,6 +773,7 @@
   <ItemGroup>
     <Folder Include="About\" />
     <Folder Include="Pages\" />
+    <Folder Include="_Code\Presenters\Cart\" />
     <Folder Include="_Code\Views\Admin\" />
     <Folder Include="_Code\Views\Fan\" />
     <Folder Include="_Code\Views\Store\Details\" />

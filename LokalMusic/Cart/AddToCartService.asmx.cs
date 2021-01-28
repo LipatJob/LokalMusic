@@ -1,4 +1,4 @@
-﻿using LokalMusic._Code.Presenters.Cart;
+﻿using LokalMusic._Code.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +24,8 @@ namespace LokalMusic.Store
         public string AddProductToCart(string productId)
         {
             // add try catch
-            int addStatus = AddToCartPresenter.AddProductToCart(int.Parse(productId));
-            return AddToCartPresenter.GetAddToCartMessage(addStatus);
+            int addToCartStatus = AddToCartHelper.AddProductToCart(int.Parse(productId));
+            return AddToCartHelper.GetAddToCartMessage(addToCartStatus);
         }
     }
 }
