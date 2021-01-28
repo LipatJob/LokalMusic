@@ -23,37 +23,43 @@
             <div class="col-xl-9">
 
                 <%--individual album--%>
-                <div class="card border-0 mb-5 shadow">
-                    <div class="card-body row">
+                <asp:Repeater ID="albumContainer" runat="server">
+                    <ItemTemplate>
 
-                        <%--checkbox--%>
-                        <div class="col-md-1 mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4">
-                            <input type="checkbox" id="" class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"/>
-                        </div>
+                        <div class="card border-0 mb-3 shadow">
+                            <div class="card-body row">
 
-                        <%--image--%>
-                        <div class="col-md-3 m-0 p-0">
-                            <img src="../Content/Images/default_cover.jpg" class="mx-auto d-block img-responsive" width="200" height="200"/>
-                        </div>
+                                <%--checkbox--%>
+                                <div class="col-md-1 mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4">
+                                    <input type="checkbox" id="" class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"/>
+                                </div>
 
-                        <%--title and other description--%>
-                        <div class="col-md-6">
-                            <h6 class="" style="font-size:16px; color: #C4C4C4">Album</h6>
-                            <h4 class="card-title" style="color:#AA3A3A; font-size:28px;">Album title</h4>
-                            <h6 class="pb-xl-3 pb-md-3" style="font-size:16px; color: #5E5E5E">By artist name</h6>
+                                <%--image--%>
+                                <div class="col-md-3 m-0 p-0">
+                                    <img src=<%#Eval("AlbumCoverAddress") %> class="mx-auto d-block img-responsive" width="200" height="200"/>
+                                </div>
 
-                            <div class="mt-xl-5 pt-xl-4 mt-md-5 pt-md-4 mt-sm-0 pt-sm-0">
-                                <p class="mb-0" style="color:#8F8F8F; font-size: 15px;">5 tracks, 15 minutes.</p>
+                                <%--title and other description--%>
+                                <div class="col-md-6">
+                                    <h6 class="" style="font-size:16px; color: #C4C4C4">Album</h6>
+                                    <h4 class="card-title" style="color:#AA3A3A; font-size:28px;"><%#Eval("AlbumName") %></h4>
+                                    <h6 class="pb-xl-3 pb-md-3" style="font-size:16px; color: #5E5E5E">By <%#Eval("ArtistName") %></h6>
+
+                                    <div class="mt-xl-5 pt-xl-4 mt-md-5 pt-md-4 mt-sm-0 pt-sm-0">
+                                        <p class="mb-0" style="color:#8F8F8F; font-size: 15px;"><%#Eval("TrackCount") %> tracks, <%#Eval("TrackTotalMinutes") %> minutes.</p>
+                                    </div>
+                                </div>
+
+                                <%--price--%>
+                                <div class="col-md-2">
+                                    <p class="text-right" style="color:#AA3A3A; font-size:29px; font-weight:600">₱<%#Eval("Price") %></p>
+                                </div>
+
                             </div>
                         </div>
 
-                        <%--price--%>
-                        <div class="col-md-2">
-                            <p class="text-right" style="color:#AA3A3A; font-size:29px; font-weight:600">₱600</p>
-                        </div>
-
-                    </div>
-                </div>
+                    </ItemTemplate>
+                </asp:Repeater>
 
                 <%--individual tracks, 2 repeater, 2nd repeater data source is eval--%>
                 <div class="card border-0 mb-5 shadow">
