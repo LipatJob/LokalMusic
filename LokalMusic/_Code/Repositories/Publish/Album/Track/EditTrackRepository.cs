@@ -85,7 +85,7 @@ WHERE TrackId = @trackId
                 ("trackName", model.TrackName),
                 ("price", model.Price),
                 ("trackId", trackId),
-                ("genreId", model.Genre),
+                ("genreId", genreId),
                 ("description", model.Description),
                 ("trackFileDuration", model.TrackFileDuration),
                 ("clipFileDuration", model.ClipFileDuration)
