@@ -96,7 +96,7 @@ namespace LokalMusic._Code.Repositories.Cart
             return artists.Count > 0 ? artists : null;
         }
 
-        public List<CartTrack> GetTracks(int customerId, string albumIds)
+        public List<CartTrack> GetTracks(int customerId, int albumArtistId)
         {
             List<CartTrack> tracks = new List<CartTrack>();
 
@@ -116,13 +116,26 @@ namespace LokalMusic._Code.Repositories.Cart
                            "ON Album.AlbumCoverID = FileInfo.FileId " +
                            "INNER JOIN UserInfo " +
                            "ON Album.UserId = UserInfo.UserId " +
-                           "WHERE UserCart.UserId = @CustomerId " +
-                           "AND Album.AlbumId NOT IN(@AlbumIds)  " +
+                           "WHERE UserCart.UserId = @CustomerId AND Album.UserId = @ArtistId " +
                            "AND TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
                            "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
-                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')" +
+                           "AND Album.AlbumId NOT IN " +
+                                                    "(SELECT Album.AlbumId " +
+                                                    "FROM UserCart " +
+                                                    "INNER JOIN Product as AlbumProduct " +
+                                                    "ON UserCart.ProductId = AlbumProduct.ProductId " +
+                                                    "INNER JOIN Album " +
+                                                    "ON AlbumProduct.ProductId = Album.AlbumId " +
+                                                    "INNER JOIN ArtistInfo " +
+                                                    "ON Album.UserId = ArtistInfo.UserId " +
+                                                    "INNER JOIN UserInfo " +
+                                                    "ON Album.UserId = UserInfo.UserId " +
+                                                    "INNER JOIN FileInfo " +
+                                                    "ON Album.AlbumCoverID = FileInfo.FileId " +
+                                                    "WHERE UserCart.UserId = @CustomerId)";
 
-            var values = DbHelper.ExecuteDataTableQuery(query, ("CustomerId", customerId), ("AlbumIds", albumIds));
+            var values = DbHelper.ExecuteDataTableQuery(query, ("CustomerId", customerId), ("ArtistId", albumArtistId));
             bool valid = values.Rows.Count > 0;
 
             if (valid)
@@ -139,7 +152,7 @@ namespace LokalMusic._Code.Repositories.Cart
 
                         Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
 
-                        TimeSpan.Parse(values.Rows[i]["AudioLength"].ToString()).TotalMinutes,
+                        Math.Round(TimeSpan.Parse(values.Rows[i]["AudioLength"].ToString()).TotalMinutes, 2),
                         values.Rows[i]["AlbumCover"].ToString()
                         );
 

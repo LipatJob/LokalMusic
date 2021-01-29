@@ -29,7 +29,29 @@ namespace LokalMusic._Code.Presenters.Cart
         {
             return this.repository.GetAlbums(AuthenticationHelper.UserId);
 
-        } 
+        }
 
+        public List<CartArtist> GetCartArtists()
+        {
+            List<CartArtist> relatedArtistInCart = this.repository.GetArtist(AuthenticationHelper.UserId);
+
+            if (relatedArtistInCart == null)
+                return null;
+
+            List<CartArtist> artists = new List<CartArtist>();
+
+            // not null
+            foreach(CartArtist artist in relatedArtistInCart)
+            {
+                artist.tracks = this.repository.GetTracks(AuthenticationHelper.UserId, artist.ArtistId);
+
+                // add this artis if it has tracks
+                // in the user's cart
+                if (artist.tracks != null)
+                    artists.Add(artist);                    
+            }
+
+            return artists;
+        }
     }
 }
