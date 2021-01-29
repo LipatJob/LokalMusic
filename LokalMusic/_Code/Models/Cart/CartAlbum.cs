@@ -41,5 +41,13 @@ namespace LokalMusic._Code.Models.Cart
             }
         }
 
+        public string AlbumArtistUrl
+        {
+            get
+            {
+                return $"~/Store/" + this.ArtistId;
+            }
+        }
+
     }
 }

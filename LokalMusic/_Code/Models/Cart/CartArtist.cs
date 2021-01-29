@@ -29,6 +29,13 @@ namespace LokalMusic._Code.Models.Cart
         public string ArtistName { get; set; }
         public List<CartTrack> tracks { get; set; }
 
+        public string DetailsUrl 
+        { 
+            get 
+            {
+                return $"~/Store/" + this.ArtistId;
+            }
+        }
 
     }
 }
