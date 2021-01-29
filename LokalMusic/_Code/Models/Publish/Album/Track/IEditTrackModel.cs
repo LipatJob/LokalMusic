@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace LokalMusic._Code.Models.Publish.Album.Track
+{
+    public interface IEditTrackModel
+    {
+        string ArtistName { get; set; }
+
+        string AlbumName { get; set; }
+
+        string TrackName { get; set; }
+
+        string Genre { get; set; }
+
+        string Description { get; set; }
+
+        decimal Price { get; set; }
+
+        string TrackFile { get; set; }
+
+        TimeSpan TrackFileDuration { get; set; }
+
+        string ClipFile { get; set; }
+
+        TimeSpan ClipFileDuration { get; set; }
+    }
+}

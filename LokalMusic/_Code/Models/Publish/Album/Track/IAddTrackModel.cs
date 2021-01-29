@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LokalMusic._Code.Models.Publish.Album.Track
 {
-    public interface AddTrackModel
+    public interface IAddTrackModel
     {
         string ArtistName { get; set; }
 
