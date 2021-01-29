@@ -16,6 +16,7 @@ namespace LokalMusic.Cart
         protected CartPresenter presenter;
 
         protected List<CartAlbum> albums;
+        protected List<CartArtist> artists; // this model contains the tracks
 
         public CartPage()
         {
@@ -29,6 +30,9 @@ namespace LokalMusic.Cart
             presenter.PageLoad();
 
             this.albums = this.presenter.GetCartAlbums();
+
+            this.artists = this.presenter.GetCartArtists();
+
             this.BindModel();
         }
 
@@ -37,6 +41,10 @@ namespace LokalMusic.Cart
             //albums
             albumContainer.DataSource = this.albums;
             albumContainer.DataBind();
+
+            // artist with their tracks
+            artistsContainer.DataSource = this.artists;
+            artistsContainer.DataBind();
         }
 
     }
