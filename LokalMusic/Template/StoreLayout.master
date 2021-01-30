@@ -138,7 +138,7 @@
         function AddToCart(productId) {
             $.ajax({
                 type: "POST",
-                url: "/Cart/AddToCartService.asmx/AddProductToCart",
+                url: "/Cart/CartService.asmx/AddProductToCart",
                 contentType: "application/json; charset=utf-8",
                 data: "{ 'productId' : '" + productId + "'}",
                 //data: JSON.stringify(trackId),

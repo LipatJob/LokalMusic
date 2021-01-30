@@ -53,5 +53,12 @@ namespace LokalMusic._Code.Presenters.Cart
 
             return artists;
         }
+
+        public void ProcessCustomerOrder(List<CheckoutItem> checkoutItems)
+        {
+
+
+
+        }
     }
 }

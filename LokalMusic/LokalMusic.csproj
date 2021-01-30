@@ -443,7 +443,7 @@
     <Content Include="Account\Login.aspx">
       <BrowseToURL>~/Account/Login.aspx</BrowseToURL>
     </Content>
-    <Content Include="Cart\AddToCartService.asmx" />
+    <Content Include="Cart\CartService.asmx" />
     <Content Include="Store\AlbumsPage.aspx" />
     <Content Include="Store\ArtistsPage.aspx" />
     <Content Include="Store\Details\AlbumDetails.aspx" />
@@ -577,8 +577,8 @@
     <Compile Include="Publish\Album\Tracks.aspx.designer.cs">
       <DependentUpon>Tracks.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Cart\AddToCartService.asmx.cs">
-      <DependentUpon>AddToCartService.asmx</DependentUpon>
+    <Compile Include="Cart\CartService.asmx.cs">
+      <DependentUpon>CartService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Store\AlbumsPage.aspx.cs">
@@ -696,6 +696,7 @@
     <Compile Include="_Code\Models\Cart\CartAlbum.cs" />
     <Compile Include="_Code\Models\Cart\CartArtist.cs" />
     <Compile Include="_Code\Models\Cart\CartTrack.cs" />
+    <Compile Include="_Code\Models\Cart\CheckoutItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptListItem.cs" />
