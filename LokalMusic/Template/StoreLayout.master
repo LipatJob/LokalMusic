@@ -9,10 +9,40 @@
             font-weight: 500;
             color: #5E5E5E;
         }
+
+        h1 {
+            font-size: 25px;
+            font-family:Montserrat;
+        }
+
+        .emphasize {
+            color:#AA3A3A;
+            font-weight: 700;
+            font-size:16px;
+        }
+
+        .img-hoverable:hover{
+            border: 1px solid #F82B2B;
+        }
+
+        .titleLink{
+            color: #B82828;
+            font-weight: 700;
+        }
+
+        .titleLink:hover{
+            text-decoration: none;
+            color: #ff7171;
+        }
+
+        button {
+            border: none;
+            background: none;
+        }
     </style>
 
     <%--Nav--%>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <a class="navbar-brand" href="../Store/Home.aspx" runat="server">
             <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
         </a>
@@ -35,7 +65,7 @@
 
             <%--Authentication--%>
             <% if (AuthenticationHelper.LoggedIn)
-                {%>
+            {%>
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown ml-xl-4">
@@ -57,24 +87,29 @@
                             <a class="dropdown-item" href="~/Admin/Products" runat="server">Admin</a>
                             <div class="dropdown-divider"></div>
                             <%} %>
-                            <a class="dropdown-item" href="~/Account/Signout" runat="server">Sign out</a>
+                            <% else if (AuthenticationHelper.UserType == AuthenticationHelper.FINANCE_USER_TYPE)%>
+                            <%{%>
+                            <a class="dropdown-item" href="~/Finance/Reports" runat="server">Finance</a>
+                            <div class="dropdown-divider"></div>
+                            <%} %>
+                            <a class="dropdown-item" href="~/Account/Signout"  runat="server">Sign out</a>
                         </div>
                     </li>
                 </ul>
             </div>
             <%}
-                else
-                {%>
+            else
+            {%>
             <div>
                 <ul class="navbar-nav ml-xl-4">
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/Account/Register/Fan" runat="server">Join</a>
+                        <a class="nav-link" href="~/Account/Register/Fan" target="_blank" runat="server">Join</a>
                     </li>
                     <li>
                         <span class="nav-link">or</span>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>
+                        <a class="nav-link" href="~/Account/Login" target="_blank" runat="server">Sign In</a>
                     </li>
                 </ul>
             </div>
@@ -84,7 +119,7 @@
             <div>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link ml-xl-4" href="#">
+                        <a class="nav-link ml-xl-4" href="../Cart/CartPage.aspx">
                             <img src="~/Content/Images/cart.png" width="20" height="20" class="d-block my-auto" alt="" runat="server">
                         </a>
                     </li>
@@ -97,5 +132,26 @@
     <div class="body-content">
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
+
+    <%--AJAX Add to Cart--%>
+    <script>
+        function AddToCart(productId) {
+            $.ajax({
+                type: "POST",
+                url: "/Cart/AddToCartService.asmx/AddProductToCart",
+                contentType: "application/json; charset=utf-8",
+                data: "{ 'productId' : '" + productId + "'}",
+                //data: JSON.stringify(trackId),
+                dataType: "json",
+                success: function (message) {
+                    alert(message.d);
+                },
+                error: function () {
+                    alert("An Error has occured");
+                }
+            });
+            return false;
+        }
+    </script>
 
 </asp:Content>

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Store
 {
@@ -27,12 +24,20 @@ namespace LokalMusic._Code.Models.Store
         public string ArtistProfileImage { get; set; }
 
         // Processed in presenter
-        public List<string> Genres { get; set; }
+        public string Genre { get; set; }
 
         // Processed in presenter
         public int AlbumCount { get; set; }
         public int TrackTotalCount { get; set; }
+        public TrackSummary TrackTop1 { get; set; }
+        public TrackSummary TrackTop2 { get; set; }
 
-
+        public string DetailsUrl
+        {
+            get
+            {
+                return $"~/Store/" + this.ArtistId;
+            }
+        }
     }
 }

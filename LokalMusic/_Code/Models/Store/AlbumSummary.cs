@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Store
 {
@@ -32,11 +29,19 @@ namespace LokalMusic._Code.Models.Store
         public DateTime DateReleased { get; set; }
 
         // processed in presenter
-        public List<string> Genre { get; set; }
+        public string Genre { get; set; }
 
         // processed in presenter, not in repository
-        public int TrackCounts { get; set; }
-        public int TrackMinutes { get; set; }
+        public int TrackCount { get; set; }
+        public double TrackMinutes { get; set; }
+
+        public string DetailsUrl
+        {
+            get
+            {
+                return $"~/Store/" + this.ArtistId + "/" + this.AlbumId;
+            }
+        }
 
     }
 }

@@ -16,39 +16,19 @@ namespace LokalMusic._Code.Repositories.Admin
         {
             string query = @"
 SELECT
-	[AlbumTracks].ProductId,
-	[AlbumTracks].AlbumId,
+	[Product].ProductId,
+	[Album].AlbumId,
 	[Product].ProductName,
 	[Product].DateAdded,
 	[ArtistInfo].ArtistName,
 	[ProductType].TypeName,
 	[ProductStatus].StatusName
-FROM
-	(SELECT ProductId, [Track].AlbumId
-	FROM [Track]
-		INNER JOIN [Product] ON
-			[Product].ProductId = [Track].TrackId
-		INNER JOIN [Album] ON
-			[Track].AlbumId = [Album].AlbumId
-		INNER JOIN [ArtistInfo] ON
-			[ArtistInfo].UserId = [Album].UserId
-	UNION
-	SELECT ProductId, AlbumId
-	FROM [Album]
-		INNER JOIN [Product] ON
-			[Product].ProductId = [Album].AlbumId)
-	AS [AlbumTracks]
-
-INNER JOIN [Product] ON
-	[Product].ProductId = [AlbumTracks].ProductId
-INNER JOIN [Album] ON
-	[Album].AlbumId = [AlbumTracks].AlbumId
-INNER JOIN [ArtistInfo] ON
-	[ArtistInfo].UserId = [Album].UserId
-INNER JOIN [ProductStatus] ON
-	[ProductStatus].ProductStatusId = [Product].ProductStatusId
-INNER JOIN [ProductType] ON
-	[ProductType].ProductTypeId = [Product].ProductTypeId
+FROM [Product]
+	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
+	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId, [Product].ProductId)
+	LEFT JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
+	INNER JOIN [ProductStatus] ON [ProductStatus].ProductStatusId = [Product].ProductStatusId
+	INNER JOIN [ProductType] ON	[ProductType].ProductTypeId = [Product].ProductTypeId
 ORDER BY [Product].DateAdded DESC;
 ";
             return DbHelper.ExecuteDataTableQuery(query).AsEnumerable().Select((row) =>
@@ -82,7 +62,7 @@ ORDER BY [Product].DateAdded DESC;
 UPDATE [Product]
 SET ProductStatusId = (SELECT ProductStatusId
 						FROM [ProductStatus]
-						WHERE StatusName  = @ProductStatus)
+						WHERE StatusName = @ProductStatus)
 WHERE ProductId = @ProductId";
             DbHelper.ExecuteNonQuery(
                 query,

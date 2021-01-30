@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template/StoreLayoutWithSideNav.master" AutoEventWireup="true" CodeBehind="TracksPage.aspx.cs" Inherits="LokalMusic.Store.TracksPage" %>
+﻿<%@ Page Title="Tracks" Language="C#" MasterPageFile="~/Template/StoreLayoutWithSideNav.master" AutoEventWireup="true" CodeBehind="TracksPage.aspx.cs" Inherits="LokalMusic.Store.TracksPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
@@ -11,6 +11,7 @@
         thead tr td {
             font-size: 13px;
         }
+
     </style>
 
     <div class="container">
@@ -18,7 +19,7 @@
 
         <div class="pt-4 pb-4 pl-3 pr-3" style="background-color: #F4F4F4;">
             <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
-                <table class="table table-hover">
+                <table class="table table-striped">
                     <thead>
                         <tr class="text-center font-weight-bold">
                             <td></td>
@@ -33,26 +34,35 @@
                     </thead>
                 
                     <tbody>
+
                         <asp:Repeater ID="trackContainer" runat="server">
                             <ItemTemplate>
                                 <tr class="text-center">
                                     <td class="float-right">
-                                        <img src="../Content/Images/default_cover.jpg" width="30" height="30" class="mx-auto" runat="server"/>
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank">
+                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable"/>
+                                        </a>
                                     </td>   
-                                    <td class="emphasize"><%#Eval("TrackName") %></td>
+                                    <td class="emphasize">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank" class="titleLink">
+                                            <%#Eval("TrackName") %>
+                                        </a>
+                                    </td>
                                     <td><%#Eval("AlbumName") %></td>
                                     <td><%#Eval("ArtistName") %></td>
                                     <td><%#Eval("Genre") %></td>
-                                    <td><%#Eval("TrackDuration") %></td>
+                                    <td><%#Eval("AudioDuration") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
                                     <td>
-                                        <a href="#">
-                                            <img src="../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
-                                        </a>
+                                        <button onclick='AddToCart(<%#Eval("TrackId")%>); return false;'>
+                                            <img src="../Content/Images/cart.png" class="" width="20" height="20" runat="server" />
+                                        </button>
                                     </td>
                                 </tr>
+                                </a>
                             </ItemTemplate>
                         </asp:Repeater>
+
                     </tbody>
                 </table>
             </div>

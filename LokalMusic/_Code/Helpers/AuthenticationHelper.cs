@@ -9,6 +9,7 @@ namespace LokalMusic._Code.Helpers
         public const string FINANCE_USER_TYPE = "FINANCE";
         public const string FAN_USER_TYPE = "FAN";
         public const string GUEST_USER_TYPE = "GUEST";
+        public const int GUEST_USER_ID = -1;
 
         private const string UserIdSessionName = "USERID";
         private const string UsernameSessionName = "USERNAME";
@@ -16,10 +17,20 @@ namespace LokalMusic._Code.Helpers
         public static int UserId
         {
             set { HttpContext.Current.Session[UserIdSessionName] = value; }
-            get { return (int)(HttpContext.Current.Session[UserIdSessionName] ?? -1); }
+            get
+            {
+                if (HttpContext.Current.Session[UserIdSessionName] == null)
+                {
+                    return GUEST_USER_ID;
+                }
+                else
+                {
+                    return (int)HttpContext.Current.Session[UserIdSessionName];
+                }
+            }
         }
 
-        public static bool LoggedIn { get { return UserId != -1; } }
+        public static bool LoggedIn { get { return UserId != GUEST_USER_ID; } }
 
         public static void ClearUserSession()
         {

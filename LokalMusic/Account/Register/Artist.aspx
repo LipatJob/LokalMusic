@@ -10,7 +10,7 @@
         }
 
             .signin-form > *{
-                 max-width:100%; 
+                 max-width:100%;
                  width:100%
             }
 
@@ -20,7 +20,7 @@
         }
 
         .form-control {
-             max-width:100%; 
+             max-width:100%;
              width:100%
         }
     </style>

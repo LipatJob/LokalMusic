@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template/StoreLayoutWithSideNav.master" AutoEventWireup="true" CodeBehind="AlbumsPage.aspx.cs" Inherits="LokalMusic.Store.AlbumsPage" %>
+﻿<%@ Page Title="Albums" Language="C#" MasterPageFile="~/Template/StoreLayoutWithSideNav.master" AutoEventWireup="true" CodeBehind="AlbumsPage.aspx.cs" Inherits="LokalMusic.Store.AlbumsPage" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <style>
@@ -24,57 +25,48 @@
     <div class="container">
         <h1 class="mb-4">Lokal Albums</h1>
 
-        <div class="pt-4 pb-4 pl-3 pr-3" style="background-color: #F4F4F4;">
+        <div class="pt-3 pb-2 pl-3 pr-3" style="background-color: #F4F4F4;">
 
-            <% foreach (LokalMusic._Code.Models.Store.AlbumProduct album in albums)
-            {%>
+            <asp:Repeater ID="albumContainer" runat="server">
+                <ItemTemplate>
 
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body">
-                        <div class="row w-100">
-                            <div class="col-xl-3">
-                                <a href="#">
-                                    <%Response.Write("<img src='"+ album.FileName + "' alt='album_cover' class='d-block mx-auto' width='200' height='200' runat='server'/>"); %>
-                                    <%--<img src=<%Response.Write(album.FileName);%> alt="album_cover" class="d-block mx-auto" width="200" height="200" runat="server"/>--%>
-                                </a>
-                            </div>
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
 
-                            <div class="col-md-6 col-md-6">
-                                <h4 class="album-title"><%Response.Write(album.AlbumName); %></h4>
-                                <p style="font-size:14px; color: #5E5E5E; margin-top: -10px; font-weight:400;"><%Response.Write(album.ArtistName); %></p>
-                                <div class="mt-5 mt-md-0 mt-sm-0 mt-0">
-                                    <%
-                                        int trackCount = 0;
-                                        double trackMinutes = 0;
-                                        List<string> genre = new List<string>();
-                                        foreach (var track in album.Tracks)
-                                        {
-                                            trackCount += 1;
-                                            trackMinutes += track.TrackDuration.TotalMinutes;
-                                            if (!genre.Contains(track.Genre))
-                                                genre.Add(track.Genre);
-                                        }
-                                        trackMinutes = Math.Round(trackMinutes, 2);
+                            <div class="row w-100">
+                                <div class="col-xl-3">
+                                    <a href=<%#Eval("DetailsUrl") %> runat="server">
+                                        <img src=<%#Eval("AlbumCover")%> alt="album_cover" class="d-block mx-auto mb-xl-0 mb-sm-2 img-hoverable" width="200" height="200"/>
+                                    </a>
+                                </div>
 
-                                    %>
+                                <div class="col-md-6 col-md-6">
+                                    <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink"><h4 class="album-title"><%#Eval("AlbumName")%></h4></a>
+                                    <p style="font-size:14px; color: #5E5E5E; margin-top: -10px; font-weight:400;"><%#Eval("ArtistName")%></p>
+                                    
+                                    <div class="pt-xl-3"></div>
 
-                                    <p style="font-size:13px; color: #8F8F8F; font-weight:400;"><%Response.Write(trackCount + " track(s), " + trackMinutes + " minutes"); %></p>
-                                    <p style="font-size:13px; color: #8F8F8F; margin-top: -15px; font-weight:500;">released <%Response.Write(album.DateReleased.ToLongDateString()); %></p>
-                                    <p style="font-size:13px; color: #C4C4C4; margin-top: -15px; font-weight:400;"><%Response.Write("Genre: " + string.Join(", ", genre));%></p>
-                                </div>                            
-                            </div>
+                                    <div class="mt-xl-5 mt-md-3 mb-0">
+                                        <p style="font-size:13px; color: #8F8F8F; font-weight:400;"><%#Eval("TrackCount")%> tracks, <%#Eval("TrackMinutes") %> minutes</p>
+                                        <p style="font-size:13px; color: #8F8F8F; margin-top: -15px; font-weight:500;">released <%#Eval("DateReleased", "{0:MMMM dd, yyyy}") %></p>
+                                        <p style="font-size:13px; color: #C4C4C4; margin-top: -15px; font-weight:400;">Genre(s): <%#Eval("Genre")%></p>
+                                    </div>                            
+                                </div>
 
-                            <div class="col-md-3 col-xl-3 col-md-6">
-                                <div class="float-right">
-                                    <h4 class="album-price">₱350.00</h4>
-                                    <a href="" class="btn btn-danger float-right" style="background-color: #B82828; font-size: 12px; font-weight: 600">Add to Cart</a>
+                                <div class="col-md-3 col-xl-3 col-md-6 text-right">
+                                    <h4 class="album-price">₱<%#Eval("Price")%></h4>
+                                    
+                                    <div class="mt-xl-4 pt-xl-5 mt-md-5">
+                                        <%--GetURL--%>
+                                        <a class="btn btn-danger mt-xl-5 mt-md-3" style="background-color: #B82828; font-size: 12px; font-weight: 600"  onclick='AddToCart(<%#Eval("AlbumId")%>); return false;'>Add to Cart</a>     
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            <%} %>
+                </ItemTemplate>
+            </asp:Repeater>
 
         </div>
 

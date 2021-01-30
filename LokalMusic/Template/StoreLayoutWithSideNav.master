@@ -2,14 +2,16 @@
 
 <asp:Content ID="StoreContentWithSideNav" ContentPlaceHolderID="MainContent" runat="server">
 
-    <style type="text/css" scoped>
+    <style>
+        
         /* The side navigation menu */
         .sidenav {
+            
             height: 100%; /* 100% Full-height */
             width: 200px; /* 0 width - change this with JavaScript */
             position: fixed; /* Stay in place */
-            z-index: 1; /* Stay on top */
-            /*top: 0;*/ /* Stay at the top */
+            z-index: 0; /* Stay on top */
+            top: 2; /* Stay at the top */
             left: 0;
             background-color: #FAFAFA;
             overflow-x: hidden; /* Disable horizontal scroll */
@@ -29,8 +31,8 @@
         }
 
         /* When you mouse over the navigation links, change their color */
-        .sidenav a:hover {
-
+        .sidenav a:active, .sidenav a:after, .sidenav a:current {
+            color:red;
         }
 
         .sidenav .side-links{
@@ -63,73 +65,73 @@
             .sidenav a {font-size: 18px;}
         }
 
-        h1 {
-            font-size: 25px;
-            font-family:Montserrat;
-        }
-
-        .emphasize {
-            color:#AA3A3A; 
-            font-weight: 700; 
-            font-size:16px;
-        }
+        
 
         thead{
             font-family: Montserrat;
             font-size: 15px;
         }
+
+        .my-button{
+            font-family:Montserrat;
+            background-color: #FAFAFA;
+            font-size: 13px;
+            font-weight: 600;
+            color: black
+        }
+
+        .filter-btn{
+            font-family:Montserrat;
+            background-color: #FAFAFA;
+            font-size: 13px;
+            font-weight: 600;
+            color: #F82B2B;
+        }
     </style>
 
-    <div id="product-display" class="sidenav">
+    <div id="product-display" class="sidenav sticky">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         
         <div class="text-center mt-3 linkContainer">
             <p>Display By</p>
             <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
-            <a class="side-links" id="tracks_page" runat="server">Lokal Track</a>
-            <a class="side-links" id="albums_page" runat="server">Lokal Album</a>
-            <a href="" class="side-links" id="artists_page">Lokal Artists</a>
+            <a class="side-links" id="tracks_page" runat="server">Lokal Tracks</a>
+            <a class="side-links" ID="albums_page" runat="server">Lokal Albums</a>
+            <a class="side-links" ID="artists_page" runat="server">Lokal Artists</a>
             <hr style="width: 150px; background:#525252;"/>
-
             <p class="mt-5">Sort By</p>
             <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
-            <a href="" class="side-links" id="sort_a_z" onclick="sortClick('TL')">Title</a>
-            <a href="" class="side-links" id="sort_z_a" onclick="sortClick('PR')">Price</a>
-            <a href="" class="side-links" id="recently_added" onclick="sortClick('RA')">Recently Added</a>
+            <asp:Button ID="sort1" OnClick="SortClick" CssClass="my-button border-0 mx-auto d-block mt-3" runat="server" Text="Recently Added" CommandArgument="s1"/>
+            <asp:Button ID="sort2" OnClick="SortClick" CssClass="my-button border-0 mx-auto d-block mt-3" runat="server" Text="Title" CommandArgument="s2"/>
+            <asp:Button ID="sort3" OnClick="SortClick" CssClass="my-button border-0 mx-auto d-block mt-3 mb-3" runat="server" Text="Price" CommandArgument="s3"/>
+            <%--<a runat="server" class="side-links" id="sort_a_z" onclick="sortClick">Title</a>--%>
+            <%--<a runat="server" class="side-links" id="sort_z_a" onclick="sortClick">Price</a>
+            <a runat="server" class="side-links" id="recently_added" onclick="sortClick">Recently Added</a>--%>
 
-            <hr style="margin-top:5px; width: 80px; background:#525252;"/>
-            <a href="" class="side-links" id="order_asc" onclick="orderClick('ASC')">Ascending</a>
-            <a href="" class="side-links" id="order_desc" onclick="orderClick('DESC')">Descending</a>
+            <hr style=" width: 80px; background:#525252;"/>
+            <asp:Button ID="orderASC" OnClick="OrderClick" CssClass="my-button border-0 mx-auto d-block mt-3" runat="server" Text="Ascending" CommandArgument="asc"/>
+            <asp:Button ID="orderDESC" OnClick="OrderClick" CssClass="my-button border-0 mx-auto d-block mt-3 mb-3" runat="server" Text="Descending" CommandArgument="desc"/>
+            <%--<a href="" class="side-links" id="order_asc" onclick="orderClick('ASC')">Ascending</a>
+            <a href="" class="side-links" id="order_desc" onclick="orderClick('DESC')">Descending</a>--%>
+            
             <hr style="width: 150px; background:#525252;"/>
-
-            <button class="btn btn-light" onclick="s()">Filter</button>
+            <%--<asp:Button ID="filter" runat="server" OnClick="filterBtn_Click" Text="Filter" CssClass="filter-btn border-0 mx-auto d-block"/>--%>
+            
         </div>
 
     </div>
 
 
-    <div class="body-content" id="main">
+    <div class="" id="main">
         <span onclick="openNav()">open</span>
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
 
     <script>
-
-        function sortClick(text) {
-            localStorage.setItem("sortby", text);
-        }
-
-        function orderClick(text) {
-            localStorage.setItem("orderby", text);
-        }
-
-        function s() {
-            alert("sort by" + localStorage.getItem("sortby") + " order by" + localStorage.getItem("orderby"));
-        }
-
         function openNav() {
           document.getElementById("product-display").style.width = "200px";
           document.getElementById("main").style.marginLeft = "200px";
+
         }
 
         function closeNav() {
