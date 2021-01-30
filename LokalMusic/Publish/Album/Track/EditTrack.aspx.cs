@@ -44,10 +44,16 @@ namespace LokalMusic.Publish.Album.Track
         {
             if (trackFile.HasFile)
             {
-                string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
-                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
-                TrackFile = fileLocation;
-                TrackFileDuration = new TimeSpan(0, 2, 45);
+                // string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
+                // string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
+                // TrackFile = fileLocation;
+                // TrackFileDuration = new TimeSpan(0, 2, 45);
+                using (var file = new DisposableHttpPostedFileWrapper(trackFile.PostedFile))
+                {
+                    var tfile = TagLib.File.Create(file.fileLocation);
+                    TrackFileDuration = tfile.Properties.Duration;
+                }
+                Response.Write(TrackFileDuration.TotalSeconds);
             }
         }
 
