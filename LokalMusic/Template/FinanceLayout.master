@@ -90,9 +90,10 @@
 
         <%--Nav--%>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="../Store/Home.aspx" runat="server">
                 <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
             </a>
+
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <span class="nav-header">Finance</span>
@@ -110,7 +111,7 @@
 
             <div id="product-display" class="sidenav">
                 <div class="text-center  side-container">
-                    <%-- %>p class="side-links mt-3"><%Response.Write(AuthenticationHelper.Username " "); %></ --%>
+                    <p class="side-links mt-3"><%=AuthenticationHelper.Username%></p>
                     <hr style="width: 150px; background: #525252; margin-top:0px;" />
                     <a href="~/Finance/Reports" runat="server" class="side-links productsSideItem">Reports</a>
                     <a href="~/Finance/Receipts" runat="server" class="side-links usersSideItem">Receipts</a>

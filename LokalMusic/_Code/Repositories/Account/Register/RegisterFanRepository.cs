@@ -14,9 +14,9 @@ namespace LokalMusic._Code.Repositories.Account.Register
             int userTypeId = GetUserTypeId();
             int userStatusId = GetUserStatusId();
 
-            string query =
-                $"INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered) " +
-                $"VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered)";
+            string query =@"
+INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered)
+VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered)";
 
             DbHelper.ExecuteScalar(
                 query,
@@ -30,26 +30,26 @@ namespace LokalMusic._Code.Repositories.Account.Register
 
         public bool IsUsernameUnique(string username)
         {
-            string query = $"SELECT Username from UserInfo WHERE Username = @username;";
+            string query = "SELECT Username from UserInfo WHERE Username = @username;";
             return DbHelper.ExecuteScalar(query, ("username", username)) == null;
         }
 
         public bool IsEmailUnique(string email)
         {
-            string query = $"SELECT Email from UserInfo WHERE Email = @email;";
+            string query = "SELECT Email from UserInfo WHERE Email = @email;";
             return DbHelper.ExecuteScalar(query, ("email", email)) == null;
         }
 
         private int GetUserTypeId()
         {
             // Query ID for user type
-            string query = $"SELECT UserTypeId from UserType WHERE TypeName = @FanTypeName;";
+            string query = "SELECT UserTypeId from UserType WHERE TypeName = @FanTypeName;";
             return (int)DbHelper.ExecuteScalar(query, ("FanTypeName", FAN_TYPE_NAME));
         }
 
         private int GetUserStatusId()
         {
-            string query = $"SELECT UserStatusId from UserStatus WHERE UserStatusName = @ActiveTypeName;";
+            string query = "SELECT UserStatusId from UserStatus WHERE UserStatusName = @ActiveTypeName;";
             return (int)DbHelper.ExecuteScalar(query, ("ActiveTypeName", ACTIVE_TYPE_NAME));
         }
     }

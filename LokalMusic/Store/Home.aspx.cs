@@ -1,14 +1,9 @@
-﻿using LokalMusic._Code.Models.Products;
-using LokalMusic._Code.Models.Store;
+﻿using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Repositories;
 using LokalMusic._Code.Repositories.Store;
 using LokalMusic._Code.Views.Store;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace LokalMusic.Store
 {
@@ -32,9 +27,9 @@ namespace LokalMusic.Store
         protected void Page_Load(object sender, EventArgs e)
         {
             // bind url to view links
-            albumViewAll.HRef = $"~/Store/Albums/{"PR"}/{"ASC"}";
-            //artistViewAll.HRef = $"~/Store/Artist/{"DA"}/{"DESC"}";
-            trackViewAll.HRef = $"~/Store/Tracks/{"PR"}/{"ASC"}";
+            albumViewAll.HRef = $"~/Store/Albums/{"s1"}/{"asc"}";
+            artistViewAll.HRef = $"~/Store/Artists/{"s1"}/{"asc"}";
+            trackViewAll.HRef = $"~/Store/Tracks/{"s1"}/{"asc"}";
 
             this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
             this.topArtists = this.presenter.GetTopArtists();

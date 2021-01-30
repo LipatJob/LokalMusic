@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="LokalMusic.Store.Home" %>
+﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="LokalMusic.Store.Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -21,17 +21,13 @@
 
             border:solid;
             border-width: 1px;
-            border-color: red;
-
+            border-color: #dc3545 ;
+            border-radius: 5px;
             padding: 0px 3px 0px 3px;
         }
 
         .view-all:hover, #best-selling-albums a:hover, #top-artists a:hover, #famous-tracks a:hover{
             text-decoration: none;
-        }
-
-        img:hover{
-            border: 2px dotted red;
         }
 
         .card-body{
@@ -65,19 +61,19 @@
 
                 <div class="col-lg-3 mb-md-3 mb-sm-3 mb-lg-0">
                     <a href="#" class="" target="_blank">
-                        <img src="../Content/Images/testpicture1.jpg" class="w-100 h-100" alt="feature-artist-name"/>
+                        <img src="../Content/Images/testpicture1.jpg" class="w-100 h-100 img-hoverable" alt="feature-artist-name"/>
                     </a>
                 </div>
 
                 <div class="col-lg-3 mb-md-3 mb-sm-3 mb-lg-0">
                     <a href="#" class="" target="_blank">
-                        <img src="../Content/Images/testpicture2.png" class="w-100 h-100" alt="feature-artist-name"/>
+                        <img src="../Content/Images/testpicture2.png" class="w-100 h-100 img-hoverable" alt="feature-artist-name"/>
                     </a>
                 </div>
 
                 <div class="col-lg-3 mb-md-3 mb-sm-3 mb-lg-0">
                     <a href="#" class="" target="_blank">
-                        <img src="../Content/Images/testpicture3.jpg" class="w-100 h-100" alt="feature-artist-name"/>
+                        <img src="../Content/Images/testpicture3.jpg" class="w-100 h-100 img-hoverable" alt="feature-artist-name"/>
                     </a>
                 </div>
             </div>        
@@ -96,7 +92,7 @@
                 <ItemTemplate>
                     <div class="col-md-2">
                         <div class="card border-0">
-                            <a href="#" ><img src="<%#Eval("AlbumCover") %>" class="card-img-top" alt="album-name"/></a>    
+                            <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable" alt="album-name"/></a>    
                             <div class="card-body">
                                 <p><%#Eval("AlbumName")%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
@@ -113,7 +109,7 @@
     <div id="top-artists" class="container mt-4">
         <div class="row mb-4">
             <h5 class="my-auto">Top Artists</h5>
-            <a href="Store/ArtistPage.aspx" class="text-danger ml-2 view-all my-auto" id="artistViewAll" runat="server">View All</a>
+            <a class="text-danger ml-2 view-all my-auto" id="artistViewAll" runat="server">View All</a>
         </div> 
 
         <%--Artists--%>
@@ -122,7 +118,7 @@
                 <ItemTemplate>
                     <div class="col-md-2">
                         <div class="card border-0">
-                            <a href="#" ><img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top" alt="artist-name"/></a>    
+                            <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable" alt="artist-name"/></a>    
                             <div class="card-body">
                                 <p><%#Eval("ArtistName")%></p>
                                 <p style="font-weight: 400;"><%#Eval("Bio")%></p>
@@ -138,7 +134,7 @@
     <div id="famous-tracks" class="container mt-4">
         <div class="row mb-4">
             <h5 class="my-auto">Famous Tracks</h5>
-            <a href="Store/TracksPage.aspx" class="text-danger ml-2 view-all my-auto" id="trackViewAll" runat="server">View All</a>
+            <a class="text-danger ml-2 view-all my-auto" id="trackViewAll" runat="server">View All</a>
         </div>
 
         <%--Track--%>
@@ -147,7 +143,7 @@
                 <ItemTemplate>
                     <div class="col-md-2">
                     <div class="card border-0">
-                        <a href="#" ><img src="<%#Eval("AlbumCover")%>" class="card-img-top" alt="track-name"/></a>
+                        <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name"/></a>
                         <div class="card-body">
                             <p><%#Eval("TrackName")%></p>
                             <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>

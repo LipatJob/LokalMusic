@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Web;
 using System.Web.Routing;
 using Microsoft.AspNet.FriendlyUrls;
 
@@ -23,24 +20,80 @@ namespace LokalMusic
                 "~/Fan/Collection.aspx"
             );
 
+            // Products Page
+
             routes.MapPageRoute(
                 "TrackPage",
                 "Store/Tracks/{SortBy}/{OrderBy}",
-                "~/Store/TracksPage.aspx"
+                "~/Store/TracksPage.aspx",
+                false,
+                new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
                 );
 
             routes.MapPageRoute(
                 "AlbumPage",
                 "Store/Albums/{SortBy}/{OrderBy}",
-                "~/Store/AlbumsPage.aspx"
+                "~/Store/AlbumsPage.aspx",
+                false,
+                new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
                 );
 
-            //routes.MapPageRoute(
-            //    "TrackDetails",
-            //    "Store/{ArtistName}/{AlbumId}/{TrackName}",
-            //    "~/Store/TracksPage.aspx"
-            //);
+            routes.MapPageRoute(
+                "ArtistPage",
+                "Store/Artists/{SortBy}/{OrderBy}",
+                "~/Store/ArtistsPage.aspx",
+                false,
+                new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
+                );
 
+            // End Products Page
+
+            // Product Details
+
+            routes.MapPageRoute(
+                "TrackDetails",
+                "Store/{ArtistId}/{AlbumId}/{TrackID}",
+                "~/Store/Details/TrackDetails.aspx");
+
+            routes.MapPageRoute(
+                "AlbumDetails",
+                "Store/{ArtistId}/{AlbumId}",
+                "~/Store/Details/AlbumDetails.aspx");
+
+            routes.MapPageRoute(
+                "ArtistDetails",
+                "Store/{ArtistId}",
+                "~/Store/Details/ArtistDetails.aspx");
+
+            // End Product Details
+
+            // Publish Pages
+
+            routes.MapPageRoute(
+                "Tracks",
+                "Publish/Album/{AlbumId}",
+                "~/Publish/Album/Tracks.aspx"
+                );
+
+            routes.MapPageRoute(
+                "AddTrack",
+                "Publish/Album/{AlbumId}/Track/Add",
+                "~/Publish/Album/Track/AddTrack.aspx"
+                );
+
+            routes.MapPageRoute(
+                "EditAlbum",
+                "Publish/Album/{AlbumId}/Edit",
+                "~/Publish/Album/Edit.aspx"
+                );
+
+            routes.MapPageRoute(
+                "EditTrack",
+                "Publish/Album/{AlbumId}/Track/{TrackId}/Edit",
+                "~/Publish/Album/Track/EditTrack.aspx"
+                );
+
+            // End Publish Pages
         }
 
 

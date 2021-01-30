@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Store
 {
@@ -41,6 +38,12 @@ namespace LokalMusic._Code.Models.Store
         public TimeSpan AudioDuration { get; set; }
 
         public string AlbumCover { get; set; }
+
+        public string DetailsUrl { 
+            get { 
+                return $"~/Store/" + this.ArtistId + "/" + this.AlbumId + "/" + this.TrackId;
+            } 
+        }
 
     }
 }

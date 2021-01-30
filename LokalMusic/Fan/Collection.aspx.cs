@@ -2,11 +2,6 @@
 using LokalMusic._Code.Presenters.Fan;
 using LokalMusic._Code.Repositories.Fan;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace LokalMusic.Fan
 {

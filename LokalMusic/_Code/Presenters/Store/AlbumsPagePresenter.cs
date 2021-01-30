@@ -16,13 +16,42 @@ namespace LokalMusic._Code.Presenters.Store
             this.repository = repo;
         }
 
-        public List<AlbumProduct> GetAlbums(string sortBy = "RA", string orderBy = "ASC")
+        public List<AlbumSummary> GetAlbums(string sortBy = "s1", string orderBy = "asc")
         {
-            if (sortBy == "RA") sortBy = "DateReleased";
-            else if (sortBy == "PR") sortBy = "Price";
-            else if (sortBy == "TN") sortBy = "ProductName";
+            sortBy = sortBy.ToLower();
+            orderBy = orderBy.ToLower();
 
-            List<AlbumProduct> albums = this.repository.GetAlbums(sortBy, orderBy, true);
+            if (sortBy == "s1") sortBy = "DateReleased";
+            else if (sortBy == "s2") sortBy = "AlbumName";
+            else if (sortBy == "s3") sortBy = "Price";
+            else sortBy = "Price";
+
+            if (orderBy != "asc" && orderBy != "desc")
+                orderBy = "asc";
+
+            List<AlbumSummary> albums = this.repository.GetSummarizedAlbum(sortBy, orderBy);
+
+            foreach (var album in albums)
+            {
+                if (album == null)
+                    break;
+
+                List<TrackSummary> tracks = this.repository.GetSummarizedTracksByAlbumId(album.AlbumId);
+
+                if (tracks == null)
+                    break;
+
+                album.TrackCount = tracks.Count;
+
+                double totalMinutes = 0;
+                tracks.ForEach(m =>{ totalMinutes += m.AudioDuration.TotalMinutes; });
+                album.TrackMinutes = System.Math.Round(totalMinutes, 2);
+
+                List<string> genres = new List<string>();
+                tracks.ForEach(m => genres.Add( m.Genre.Substring(0,1).ToUpper() + m.Genre.Substring(1).ToLower() ));
+
+                album.Genre = string.Join(", ", genres);
+            }
 
             return albums;
         }

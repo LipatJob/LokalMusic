@@ -5,7 +5,6 @@ using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Services;
@@ -47,7 +46,6 @@ namespace LokalMusic.Account
                 ShowProfileImageChangedMessage();
             }
         }
-        
         private bool IsPasswordChanged()
         {
             return Request.QueryString["PasswordChanged"] == "True";
