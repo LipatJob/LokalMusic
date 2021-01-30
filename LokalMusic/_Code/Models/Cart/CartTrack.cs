@@ -7,6 +7,21 @@ namespace LokalMusic._Code.Models.Cart
 {
     public class CartTrack
     {
+        public CartTrack()
+        {
+        }
+
+        public CartTrack(int trackId, int albumId, int artistId, string trackName, string albumName, decimal price, double audioLength, string albumCover)
+        {
+            TrackId = trackId;
+            AlbumId = albumId;
+            ArtistId = artistId;
+            TrackName = trackName;
+            AlbumName = albumName;
+            Price = price;
+            AudioLength = audioLength;
+            AlbumCover = albumCover;
+        }
 
         public int TrackId { get; set; }
         public int AlbumId { get; set; }
@@ -17,7 +32,9 @@ namespace LokalMusic._Code.Models.Cart
 
         public Decimal Price { get; set; }
 
-        public int AudioLength { get; set; }
+        public double AudioLength { get; set; }
+
+        public string AlbumCover { get; set; }
 
         public string DetailsUrl 
         { 
