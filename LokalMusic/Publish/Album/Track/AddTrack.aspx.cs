@@ -94,7 +94,7 @@ namespace LokalMusic.Publish.Album.Track
         public string fileLocation { get; private set; }
         public DisposableHttpPostedFileWrapper(HttpPostedFile file)
         {
-            fileLocation = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/App_Data/uploads"), System.Guid.NewGuid().ToString() + Path.GetExtension(file.FileName));
+            fileLocation = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Temporary"), System.Guid.NewGuid().ToString() + Path.GetExtension(file.FileName));
             file.SaveAs(fileLocation);
         }
 
