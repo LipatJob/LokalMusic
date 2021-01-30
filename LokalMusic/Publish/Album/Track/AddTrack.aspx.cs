@@ -94,8 +94,10 @@ namespace LokalMusic.Publish.Album.Track
         public string fileLocation { get; private set; }
         public DisposableHttpPostedFileWrapper(HttpPostedFile file)
         {
-            fileLocation = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Temporary"), System.Guid.NewGuid().ToString() + Path.GetExtension(file.FileName));
-            file.SaveAs(fileLocation);
+            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            fileLocation = Path.Combine(HttpContext.Current.Server.MapPath("~/Temporary"));
+            Directory.CreateDirectory(fileLocation);
+            file.SaveAs(Path.Combine(fileLocation, fileName));
         }
 
         public void Dispose()
