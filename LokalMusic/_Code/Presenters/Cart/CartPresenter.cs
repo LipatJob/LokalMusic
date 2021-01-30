@@ -72,8 +72,8 @@ namespace LokalMusic._Code.Presenters.Cart
                             status = this.repository.CreateProductOrder(orderId, item.ProductId, item.Price);
 
                             //remove from cart
-                            //if (status)
-                            //    this.repository.DeleteOrderedItemFromCart(AuthenticationHelper.UserId, item.ProductId, item.ProductType);
+                            if (status)
+                                this.repository.RemoveOrderedItemFromCart(AuthenticationHelper.UserId, item.ProductId, item.ProductType);
                         }
                 }
 
