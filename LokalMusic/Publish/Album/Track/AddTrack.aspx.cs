@@ -32,7 +32,6 @@ namespace LokalMusic.Publish.Album.Track
         public string ClipFile { get => clipSource.Src; set => clipSource.Src = value; }
         public TimeSpan ClipFileDuration { get; set; }
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             Presenter.PageLoad();
@@ -48,7 +47,10 @@ namespace LokalMusic.Publish.Album.Track
                 string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
                 string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
                 TrackFile = fileLocation;
-                TrackFileDuration = new TimeSpan(0, 2, 45);
+
+                var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(trackFile.PostedFile));
+                TrackFileDuration = tfile.Properties.Duration;
+                Response.Write(TrackFileDuration);
             }
         }
 
@@ -58,8 +60,8 @@ namespace LokalMusic.Publish.Album.Track
             {
                 string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
                 string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
-                TrackFile = fileLocation;
-                TrackFileDuration = new TimeSpan(0, 1, 0);
+                ClipFile = fileLocation;
+                ClipFileDuration = new TimeSpan(0, 1, 0);
             }
         }
 
@@ -80,5 +82,32 @@ namespace LokalMusic.Publish.Album.Track
             priceTxt.Text = "";
 
         }
+    }
+
+    public class HttpPostedFileAbstraction : TagLib.File.IFileAbstraction
+    {
+        private HttpPostedFile file;
+
+        public HttpPostedFileAbstraction(HttpPostedFile file)
+        {
+            this.file = file;
+        }
+
+        public string Name
+        {
+            get { return file.FileName; }
+        }
+
+        public System.IO.Stream ReadStream
+        {
+            get { return file.InputStream; }
+        }
+
+        public System.IO.Stream WriteStream
+        {
+            get { throw new Exception("Cannot write to HttpPostedFile"); }
+        }
+
+        public void CloseStream(System.IO.Stream stream) { }
     }
 }
