@@ -11,26 +11,18 @@ namespace LokalMusic._Code.Models.Cart
         {
         }
 
-        public CheckoutItem(int productId, string productName, decimal price, string paymentProviderName)
+        public CheckoutItem(int productId, string productName, decimal price, string productType)
         {
             ProductId = productId;
             ProductName = productName;
             Price = price;
-            PaymentProviderName = paymentProviderName;
+            ProductType = productType;
         }
 
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public Decimal Price { get; set; }
+        public string ProductType { get; set; }
 
-        public string PaymentProviderName { get; set; }
-
-        public string  Summary
-        {
-            get
-            {
-                return "PID: " + ProductId + " | PNAME: " + ProductName + " | PR: " + Price + " || ";
-            }
-        }
     }
 }

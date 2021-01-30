@@ -58,6 +58,11 @@ namespace LokalMusic._Code.Repositories.Cart
             return albums.Count > 0 ? albums : null;
         }
 
+        public void DeleteOrderedItemFromCart(int customerId, int productId, string productType)
+        {
+            
+        }
+
         public List<CartArtist> GetArtist(int customerId)
         {
             List<CartArtist> artists = new List<CartArtist>();
