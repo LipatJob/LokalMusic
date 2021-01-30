@@ -822,6 +822,7 @@
     <Folder Include="About\" />
     <Folder Include="App_Data\uploads\" />
     <Folder Include="Pages\" />
+    <Folder Include="Temporary\" />
     <Folder Include="_Code\Views\Admin\" />
     <Folder Include="_Code\Views\Fan\" />
     <Folder Include="_Code\Views\Store\Details\" />
