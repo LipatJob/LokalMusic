@@ -55,7 +55,10 @@
                                     <div class="row">
                                         <%--checkbox--%>
                                         <div class="col-md-1 mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4">
-                                            <input type="checkbox" id="" class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"/>
+                                            <input type="checkbox"
+                                                id='<%#Eval("TrackId") %>'
+                                                class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"
+                                                onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2});", Eval("TrackId"), Eval("TrackName"), Eval("Price")) %>' />
                                         </div>
 
                                         <%--image--%>
@@ -107,7 +110,10 @@
 
                                 <%--checkbox--%>
                                 <div class="col-md-1 mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4">
-                                    <input type="checkbox" id="" class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"/>
+                                    <input type="checkbox" 
+                                        id='<%#Eval("AlbumId") %>'
+                                        class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"
+                                        onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2});", Eval("AlbumId"), Eval("AlbumName"), Eval("Price")) %>'/>
                                 </div>
 
                                 <%--image--%>
@@ -149,12 +155,98 @@
 
             <%--summary and checkout--%>
             <div class="col-xl-3">
-
+                <button type="button" id="" class="btn btn-danger btn-primary" onclick="RenderCheckoutSummary()" >PROCESS CHECKOUT</button>
+                <button type="button" id="" class="btn btn-danger btn-block" onclick="PayNow()" >PAY NOW</button>
             </div>
 
         </div>
 
     </div>
 
+    <script>
+
+        // data structure
+        /*
+         * {
+         *
+         *   id# : [id, trackname, price],
+         *   id# : [id, albumname, price]
+         *
+         * }
+         * if (1 in selectedItems)
+                alert("track name " + selectedItems[1][0] + " price " + selectedItems[1][1]);
+
+            delete selectedItems[1] 
+            if (1 in selectedItems)
+                alert("track name " + selectedItems[1][0] + " price " + selectedItems[1][1]);
+         *
+         */
+
+        var forCheckout = {};
+
+        function CheckChanged(source, productId, trackName, price) {
+
+            if (source.checked) {
+                AddForCheckout(productId, trackName, price);
+            }
+            else {
+                RemoveFromCheckout(productId);
+            }
+        }
+
+        function AddForCheckout(productId, titleName, productPrice) {
+            forCheckout[productId] = [productId.toString(), titleName, productPrice.toString()];
+        }
+
+        function RemoveFromCheckout(productId) {
+            if (productId in forCheckout) {
+                delete forCheckout[productId];
+            }
+        }
+
+        function RenderCheckoutSummary() {
+            //displays summary in div
+            // PAY NOW button will not call this function
+
+            for (var productId in forCheckout) {
+                //console.log(typeof (productId));
+                //console.log(typeof (forCheckout[productId]));
+                //console.log(typeof (forCheckout[productId][0]));
+                //console.log(typeof (forCheckout[productId][1]));
+                //console.log(typeof (forCheckout[productId][2]));
+                console.log("product Id " + productId + " values " + forCheckout[productId]);
+            }
+        }
+
+        function ClearSummary() {
+
+        }
+
+        function PayNow() {
+            var items = [];
+
+            for (var productId in forCheckout) {
+                items.push(forCheckout[productId]);
+            }
+
+            if (items.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Cart/CartService.asmx/ProcessCheckout",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{ 'forCheckout' : '" + JSON.stringify(items) + "'}",
+                    dataType: "json",
+                    success: function (message) {
+                        alert(message.d);
+                    },
+                    error: function () {
+                        alert("An Error has occured");
+                    }
+                });
+                return false;
+            }            
+        }
+
+    </script>
 
 </asp:Content>

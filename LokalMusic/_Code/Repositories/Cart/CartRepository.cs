@@ -163,5 +163,37 @@ namespace LokalMusic._Code.Repositories.Cart
             return tracks.Count > 0 ? tracks : null;
         }
 
+        public Decimal GetProductPrice(int productId)
+        {
+            string query = "SELECT * " +
+                           "FROM Product " +
+                           "WHERE ProductId = @ProductId " +
+                           "AND ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_LISTED +"')";
+
+            Decimal price = Decimal.Round(Decimal.Parse(DbHelper.ExecuteScalar(query, ("ProductId", productId)).ToString()));
+
+            return price;
+        }
+
+        public int CreateOrderInfo(int customerId, Decimal amountPaid, string paymentProvider)
+        {
+            string query = "INSERT INTO OrderInfo (CustomerId, OrderDate, AmountPaid, PaymentProvider) " +
+                           "OUTPUT INSERTED.OrderId " +
+                           "VALUES(@CustomerId, @OrderDate, @AmountPaid, @PaymentProvider)";
+
+            int orderId = (int) DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("OrderDate", DateTime.Now), ("AmountPaid", amountPaid), ("PaymentProvider", paymentProvider));
+
+            return orderId;
+        }
+
+        public bool CreateProductOrder(int orderId, int productId, Decimal productPrice)
+        {
+            string query = "INSERT INTO ProductOrder (ProductId, OrderId, OrderDate, ProductPrice) "+
+                           "VALUES(@ProductId, @OrderId, @OrderDate, @ProductPrice)";
+
+            int affectedRow = DbHelper.ExecuteNonQuery(query, ("ProductId", productId), ("OrderId", orderId), ("OrderDate", DateTime.Now), ("ProductPrice", productPrice));
+
+            return affectedRow > 0 ? true : false;
+        }
     }
 }
