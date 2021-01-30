@@ -65,9 +65,9 @@ namespace LokalMusic.Store
                 cart.Add(cartItem);
             }
 
-            new CartPresenter(new CartRepository()).ProcessCustomerOrder(cart);
+            bool status = new CartPresenter(new CartRepository()).ProcessCustomerOrder(cart);
 
-            return "Your order and payment has been processed successfully. You can view product in your collections.";
+            return status ? "Your order and payment has been processed successfully. You can view product in your collections." : "Something went wrong. Try again later.";
         }
     }
 }
