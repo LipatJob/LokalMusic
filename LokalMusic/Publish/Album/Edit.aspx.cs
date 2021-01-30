@@ -27,10 +27,15 @@ namespace LokalMusic.Publish.Album
         public string Producer { get => producerTxt.Text; set => producerTxt.Text = value; }
         public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = String.Format("{0:N}", value); }
         public string AlbumCover { get => albumCoverPreview.ImageUrl; set => albumCoverPreview.ImageUrl = value; }
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Presenter.PageLoad();
+            if (!Page.IsPostBack)
+            {
+                Presenter.PageLoad();
+
+            }
         }
 
         protected void uploadPictureBtn_Click(object sender, EventArgs e)
@@ -45,7 +50,10 @@ namespace LokalMusic.Publish.Album
 
         protected void saveBtn_Click(object sender, EventArgs e)
         {
-            Presenter.EditAlbum();
+            if(Page.IsValid)
+            {
+                Presenter.EditAlbum();
+            }
         }
 
         protected void cancelBtn_Click(object sender, EventArgs e)
