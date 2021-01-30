@@ -49,11 +49,6 @@ namespace LokalMusic.Publish.Album.Track
                 //string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
                 //TrackFile = fileLocation;
 
-                using (var file = new DisposableHttpPostedFileWrapper(trackFile.PostedFile))
-                {
-                    var tfile = TagLib.File.Create(file.fileLocation);
-                    TrackFileDuration = tfile.Properties.Duration;
-                }
                 Response.Write(TrackFileDuration.TotalSeconds);
             }
         }
@@ -88,21 +83,30 @@ namespace LokalMusic.Publish.Album.Track
         }
     }
 
-    public class DisposableHttpPostedFileWrapper: IDisposable
+    public class HttpPostedFileAbstraction : TagLib.File.IFileAbstraction
     {
-        public HttpPostedFile file { get; private set; }
-        public string fileLocation { get; private set; }
-        public DisposableHttpPostedFileWrapper(HttpPostedFile file)
+        private HttpPostedFile file;
+
+        public HttpPostedFileAbstraction(HttpPostedFile file)
         {
-            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-            fileLocation = Path.Combine(HttpContext.Current.Server.MapPath("~/Temporary"));
-            Directory.CreateDirectory(fileLocation);
-            file.SaveAs(Path.Combine(fileLocation, fileName));
+            this.file = file;
         }
 
-        public void Dispose()
+        public string Name
         {
-            File.Delete(fileLocation);
+            get { return file.FileName; }
         }
+
+        public System.IO.Stream ReadStream
+        {
+            get { return file.InputStream; }
+        }
+
+        public System.IO.Stream WriteStream
+        {
+            get { throw new Exception("Cannot write to HttpPostedFile"); }
+        }
+
+        public void CloseStream(System.IO.Stream stream) { }
     }
 }
