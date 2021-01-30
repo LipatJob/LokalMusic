@@ -12,7 +12,7 @@ namespace LokalMusic._Code.Presenters.Publish.Album
     {
         private EditAlbumRepository editAlbumRepository;
         private IEditAlbumViewModel viewModel;
-        private int AlbumId;
+        private int AlbumId => int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
 
         public EditAlbumPresenter(IEditAlbumViewModel viewModel, EditAlbumRepository editAlbumRepository)
         {
@@ -31,7 +31,6 @@ namespace LokalMusic._Code.Presenters.Publish.Album
                 NavigationHelper.Redirect("~");
             }
 
-            AlbumId = int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
             editAlbumRepository.GetArtistName(AuthenticationHelper.UserId, viewModel);
             LoadAlbumDetails();
         }

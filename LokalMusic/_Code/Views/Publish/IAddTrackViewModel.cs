@@ -9,4 +9,5 @@ namespace LokalMusic._Code.Views.Publish
     public interface IAddTrackViewModel : IAddTrackModel
     {
     }
+
 }
