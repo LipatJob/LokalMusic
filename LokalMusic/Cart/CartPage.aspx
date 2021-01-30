@@ -155,8 +155,8 @@
 
             <%--summary and checkout--%>
             <div class="col-xl-3">
-                <button type="button" id="" class="btn btn-danger btn-primary" onclick="RenderCheckoutSummary()" >PROCESS CHECKOUT</button>
-                <button type="button" id="" class="btn btn-danger btn-block" onclick="PayNow()" >PAY NOW</button>
+                <button type="button" id="" class="btn btn-primary mb-5" onclick="RenderCheckoutSummary()" >PROCESS CHECKOUT -- this button first (for now)</button>
+                <button type="button" id="" class="btn btn-danger btn-block" onclick="PayNow()" >PAY NOW -- this button is 2nd</button>
             </div>
 
         </div>

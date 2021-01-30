@@ -18,9 +18,17 @@ namespace LokalMusic._Code.Repositories.Cart
 
         public static bool IsProductBought(int productId, int userId)
         {
-            string query = "SELECT * FROM OrderInfo WHERE UserId = @UserId AND ProductId = @ProductId"; // check in OrderInfo and ProducTOrder
+            string query = "SELECT ProductOrderId " +
+                           "FROM ProductOrder " +
+                           "INNER JOIN OrderInfo  " +
+                           "ON ProductOrder.OrderId = OrderInfo.OrderId  " +
+                           "WHERE ProductId = @ProductId AND CustomerId = @CustomerId";
 
-            //return DbHelper.ExecuteScalar(query, ("UserId", userId), ("ProductId", productId)) != null ? true : false;
+            return DbHelper.ExecuteScalar(query, ("CustomerId", userId), ("ProductId", productId)) != null ? true : false;
+        }
+
+        public static bool IsTrackAlbumBought(int productId, int userId)
+        {
             return false;
         }
 
