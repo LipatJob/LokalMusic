@@ -57,8 +57,8 @@ namespace LokalMusic.Publish.Album.Track
             {
                 string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
                 string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
-                TrackFile = fileLocation;
-                TrackFileDuration = new TimeSpan(0, 1, 0);
+                ClipFile = fileLocation;
+                ClipFileDuration = new TimeSpan(0, 1, 0);
             }
         }
 
