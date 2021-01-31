@@ -26,7 +26,10 @@
                 <table style="width: 100%;">
                     <tr>
                         <td>Track Name</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="trackNameTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;">
+                            <asp:TextBox ID="trackNameTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:CustomValidator ID="trackNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackNameTxtCv_ServerValidate"></asp:CustomValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td>Genre</td>
@@ -38,7 +41,10 @@
                     </tr>
                     <tr>
                         <td>Price</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;">
+                            <asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
+                        </td>
                     </tr>
                 </table>
             </div>

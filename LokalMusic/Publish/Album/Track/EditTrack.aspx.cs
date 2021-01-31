@@ -85,6 +85,32 @@ namespace LokalMusic.Publish.Album.Track
             Presenter.LoadTrackDetails();
         }
 
+        protected void trackNameTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(TrackName),
+                    errorMessage: "Please enter a track name")
+                .Validate();
+        }
+
+        protected void priceTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            decimal validDecimal;
+
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(priceTxt.Text),
+                    errorMessage: "Please enter the track price")
+                .AddRule(
+                    rule: () => decimal.TryParse(priceTxt.Text, out validDecimal),
+                    errorMessage: "Please enter numbers only")
+                .AddRule(
+                    rule: ValidUtils.IsValidPrice(priceTxt.Text),
+                    errorMessage: "Price should be more than zero")
+                .Validate();
+        }
+
         protected void unlistBtn_Click(object sender, EventArgs e)
         {
             Presenter.UnlistTrack();

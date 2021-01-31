@@ -88,19 +88,5 @@ WHERE Album.AlbumId = @AlbumId
 
             return albumName;
         }
-        /**
-        public int GetAlbumId(string urlAlbumName)
-        {
-            string query = "SELECT ProductId FROM Product WHERE REPLACE(ProductName,' ','') = @URLName";
-            var result = DbHelper.ExecuteDataTableQuery(query, ("URLName", urlAlbumName));
-
-            var albumId = 0;
-            foreach (DataRow row in result.Rows)
-            {
-                albumId = (int)row["ProductId"];
-            }
-
-            return albumId;
-        }**/
     }
 }
