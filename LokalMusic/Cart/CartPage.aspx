@@ -20,6 +20,39 @@
            
        }
 
+       .line{
+           padding-top: .5px;
+           padding-bottom: .5px;
+           background-color: #dddddd;
+       }
+
+       #productNameContainer p, #productPriceContainer p{
+           font-size: 17px;
+           font-weight: 600;
+       }
+
+       #productPriceContainer p{
+           color: #AA3A3A;
+       }
+
+       #grandTotal{
+           font-weight: 700;
+           color: #AA3A3A;
+           font-size: 19px;
+       }
+
+       label{
+           font-size: 13px;
+           color: #8F8F8F;
+           margin-bottom: -5px;
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       }
+
+       .form-control{
+           margin-top: -5px;
+           color: #3A3A3A;
+           font-weight: 700;
+       }
     </style>
 
     <div class="container">
@@ -28,7 +61,7 @@
         <div class="row">
 
             <%--products--%>
-            <div class="col-xl-9">
+            <div class="col-xl-8">
 
                 <h3 class="mb-3">Individual Tracks per Artists</h3>
 
@@ -124,7 +157,7 @@
                                 </div>
 
                                 <%--title and other description--%>
-                                <div class="col-md-5 col-xl-6">
+                                <div class="col-md-5 col-xl-5">
                                     <h6 class="" style="font-size:16px; color: #C4C4C4">Album</h6>
 
                                     <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
@@ -141,8 +174,8 @@
                                 </div>
 
                                 <%--price--%>
-                                <div class="col-md-3 col-xl-2">
-                                    <p class="text-right" style="color:#AA3A3A; font-size:29px; font-weight:600">₱<%#Eval("Price") %></p>
+                                <div class="col-md-3 col-xl-3">
+                                    <p class="text-right" style="color:#AA3A3A; font-size:25px; font-weight:600">₱<%#Eval("Price") %></p>
                                 </div>
 
                             </div>
@@ -154,9 +187,81 @@
             </div>
 
             <%--summary and checkout--%>
-            <div class="col-xl-3">
-                <button type="button" id="" class="btn btn-primary mb-5" onclick="RenderCheckoutSummary()" >PROCESS CHECKOUT -- this button first (for now)</button>
-                <button type="button" id="" class="btn btn-danger btn-block" onclick="PayNow()" >PAY NOW -- this button is 2nd</button>
+            <div class="col-xl-4">
+
+                <%--summary of selected products--%>
+                <div class="card shadow-sm mb-3 border-0" style="background-color: #F4F4F4;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color:#7a7a7a;">Checkout Summary</h5>
+                        <div class="line"></div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6" id="productNameContainer">
+                            </div>
+
+                            <div class="col-md-6" id="productPriceContainer">
+                            </div>
+                        </div>
+
+                        <div class="line"></div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <h5 class="cart-title mb-0" style="color:#7a7a7a;">Grand Total</h5>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p id="grandTotal" class="mb-0">₱00.0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%--online payment information--%>
+                <div class="card shadow-sm border-0" style="background-color: #F4F4F4;">
+                    <div class="card-body ml-2 mr-2">
+                        <h5 class="card-title" style="color:#7a7a7a;">Payment Information</h5>
+                        <div class="line"></div>
+
+                        <span id="errorPlaceHolder" class="text-danger" style="font-weight: 600;"></span>
+
+                        <div class="form-row mt-3">
+                            <div class="col-12">
+                                <select class="form-control border-0 rounded pb-0">
+                                    <option>MASTERCARD</option>
+                                    <option>VISA</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row mt-3">
+                            <div class="col-12">
+                                <label for="cardHolderName" class="bg-white w-100 pl-2 rounded pb-0">CARDHOLDER'S NAME</label>
+                                <input type="text" id="cardHolderName" class="form-control border-0 pt-0" placeholder="John Doe" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row mt-3">
+                            <div class="col-12">
+                                <label for="cardNumber" class="bg-white w-100 pl-2 rounded pb-0">CARD NUMBER</label>
+                                <input type="text" id="cardNumber" class="form-control border-0 pt-0" placeholder="XXXXXXXXXXXXXXXX" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row mt-3 mb-2">
+                            <div class="col-md-8">
+                                <label for="expDate" class="bg-white w-100 pl-2 rounded pb-0">EXPIRATION DATE</label>
+                                <input type="month" id="expDate" class="form-control border-0 pt-0" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="securityCode" class="bg-white w-100 pl-2 rounded pb-0">SEC CODE</label>
+                                <input type="number" id="securityCode" min="100" max="999" class="form-control border-0 pt-0" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" id="" class="btn btn-danger btn-block" onclick="PayNow()" style="background-color: #B82828; font-weight: 700;" >PAY NOW</button>
             </div>
 
         </div>
@@ -165,21 +270,9 @@
 
     <script>
 
-        // data structure
-        /*
-         * {
-         *
-         *   id# : [id, trackname, price, productType],
-         *   id# : [id, albumname, price, productType]
-         *
-         * }
-         * if (1 in selectedItems)
-                alert("track name " + selectedItems[1][0] + " price " + selectedItems[1][1]);
-
-            delete selectedItems[1] 
-            if (1 in selectedItems)
-                alert("track name " + selectedItems[1][0] + " price " + selectedItems[1][1]);
-         *
+        /*data structure
+         * {id# : [id, trackname, price, productType],
+         *  id# : [id, albumname, price, productType]}
          */
 
         var forCheckout = {};
@@ -192,6 +285,9 @@
             else {
                 RemoveFromCheckout(productId);
             }
+
+            ClearSummary();
+            RenderCheckoutSummary();
         }
 
         function AddForCheckout(productId, titleName, productPrice, productType) {
@@ -205,20 +301,40 @@
         }
 
         function RenderCheckoutSummary() {
-            //displays summary in div
-            // PAY NOW button will not call this function
+            var grandTotal = 0;
 
             for (var productId in forCheckout) {
-                //console.log(typeof (productId));
-                //console.log(typeof (forCheckout[productId]));
-                //console.log(typeof (forCheckout[productId][0]));
-                //console.log(typeof (forCheckout[productId][1]));
-                //console.log(typeof (forCheckout[productId][2]));
-                console.log("product Id " + productId + " values " + forCheckout[productId]);
+                //create p childs
+                var nameTag = document.createElement("p");
+                var nameText = document.createTextNode(forCheckout[productId][1]);
+                nameTag.appendChild(nameText);
+                var priceTag = document.createElement("p");
+                var priceText = document.createTextNode("₱"+forCheckout[productId][2]);
+                priceTag.appendChild(priceText);
+
+                // update product names
+                var element = document.getElementById("productNameContainer");
+                element.appendChild(nameTag);
+
+                // update product price
+                var element = document.getElementById("productPriceContainer");
+                element.appendChild(priceTag);
+
+                // compute grand total
+                grandTotal += parseFloat(forCheckout[productId][2]);
             }
+
+            // update grand total
+            document.getElementById("grandTotal").innerHTML = "₱" + grandTotal;
         }
 
         function ClearSummary() {
+            document.getElementById("productNameContainer").textContent = '';
+            document.getElementById("productPriceContainer").textContent = '';
+            document.getElementById("grandTotal").innerHTML = "₱00.0";
+        }
+
+        function ValidateFields() {
 
         }
 
