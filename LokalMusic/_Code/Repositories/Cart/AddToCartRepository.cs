@@ -70,9 +70,5 @@ namespace LokalMusic._Code.Repositories.Cart
             return DbHelper.ExecuteNonQuery(query, ("ProductId", productId), ("UserId", userId));
         }
 
-        public static int RemoveFromCart(int productId, int userId)
-        {
-            return 0;
-        }
     }
 }

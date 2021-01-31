@@ -44,7 +44,7 @@
     <%--Nav--%>
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <a class="navbar-brand" href="../Store/Home.aspx" runat="server">
-            <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
+            <img src="~/Content/Images/New Logo.png" width="105" height="40" class="d-inline-block my-auto ml-xl-5" alt="" runat="server">
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,13 +103,13 @@
             <div>
                 <ul class="navbar-nav ml-xl-4">
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/Account/Register/Fan" target="_blank" runat="server">Join</a>
+                        <a class="nav-link" href="~/Account/Register/Fan" runat="server">Join</a>
                     </li>
                     <li>
                         <span class="nav-link">or</span>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/Account/Login" target="_blank" runat="server">Sign In</a>
+                        <a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>
                     </li>
                 </ul>
             </div>
