@@ -114,13 +114,13 @@ namespace LokalMusic.Publish.Album.Track
         protected global::System.Web.UI.WebControls.FileUpload trackFile;
 
         /// <summary>
-        /// uploadTrackFileBtn control.
+        /// trackFileCv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button uploadTrackFileBtn;
+        protected global::System.Web.UI.WebControls.CustomValidator trackFileCv;
 
         /// <summary>
         /// clipSource control.
@@ -141,13 +141,13 @@ namespace LokalMusic.Publish.Album.Track
         protected global::System.Web.UI.WebControls.FileUpload clipFile;
 
         /// <summary>
-        /// uploadClipFileBtn control.
+        /// clipFileCv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button uploadClipFileBtn;
+        protected global::System.Web.UI.WebControls.CustomValidator clipFileCv;
 
         /// <summary>
         /// cancelBtn control.

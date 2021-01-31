@@ -1,8 +1,7 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Models.Publish.Album.Track;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Web;
 
 namespace LokalMusic._Code.Repositories.Publish.Album.Track
@@ -59,8 +58,18 @@ WHERE TrackId = @trackId
             model.ClipFileDuration = (TimeSpan)result.Rows[0]["ClipFileDuration"];
         }
 
-        public void EditTrack(IEditTrackModel model, int trackId)
+        public void EditTrack(IEditTrackModel model, int trackId, HttpPostedFile trackFile, HttpPostedFile clipFile)
         {
+            if (model.TrackIsUpdated)
+            {
+                UploadTrackFile(model, trackId, trackFile);
+            }
+            
+            if (model.ClipIsUpdated)
+            {
+                UploadClipFile(model, trackId, clipFile);
+            }
+
             int genreId = EditInGenre(model);
 
             string updateTrackQuery = @"
@@ -93,7 +102,7 @@ WHERE TrackId = @trackId;";
                 );
 
             var result = DbHelper.ExecuteDataTableQuery(
-                fileIdQuery,("trackId", trackId));
+                fileIdQuery, ("trackId", trackId));
 
             if (result != null)
             {
@@ -108,6 +117,26 @@ WHERE TrackId = @trackId;";
                     ("clipFile", model.ClipFile),
                     ("clipFileId", clipFileId));
             }
+        }
+
+        private void UploadTrackFile(IEditTrackModel model, int trackId, HttpPostedFile trackFile)
+        {
+            var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(trackFile));
+            model.TrackFileDuration = tfile.Properties.Duration;
+
+            string fileName = trackId + Path.GetExtension(trackFile.FileName);
+            string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile, true);
+            model.TrackFile = fileLocation;
+        }
+
+        private void UploadClipFile(IEditTrackModel model, int trackId, HttpPostedFile clipFile)
+        {
+            var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(clipFile));
+            model.ClipFileDuration = tfile.Properties.Duration;
+
+            string fileName = trackId + Path.GetExtension(clipFile.FileName);
+            string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.CLIPS_CONTAINER_NAME, clipFile, true);
+            model.ClipFile = fileLocation;
         }
 
         private int EditInGenre(IEditTrackModel model)

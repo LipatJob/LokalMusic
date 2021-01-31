@@ -57,9 +57,6 @@
                 <div style="margin-bottom:20px;">
                     <asp:FileUpload ID="trackFile" runat="server" />
                 </div>
-                <div>
-                    <asp:Button ID="uploadTrackFileBtn" runat="server" Text="Upload Track File" CssClass="btn btn-publish" OnClick="uploadTrackFileBtn_Click" />
-                </div>
 
                 <p style="margin-top:50px">Clip File</p>
                 <div style="margin-bottom:20px;">
@@ -68,9 +65,6 @@
                 </div>
                 <div style="margin-bottom:20px;">
                     <asp:FileUpload ID="clipFile" runat="server" />
-                </div>
-                <div>
-                    <asp:Button ID="uploadClipFileBtn" runat="server" Text="Upload Clip File" CssClass="btn btn-publish" OnClick="uploadClipFileBtn_Click" />
                 </div>
             </div>            
         </div>
