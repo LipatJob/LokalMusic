@@ -1,12 +1,6 @@
 ﻿using LokalMusic._Code.Helpers;
-using LokalMusic._Code.Models.Publish.Album;
 using LokalMusic._Code.Repositories.Publish.Album;
 using LokalMusic._Code.Views.Publish;
-using LokalMusic.Publish.Album;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Presenters.Publish.Album
 {

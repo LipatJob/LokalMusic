@@ -3,8 +3,6 @@ using LokalMusic._Code.Presenters.Publish.Album;
 using LokalMusic._Code.Repositories.Publish.Album;
 using LokalMusic._Code.Views.Publish;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -76,6 +74,9 @@ namespace LokalMusic.Publish.Album
         protected void dateReleasedTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
             new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(dateReleasedTxt.Text),
+                    errorMessage: "Please enter the release date")
                 .AddRule(
                     rule: ValidUtils.IsValidRegex(dateReleasedTxt.Text, @"^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$"),
                     errorMessage: "Date should be in the format of MM/DD/YYYY")
