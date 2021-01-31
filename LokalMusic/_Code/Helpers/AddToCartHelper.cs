@@ -14,6 +14,7 @@ namespace LokalMusic._Code.Helpers
         public const int ADD_TO_CART_EXISTING = 2;
         public const int ADD_TO_CART_BOUGHT = 3;
         public const int ADD_TO_CART_LOGIN = 4;
+        public const int ADD_TO_CART_ALBUMBOUGHT = 5;
 
 
         public static int AddProductToCart(int productId)
@@ -27,6 +28,9 @@ namespace LokalMusic._Code.Helpers
 
             if (AddToCartRepository.IsProductBought(productId, AuthenticationHelper.UserId))
                 return ADD_TO_CART_BOUGHT;
+
+            if (AddToCartRepository.IsTrackAlbumBought(productId, AuthenticationHelper.UserId))
+                return ADD_TO_CART_ALBUMBOUGHT;
 
             // if album is added, remove all of its tracks in the database; or,
             // formulate an sql query that will not obtain cart product tracks, if its album are retrieved
@@ -48,6 +52,8 @@ namespace LokalMusic._Code.Helpers
                 return "Unable to add to your cart. Try again later.";
             else if (category == ADD_TO_CART_LOGIN)
                 return "Please login or create an account first."; //find a way to implement auto redirect
+            else if (category == ADD_TO_CART_ALBUMBOUGHT)
+                return "This track's album is already in your collection.";
             else
                 return "Something went wrong. Try again.";
         }

@@ -54,11 +54,30 @@ namespace LokalMusic._Code.Presenters.Cart
             return artists;
         }
 
-        public void ProcessCustomerOrder(List<CheckoutItem> checkoutItems)
+        public bool ProcessCustomerOrder(List<CheckoutItem> checkoutItems, string paymentProvider)
         {
+            bool status = false;
 
+            if (checkoutItems != null)
+                if (checkoutItems.Count > 0)
+                {
+                    // create order id first
+                    int orderId = this.repository.CreateOrderInfo(AuthenticationHelper.UserId, checkoutItems.Sum(m => m.Price), paymentProvider);
 
+                    if (orderId != 0)
+                        // create many productorder per checkitems
+                        foreach (var item in checkoutItems)
+                        {
+                            // insert to database
+                            status = this.repository.CreateProductOrder(orderId, item.ProductId, item.Price);
 
+                            //remove from cart
+                            if (status)
+                                this.repository.RemoveOrderedItemFromCart(AuthenticationHelper.UserId, item.ProductId, item.ProductType);
+                        }
+                }
+
+            return status;
         }
     }
 }

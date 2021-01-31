@@ -58,7 +58,7 @@
                                             <input type="checkbox"
                                                 id='<%#Eval("TrackId") %>'
                                                 class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"
-                                                onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2});", Eval("TrackId"), Eval("TrackName"), Eval("Price")) %>' />
+                                                onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2}, \"{3}\");", Eval("TrackId"), Eval("TrackName"), Eval("Price"), "TRACK") %>' />
                                         </div>
 
                                         <%--image--%>
@@ -113,7 +113,7 @@
                                     <input type="checkbox" 
                                         id='<%#Eval("AlbumId") %>'
                                         class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"
-                                        onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2});", Eval("AlbumId"), Eval("AlbumName"), Eval("Price")) %>'/>
+                                        onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2}, \"{3}\");", Eval("AlbumId"), Eval("AlbumName"), Eval("Price"), "ALBUM") %>'/>
                                 </div>
 
                                 <%--image--%>
@@ -155,8 +155,8 @@
 
             <%--summary and checkout--%>
             <div class="col-xl-3">
-                <button type="button" id="" class="btn btn-danger btn-primary" onclick="RenderCheckoutSummary()" >PROCESS CHECKOUT</button>
-                <button type="button" id="" class="btn btn-danger btn-block" onclick="PayNow()" >PAY NOW</button>
+                <button type="button" id="" class="btn btn-primary mb-5" onclick="RenderCheckoutSummary()" >PROCESS CHECKOUT -- this button first (for now)</button>
+                <button type="button" id="" class="btn btn-danger btn-block" onclick="PayNow()" >PAY NOW -- this button is 2nd</button>
             </div>
 
         </div>
@@ -169,8 +169,8 @@
         /*
          * {
          *
-         *   id# : [id, trackname, price],
-         *   id# : [id, albumname, price]
+         *   id# : [id, trackname, price, productType],
+         *   id# : [id, albumname, price, productType]
          *
          * }
          * if (1 in selectedItems)
@@ -184,18 +184,18 @@
 
         var forCheckout = {};
 
-        function CheckChanged(source, productId, trackName, price) {
+        function CheckChanged(source, productId, trackName, price, productType) {
 
             if (source.checked) {
-                AddForCheckout(productId, trackName, price);
+                AddForCheckout(productId, trackName, price, productType);
             }
             else {
                 RemoveFromCheckout(productId);
             }
         }
 
-        function AddForCheckout(productId, titleName, productPrice) {
-            forCheckout[productId] = [productId.toString(), titleName, productPrice.toString()];
+        function AddForCheckout(productId, titleName, productPrice, productType) {
+            forCheckout[productId] = [productId.toString(), titleName, productPrice.toString(), productType];
         }
 
         function RemoveFromCheckout(productId) {
@@ -229,12 +229,14 @@
                 items.push(forCheckout[productId]);
             }
 
+            var providerName = "MASTER CARD";
+
             if (items.length > 0) {
                 $.ajax({
                     type: "POST",
                     url: "/Cart/CartService.asmx/ProcessCheckout",
                     contentType: "application/json; charset=utf-8",
-                    data: "{ 'forCheckout' : '" + JSON.stringify(items) + "'}",
+                    data: "{ 'forCheckout' : '" + JSON.stringify(items) + "', 'paymentProvider' : '" + providerName + "'}",
                     dataType: "json",
                     success: function (message) {
                         alert(message.d);

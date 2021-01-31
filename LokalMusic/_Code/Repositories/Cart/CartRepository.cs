@@ -195,5 +195,67 @@ namespace LokalMusic._Code.Repositories.Cart
 
             return affectedRow > 0 ? true : false;
         }
+
+        public void RemoveOrderedItemFromCart(int customerId, int productId, string productType)
+        {
+            if (productType.ToUpper() == "ALBUM")
+            {
+                // remove album
+                RemoveAlbumFromCart(customerId, productId);
+                // remove other track also
+                List<int> trackIds = GetAlbumTrackIds(productId);
+
+                foreach (int id in trackIds)
+                    RemoveTrackFromCart(customerId, id);
+
+            }
+            else if (productType.ToUpper() == "TRACK")
+            {
+                // simply remove the track
+                RemoveTrackFromCart(customerId, productId);
+            }
+        }
+
+        public void RemoveTrackFromCart(int customerId, int trackId)
+        {
+            string query = "DELETE FROM UserCart " +
+                           "WHERE UserId = @CustomerId " +
+                           "AND ProductId = @TrackId ";
+
+            int affectedRow = DbHelper.ExecuteNonQuery(query, ("CustomerId", customerId), ("TrackId", trackId));
+        }
+
+        public List<int> GetAlbumTrackIds(int albumId)
+        {
+            List<int> trackIds = new List<int>();
+
+            string query = "SELECT TrackId " +
+                           "FROM Product as AlbumProduct " +
+                           "INNER JOIN Track " +
+                           "ON AlbumProduct.ProductId = Track.AlbumId " +
+                           "WHERE AlbumProduct.ProductId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    trackIds.Add( (int)values.Rows[i]["TrackId"] );
+                }
+            }
+
+            return trackIds;
+        }
+
+        public void RemoveAlbumFromCart(int customerId, int albumId)
+        {
+            string query = "DELETE FROM UserCart " +
+                           "WHERE UserId = @CustomerId " +
+                           "AND ProductId = @AlbumId ";
+
+            int affectedRow = DbHelper.ExecuteNonQuery(query, ("CustomerId", customerId), ("AlbumId", albumId));
+        }
     }
 }
