@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Publish.Album
 {
@@ -20,5 +17,7 @@ namespace LokalMusic._Code.Models.Publish.Album
         decimal Price { get; set; }
 
         string AlbumCover { get; set; }
+
+        bool AlbumCoverIsUpdated { get; set; }
     }
 }

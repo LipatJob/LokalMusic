@@ -1,10 +1,6 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Repositories.Publish.Album.Track;
 using LokalMusic._Code.Views.Publish;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Presenters.Publish.Album.Track
 {
@@ -45,7 +41,7 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
 
         public void EditTrack()
         {
-            editTrackRepository.EditTrack(viewModel, TrackId);
+            editTrackRepository.EditTrack(viewModel, TrackId, viewModel.UploadedTrackFile, viewModel.UploadedClipFile);
         }
 
         public void UnlistTrack()

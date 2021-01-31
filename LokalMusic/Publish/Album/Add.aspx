@@ -38,7 +38,7 @@
                         <td>Date Released</td>
                         <td style="padding-left:24px;">
                             <asp:TextBox ID="dateReleasedTxt" runat="server" Width="500" Height="36" placeholder="MM/DD/YYYY"></asp:TextBox><br />
-                            <asp:CustomValidator ID="dateReleasedTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="dateReleasedTxt" CssClass="validation-message" OnServerValidate="dateReleasedTxtCv_ServerValidate"></asp:CustomValidator>
+                            <asp:CustomValidator ID="dateReleasedTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="dateReleasedTxt" CssClass="validation-message" OnServerValidate="dateReleasedTxtCv_ServerValidate" ValidateEmptyText="True"></asp:CustomValidator>
                         </td>
                     </tr>
                     <tr>
@@ -60,10 +60,8 @@
                     <asp:Image ID="albumCoverPreview" runat="server" ImageUrl="~\Content\Images\default_cover.jpg" Width="200" Height="200" />
                 </div>
                 <div style="margin-bottom:20px;">
-                    <asp:FileUpload ID="albumCoverFile" accept="image/*" runat="server" />
-                </div>
-                <div>
-                    <asp:Button ID="uploadPictureBtn" runat="server" Text="Upload Picture" CssClass="btn btn-publish" OnClick="uploadPictureBtn_Click" />
+                    <asp:FileUpload ID="albumCoverFile" accept="image/*" runat="server" /><br />
+                    <asp:CustomValidator ID="albumCoverFileCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="albumCoverFile" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="albumCoverFileCv_ServerValidate"></asp:CustomValidator>
                 </div>
             </div>            
         </div>

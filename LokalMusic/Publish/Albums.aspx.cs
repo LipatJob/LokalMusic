@@ -2,11 +2,6 @@
 using LokalMusic._Code.Presenters;
 using LokalMusic._Code.Repositories.Publish;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace LokalMusic.Publish
 {

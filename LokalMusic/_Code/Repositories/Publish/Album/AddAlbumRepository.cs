@@ -1,9 +1,7 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Models.Publish.Album;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+using System.IO;
 using System.Web;
 
 namespace LokalMusic._Code.Repositories.Publish.Album
@@ -18,10 +16,10 @@ namespace LokalMusic._Code.Repositories.Publish.Album
             model.ArtistName = result.ToString();
         }
 
-        public int AddAlbum(IAddAlbumModel model, int userId)
+        public int AddAlbum(IAddAlbumModel model, int userId, HttpPostedFile albumCover)
         {
             int albumId = AddToProduct(model);
-            int albumCoverId = AddToFile(model);
+            int albumCoverId = AddToFile(model, albumId, albumCover);
             AddToAlbum(model, albumId, albumCoverId, userId);
 
             return albumId;
@@ -32,12 +30,9 @@ namespace LokalMusic._Code.Repositories.Publish.Album
             string query = @"
 INSERT INTO Product(ProductTypeId,ProductStatusId,DateAdded,Price,ProductName)
 VALUES
-(1,1,@dateAdded,@price,@albumName)
+(1,1,@dateAdded,@price,@albumName);
 
-SELECT ProductId AS AlbumId
-FROM Product
-WHERE ProductName = @albumName
-AND DateAdded = (SELECT MAX(DateAdded) FROM Product WHERE ProductName = @albumName)
+SELECT SCOPE_IDENTITY();
 ";
 
             string result = DbHelper.ExecuteScalar(
@@ -49,19 +44,24 @@ AND DateAdded = (SELECT MAX(DateAdded) FROM Product WHERE ProductName = @albumNa
             return int.Parse(result);
         }
 
-        private int AddToFile(IAddAlbumModel model)
+        private int AddToFile(IAddAlbumModel model, int albumId, HttpPostedFile albumCover)
         {
+            string fileName = albumId + Path.GetExtension(albumCover.FileName);
+            string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.ALBUMCOVER_CONTAINER_NAME, albumCover);
+            model.AlbumCover = fileLocation;
+
             string query = @"
 INSERT INTO FileInfo(FileTypeId,FileName)
 VALUES
-(1,@albumCover)
+((SELECT FileTypeId FROM FileType WHERE FileTypeName = @fileTypeName),@albumCover);
 
-SELECT FileId
-FROM FileInfo
-WHERE FileName = @albumCover
+SELECT SCOPE_IDENTITY();
 ";
 
-            string result = DbHelper.ExecuteScalar(query, ("albumCover", model.AlbumCover)).ToString();
+            string result = DbHelper.ExecuteScalar(
+                query, 
+                ("fileTypeName", FileSystemHelper.ALBUMCOVER_CONTAINER_NAME),
+                ("albumCover", model.AlbumCover)).ToString();
             return int.Parse(result);
         }
 

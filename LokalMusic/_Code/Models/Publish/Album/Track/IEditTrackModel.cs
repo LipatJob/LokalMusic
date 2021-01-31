@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Models.Publish.Album.Track
 {
@@ -26,5 +23,9 @@ namespace LokalMusic._Code.Models.Publish.Album.Track
         string ClipFile { get; set; }
 
         TimeSpan ClipFileDuration { get; set; }
+
+        bool TrackIsUpdated { get; set; }
+
+        bool ClipIsUpdated { get; set; }
     }
 }
