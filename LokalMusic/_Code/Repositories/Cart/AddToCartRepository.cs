@@ -27,9 +27,41 @@ namespace LokalMusic._Code.Repositories.Cart
             return DbHelper.ExecuteScalar(query, ("CustomerId", userId), ("ProductId", productId)) != null ? true : false;
         }
 
-        public static bool IsTrackAlbumBought(int productId, int userId)
+        public static bool IsProductATrack(int productId)
         {
-            return false;
+            string query = "SELECT ProductId " +
+                           "FROM Product " +
+                           "WHERE ProductId = @ProductId " +
+                           "AND ProductTypeId = (SELECT ProductType.ProductTypeId FROM ProductType WHERE ProductType.TypeName = 'TRACK')";
+
+            return DbHelper.ExecuteScalar(query, ("ProductId", productId)) != null ? true : false;
+        }
+
+        public static int GetAlbumIdOfTrack(int trackId)
+        {
+            string query = "SELECT AlbumId " +
+                           "FROM Product " +
+                           "INNER JOIN Track " +
+                           "ON ProductId = TrackId " +
+                           "WHERE ProductId = @TrackId";
+
+            return (int)DbHelper.ExecuteScalar(query, ("TrackId", trackId));
+        }
+
+        public static bool IsTrackOfAlbumBought(int trackId, int userId)
+        {
+            int albumId = GetAlbumIdOfTrack(trackId);
+
+            if (albumId <= 0) return false;
+
+            string query = "SELECT OrderInfo.OrderId " +
+                           "FROM OrderInfo " +
+                           "INNER JOIN ProductOrder " +
+                           "ON OrderInfo.OrderId = ProductOrder.OrderId " +
+                           "WHERE CustomerId = @CustomerId " +
+                           "AND ProductOrder.ProductId = @AlbumId";
+
+            return DbHelper.ExecuteScalar(query, ("CustomerId", userId), ("AlbumId", albumId)) != null ? true : false;
         }
 
         public static int AddToCart(int productId, int userId)
