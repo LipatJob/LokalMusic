@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Globalization;
 
 namespace LokalMusic._Code.Repositories.Publish.Albums
 {
@@ -49,7 +50,7 @@ WHERE Album.AlbumId = @AlbumId
                         TrackCoverLink = (string)row["TrackCoverLink"],
                         TrackName = (string)row["TrackName"],
                         DateAdded = (DateTime)row["DateAdded"],
-                        Genre = (string)row["Genre"],
+                        Genre = new CultureInfo("en").TextInfo.ToTitleCase(row["Genre"].ToString().ToLower()),
                         Duration = (TimeSpan)row["Duration"],
                         Price = (decimal)row["Price"],
                         SalesCount = (int)row["SalesCount"]

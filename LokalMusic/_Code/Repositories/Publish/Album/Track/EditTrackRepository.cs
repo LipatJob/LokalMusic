@@ -63,25 +63,26 @@ WHERE TrackId = @trackId
         {
             int genreId = EditInGenre(model);
 
-            string query = @"
+            string updateTrackQuery = @"
 UPDATE Product
 SET ProductName = @trackName,
 Price = @price
-WHERE ProductId = @trackId
+WHERE ProductId = @trackId;
 
 UPDATE Track
 SET GenreId = @genreId,
 Description = @description,
 TrackDuration = @trackFileDuration,
 ClipDuration = @clipFileDuration
-WHERE TrackId = @trackId
+WHERE TrackId = @trackId;";
 
+            string fileIdQuery = @"
 SELECT TrackFileID, ClipFileID
 FROM Track
-WHERE TrackId = @trackId
-";
-            var result = DbHelper.ExecuteDataTableQuery(
-                query,
+WHERE TrackId = @trackId;";
+
+            DbHelper.ExecuteScalar(
+                updateTrackQuery,
                 ("trackName", model.TrackName),
                 ("price", model.Price),
                 ("trackId", trackId),
@@ -91,16 +92,22 @@ WHERE TrackId = @trackId
                 ("clipFileDuration", model.ClipFileDuration)
                 );
 
-            int trackFileId = (int)result.Rows[0]["TrackFileID"];
-            int clipFileId = (int)result.Rows[0]["ClipFileID"];
+            var result = DbHelper.ExecuteDataTableQuery(
+                fileIdQuery,("trackId", trackId));
 
-            string query2 = "UPDATE FileInfo SET FileName = @trackFile WHERE FileId = @trackFileId " +
-                "UPDATE FileInfo SET FileName = @clipFile WHERE FileId = @clipFileId";
-            DbHelper.ExecuteScalar(query2,
-                ("trackFile", model.TrackFile),
-                ("trackFileId", trackFileId),
-                ("clipFile", model.ClipFile),
-                ("clipFileId", clipFileId));
+            if (result != null)
+            {
+                int trackFileId = (int)result.Rows[0]["TrackFileID"];
+                int clipFileId = (int)result.Rows[0]["ClipFileID"];
+
+                string updateFileQuery = "UPDATE FileInfo SET FileName = @trackFile WHERE FileId = @trackFileId " +
+                    "UPDATE FileInfo SET FileName = @clipFile WHERE FileId = @clipFileId";
+                DbHelper.ExecuteScalar(updateFileQuery,
+                    ("trackFile", model.TrackFile),
+                    ("trackFileId", trackFileId),
+                    ("clipFile", model.ClipFile),
+                    ("clipFileId", clipFileId));
+            }
         }
 
         private int EditInGenre(IEditTrackModel model)

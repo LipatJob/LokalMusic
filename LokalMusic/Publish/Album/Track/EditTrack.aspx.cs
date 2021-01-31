@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization;
 
 namespace LokalMusic.Publish.Album.Track
 {
@@ -24,7 +25,7 @@ namespace LokalMusic.Publish.Album.Track
         public string ArtistName { get => artistName.Text; set => artistName.Text = value; }
         public string AlbumName { get => albumName.Text; set => albumName.Text = value; }
         public string TrackName { get => trackNameTxt.Text; set => trackNameTxt.Text = value; }
-        public string Genre { get => genreTxt.Text; set => genreTxt.Text = value; }
+        public string Genre { get => genreTxt.Text; set => genreTxt.Text = new CultureInfo("en").TextInfo.ToTitleCase(value.ToLower()); }
         public string Description { get => descriptionTxt.Text; set => descriptionTxt.Text = value; }
         public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = String.Format("{0:N}", value); }
         public string TrackFile { get => trackSource.Src; set => trackSource.Src = value; }
@@ -34,23 +35,26 @@ namespace LokalMusic.Publish.Album.Track
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Presenter.PageLoad();
+            if (!Page.IsPostBack)
+            {
+                Presenter.PageLoad();
 
-            AlbumId = NavigationHelper.GetRouteValue("AlbumId").ToString();
-            viewTracks.HRef = "~/Publish/Album/" + AlbumId;
+                AlbumId = NavigationHelper.GetRouteValue("AlbumId").ToString();
+                viewTracks.HRef = "~/Publish/Album/" + AlbumId;
+            }
         }
 
         protected void uploadTrackFileBtn_Click(object sender, EventArgs e)
         {
             if (trackFile.HasFile)
             {
-                // string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
-                // string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
-                // TrackFile = fileLocation;
-                // TrackFileDuration = new TimeSpan(0, 2, 45);
                 var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(trackFile.PostedFile));
                 TrackFileDuration = tfile.Properties.Duration;
-                Response.Write(TrackFileDuration.TotalSeconds);
+                Response.Write(TrackFileDuration);
+
+                string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
+                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
+                TrackFile = fileLocation;
             }
         }
 
@@ -58,16 +62,22 @@ namespace LokalMusic.Publish.Album.Track
         {
             if (clipFile.HasFile)
             {
-                string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
-                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
+                var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(clipFile.PostedFile));
+                ClipFileDuration = tfile.Properties.Duration;
+                Response.Write(ClipFileDuration);
+
+                string fileName = AuthenticationHelper.UserId.ToString() + "_" + clipFile.PostedFile.FileName;
+                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.CLIPS_CONTAINER_NAME, clipFile.PostedFile);
                 ClipFile = fileLocation;
-                ClipFileDuration = new TimeSpan(0, 1, 0);
             }
         }
 
         protected void saveBtn_Click(object sender, EventArgs e)
         {
-            Presenter.EditTrack();
+            if (Page.IsValid)
+            {
+                Presenter.EditTrack();
+            }
         }
 
         protected void cancelBtn_Click(object sender, EventArgs e)
