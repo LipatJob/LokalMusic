@@ -39,7 +39,7 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
 
         public void AddTrack()
         {
-            addTrackRepository.AddTrack(viewModel, AlbumId);
+            addTrackRepository.AddTrack(viewModel, AlbumId, viewModel.UploadedTrackFile, viewModel.UploadedClipFile);
         }
     }
 }

@@ -2,6 +2,7 @@
 using LokalMusic._Code.Models.Publish.Album.Track;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -25,11 +26,11 @@ namespace LokalMusic._Code.Repositories.Publish.Album.Track
             model.AlbumName = result.ToString();
         }
 
-        public void AddTrack(IAddTrackModel model, int albumId)
+        public void AddTrack(IAddTrackModel model, int albumId, HttpPostedFile trackFile, HttpPostedFile clipFile)
         {
             int trackId = AddToProduct(model);
-            int trackFileId = AddTrackFile(model);
-            int clipFileId = AddClipFile(model);
+            int trackFileId = AddTrackFile(model, trackId, trackFile);
+            int clipFileId = AddClipFile(model, trackId, clipFile);
             int genreId = AddToGenre(model);
 
             string query = "INSERT INTO Track VALUES(@trackId,@albumId,@genreId,@trackFileId,@clipFileId,@trackDuration,@description,@clipDuration)";
@@ -51,10 +52,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album.Track
 INSERT INTO Product(ProductTypeId,ProductStatusId,DateAdded,Price,ProductName)
 VALUES (2,1,@dateAdded,@price,@trackName)
 
-SELECT ProductId AS TrackId
-FROM Product
-WHERE ProductName = @trackName
-AND DateAdded = (SELECT MAX(DateAdded) FROM Product WHERE ProductName = @trackName)
+SELECT SCOPE_IDENTITY();
 ";
             string result = DbHelper.ExecuteScalar(
                 query,
@@ -65,32 +63,48 @@ AND DateAdded = (SELECT MAX(DateAdded) FROM Product WHERE ProductName = @trackNa
             return int.Parse(result);
         }
 
-        private int AddTrackFile(IAddTrackModel model)
+        private int AddTrackFile(IAddTrackModel model, int trackId, HttpPostedFile trackFile)
         {
+            var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(trackFile));
+            model.TrackFileDuration = tfile.Properties.Duration;
+
+            string fileName = trackId + Path.GetExtension(trackFile.FileName);
+            string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile);
+            model.TrackFile = fileLocation;
+            
             string query = @"
 INSERT INTO FileInfo(FileTypeId,FileName)
-VALUES (2,@trackFile)
+VALUES ((SELECT FileTypeId FROM FileType WHERE FileTypeName = @fileTypeName), @trackFile)
 
-SELECT FileId FROM FileInfo
-WHERE FileName = @trackFile
+SELECT SCOPE_IDENTITY();
 ";
             string result = DbHelper.ExecuteScalar(
-                query, ("trackFile", model.TrackFile)).ToString();
+                query, 
+                ("fileTypeName", FileSystemHelper.TRACKS_CONTAINER_NAME), 
+                ("trackFile", model.TrackFile)).ToString();
 
             return int.Parse(result);
         }
 
-        private int AddClipFile(IAddTrackModel model)
+        private int AddClipFile(IAddTrackModel model, int trackId, HttpPostedFile clipFile)
         {
+            var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(clipFile));
+            model.ClipFileDuration = tfile.Properties.Duration;
+
+            string fileName = trackId + Path.GetExtension(clipFile.FileName);
+            string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.CLIPS_CONTAINER_NAME, clipFile);
+            model.ClipFile = fileLocation;
+
             string query = @"
 INSERT INTO FileInfo(FileTypeId,FileName)
-VALUES (2,@clipFile)
+VALUES ((SELECT FileTypeId FROM FileType WHERE FileTypeName = @fileTypeName), @clipFile)
 
-SELECT FileId FROM FileInfo
-WHERE FileName = @clipFile
+SELECT SCOPE_IDENTITY();
 ";
             string result = DbHelper.ExecuteScalar(
-                query, ("clipFile", model.ClipFile)).ToString();
+                query, 
+                ("fileTypeName", FileSystemHelper.CLIPS_CONTAINER_NAME),
+                ("clipFile", model.ClipFile)).ToString();
 
             return int.Parse(result);
         }
@@ -111,5 +125,33 @@ WHERE FileName = @clipFile
 
             return int.Parse(genreId.ToString());
         }
+    }
+
+
+    public class HttpPostedFileAbstraction : TagLib.File.IFileAbstraction
+    {
+        private HttpPostedFile file;
+
+        public HttpPostedFileAbstraction(HttpPostedFile file)
+        {
+            this.file = file;
+        }
+
+        public string Name
+        {
+            get { return file.FileName; }
+        }
+
+        public System.IO.Stream ReadStream
+        {
+            get { return file.InputStream; }
+        }
+
+        public System.IO.Stream WriteStream
+        {
+            get { throw new Exception("Cannot write to HttpPostedFile"); }
+        }
+
+        public void CloseStream(System.IO.Stream stream) { }
     }
 }
