@@ -114,13 +114,13 @@ namespace LokalMusic.Publish.Album
         protected global::System.Web.UI.WebControls.FileUpload albumCoverFile;
 
         /// <summary>
-        /// uploadPictureBtn control.
+        /// albumCoverFileCv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button uploadPictureBtn;
+        protected global::System.Web.UI.WebControls.CustomValidator albumCoverFileCv;
 
         /// <summary>
         /// cancelBtn control.

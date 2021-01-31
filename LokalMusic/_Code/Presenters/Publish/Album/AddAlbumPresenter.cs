@@ -37,7 +37,7 @@ namespace LokalMusic._Code.Presenters.Publish.Album
 
         public int AddAlbum()
         {
-            return addAlbumRepository.AddAlbum(viewModel, AuthenticationHelper.UserId);
+            return addAlbumRepository.AddAlbum(viewModel, AuthenticationHelper.UserId, viewModel.UploadedAlbumCover);
         }
     }
 }

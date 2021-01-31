@@ -42,7 +42,7 @@ namespace LokalMusic._Code.Presenters.Publish.Album
 
         public void EditAlbum()
         {
-            editAlbumRepository.EditAlbum(viewModel, AlbumId);
+            editAlbumRepository.EditAlbum(viewModel, AlbumId, viewModel.UploadedAlbumCover);
         }
         
         public void UnlistAlbum()
