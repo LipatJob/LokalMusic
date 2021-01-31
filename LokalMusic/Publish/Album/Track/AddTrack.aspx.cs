@@ -45,11 +45,12 @@ namespace LokalMusic.Publish.Album.Track
         {
             if (trackFile.HasFile)
             {
-                //string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
-                //string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
-                //TrackFile = fileLocation;
+                var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(trackFile.PostedFile));
+                TrackFileDuration = tfile.Properties.Duration;
 
-                Response.Write(TrackFileDuration.TotalSeconds);
+                string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
+                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
+                TrackFile = fileLocation;
             }
         }
 
@@ -57,10 +58,12 @@ namespace LokalMusic.Publish.Album.Track
         {
             if (clipFile.HasFile)
             {
-                // string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
-                // string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
-                // ClipFile = fileLocation;
-                // ClipFileDuration = new TimeSpan(0, 1, 0);
+                var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(clipFile.PostedFile));
+                ClipFileDuration = tfile.Properties.Duration;
+
+                string fileName = AuthenticationHelper.UserId.ToString() + "_" + clipFile.PostedFile.FileName;
+                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.CLIPS_CONTAINER_NAME, clipFile.PostedFile);
+                ClipFile = fileLocation;
             }
         }
 

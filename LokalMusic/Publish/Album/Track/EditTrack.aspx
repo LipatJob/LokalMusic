@@ -71,7 +71,7 @@
 
         <div class="row float-right" style="margin-top: 40px">
             <div class="col-12">
-                <asp:LinkButton ID="unlistBtn" runat="server" ForeColor="#B82828" OnClick="unlistBtn_Click">Unlist Album</asp:LinkButton>
+                <asp:LinkButton ID="unlistBtn" runat="server" ForeColor="#B82828" OnClick="unlistBtn_Click">Unlist Track</asp:LinkButton>
                 &emsp;
                 <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" OnClick="cancelBtn_Click" />
                 &emsp;
