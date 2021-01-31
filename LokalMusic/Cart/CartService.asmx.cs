@@ -34,11 +34,11 @@ namespace LokalMusic.Store
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public string ProcessCheckout(object forCheckout)
+        public string ProcessCheckout(object forCheckout, string paymentProvider)
         {
             List<CheckoutItem> cart = new List<CheckoutItem>();
 
-            // format ["["#", "", "#"]", "[#, "", #]"]
+            // format ["["#", "", "#", ""]", "[#, "", #]", ""]
             string unparsedCartItems = forCheckout.ToString();
 
             // split product groups 
@@ -59,15 +59,14 @@ namespace LokalMusic.Store
                     int.Parse(tempItems[0]),
                     tempItems[1].ToString(),
                     Decimal.Round(Decimal.Parse(tempItems[2].ToString()), 2),
-                    "MASTER CARD"
-                    );
+                    tempItems[3].ToString());
 
                 cart.Add(cartItem);
             }
 
-            new CartPresenter(new CartRepository()).ProcessCustomerOrder(cart);
+            bool status = new CartPresenter(new CartRepository()).ProcessCustomerOrder(cart, paymentProvider);
 
-            return "Your order and payment has been processed successfully. You can view product in your collections.";
+            return status ? "Your order and payment has been processed successfully. You can view product in your collections." : "Something went wrong. Try again later.";
         }
     }
 }
