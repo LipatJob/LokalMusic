@@ -55,7 +55,8 @@
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
-                    <asp:FileUpload ID="trackFile" runat="server" />
+                    <asp:FileUpload ID="trackFile" runat="server" /><br />
+                    <asp:CustomValidator ID="trackFileCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackFile" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackFileCv_ServerValidate"></asp:CustomValidator>
                 </div>
 
                 <p style="margin-top:50px">Clip File</p>
@@ -64,7 +65,8 @@
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
-                    <asp:FileUpload ID="clipFile" runat="server" />
+                    <asp:FileUpload ID="clipFile" runat="server" /><br />
+                    <asp:CustomValidator ID="clipFileCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="clipFile" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="clipFileCv_ServerValidate"></asp:CustomValidator>
                 </div>
             </div>            
         </div>

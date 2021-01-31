@@ -29,26 +29,17 @@ namespace LokalMusic.Publish.Album
         public string Producer { get => producerTxt.Text; }
         public decimal Price { get => decimal.Parse(priceTxt.Text); }
         public string AlbumCover { get => albumCoverPreview.ImageUrl; set => albumCoverPreview.ImageUrl = value; }
+        public HttpPostedFile UploadedAlbumCover => albumCoverFile.PostedFile;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Presenter.PageLoad();
         }
 
-        protected void uploadPictureBtn_Click(object sender, EventArgs e)
-        {
-            if (albumCoverFile.HasFile)
-            {
-                string fileName = AuthenticationHelper.UserId.ToString() + "_" + albumCoverFile.PostedFile.FileName;
-                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.ALBUMCOVER_CONTAINER_NAME, albumCoverFile.PostedFile);
-                AlbumCover = fileLocation;
-            }
-        }
-
         protected void addBtn_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
-            {
+            {                
                 int AlbumId = Presenter.AddAlbum();
                 string addTrackLink = "~/Publish/Album/" + AlbumId.ToString() + "/Track/Add";
                 NavigationHelper.Redirect(addTrackLink);
@@ -97,6 +88,15 @@ namespace LokalMusic.Publish.Album
                 .AddRule(
                     rule: ValidUtils.IsValidPrice(priceTxt.Text),
                     errorMessage: "Price should be more than zero")
+                .Validate();
+        }
+
+        protected void albumCoverFileCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: () => albumCoverFile.HasFile,
+                    errorMessage: "Please upload an album cover")
                 .Validate();
         }
     }

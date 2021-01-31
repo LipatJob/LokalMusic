@@ -62,9 +62,6 @@
                 <div style="margin-bottom:20px;">
                     <asp:FileUpload ID="albumCoverFile" accept="image/*" runat="server" />
                 </div>
-                <div>
-                    <asp:Button ID="uploadPictureBtn" runat="server" Text="Upload Picture" CssClass="btn btn-publish" OnClick="uploadPictureBtn_Click" />
-                </div>
             </div>            
         </div>
 

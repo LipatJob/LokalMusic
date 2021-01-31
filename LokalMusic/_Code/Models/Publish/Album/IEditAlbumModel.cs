@@ -20,5 +20,7 @@ namespace LokalMusic._Code.Models.Publish.Album
         decimal Price { get; set; }
 
         string AlbumCover { get; set; }
+
+        bool AlbumCoverIsUpdated { get; set; }
     }
 }

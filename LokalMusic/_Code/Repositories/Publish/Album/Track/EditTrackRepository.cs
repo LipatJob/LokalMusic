@@ -87,6 +87,11 @@ TrackDuration = @trackFileDuration,
 ClipDuration = @clipFileDuration
 WHERE TrackId = @trackId;";
 
+            string fileIdQuery = @"
+SELECT TrackFileID, ClipFileID
+FROM Track
+WHERE TrackId = @trackId;";
+
             DbHelper.ExecuteScalar(
                 updateTrackQuery,
                 ("trackName", model.TrackName),
@@ -97,6 +102,23 @@ WHERE TrackId = @trackId;";
                 ("trackFileDuration", model.TrackFileDuration),
                 ("clipFileDuration", model.ClipFileDuration)
                 );
+
+            var result = DbHelper.ExecuteDataTableQuery(
+                fileIdQuery, ("trackId", trackId));
+
+            if (result != null)
+            {
+                int trackFileId = (int)result.Rows[0]["TrackFileID"];
+                int clipFileId = (int)result.Rows[0]["ClipFileID"];
+
+                string updateFileQuery = "UPDATE FileInfo SET FileName = @trackFile WHERE FileId = @trackFileId " +
+                    "UPDATE FileInfo SET FileName = @clipFile WHERE FileId = @clipFileId";
+                DbHelper.ExecuteScalar(updateFileQuery,
+                    ("trackFile", model.TrackFile),
+                    ("trackFileId", trackFileId),
+                    ("clipFile", model.ClipFile),
+                    ("clipFileId", clipFileId));
+            }
         }
 
         private void UploadTrackFile(IEditTrackModel model, int trackId, HttpPostedFile trackFile)

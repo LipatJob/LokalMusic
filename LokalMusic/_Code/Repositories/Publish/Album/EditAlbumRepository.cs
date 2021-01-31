@@ -3,6 +3,7 @@ using LokalMusic._Code.Models.Publish.Album;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -45,8 +46,15 @@ WHERE Product.ProductId = @AlbumId
             model.AlbumCover = (string)result.Rows[0]["AlbumCover"];
         }
 
-        public void EditAlbum(IEditAlbumModel model, int albumId)
+        public void EditAlbum(IEditAlbumModel model, int albumId, HttpPostedFile albumCover)
         {
+            if (model.AlbumCoverIsUpdated)
+            {
+                string fileName = albumId + Path.GetExtension(albumCover.FileName);
+                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.ALBUMCOVER_CONTAINER_NAME, albumCover, true);
+                model.AlbumCover = fileLocation;
+            }
+
             string updateProductQuery = @"
 UPDATE Product
 SET
@@ -63,7 +71,7 @@ ProducerName = @producer
 WHERE AlbumId = @albumId;
 ";
 
-            string getAlbumIdQuery = @"
+            string getAlbumCoverIdQuery = @"
 SELECT AlbumCoverID FROM Album
 WHERE AlbumId = @albumId;";
 
@@ -79,13 +87,13 @@ WHERE AlbumId = @albumId;";
                 ("dateReleased", model.DateReleased),
                 ("producer", model.Producer));
 
-            var albumIdResult = DbHelper.ExecuteScalar(
-                getAlbumIdQuery,
+            var result = DbHelper.ExecuteScalar(
+                getAlbumCoverIdQuery,
                 ("albumId", albumId));
 
-            if(albumIdResult != null)
+            if(result != null)
             {
-                int albumCoverId = (int)albumIdResult;
+                int albumCoverId = (int)result;
                 string query2 = "UPDATE FileInfo SET FileName = @albumCover WHERE FileId = @albumCoverId";
                 DbHelper.ExecuteScalar(query2, ("albumCover", model.AlbumCover), ("albumCoverId", albumCoverId));
             }

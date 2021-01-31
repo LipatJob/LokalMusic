@@ -8,5 +8,6 @@ namespace LokalMusic._Code.Views.Publish
 {
     public interface IAddAlbumViewModel : IAddAlbumModel
     {
+        HttpPostedFile UploadedAlbumCover { get; }
     }
 }
