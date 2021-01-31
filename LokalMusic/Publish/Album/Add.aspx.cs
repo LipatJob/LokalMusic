@@ -64,5 +64,40 @@ namespace LokalMusic.Publish.Album
             priceTxt.Text = "";
             albumCoverPreview.ImageUrl = @"~\Content\Images\default_cover.jpg";
         }
+
+        protected void albumNameTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(AlbumName),
+                    errorMessage: "Please enter an album name")
+                .Validate();
+        }
+
+        protected void dateReleasedTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsValidRegex(dateReleasedTxt.Text, @"^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$"),
+                    errorMessage: "Date should be in the format of MM/DD/YYYY")
+                .Validate();
+        }
+
+        protected void priceTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            decimal validDecimal;
+
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: ValidUtils.IsNotEmpty(priceTxt.Text),
+                    errorMessage: "Please enter the album price")
+                .AddRule(
+                    rule: () => decimal.TryParse(priceTxt.Text, out validDecimal),
+                    errorMessage: "Please enter numbers only")
+                .AddRule(
+                    rule: ValidUtils.IsValidPrice(priceTxt.Text),
+                    errorMessage: "Price should be more than zero")
+                .Validate();
+        }
     }
 }

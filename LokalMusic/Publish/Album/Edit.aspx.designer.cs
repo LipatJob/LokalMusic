@@ -33,6 +33,15 @@ namespace LokalMusic.Publish.Album
         protected global::System.Web.UI.WebControls.TextBox albumNameTxt;
 
         /// <summary>
+        /// albumNameTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator albumNameTxtCv;
+
+        /// <summary>
         /// descriptionTxt control.
         /// </summary>
         /// <remarks>
@@ -51,6 +60,15 @@ namespace LokalMusic.Publish.Album
         protected global::System.Web.UI.WebControls.TextBox dateReleasedTxt;
 
         /// <summary>
+        /// dateReleasedTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator dateReleasedTxtCv;
+
+        /// <summary>
         /// producerTxt control.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace LokalMusic.Publish.Album
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox priceTxt;
+
+        /// <summary>
+        /// priceTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator priceTxtCv;
 
         /// <summary>
         /// albumCoverPreview control.
