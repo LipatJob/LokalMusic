@@ -45,7 +45,7 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
 
         public void EditTrack()
         {
-            editTrackRepository.EditTrack(viewModel, TrackId);
+            editTrackRepository.EditTrack(viewModel, TrackId, viewModel.UploadedTrackFile, viewModel.UploadedClipFile);
         }
 
         public void UnlistTrack()

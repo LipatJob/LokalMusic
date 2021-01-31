@@ -32,6 +32,8 @@ namespace LokalMusic.Publish.Album.Track
         public TimeSpan TrackFileDuration { get; set; }
         public string ClipFile { get => clipSource.Src; set => clipSource.Src = value; }
         public TimeSpan ClipFileDuration { get; set; }
+        public HttpPostedFile UploadedTrackFile => trackFile.PostedFile;
+        public HttpPostedFile UploadedClipFile => clipFile.PostedFile;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,32 +41,6 @@ namespace LokalMusic.Publish.Album.Track
 
             AlbumId = NavigationHelper.GetRouteValue("AlbumId").ToString();
             viewTracks.HRef = "~/Publish/Album/" + AlbumId;
-        }
-
-        protected void uploadTrackFileBtn_Click(object sender, EventArgs e)
-        {
-            if (trackFile.HasFile)
-            {
-                var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(trackFile.PostedFile));
-                TrackFileDuration = tfile.Properties.Duration;
-
-                string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
-                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
-                TrackFile = fileLocation;
-            }
-        }
-
-        protected void uploadClipFileBtn_Click(object sender, EventArgs e)
-        {
-            if (clipFile.HasFile)
-            {
-                var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(clipFile.PostedFile));
-                ClipFileDuration = tfile.Properties.Duration;
-
-                string fileName = AuthenticationHelper.UserId.ToString() + "_" + clipFile.PostedFile.FileName;
-                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.CLIPS_CONTAINER_NAME, clipFile.PostedFile);
-                ClipFile = fileLocation;
-            }
         }
 
         protected void addBtn_Click(object sender, EventArgs e)
@@ -110,32 +86,5 @@ namespace LokalMusic.Publish.Album.Track
                     errorMessage: "Price should be more than zero")
                 .Validate();
         }
-    }
-
-    public class HttpPostedFileAbstraction : TagLib.File.IFileAbstraction
-    {
-        private HttpPostedFile file;
-
-        public HttpPostedFileAbstraction(HttpPostedFile file)
-        {
-            this.file = file;
-        }
-
-        public string Name
-        {
-            get { return file.FileName; }
-        }
-
-        public System.IO.Stream ReadStream
-        {
-            get { return file.InputStream; }
-        }
-
-        public System.IO.Stream WriteStream
-        {
-            get { throw new Exception("Cannot write to HttpPostedFile"); }
-        }
-
-        public void CloseStream(System.IO.Stream stream) { }
     }
 }

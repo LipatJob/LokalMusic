@@ -8,6 +8,9 @@ namespace LokalMusic._Code.Views.Publish
 {
     public interface IAddTrackViewModel : IAddTrackModel
     {
+        HttpPostedFile UploadedTrackFile { get; }
+
+        HttpPostedFile UploadedClipFile { get; }
     }
 
 }

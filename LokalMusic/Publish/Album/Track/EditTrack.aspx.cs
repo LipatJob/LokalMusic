@@ -15,7 +15,7 @@ namespace LokalMusic.Publish.Album.Track
     public partial class EditTrack : System.Web.UI.Page, IEditTrackViewModel
     {
         private EditTrackPresenter Presenter;
-        private string AlbumId;
+        private string AlbumId => NavigationHelper.GetRouteValue("AlbumId").ToString();
 
         public EditTrack()
         {
@@ -32,6 +32,11 @@ namespace LokalMusic.Publish.Album.Track
         public TimeSpan TrackFileDuration { get; set; }
         public string ClipFile { get => clipSource.Src; set => clipSource.Src = value; }
         public TimeSpan ClipFileDuration { get; set; }
+        public HttpPostedFile UploadedTrackFile => trackFile.PostedFile;
+        public HttpPostedFile UploadedClipFile => clipFile.PostedFile;
+
+        public bool TrackIsUpdated { get; set; }
+        public bool ClipIsUpdated { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,36 +44,7 @@ namespace LokalMusic.Publish.Album.Track
             {
                 Presenter.PageLoad();
 
-                AlbumId = NavigationHelper.GetRouteValue("AlbumId").ToString();
                 viewTracks.HRef = "~/Publish/Album/" + AlbumId;
-            }
-        }
-
-        protected void uploadTrackFileBtn_Click(object sender, EventArgs e)
-        {
-            if (trackFile.HasFile)
-            {
-                var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(trackFile.PostedFile));
-                TrackFileDuration = tfile.Properties.Duration;
-                Response.Write(TrackFileDuration);
-
-                string fileName = AuthenticationHelper.UserId.ToString() + "_" + trackFile.PostedFile.FileName;
-                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile.PostedFile);
-                TrackFile = fileLocation;
-            }
-        }
-
-        protected void uploadClipFileBtn_Click(object sender, EventArgs e)
-        {
-            if (clipFile.HasFile)
-            {
-                var tfile = TagLib.File.Create(new HttpPostedFileAbstraction(clipFile.PostedFile));
-                ClipFileDuration = tfile.Properties.Duration;
-                Response.Write(ClipFileDuration);
-
-                string fileName = AuthenticationHelper.UserId.ToString() + "_" + clipFile.PostedFile.FileName;
-                string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.CLIPS_CONTAINER_NAME, clipFile.PostedFile);
-                ClipFile = fileLocation;
             }
         }
 
@@ -76,6 +52,16 @@ namespace LokalMusic.Publish.Album.Track
         {
             if (Page.IsValid)
             {
+                if (trackFile.HasFile)
+                    TrackIsUpdated = true;
+                else
+                    TrackIsUpdated = false;
+
+                if (clipFile.HasFile)
+                    ClipIsUpdated = true;
+                else
+                    ClipIsUpdated = false;
+
                 Presenter.EditTrack();
             }
         }

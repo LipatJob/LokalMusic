@@ -26,5 +26,9 @@ namespace LokalMusic._Code.Models.Publish.Album.Track
         string ClipFile { get; set; }
 
         TimeSpan ClipFileDuration { get; set; }
+
+        bool TrackIsUpdated { get; set; }
+
+        bool ClipIsUpdated { get; set; }
     }
 }
