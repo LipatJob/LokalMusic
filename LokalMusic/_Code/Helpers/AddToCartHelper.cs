@@ -23,8 +23,6 @@ namespace LokalMusic._Code.Helpers
             if (!AuthenticationHelper.LoggedIn)
                 return ADD_TO_CART_LOGIN;
 
-            // if cart is listed
-
             if (AddToCartRepository.IsInCart(productId, AuthenticationHelper.UserId))
                 return ADD_TO_CART_EXISTING;
 
@@ -35,8 +33,6 @@ namespace LokalMusic._Code.Helpers
                 if (AddToCartRepository.IsTrackOfAlbumBought(productId, AuthenticationHelper.UserId))
                     return ADD_TO_CART_ALBUMBOUGHT;
 
-            // if album is added, remove all of its tracks in the database; or,
-            // formulate an sql query that will not obtain cart product tracks, if its album are retrieved
             if (AddToCartRepository.AddToCart(productId, AuthenticationHelper.UserId) == 0)
                 return ADD_TO_CART_ERROR;
 

@@ -90,8 +90,8 @@
 
         <%--Nav--%>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="../Store/Home.aspx" runat="server">
-                <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
+            <a class="navbar-brand" href="#" runat="server">
+                <img src="~/Content/Images/New Logo.png" width="105" height="40" class="d-inline-block my-auto ml-xl-5" alt="" runat="server">
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
