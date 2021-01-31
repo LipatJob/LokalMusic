@@ -38,7 +38,7 @@
                         <td>Date Released</td>
                         <td style="padding-left:24px;">
                             <asp:TextBox ID="dateReleasedTxt" runat="server" Width="500" Height="36" placeholder="MM/DD/YYYY"></asp:TextBox><br />
-                            <asp:CustomValidator ID="dateReleasedTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="dateReleasedTxt" CssClass="validation-message" OnServerValidate="dateReleasedTxtCv_ServerValidate"></asp:CustomValidator>
+                            <asp:CustomValidator ID="dateReleasedTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="dateReleasedTxt" CssClass="validation-message" OnServerValidate="dateReleasedTxtCv_ServerValidate" ValidateEmptyText="True"></asp:CustomValidator>
                         </td>
                     </tr>
                     <tr>
