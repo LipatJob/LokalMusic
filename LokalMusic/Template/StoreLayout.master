@@ -54,7 +54,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link ml-xl-5" href="#">Catalogue</a>
+                    <a class="nav-link ml-xl-5" href="/Store/Search">Catalogue</a>
                 </li>
             </ul>
 

@@ -46,6 +46,15 @@ namespace LokalMusic
                 new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
                 );
 
+            // search
+            routes.MapPageRoute(
+                "Catalogue",
+                "Store/Search/{SearchVal}",
+                "~/Store/CataloguePage.aspx",
+                true,
+                new RouteValueDictionary { { "SearchVal", "*" } }
+                );
+
             // End Products Page
 
             // Product Details
