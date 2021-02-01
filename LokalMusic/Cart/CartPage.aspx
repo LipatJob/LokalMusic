@@ -48,7 +48,7 @@
            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
        }
 
-       .form-control{
+       .card .form-control{
            margin-top: -5px;
            color: #3A3A3A;
            font-weight: 700;
@@ -62,74 +62,70 @@
 
             <%--products--%>
             <div class="col-xl-8">
-
                 <h3 class="mb-3">Individual Tracks per Artists</h3>
 
                 <%--individual tracks r--%>
                 <asp:Repeater ID="artistsContainer" runat="server">
                     <ItemTemplate>
+                        <div class="card border-0 mb-3 shadow">
+                            <div class="card-body">
 
-                    <div class="card border-0 mb-3 shadow">
-
-                        <div class="card-body">
-
-                            <div class="ml-3">
-                                <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
-                                    <p style="font-size:20px; color:black; font-weight: 600;"><%#Eval("ArtistName") %></p>
-                                </a>
-                                <p style="color:#C4C4C4; font-size:16px; font-weight: 600; margin-top:-17px;">Artist</p>
-                            </div>
+                                <div class="ml-3">
+                                    <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
+                                        <p style="font-size:20px; color:black; font-weight: 600;"><%#Eval("ArtistName") %></p>
+                                    </a>
+                                    <p style="color:#C4C4C4; font-size:16px; font-weight: 600; margin-top:-17px;">Artist</p>
+                                </div>
                         
 
-                            <%--artist's tracks r--%>
-                            <asp:Repeater ID="artistTracksContainer" runat="server" DataSource=<%#Eval("tracks")%>>
-                                <ItemTemplate>
-
-                                    <div class="row">
-                                        <%--checkbox--%>
-                                        <div class="col-md-1 mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4">
-                                            <input type="checkbox"
-                                                id='<%#Eval("TrackId") %>'
-                                                class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"
-                                                onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2}, \"{3}\");", Eval("TrackId"), Eval("TrackName"), Eval("Price"), "TRACK") %>' />
-                                        </div>
-
-                                        <%--image--%>
-                                        <div class="col-md-2 m-0 p-0">
-                                            <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
-                                                <img src=<%#Eval("AlbumCover") %> class="mx-auto my-auto d-block img-responsive img-hoverable" width="100" height="100"/>
-                                            </a>
-                                        </div>
-
-                                        <%--title and other description--%>
-                                        <div class="col-md-7">
-                                            <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
-                                                <h4 class="card-title" style="color:#AA3A3A; font-size:24px;"><%#Eval("TrackName") %></h4>
-                                            </a>
-
-                                            <a href=<%#Eval("TrackAlbumDetails") %> class="titleLink" target="_blank" runat="server">
-                                                <h6 class="" style="font-size:15px; color: #5E5E5E"><%#Eval("AlbumName") %></h6>
-                                            </a>
-
-                                            <div class="">
-                                                <p class="mb-0" style="color:#8F8F8F; font-size: 16px;"><%#Eval("AudioLength") %> minutes</p>
+                                <%--artist's tracks r--%>
+                                <asp:Repeater ID="artistTracksContainer" runat="server" DataSource=<%#Eval("tracks")%>>
+                                    <ItemTemplate>
+                                        <div class="row">
+                                            <%--checkbox--%>
+                                            <div class="col-md-1 mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4">
+                                                <input type="checkbox"
+                                                    id='<%#Eval("TrackId") %>'
+                                                    class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"
+                                                    onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2}, \"{3}\");", Eval("TrackId"), Eval("TrackName"), Eval("Price"), "TRACK") %>' />
                                             </div>
-                                        </div>
 
-                                        <%--price--%>
-                                        <div class="col-md-2">
-                                            <p class="text-right" style="color:#AA3A3A; font-size:26px; font-weight:600">₱<%#Eval("Price") %></p>
-                                        </div>
-                                    </div>  
-                                    <div style="" class="divider"></div> 
+                                            <%--image--%>
+                                            <div class="col-md-2 m-0 p-0">
+                                                <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
+                                                    <img src=<%#Eval("AlbumCover") %> class="mx-auto my-auto d-block img-responsive img-hoverable" width="100" height="100"/>
+                                                </a>
+                                            </div>
 
-                                </ItemTemplate>
-                            </asp:Repeater>
+                                            <%--title and other description--%>
+                                            <div class="col-md-7">
+                                                <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
+                                                    <h4 class="card-title" style="color:#AA3A3A; font-size:24px;"><%#Eval("TrackName") %></h4>
+                                                </a>
 
+                                                <a href=<%#Eval("TrackAlbumDetails") %> class="titleLink" target="_blank" runat="server">
+                                                    <h6 class="" style="font-size:15px; color: #5E5E5E"><%#Eval("AlbumName") %></h6>
+                                                </a>
+
+                                                <div class="">
+                                                    <p class="mb-0" style="color:#8F8F8F; font-size: 16px;"><%#Eval("AudioLength") %> minutes</p>
+                                                </div>
+                                            </div>
+
+                                            <%--price--%>
+                                            <div class="col-md-2">
+                                                <p class="text-right" style="color:#AA3A3A; font-size:26px; font-weight:600">₱<%#Eval("Price") %></p>
+                                            </div>
+                                        </div>  
+                                        <div style="" class="divider"></div> 
+                                    </ItemTemplate>
+
+                                </asp:Repeater>
+
+                            </div>
                         </div>
-                    </div>
-
                     </ItemTemplate>
+
                 </asp:Repeater>
 
                 <h3 class="mb-3 mt-5">Albums</h3>
@@ -137,7 +133,6 @@
                 <%--individual album--%>
                 <asp:Repeater ID="albumContainer" runat="server">
                     <ItemTemplate>
-
                         <div class="card border-0 mb-3 shadow">
                             <div class="card-body row">
 
@@ -180,8 +175,8 @@
 
                             </div>
                         </div>
-
                     </ItemTemplate>
+
                 </asp:Repeater>
 
             </div>
@@ -226,9 +221,9 @@
 
                         <div class="form-row mt-3">
                             <div class="col-12">
-                                <select class="form-control border-0 rounded pb-0">
-                                    <option>MASTERCARD</option>
-                                    <option>VISA</option>
+                                <select class="form-control border-0 rounded pb-0" id="paymentProviderName" name="paymentProviderName">
+                                    <option value="MASTERCARD">Mastercard</option>
+                                    <option value="VISA">VISA</option>
                                 </select>
                             </div>
                         </div>
@@ -236,32 +231,33 @@
                         <div class="form-row mt-3">
                             <div class="col-12">
                                 <label for="cardHolderName" class="bg-white w-100 pl-2 rounded pb-0">CARDHOLDER'S NAME</label>
-                                <input type="text" id="cardHolderName" class="form-control border-0 pt-0" placeholder="John Doe" required>
+                                <input type="text" id="cardHolderName" name="cardHolderName" class="form-control border-0 pt-0" placeholder="" required>
                             </div>
                         </div>
 
                         <div class="form-row mt-3">
                             <div class="col-12">
                                 <label for="cardNumber" class="bg-white w-100 pl-2 rounded pb-0">CARD NUMBER</label>
-                                <input type="text" id="cardNumber" class="form-control border-0 pt-0" placeholder="XXXXXXXXXXXXXXXX" required>
+                                <input type="number" id="cardNumber" name="cardNumber" class="form-control border-0 pt-0"  required min="1000000000000000" max="9999999999999999">
                             </div>
                         </div>
 
-                        <div class="form-row mt-3 mb-2">
+                        <div class="form-row mt-3">
                             <div class="col-md-8">
                                 <label for="expDate" class="bg-white w-100 pl-2 rounded pb-0">EXPIRATION DATE</label>
-                                <input type="month" id="expDate" class="form-control border-0 pt-0" required>
+                                <input type="month" id="expDate" name="expDate" class="form-control border-0 pt-0" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="securityCode" class="bg-white w-100 pl-2 rounded pb-0">SEC CODE</label>
-                                <input type="number" id="securityCode" min="100" max="999" class="form-control border-0 pt-0" required>
+                                <input type="text" id="securityCode" name="securityCode" class="form-control border-0 pt-0" required>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
-                <button type="button" id="" class="btn btn-danger btn-block" onclick="PayNow()" style="background-color: #B82828; font-weight: 700;" >PAY NOW</button>
+                <input type="button" id="" class="btn btn-danger btn-block pt-2 pb-2" onclick="PayNow()" style="background-color: #B82828; font-weight: 700;" value="PAY NOW" />
             </div>
 
         </div>
@@ -269,24 +265,18 @@
     </div>
 
     <script>
-
         /*data structure
          * {id# : [id, trackname, price, productType],
          *  id# : [id, albumname, price, productType]}
          */
-
         var forCheckout = {};
 
         function CheckChanged(source, productId, trackName, price, productType) {
-
-            if (source.checked) {
-                AddForCheckout(productId, trackName, price, productType);
-            }
-            else {
-                RemoveFromCheckout(productId);
-            }
-
+            if (source.checked) AddForCheckout(productId, trackName, price, productType);
+            else RemoveFromCheckout(productId);
+            
             ClearSummary();
+            ClearErrors();
             RenderCheckoutSummary();
         }
 
@@ -295,9 +285,7 @@
         }
 
         function RemoveFromCheckout(productId) {
-            if (productId in forCheckout) {
-                delete forCheckout[productId];
-            }
+            if (productId in forCheckout) delete forCheckout[productId];
         }
 
         function RenderCheckoutSummary() {
@@ -323,9 +311,47 @@
                 // compute grand total
                 grandTotal += parseFloat(forCheckout[productId][2]);
             }
-
             // update grand total
             document.getElementById("grandTotal").innerHTML = "₱" + grandTotal;
+        }
+
+        function ValidateFields() {
+            var validForm = true;
+
+            if (document.getElementById("paymentProviderName").value.trim() == "") {
+                validForm = false;
+                document.getElementById("errorPlaceHolder").innerHTML = "Incomplete payment information.";
+            }
+
+            if (document.getElementById("cardHolderName").value.trim() == "") {
+                validForm = false;
+                document.getElementById("errorPlaceHolder").innerHTML = "Incomplete payment information.";
+            }
+
+            if (document.getElementById("cardNumber").value.trim() == "") {
+                validForm = false;
+                document.getElementById("errorPlaceHolder").innerHTML = "Incomplete payment information.";
+            }
+            else if (document.getElementById("cardNumber").value.trim().length != 16) {
+                validForm = false;
+                document.getElementById("errorPlaceHolder").innerHTML = "Card number length should be 16. ";
+            }
+
+            if (document.getElementById("expDate").value.trim() == "") {
+                validForm = false;
+                document.getElementById("errorPlaceHolder").innerHTML = "Incomplete payment information.";
+            }
+
+            if (document.getElementById("securityCode").value.trim() == "") {
+                validForm = false;
+                document.getElementById("errorPlaceHolder").innerHTML = "Incomplete payment information.";
+            } 
+            else if (document.getElementById("securityCode").value.trim().length != 3) {
+                validForm = false;
+                document.getElementById("errorPlaceHolder").innerHTML = "Security code length should be 3. ";
+            }
+
+            return validForm;
         }
 
         function ClearSummary() {
@@ -334,35 +360,40 @@
             document.getElementById("grandTotal").innerHTML = "₱00.0";
         }
 
-        function ValidateFields() {
-
+        function ClearErrors() {
+            document.getElementById("errorPlaceHolder").innerHTML = '';
         }
 
         function PayNow() {
             var items = [];
-
             for (var productId in forCheckout) {
                 items.push(forCheckout[productId]);
             }
 
-            var providerName = "MASTER CARD";
+            var providerName = document.getElementById("paymentProviderName").value.trim();
 
             if (items.length > 0) {
-                $.ajax({
-                    type: "POST",
-                    url: "/Cart/CartService.asmx/ProcessCheckout",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{ 'forCheckout' : '" + JSON.stringify(items) + "', 'paymentProvider' : '" + providerName + "'}",
-                    dataType: "json",
-                    success: function (message) {
-                        alert(message.d);
-                    },
-                    error: function () {
-                        alert("An Error has occured");
-                    }
-                });
-                return false;
-            }            
+                if (ValidateFields()) {
+                    ClearErrors();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Cart/CartService.asmx/ProcessCheckout",
+                        contentType: "application/json; charset=utf-8",
+                        data: "{ 'forCheckout' : '" + JSON.stringify(items) + "', 'paymentProvider' : '" + providerName + "'}",
+                        dataType: "json",
+                        success: function (message) {
+                            alert(message.d);
+                        },
+                        error: function () {
+                            alert("An Error has occured");
+                        }
+                    });
+                }
+            }
+            else {
+                alert("You have not selected any products for checkout.");
+            }
         }
 
     </script>

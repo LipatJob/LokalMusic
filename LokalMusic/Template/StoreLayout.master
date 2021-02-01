@@ -59,8 +59,8 @@
             </ul>
 
             <div class="form-inline my-2 my-lg-0">
-                <asp:TextBox ID="SearchTxt" runat="server" CssClass="form-control mr-sm-2" PlaceHolder="Search"></asp:TextBox>
-                <asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="Search" CssClass="btn btn-light my-2 my-sm-0" />
+                <input type="text" ID="SearchTxt"  class="form-control mr-sm-2 border-0" PlaceHolder="Search"/>
+                <input type="button" ID="SearchBtn" value="Search" class="btn btn-light my-2 my-sm-0" />
             </div>
 
             <%--Authentication--%>
