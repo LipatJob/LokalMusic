@@ -7,12 +7,10 @@ namespace LokalMusic._Code.Presenters.Store
 {
     public class ArtistsPagePresenter
     {
-        private ArtistsPage view;
         private StoreRepository repository;
 
-        public ArtistsPagePresenter(ArtistsPage view, StoreRepository repo)
+        public ArtistsPagePresenter( StoreRepository repo)
         {
-            this.view = view;
             this.repository = repo;
         }
 

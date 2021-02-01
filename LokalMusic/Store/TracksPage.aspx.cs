@@ -2,19 +2,18 @@
 using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Presenters.Store;
 using LokalMusic._Code.Repositories;
-using LokalMusic._Code.Views.Store;
 using System;
 using System.Collections.Generic;
 
 namespace LokalMusic.Store
 {
-    public partial class TracksPage : System.Web.UI.Page, ITracksPage
+    public partial class TracksPage : System.Web.UI.Page
     {
         private TracksPagePresenter presenter;
         public List<TrackSummary> tracks;
         public TracksPage()
         {
-            this.presenter = new TracksPagePresenter(this, new StoreRepository());
+            this.presenter = new TracksPagePresenter(new StoreRepository());
 
             string sortby = (string)NavigationHelper.GetRouteValue("SortBy");
             string orderby = (string)NavigationHelper.GetRouteValue("OrderBy");

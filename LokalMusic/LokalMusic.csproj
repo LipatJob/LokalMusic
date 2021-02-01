@@ -815,10 +815,6 @@
     <Compile Include="_Code\Views\Publish\IAddTrackViewModel.cs" />
     <Compile Include="_Code\Views\Publish\IEditAlbumViewModel.cs" />
     <Compile Include="_Code\Views\Publish\IEditTrackViewModel.cs" />
-    <Compile Include="_Code\Views\Store\IArtistsPage.cs" />
-    <Compile Include="_Code\Views\Store\IHomeViewModel.cs" />
-    <Compile Include="_Code\Views\Store\IAlbumsPage.cs" />
-    <Compile Include="_Code\Views\Store\ITracksPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="About\" />
@@ -827,7 +823,6 @@
     <Folder Include="Temporary\" />
     <Folder Include="_Code\Views\Admin\" />
     <Folder Include="_Code\Views\Fan\" />
-    <Folder Include="_Code\Views\Store\Details\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
