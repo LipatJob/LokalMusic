@@ -1,17 +1,14 @@
 ﻿using LokalMusic._Code.Models.Store;
-using LokalMusic._Code.Views.Store;
 using System.Collections.Generic;
 
 namespace LokalMusic._Code.Repositories.Store
 {
     public class HomePresenter
     {
-        private IHomeViewModel view;
         private StoreRepository repository;
 
-        public HomePresenter(IHomeViewModel view, StoreRepository repo)
+        public HomePresenter(StoreRepository repo)
         {
-            this.view = view;
             this.repository = repo;
         }
 

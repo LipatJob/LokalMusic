@@ -1,17 +1,13 @@
 ﻿using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Repositories;
 using LokalMusic._Code.Repositories.Store;
-using LokalMusic._Code.Views.Store;
 using System;
 using System.Collections.Generic;
 
 namespace LokalMusic.Store
 {
-    public partial class Home : System.Web.UI.Page, IHomeViewModel
+    public partial class Home : System.Web.UI.Page
     {
-
-        // private Model modelName;
-        // public Model ModelName { get {return this.modelName;} set { this.modelName = value; }
 
         private HomePresenter presenter;
 
@@ -21,7 +17,7 @@ namespace LokalMusic.Store
 
         public Home()
         {
-            this.presenter = new HomePresenter(this, new StoreRepository());
+            this.presenter = new HomePresenter(new StoreRepository());
         }
 
         protected void Page_Load(object sender, EventArgs e)

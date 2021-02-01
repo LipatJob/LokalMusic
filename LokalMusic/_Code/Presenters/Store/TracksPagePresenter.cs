@@ -1,18 +1,15 @@
 ﻿using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Repositories;
-using LokalMusic._Code.Views.Store;
 using System.Collections.Generic;
 
 namespace LokalMusic._Code.Presenters.Store
 {
     public class TracksPagePresenter
     {
-        private ITracksPage view;
         private StoreRepository repository;
 
-        public TracksPagePresenter(ITracksPage view, StoreRepository repo)
+        public TracksPagePresenter(StoreRepository repo)
         {
-            this.view = view;
             this.repository = repo;
         }
 
