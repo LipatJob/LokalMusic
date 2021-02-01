@@ -727,6 +727,7 @@
     <Compile Include="_Code\Models\Publish\SalesProduct.cs" />
     <Compile Include="_Code\Models\Store\AlbumSummary.cs" />
     <Compile Include="_Code\Models\Store\ArtistSummary.cs" />
+    <Compile Include="_Code\Models\Store\CatalogueItem.cs" />
     <Compile Include="_Code\Models\Store\Details\Album.cs" />
     <Compile Include="_Code\Models\Store\Details\Artist.cs" />
     <Compile Include="_Code\Models\Store\Details\Track.cs" />
