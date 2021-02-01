@@ -1,4 +1,5 @@
 ﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Presenters.Store;
 using LokalMusic._Code.Repositories;
 using System;
@@ -12,7 +13,7 @@ namespace LokalMusic.Store
 {
     public partial class CataloguePage : System.Web.UI.Page
     {
-
+        protected List<CatalogueItem> catalogueItems;
         protected CataloguePagePresenter presenter;
         public CataloguePage()
         {
@@ -26,6 +27,8 @@ namespace LokalMusic.Store
             string searchValue = (string)NavigationHelper.GetRouteValue("SearchVal");
 
             place.InnerText = searchValue;
+
+            this.catalogueItems = this.presenter.GetSearchedProducts(searchValue);
         }
     }
 }

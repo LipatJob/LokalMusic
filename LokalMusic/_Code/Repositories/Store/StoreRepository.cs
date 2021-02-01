@@ -306,5 +306,92 @@ namespace LokalMusic._Code.Repositories
             return tracks;
         }
 
+        public List<CatalogueItem> GetSearchedProducts(string searchValue)
+        {
+            if (searchValue == "*")
+                searchValue = "%%";
+            else
+                searchValue = "%" + searchValue + "%";
+
+            List<CatalogueItem> items = new List<CatalogueItem>();
+
+            string query = "SELECT Album.UserId as AlbumArtistId, TrackAlbum.AlbumId as TrackAlbumArtistId, " +
+                           "Album.AlbumId as AlbumAlbumId, TrackAlbum.AlbumId as TrackAlbumAlbumId, " +
+                           "Track.TrackId, " +
+                           "FileInfo.FileName as AlbumCover, TrackAlbumCover.FileName as TrackAlbumCover, " +
+                           "Product.ProductName, Product.Price, ProductType.TypeName as ProductType, " +
+                           "AlbumArtistInfo.ArtistName as AlbumArtistName, TrackArtistInfo.ArtistName as TrackArtistName, " +
+                           "AlbumUser.UserStatusId as AlbumArtistStatus, TrackUser.UserStatusId as TrackArtistStatus " +
+                           "FROM Product " +
+                           "INNER JOIN ProductType " +
+                           "ON Product.ProductTypeId = ProductType.ProductTypeId " +
+                           "LEFT JOIN Album " +
+                           "ON Product.ProductId = Album.AlbumId " +
+                           "LEFT JOIN Track " +
+                           "ON Product.ProductId = Track.TrackId " +
+                           "LEFT JOIN Album as TrackAlbum " +
+                           "ON TrackAlbum.AlbumId = Track.AlbumId " +
+                           "LEFT JOIN FileInfo " +
+                           "ON Album.AlbumCoverID = FileInfo.FileId " +
+                           "LEFT JOIN FileInfo as TrackAlbumCover " +
+                           "ON TrackAlbum.AlbumCoverID = TrackAlbumCover.FileId " +
+                           "LEFT JOIN ArtistInfo as AlbumArtistInfo " +
+                           "ON Album.UserId = AlbumArtistInfo.UserId " +
+                           "LEFT JOIN ArtistInfo as TrackArtistInfo " +
+                           "ON TrackAlbum.UserId = TrackArtistInfo.UserId " +
+                           "LEFT JOIN UserInfo as AlbumUser " +
+                           "ON Album.UserId = AlbumUser.UserId " +
+                           "LEFT JOIN UserInfo as TrackUser " +
+                           "ON TrackAlbum.UserId = TrackUser.UserId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = 'PUBLISHED') " +
+                           "AND ProductName LIKE @SearchValue";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("SearchValue", searchValue));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    CatalogueItem item = null;
+                    // check if row is album or track
+                    if (values.Rows[i]["ProductType"].ToString() == "ALBUM")
+                    {
+                        item = new CatalogueItem(
+                            (int)values.Rows[i]["AlbumArtistId"],
+                            (int)values.Rows[i]["AlbumAlbumId"],
+                            0,
+
+                            values.Rows[i]["AlbumCover"].ToString(),
+                            values.Rows[i]["ProductName"].ToString(),
+                            Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+
+                            values.Rows[i]["ProductType"].ToString(),
+                            values.Rows[i]["AlbumArtistName"].ToString()
+                            );
+                    }
+                    else if (values.Rows[i]["ProductType"].ToString() == "TRACK")
+                    {
+                        item = new CatalogueItem(
+                            (int)values.Rows[i]["TrackAlbumArtistId"],
+                            (int)values.Rows[i]["TrackAlbumAlbumId"],
+                            (int)values.Rows[i]["TrackId"],
+
+                            values.Rows[i]["TrackAlbumCover"].ToString(),
+                            values.Rows[i]["ProductName"].ToString(),
+                            Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+
+                            values.Rows[i]["ProductType"].ToString(),
+                            values.Rows[i]["TrackArtistName"].ToString()
+                            );
+                    }
+
+                    items.Add(item);
+                }
+            }
+
+            return items.Count > 0 ? items : null;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Repositories;
+﻿using LokalMusic._Code.Models.Store;
+using LokalMusic._Code.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,10 @@ namespace LokalMusic._Code.Presenters.Store
             this.repository = repo;
         }
 
-
+        public List<CatalogueItem> GetSearchedProducts(string searchValue)
+        {
+            return this.repository.GetSearchedProducts(searchValue);
+        }
 
     }
 }
