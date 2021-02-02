@@ -10,7 +10,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
     public class ProductDetailsRepository
     {
 
-        const string STATUS_PRODUCT_LISTED = "LISTED";
+        const string STATUS_PRODUCT_VISIBLE = "PUBLISHED";
         const string STATUS_ARTIST_ACTIVE = "ACTIVE";
 
         // Main queries for details
@@ -40,8 +40,8 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                            "LEFT JOIN FileInfo as ArtistImageFile " +
                            "ON UserInfo.ProfileImageId = ArtistImageFile.FileId " +
                            "WHERE Track.TrackId = @TrackId AND Album.AlbumId = @AlbumId AND ArtistInfo.UserId = @ArtistId " +
-                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_LISTED +"') " +
-                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_VISIBLE +"') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("TrackId", trackId), ("AlbumId", albumId), ("ArtistId", artistId));
@@ -90,7 +90,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                            "INNER JOIN UserInfo " +
                            "ON ArtistInfo.UserId = UserInfo.UserId " +
                            "WHERE Album.AlbumId = @AlbumId AND ArtistInfo.UserId = @ArtistId " +
-                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId), ("ArtistId", artistId));
@@ -181,8 +181,8 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                            "LEFT JOIN FileInfo as ArtistImageFile " +
                            "ON UserInfo.ProfileImageId = ArtistImageFile.FileId " +
                            "WHERE Album.AlbumId = @AlbumId AND ArtistInfo.UserId = @ArtistId " +
-                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
-                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId), ("ArtistId", artistId));
@@ -235,7 +235,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                            "INNER JOIN UserInfo " +
                            "ON ArtistInfo.UserId = UserInfo.UserId " +
                            "WHERE ArtistInfo.UserId = @ArtistId " +
-                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')  " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')  " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));

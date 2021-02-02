@@ -9,7 +9,7 @@ namespace LokalMusic._Code.Repositories.Cart
 {
     public class CartRepository
     {
-        const string STATUS_PRODUCT_LISTED = "LISTED";
+        const string STATUS_PRODUCT_VISIBLE = "PUBLISHED";
         const string STATUS_ARTIST_ACTIVE = "ACTIVE";
 
         public List<CartAlbum> GetAlbums(int customerId)
@@ -29,7 +29,7 @@ namespace LokalMusic._Code.Repositories.Cart
                            "INNER JOIN FileInfo " +
                            "ON Album.AlbumCoverID = FileInfo.FileId " +
                            "WHERE UserCart.UserId = @CustomerId " +
-                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("CustomerId", customerId));
@@ -117,8 +117,8 @@ namespace LokalMusic._Code.Repositories.Cart
                            "INNER JOIN UserInfo " +
                            "ON Album.UserId = UserInfo.UserId " +
                            "WHERE UserCart.UserId = @CustomerId AND Album.UserId = @ArtistId " +
-                           "AND TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
-                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')" +
                            "AND Album.AlbumId NOT IN " +
                                                     "(SELECT Album.AlbumId " +
@@ -168,7 +168,7 @@ namespace LokalMusic._Code.Repositories.Cart
             string query = "SELECT * " +
                            "FROM Product " +
                            "WHERE ProductId = @ProductId " +
-                           "AND ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_LISTED +"')";
+                           "AND ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_VISIBLE +"')";
 
             Decimal price = Decimal.Round(Decimal.Parse(DbHelper.ExecuteScalar(query, ("ProductId", productId)).ToString()));
 
@@ -207,7 +207,6 @@ namespace LokalMusic._Code.Repositories.Cart
 
                 foreach (int id in trackIds)
                     RemoveTrackFromCart(customerId, id);
-
             }
             else if (productType.ToUpper() == "TRACK")
             {
