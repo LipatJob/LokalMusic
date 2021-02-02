@@ -26,9 +26,10 @@ namespace LokalMusic.Store
             // get parameters
             string searchValue = (string)NavigationHelper.GetRouteValue("SearchVal");
 
-            place.InnerText = searchValue;
-
             this.catalogueItems = this.presenter.GetSearchedProducts(searchValue);
+
+            productContainer.DataSource = this.catalogueItems;
+            productContainer.DataBind();
         }
     }
 }

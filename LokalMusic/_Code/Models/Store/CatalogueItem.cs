@@ -37,10 +37,10 @@ namespace LokalMusic._Code.Models.Store
         {
             get
             {
-                if (ProductType == "Album")
-                    return $"~/Store" + this.ArtistId + "/" + this.AlbumId;
+                if (ProductType.ToLower() == "album")
+                    return $"~/Store/" + this.ArtistId + "/" + this.AlbumId;
                 else
-                    return $"~/Store" + this.ArtistId + "/" + this.AlbumId + "/" + this.TrackId;
+                    return $"~/Store/" + this.ArtistId + "/" + this.AlbumId + "/" + this.TrackId;
             }
         }
 
