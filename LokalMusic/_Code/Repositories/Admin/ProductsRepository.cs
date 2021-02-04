@@ -20,9 +20,11 @@ SELECT
 	[Album].AlbumId,
 	[Product].ProductName,
 	[Product].DateAdded,
+	[ArtistInfo].UserId AS ArtistId
 	[ArtistInfo].ArtistName,
 	[ProductType].TypeName,
 	[ProductStatus].StatusName
+	
 FROM [Product]
 	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
 	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId, [Product].ProductId)
@@ -41,7 +43,8 @@ ORDER BY [Product].DateAdded DESC;
 					ArtistName = (string)row["ArtistName"],
 					DateListed = (DateTime)row["DateAdded"],
 					ProductType = (string)row["TypeName"],
-					ProductStatus = (string)row["StatusName"]
+					ProductStatus = (string)row["StatusName"],
+					ArtistId = (int)row["ArtistName"]
 				};
 			}).ToList();
 		}

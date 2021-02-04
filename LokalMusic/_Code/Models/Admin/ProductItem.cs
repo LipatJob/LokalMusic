@@ -5,6 +5,7 @@ namespace LokalMusic._Code.Models.Admin
 {
     public class ProductItem
     {
+        public int ArtistId { get; set; }
         public int ProductId { get; set; }
         public int? AlbumId { get; internal set; }
         public string ProductName { get; set; }
@@ -16,11 +17,11 @@ namespace LokalMusic._Code.Models.Admin
         {
             get
             {
-                if (ProductType == "ALBUM")
+                if (ProductType.ToLower() == "album")
                 {
-                    return NavigationHelper.CreateAbsoluteUrl($"/Store/{ProductId}");
+                    return NavigationHelper.CreateAbsoluteUrl($"/Store/{ArtistId}/{ProductId}");
                 }
-                return NavigationHelper.CreateAbsoluteUrl($"/Store/{AlbumId}/{ProductId}");
+                return NavigationHelper.CreateAbsoluteUrl($"/Store/{ArtistId}/{AlbumId}/{ProductId}");
             }
         }
 

@@ -23,7 +23,7 @@ namespace LokalMusic._Code.Presenters.Account
         {
             if (AuthenticationHelper.LoggedIn == false)
             {
-                NavigationHelper.Redirect("~/Account/Login");
+                NavigationHelper.RedirectReturnAddress("~/Account/Login");
             }
             repository.GetUserDetails(AuthenticationHelper.UserId, viewModel);
         }
