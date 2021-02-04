@@ -27,22 +27,22 @@
                     <tr>
                         <td>Track Name</td>
                         <td style="padding-left:24px;">
-                            <asp:TextBox ID="trackNameTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:TextBox ID="trackNameTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox>
                             <asp:CustomValidator ID="trackNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackNameTxtCv_ServerValidate"></asp:CustomValidator>
                         </td>
                     </tr>
                     <tr>
                         <td>Genre</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="genreTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;"><asp:TextBox ID="genreTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Description</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" TextMode="MultiLine"></asp:TextBox></td>
+                        <td style="padding-left:24px;"><asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" CssClass="form-control" TextMode="MultiLine"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Price</td>
                         <td style="padding-left:24px;">
-                            <asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:TextBox ID="priceTxt" runat="server" type="number" step=".01" min="0" max="214748.3647" Width="500" CssClass="form-control"></asp:TextBox>
                             <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
                         </td>
                     </tr>
@@ -73,7 +73,7 @@
 
         <div class="row float-right" style="margin-top: 40px">
             <div class="col-12">
-                <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" OnClick="cancelBtn_Click" />
+                <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" OnClick="cancelBtn_Click" CausesValidation="False" />
                 &emsp;
                 <asp:Button ID="addBtn" runat="server" Text="Add" CssClass="btn btn-publish" OnClick="addBtn_Click" />
             </div>

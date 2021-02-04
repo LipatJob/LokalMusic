@@ -26,29 +26,29 @@
                     <tr>
                         <td>Album Name</td>
                         <td style="padding-left:24px;">
-                            <asp:TextBox ID="albumNameTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:TextBox ID="albumNameTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox>
                             <asp:CustomValidator ID="albumNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="albumNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="albumNameTxtCv_ServerValidate"></asp:CustomValidator>
                         </td>
                     </tr>
                     <tr>
                         <td>Description</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" TextMode="MultiLine"></asp:TextBox></td>
+                        <td style="padding-left:24px;"><asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" CssClass="form-control" TextMode="MultiLine"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Date Released</td>
                         <td style="padding-left:24px;">
-                            <asp:TextBox ID="dateReleasedTxt" runat="server" Width="500" Height="36" placeholder="MM/DD/YYYY"></asp:TextBox><br />
+                            <asp:TextBox ID="TextBox1" runat="server" type="number" step=".01" min="0" max="214748.3647" Width="500" CssClass="form-control"></asp:TextBox>
                             <asp:CustomValidator ID="dateReleasedTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="dateReleasedTxt" CssClass="validation-message" OnServerValidate="dateReleasedTxtCv_ServerValidate" ValidateEmptyText="True"></asp:CustomValidator>
                         </td>
                     </tr>
                     <tr>
                         <td>Producer</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="producerTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;"><asp:TextBox ID="producerTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Price</td>
                         <td style="padding-left:24px;">
-                            <asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36">0.00</asp:TextBox><br />
+                            <asp:TextBox ID="priceTxt" runat="server" Width="500" CssClass="form-control">0.00</asp:TextBox>
                             <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
                         </td>
                     </tr>
@@ -67,9 +67,9 @@
 
         <div class="row float-right">
             <div class="col-12">
-                <asp:LinkButton ID="unlistBtn" runat="server" ForeColor="#B82828" OnClick="unlistBtn_Click">Unlist Album</asp:LinkButton>
+                <asp:LinkButton ID="unlistBtn" runat="server" ForeColor="#B82828" OnClick="unlistBtn_Click" CausesValidation="False">Unlist Album</asp:LinkButton>
                 &emsp;
-                <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" OnClick="cancelBtn_Click" />
+                <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" OnClick="cancelBtn_Click" CausesValidation="False" />
                 &emsp;
                 <asp:Button ID="saveBtn" runat="server" Text="Save" CssClass="btn btn-publish" OnClick="saveBtn_Click" />
             </div>
