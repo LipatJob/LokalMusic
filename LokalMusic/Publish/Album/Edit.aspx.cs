@@ -21,7 +21,7 @@ namespace LokalMusic.Publish.Album
         public string ArtistName { get => artistName.Text; set => artistName.Text = value; }
         public string AlbumName { get => albumNameTxt.Text; set => albumNameTxt.Text = value; }
         public string Description { get => descriptionTxt.Text; set => descriptionTxt.Text = value; }
-        public DateTime DateReleased { get => Convert.ToDateTime(dateReleasedTxt.Text); set => dateReleasedTxt.Text = String.Format("{0:MM/dd/yyyy}", value); }
+        public DateTime DateReleased { get => Convert.ToDateTime(dateReleasedTxt.Text); set => dateReleasedTxt.Text = value.ToString(); }
         public string Producer { get => producerTxt.Text; set => producerTxt.Text = value; }
         public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = String.Format("{0:N}", value); }
         public string AlbumCover { get => albumCoverPreview.ImageUrl; set => albumCoverPreview.ImageUrl = value; }
@@ -77,26 +77,21 @@ namespace LokalMusic.Publish.Album
                 .AddRule(
                     rule: ValidUtils.IsNotEmpty(dateReleasedTxt.Text),
                     errorMessage: "Please enter the release date")
-                .AddRule(
-                    rule: ValidUtils.IsValidRegex(dateReleasedTxt.Text, @"^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$"),
-                    errorMessage: "Date should be in the format of MM/DD/YYYY")
                 .Validate();
         }
 
         protected void priceTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            decimal validDecimal;
-
             new ValidationHelper((IValidator)source, args)
                 .AddRule(
                     rule: ValidUtils.IsNotEmpty(priceTxt.Text),
                     errorMessage: "Please enter the album price")
                 .AddRule(
-                    rule: () => decimal.TryParse(priceTxt.Text, out validDecimal),
-                    errorMessage: "Please enter numbers only")
-                .AddRule(
                     rule: ValidUtils.IsValidPrice(priceTxt.Text),
                     errorMessage: "Price should be more than zero")
+                .AddRule(
+                    rule: () => decimal.Parse(priceTxt.Text) < (decimal)214748.3647,
+                    errorMessage: "Price can't be more than 214,748.3647")
                 .Validate();
         }
     }

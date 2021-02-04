@@ -51,13 +51,13 @@ namespace LokalMusic.Publish.Album
         protected global::System.Web.UI.WebControls.TextBox descriptionTxt;
 
         /// <summary>
-        /// dateReleasedTxt control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dateReleasedTxt;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
 
         /// <summary>
         /// dateReleasedTxtCv control.
