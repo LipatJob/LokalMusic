@@ -87,6 +87,60 @@ namespace LokalMusic.Account
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeProfilePictureMessage;
 
         /// <summary>
+        /// changeBioSuccessAlert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeBioSuccessAlert;
+
+        /// <summary>
+        /// changeBioSuccessMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeBioSuccessMessage;
+
+        /// <summary>
+        /// ArtistNameTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ArtistNameTxt;
+
+        /// <summary>
+        /// BioTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox BioTxt;
+
+        /// <summary>
+        /// BioTxtCv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator BioTxtCv;
+
+        /// <summary>
+        /// submitBtnUpdateBio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button submitBtnUpdateBio;
+
+        /// <summary>
         /// changePasswordSuccessAlert control.
         /// </summary>
         /// <remarks>
@@ -159,12 +213,12 @@ namespace LokalMusic.Account
         protected global::System.Web.UI.WebControls.CustomValidator ConfirmNewPasswordTxtCv;
 
         /// <summary>
-        /// submitBtn control.
+        /// submitBtnChangePassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submitBtn;
+        protected global::System.Web.UI.WebControls.Button submitBtnChangePassword;
     }
 }

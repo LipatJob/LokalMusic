@@ -30,14 +30,21 @@ namespace LokalMusic.Account
         public string NewPassword { get => NewPasswordTxt.Text; }
         public string ConfrimNewPassword { get => ConfirmNewPasswordTxt.Text; }
         public string ProfileImage { get => ProfilePictureImg.ImageUrl; set => ProfilePictureImg.ImageUrl = value; }
+        public string ArtistBio { get => BioTxt.Text; set => BioTxt.Text = value; }
+        public string ArtistName { get => ArtistNameTxt.Text; set => ArtistNameTxt.Text= value; }
+
 
         public HttpPostedFile UploadedProfilePicture => ProfilePictureFile.PostedFile;
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            presenter.PageLoad();
-            
-            if(IsPasswordChanged())
+            if(!Page.IsPostBack)
+            {
+                presenter.PageLoad();
+            }
+
+            if (IsPasswordChanged())
             {
                 ShowPasswordChangedMessage();
             }
@@ -45,27 +52,42 @@ namespace LokalMusic.Account
             {
                 ShowProfileImageChangedMessage();
             }
+            else if(IsBioChanged())
+            {
+                ShowBioChangedMessage();
+            }
         }
         private bool IsPasswordChanged()
         {
             return Request.QueryString["PasswordChanged"] == "True";
         }
-        
+
         private bool IsProfileImageChanged()
         {
             return Request.QueryString["ProfileImageChanged"] == "True";
         }
-        
+
+        private bool IsBioChanged()
+        {
+            return Request.QueryString["ArtistBioChanged"] == "True";
+        }
+
         private void ShowProfileImageChangedMessage()
         {
             changeProfilePictureAlert.Visible = true;
-            changeProfilePictureMessage.InnerText = "Successfully changed Password";
+            changeProfilePictureMessage.InnerText = "Successfully changed Profile Image";
         }
-        
+
         private void ShowPasswordChangedMessage()
         {
             changePasswordSuccessAlert.Visible = true;
             changePasswordSuccessMessage.InnerText = "Successfully changed Password";
+        }
+
+        private void ShowBioChangedMessage()
+        {
+            changeBioSuccessAlert.Visible = true;
+            changeBioSuccessMessage.InnerText = "Successfuly changed Bio ";
         }
 
 
@@ -80,7 +102,7 @@ namespace LokalMusic.Account
         {
             new ValidationHelper((IValidator)source, args)
                 .AddRule(
-                    rule: ValidUtils.IsNotEmpty(OldPassword), 
+                    rule: ValidUtils.IsNotEmpty(OldPassword),
                     errorMessage: "This is a required field")
                 .AddRule(
                     rule: () => presenter.CheckOldPassword(),
@@ -113,6 +135,14 @@ namespace LokalMusic.Account
             if(Page.IsValid)
             {
                 presenter.ChangePassword();
+            }
+        }
+
+        protected void submitBtnUpdateBio_Click(object sender, EventArgs e)
+        {
+            if(Page.IsValid)
+            {
+                presenter.UpdateBio();
             }
         }
 
@@ -185,5 +215,7 @@ namespace LokalMusic.Account
         {
             return fileName.Substring(fileName.LastIndexOf('.'));
         }
+
+
     }
 }
