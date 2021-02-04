@@ -17,7 +17,7 @@ namespace LokalMusic._Code.Models.Fan
             get
             {
                 string url;
-                if (ProductType == "ALBUM")
+                if (ProductType.ToLower() == "album")
                 {
                     url = $"/Store/{ArtistId}/{AlbumId}";
                 }
