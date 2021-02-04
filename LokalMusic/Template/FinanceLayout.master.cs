@@ -9,7 +9,7 @@ namespace LokalMusic.Template
         {
             if (AuthenticationHelper.LoggedIn == false)
             {
-                Response.Redirect("~/Account/Login");
+                NavigationHelper.RedirectReturnAddress("~/Account/Login");
             }
             else if (AuthenticationHelper.UserType != AuthenticationHelper.FINANCE_USER_TYPE)
             {
