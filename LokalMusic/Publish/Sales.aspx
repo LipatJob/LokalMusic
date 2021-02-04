@@ -16,7 +16,7 @@
                                 <th>Date</th>
                                 <th>Customer</th>
                                 <th>Products</th>
-                                <th>Total Price</th>
+                                <th>Amount Paid</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,15 +24,16 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td><%#Eval("TransactionID") %></td>
-                                        <td><%#Eval("Date") %></td>
+                                        <td><%#Eval("Date","{0:dd MMMM yyyy}") %></td>
                                         <td><%#Eval("Customer") %></td>
                                         <td><%#Eval("Products") %></td>
-                                        <td><%#Eval("TotalPrice") %></td>
+                                        <td style="text-align: right;"><%#Eval("TotalPrice","{0:N}") %></td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </tbody>
                     </table>
+                    <p id="instruction" style="font-size: x-large; text-align:center; padding-top: 20px;" runat="server">No sales to show at the moment</p>
                 </div>
             </div>
         </div>

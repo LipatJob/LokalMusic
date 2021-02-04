@@ -17,7 +17,7 @@ SELECT
     TransactionProduct.TransactionId,
     MAX([Transaction].TransactionDate) AS Date,
     MAX(UserInfo.Username) AS Customer,
-    STRING_AGG(Product.ProductName + '(' + ProductType.TypeName + ')' , ', ') AS Products,
+    STRING_AGG(Product.ProductName + ' (' + ProductType.TypeName + ')' , ', ') AS Products,
     SUM(TransactionProduct.AmountPaid) AS TotalPrice
 FROM Product
     LEFT JOIN Track ON Track.TrackId = Product.ProductId
@@ -40,7 +40,7 @@ GROUP BY TransactionProduct.TransactionId
                     TransactionID = (int)row["TransactionId"],
                     Date = (DateTime)row["Date"],
                     Customer = (string)row["Customer"],
-                    Products = (string)row["Products"],
+                    Products = ((string)row["Products"]).Replace("ALBUM", "Album").Replace("TRACK", "Track"),
                     TotalPrice = (decimal)row["TotalPrice"]
                 });
             }

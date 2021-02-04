@@ -17,6 +17,11 @@ namespace LokalMusic.Publish
             ArtistName.Text = Model.ArtistName;
             SalesItemRepeater.DataSource = Model.SalesItems;
             SalesItemRepeater.DataBind();
+
+            if (Model.SalesItems.Count < 1)
+                instruction.Visible = true;
+            else
+                instruction.Visible = false;
         }
 
         public Sales()
