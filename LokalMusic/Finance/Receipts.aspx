@@ -10,7 +10,7 @@
                 <table class="table table-striped table-bordered table-hover dt-responsive" id="receiptsTable">
                     <thead>
                         <tr>
-                            <th>TransactionId</th>
+                            <th>Order Id</th>
                             <th>Username</th>
                             <th>Transaction Date</th>
                             <th>Amount Paid</th>
@@ -41,7 +41,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p><b>Transaction ID: </b><span id="TransactionId"></span></p>
+                    <p><b>Order ID: </b><span id="OrderId"></span></p>
                     <p><b>Username : </b><span id="Username"></span></p>
                     <p><b>Transaction Date : </b><span id="TransactionDate"></span></p>
 
@@ -101,14 +101,14 @@
                     bPaginate: true,
                     data: response.d,
                     columns: [
-                        { 'data': 'TransactionId' },
+                        { 'data': 'OrderId' },
                         { 'data': 'Username' },
                         { 'data': 'FormattedDate' },
                         { 'data': 'AmountPaid' },
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
-                                return `<button class="btn btn-primary" onclick="ViewReceipt(${row["TransactionId"]}, this); return false;">Receipt Details</button></a>`;
+                                return `<button class="btn btn-primary" onclick="ViewReceipt(${row["OrderId"]}, this); return false;">Receipt Details</button></a>`;
                             },
                             "width": "15%"
 
@@ -139,15 +139,14 @@
         }
 
         function ShowReceiptModal(data) {
-            console.log(JSON.stringify(data));
             $("#receiptModal").modal('show');
             $("#Username").text(data["Username"]);
             $("#TransactionDate").text(data["FormattedDate"]);
-            $("#TransactionId").text(data["TransactionId"]);
+            $("#OrderId").text(data["OrderId"]);
             $("#AmountPaid").text(data["AmountPaid"]);
             $("#products").html("");
             data["Products"].forEach((productItem) => {
-                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["AmountPaid"]}</td> </tr>`)
+                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["ProductPrice"]}</td> </tr>`)
             });
         }
 

@@ -9,8 +9,8 @@ namespace LokalMusic._Code.Repositories.Admin
 {
 	public class ProductsRepository
 	{
-		private const string UNLISTED_STATUS = "UNLISTED";
-		private const string LISTED_STATUS = "LISTED";
+		private const string WITHDRAWN_STATUS = "WITHDRAWN";
+		private const string PUBLISHED_STATUS = "PUBLISHED";
 
 		public IList<ProductItem> GetProducts()
 		{
@@ -20,7 +20,7 @@ SELECT
 	[Album].AlbumId,
 	[Product].ProductName,
 	[Product].DateAdded,
-	[ArtistInfo].UserId AS ArtistId
+	[ArtistInfo].UserId AS ArtistId,
 	[ArtistInfo].ArtistName,
 	[ProductType].TypeName,
 	[ProductStatus].StatusName
@@ -44,19 +44,19 @@ ORDER BY [Product].DateAdded DESC;
 					DateListed = (DateTime)row["DateAdded"],
 					ProductType = (string)row["TypeName"],
 					ProductStatus = (string)row["StatusName"],
-					ArtistId = (int)row["ArtistName"]
+					ArtistId = (int)row["ArtistId"]
 				};
 			}).ToList();
 		}
 
-		public void RelistItem(int productId)
+		public void RepublishItem(int productId)
 		{
-			ChangeProductStatus(productId, LISTED_STATUS);
+			ChangeProductStatus(productId, PUBLISHED_STATUS);
 		}
 
-		public void UnlistItem(int productId)
+		public void WithdrawItem(int productId)
 		{
-			ChangeProductStatus(productId, UNLISTED_STATUS);
+			ChangeProductStatus(productId, WITHDRAWN_STATUS);
 		}
 
 		public void ChangeProductStatus(int productId, string productStatus)
