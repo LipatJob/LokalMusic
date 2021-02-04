@@ -43,18 +43,18 @@ namespace LokalMusic._Code.Repositories.Account
 		{
 			string productNameQuery = @"
 SELECT
-	[Transaction].TransactionId AS TransactionId,
-	MAX(TransactionDate) AS TransactionDate,
+	[OrderInfo].OrderId AS OrderId,
+	MAX([OrderInfo].OrderDate) AS OrderDate,
 	STRING_AGG(ProductName, ', ') AS ItemsPurchased,
-	SUM([Transaction].ActualAmountPaid) AS Amount
-FROM [Transaction]
-	INNER JOIN TransactionProduct ON
-		[Transaction].TransactionId = [TransactionProduct].TransactionId
+	SUM([ProductOrder].ProductPrice) AS Amount
+FROM [OrderInfo]
+	INNER JOIN [ProductOrder] ON
+		[ProductOrder].OrderId = [OrderInfo].OrderId
 	INNER JOIN Product ON
-		[Product].ProductId = [TransactionProduct].ProductId
-WHERE [Transaction].UserId = @UserId
-GROUP BY [Transaction].TransactionId
-ORDER BY TransactionDate DESC;
+		[Product].ProductId = [ProductOrder].ProductId
+WHERE [OrderInfo].CustomerId = @UserId
+GROUP BY [OrderInfo].OrderId
+ORDER BY OrderDate DESC;
 ";
 			var result = DbHelper.ExecuteDataTableQuery(productNameQuery, ("UserId", userId));
 
@@ -62,8 +62,8 @@ ORDER BY TransactionDate DESC;
 			{
 				return new PaymentHistoryItem()
 				{
-					TransactionId = (int)row["TransactionId"],
-					TransactionDate = (DateTime)row["TransactionDate"],
+					TransactionId = (int)row["OrderId"],
+					TransactionDate = (DateTime)row["OrderDate"],
 					ItemsPurchased = (string)row["ItemsPurchased"],
 					Amount = (decimal)row["Amount"]
 				};
