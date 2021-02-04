@@ -13,7 +13,17 @@ namespace LokalMusic._Code.Repositories.Account
 	{
 		public void GetUserDetails(int userId, ISettingsModel model)
 		{
-			string detailsQuery = "SELECT FileName, Email, Username FROM UserInfo LEFT JOIN FileInfo ON UserInfo.ProfileImageId = FileInfo.FileId WHERE UserId = @UserId;";
+			string detailsQuery = @"
+SELECT
+	FileName,
+	Email,
+	Username,
+	COALESCE(ArtistInfo.Bio, '') AS Bio,
+	COALESCE(ArtistInfo.ArtistName, '') AS ArtistName
+FROM UserInfo
+	LEFT JOIN [ArtistInfo] ON [ArtistInfo].UserId = [UserInfo].UserId
+	LEFT JOIN [FileInfo] ON [UserInfo].ProfileImageId = [FileInfo].FileId WHERE [UserInfo].UserId = @UserId;
+";
 			var query = DbHelper.ExecuteDataTableQuery(detailsQuery, ("UserId", userId));
 			if (query.Rows[0].IsNull("FileName"))
 			{
@@ -25,6 +35,9 @@ namespace LokalMusic._Code.Repositories.Account
 			}
 			model.Email = (string)query.Rows[0]["Email"];
 			model.Username = (string)query.Rows[0]["Username"];
+			model.ArtistBio = (string)query.Rows[0]["Bio"];
+			model.ArtistName = (string)query.Rows[0]["ArtistName"];
+
 		}
 
 		public void UpdatePassword(int userId, string newPassword)
@@ -37,6 +50,13 @@ namespace LokalMusic._Code.Repositories.Account
 		{
 			string query = "SELECT UserId FROM UserInfo WHERE UserId = @UserId AND Password = @Password";
 			return DbHelper.ExecuteScalar(query, ("UserId", userId), ("Password", password)) != null;
+		}
+
+		public void UpdateArtistBio(int userId, string bio)
+        {
+			string updateBioQuery = "UPDATE ArtistInfo SET Bio = @Bio WHERE UserId = @UserId";
+			DbHelper.ExecuteNonQuery(updateBioQuery, ("Bio", bio), ("UserId", userId));
+
 		}
 
 		public IList<PaymentHistoryItem> GetPaymentHistory(int? userId)

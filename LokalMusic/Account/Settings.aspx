@@ -36,6 +36,10 @@
         #purchaseHistoryGv {
             width: 100%;
         }
+
+        .submitBtnUpdateBio {
+            align-self:flex-end;
+        }
     </style>
 
     <div class="container mt-3">
@@ -73,14 +77,14 @@
 
                                 <%-- Profile Picture File Upload--%>
                                 <div class="custom-file">
-                                    <asp:FileUpload runat="server" ID="ProfilePictureFile" CssClass="form-control-file custom-file-input" accept="image/*"/>
+                                    <asp:FileUpload runat="server" ID="ProfilePictureFile" CssClass="form-control-file custom-file-input" accept="image/*" />
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
 
                                 <%-- Submit Profile Picture--%>
                                 <asp:Button ID="submitProfilePicture" Text="Update Picture" runat="server" CssClass="btn btn-primary mt-2" Style="width: 100%" OnClick="submitProfilePicture_Click" ValidationGroup="ChangeProfilePicture" />
                                 <asp:CustomValidator ID="ProfilePictureFileCv" ErrorMessage="Error Message" ControlToValidate="ProfilePictureFile" runat="server" ValidationGroup="ChangeProfilePicture" OnServerValidate="ProfilePictureFileCv_ServerValidate" CssClass="validation-message" Display="Dynamic" />
-                                
+
                             </div>
                         </div>
 
@@ -96,19 +100,47 @@
             </div>
 
             <div class="col-6">
-                <%-- Change Password Success Alert --%>
-                <div id="changePasswordSuccessAlert" class="alert alert-success" role="alert" runat="server" visible="false">
-                    <span id="changePasswordSuccessMessage" runat="server"></span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                <%if (AuthenticationHelper.UserType == AuthenticationHelper.ARTIST_USER_TYPE)%>
+                <%{%>
+                <asp:Panel CssClass="item-group mx-auto" runat="server" DefaultButton="submitBtnUpdateBio">
+                    <%-- Change Bio Success Alert --%>
+                    <div id="changeBioSuccessAlert" class="alert alert-success" role="alert" runat="server" visible="false">
+                        <span id="changeBioSuccessMessage" runat="server"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h5>Artist Information</h5>
+                    <div class="form-group">
+                        <asp:Label Text="Artist Name" runat="server" />
+                        <asp:TextBox ID="ArtistNameTxt" runat="server" ValidateRequestMode="Disabled" CssClass="form-control" ReadOnly="true" />
+                    </div>
+                    <div class="form-group">
+                        <asp:Label Text="Bio" runat="server" />
+                        <asp:TextBox ID="BioTxt" runat="server" CssClass="form-control" TextMode="MultiLine" ValidationGroup="UpdateBio" />
+                    </div>
+                    <%-- Update Bio Button--%>
+                    <div style="display: flex; flex-direction: column; width: 100%;">
+                        <asp:CustomValidator ID="BioTxtCv" ErrorMessage="Error Message" ControlToValidate="BioTxt" runat="server" OnServerValidate="ConfirmNewPasswordTxtCv_ServerValidate" Display="Dynamic" ValidateEmptyText="True" CssClass="validation-message" ValidationGroup="ChangePassword" />
+                        <asp:Button ID="submitBtnUpdateBio" Text="Update Bio" runat="server" OnClick="submitBtnUpdateBio_Click" CssClass="btn btn-primary submitBtnUpdateBio" ValidationGroup="UpdateBio" />
+                    </div>
+                </asp:Panel>
+                <%} %>
 
-                <asp:Panel CssClass="item-group mx-auto" runat="server" DefaultButton="submitBtn">
+
+                <asp:Panel CssClass="item-group mx-auto" runat="server" DefaultButton="submitBtnChangePassword">
+                    <%-- Change Password Success Alert --%>
+                    <div id="changePasswordSuccessAlert" class="alert alert-success" role="alert" runat="server" visible="false">
+                        <span id="changePasswordSuccessMessage" runat="server"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
                     <%-- Group Header --%>
                     <h5>Change Password</h5>
 
-                     <%-- Old Password --%>
+                    <%-- Old Password --%>
                     <div class="form-group">
                         <asp:Label Text="Old Password" runat="server" />
                         <asp:TextBox ID="OldPasswordTxt" runat="server" type="password" CssClass="form-control" />
@@ -132,7 +164,7 @@
 
                     <%-- Change Password Button--%>
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-                        <asp:Button ID="submitBtn" Text="Change Password" runat="server" OnClick="submitBtn_Click" CssClass="btn btn-primary" ValidationGroup="ChangePassword" />
+                        <asp:Button ID="submitBtnChangePassword" Text="Change Password" runat="server" OnClick="submitBtn_Click" CssClass="btn btn-primary" ValidationGroup="ChangePassword" />
                     </div>
                 </asp:Panel>
             </div>

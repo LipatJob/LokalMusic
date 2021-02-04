@@ -2,6 +2,7 @@
 using LokalMusic._Code.Models.Account;
 using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -48,6 +49,12 @@ namespace LokalMusic._Code.Presenters.Account
         {
             repository.ChangeProfilePicture(AuthenticationHelper.UserId, viewModel.UploadedProfilePicture);
             NavigationHelper.Redirect("~/Account/Settings?ProfileImageChanged=True");
+        }
+
+        internal void UpdateBio()
+        {
+            repository.UpdateArtistBio(AuthenticationHelper.UserId, viewModel.ArtistBio);
+            NavigationHelper.Redirect("~/Account/Settings?ArtistBioChanged=True");
         }
     }
 }
