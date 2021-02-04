@@ -81,10 +81,10 @@
 
         <%-- Register Button --%>
         <asp:Button ID="btnSubmit" Text="Create an Account" runat="server" CssClass="btn btn-primary mb-3" OnClick="submitBtn_Click"/>
-        
+
         <hr />
 
         <%-- Go to Fan Signup Page --%>
-        <a href="~/Account/Register/Fan" style="text-align:center;" runat="server">Create an Fan Account</a>
+        <a href="~/Account/Register/Fan" style="text-align:center; margin-bottom:40px;" runat="server">Create an Fan Account</a>
     </div>
 </asp:Content>
