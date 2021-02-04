@@ -38,6 +38,7 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </table>
+            <p id="instruction" style="font-size: x-large; text-align:center;" runat="server">Add your first track</p>
         </div>
     </div>
 
