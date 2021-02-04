@@ -16,15 +16,14 @@ namespace LokalMusic._Code.Repositories.Finance
 
 			string query = @"
 SELECT
-	[Transaction].TransactionId,
-	[Transaction].TransactionDate,
+	[OrderInfo].OrderId,
+	[OrderInfo].OrderDate,
 	[UserInfo].Username,
-	(SELECT SUM([TransactionProduct].AmountPaid)
-	 FROM TransactionProduct
-	 WHERE [TransactionProduct].TransactionId = [Transaction].TransactionId) AS AmountPaid
-FROM [Transaction]
-	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [Transaction].UserId
-ORDER BY [Transaction].TransactionDate DESC;";
+	[OrderInfo].AmountPaid
+FROM [OrderInfo]
+	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
+ORDER BY [OrderInfo].OrderDate DESC;
+";
 
 			var receipts = new List<ReceiptListItem>();
 			var result = DbHelper.ExecuteDataTableQuery(query);
@@ -33,9 +32,9 @@ ORDER BY [Transaction].TransactionDate DESC;";
             {
 				receipts.Add(new ReceiptListItem()
 				{
-					TransactionId = (int) row["TransactionId"],
+					OrderId = (int) row["OrderId"],
 					AmountPaid = (decimal) row["AmountPaid"],
-					TransactionDate = (DateTime) row["TransactionDate"],
+					OrderDate = (DateTime) row["OrderDate"],
 					Username = (string) row["Username"]
 				});
             }
@@ -47,21 +46,19 @@ ORDER BY [Transaction].TransactionDate DESC;";
 		{
 			string modelQuery = @"
 SELECT
-	[Transaction].TransactionId,
-	[Transaction].TransactionDate,
+	[OrderInfo].OrderId,
+	[OrderInfo].OrderDate,
 	[UserInfo].Username,
-	(SELECT SUM([TransactionProduct].AmountPaid)
-	 FROM TransactionProduct
-	 WHERE [TransactionProduct].TransactionId = [Transaction].TransactionId) AS AmountPaid
-FROM [Transaction]
-	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [Transaction].UserId
-WHERE [Transaction].TransactionId = @TransactionId;";
-			var modelResult = DbHelper.ExecuteDataTableQuery(modelQuery, ("TransactionId", receiptId)).Rows[0];
+	[OrderInfo].AmountPaid
+FROM [OrderInfo]
+	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
+WHERE [OrderInfo].OrderId = @OrderId;";
+			var modelResult = DbHelper.ExecuteDataTableQuery(modelQuery, ("OrderId", receiptId)).Rows[0];
 			var model = new ReceiptModel()
 			{
-				TransactionId = (int)modelResult["TransactionId"],
+				OrderId = (int)modelResult["OrderId"],
 				AmountPaid = (decimal)modelResult["AmountPaid"],
-				TransactionDate = (DateTime)modelResult["TransactionDate"],
+				OrderDate = (DateTime)modelResult["OrderDate"],
 				Username = (string)modelResult["Username"],
 				Products = new List<ReceiptProductItem>()
 			};
@@ -69,17 +66,18 @@ WHERE [Transaction].TransactionId = @TransactionId;";
 			string productsQuery = @"
 SELECT
 	[Product].ProductName + ' (' + [ProductType].TypeName+')' AS ProductName,
-	[TransactionProduct].AmountPaid
-FROM [TransactionProduct]
-	LEFT JOIN [Product] ON [Product].ProductId = [TransactionProduct].ProductId
+	[ProductOrder].ProductPrice
+FROM [ProductOrder]
+	LEFT JOIN [Product] ON [Product].ProductId = [ProductOrder].ProductId
 	LEFT JOIN [ProductType] ON [Product].ProductTypeId = [ProductType].ProductTypeId
-WHERE [TransactionProduct].TransactionId = @TransactionId";
-			var productsResult = DbHelper.ExecuteDataTableQuery(productsQuery, ("TransactionId", receiptId));
+WHERE [ProductOrder].OrderId = @OrderId;";
+
+			var productsResult = DbHelper.ExecuteDataTableQuery(productsQuery, ("OrderId", receiptId));
             foreach (var row in productsResult.AsEnumerable())
             {
 				model.Products.Add(new ReceiptProductItem()
 				{
-					AmountPaid = (decimal) row["AmountPaid"],
+					ProductPrice = (decimal) row["ProductPrice"],
 					ProductName = (string) row["ProductName"]
 				});
             }

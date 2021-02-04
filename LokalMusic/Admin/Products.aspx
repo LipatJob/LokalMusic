@@ -61,6 +61,7 @@
         function OnSuccess(response) {
             $("#productsTbl").DataTable(
                 {
+                    "pageLength": 8,
                     bLengthChange: true,
                     lengthMenu: [[5, 10, -1], [5, 10, "All"]],
                     bFilter: true,
@@ -83,12 +84,11 @@
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
-                                if (row["ProductStatus"] != "LISTED") {
-                                    return `<button class="btn btn-secondary" onclick="RelistItem(${row["ProductId"]}, this); return false;">Relist</button>`;
+                                if (row["ProductStatus"].toUpperCase() == "WITHDRAWN") {
+                                    return `<button class="btn btn-secondary" onclick="RepublishItem(${row["ProductId"]}, this); return false;">Republish</button>`;
                                 }
-                                return `<button class="btn btn-primary" onclick="UnlistItem(${row["ProductId"]}, this); return false;">Unlist</button></a>`;
+                                return `<button class="btn btn-primary" onclick="WithdrawItem(${row["ProductId"]}, this); return false;">Withdraw</button></a>`;
                             }
-
                         },
                     ],
                     "columnDefs": [
@@ -101,15 +101,15 @@
                 });
         };
 
-        function UnlistItem(id, parent) {
+        function WithdrawItem(id, parent) {
             $.ajax({
                 type: "POST",
-                url: "/Admin/Products.aspx/Unlist",
+                url: "/Admin/Products.aspx/WithdrawItem",
                 contentType: "application/json; charset=utf-8",
                 data: "{ 'productId': '" + id + "' }",
                 dataType: "json",
                 success: function () {
-                    ChangeToRelist(id, parent);
+                    ChangeToRepublish(id, parent);
                 },
                 error: function () {
                     alert("An Error has occured while unlisting the item");
@@ -118,22 +118,22 @@
             return false;
         }
 
-        function ChangeToRelist(id, item) {
+        function ChangeToRepublish(id, item) {
             item.classList.remove('btn-primary');
             item.classList.add('btn-secondary');
-            item.innerHTML = "Relist";
-            item.onclick = function () { RelistItem(id, item); return false;};
+            item.innerHTML = "Republish";
+            item.onclick = function () { RepublishItem(id, item); return false; };
         }
 
-        function RelistItem(id, parent) {
+        function RepublishItem(id, parent) {
             $.ajax({
                 type: "POST",
-                url: "/Admin/Products.aspx/Relist",
+                url: "/Admin/Products.aspx/RepublishItem",
                 data: "{ 'productId': '" + id + "' }",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function () {
-                    ChangeToUnlist(id, parent);
+                    ChangeToWithdraw(id, parent);
                 },
                 error: function () {
                     alert("An Error has occured while unlisting the item");
@@ -143,11 +143,11 @@
             return false;
         }
 
-        function ChangeToUnlist(id, item) {
+        function ChangeToWithdraw(id, item) {
             item.classList.remove('btn-secondary');
             item.classList.add('btn-primary');
-            item.innerHTML = "Unlist"
-            item.onclick = function () { UnlistItem(id, item); return false; };
+            item.innerHTML = "Withdraw"
+            item.onclick = function () { WithdrawItem(id, item); return false; };
         }
 
 
