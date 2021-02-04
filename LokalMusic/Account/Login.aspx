@@ -43,7 +43,7 @@
 
         <%-- Error Message --%>
         <asp:CustomValidator ErrorMessage="Error Message" ControlToValidate="EmailTxt" runat="server" ID="loginCv" CssClass="validation-message" />
-        
+
         <%-- Email --%>
         <div class="form-group">
             <asp:Label Text="Email" runat="server" />
