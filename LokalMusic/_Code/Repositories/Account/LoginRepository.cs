@@ -12,9 +12,11 @@ namespace LokalMusic._Code.Repositories.Account
             string commandText = @"
 SELECT UserId
 FROM [ActiveUserInfo]
+    INNER JOIN [UserType] ON [UserType].UserTypeId = [ActiveUserInfo].UserTypeId
 WHERE
     Email = @Email AND
-    Password = @Password";
+    Password = @Password AND
+    TypeName IN ('ARTIST', 'FAN');";
             var userId = (int?)DbHelper.ExecuteScalar(
                 commandText,
                 ("Email", model.Email),
