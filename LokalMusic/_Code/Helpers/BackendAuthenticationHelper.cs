@@ -1,18 +1,19 @@
-﻿using System.Web;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace LokalMusic._Code.Helpers
 {
-    public class AuthenticationHelper
+    public class BackendAuthenticationHelper
     {
         public const string ADMIN_USER_TYPE = "ADMIN";
-        public const string ARTIST_USER_TYPE = "ARTIST";
         public const string FINANCE_USER_TYPE = "FINANCE";
-        public const string FAN_USER_TYPE = "FAN";
-        public const string GUEST_USER_TYPE = "GUEST";
+        public const string GUEST_USER_TYPE = "FINANCE";
         public const int GUEST_USER_ID = -1;
 
-        private const string UserIdSessionName = "USERID";
-        private const string UsernameSessionName = "USERNAME";
+        private const string UserIdSessionName = "BACKEND_USERID";
+        private const string UsernameSessionName = "BACKEND_USERNAME";
 
         public static int UserId
         {
@@ -36,7 +37,6 @@ namespace LokalMusic._Code.Helpers
         {
             HttpContext.Current.Session[UserIdSessionName] = null;
             HttpContext.Current.Session[UsernameSessionName] = null;
-
         }
 
         public static string Username
