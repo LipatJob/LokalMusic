@@ -50,7 +50,7 @@
     <div id="featured-artist" class="pt-5 pb-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-12">
                     <h1 class="text-center font-weight-bold">
                         Featured<br />Artists
                     </h1>
@@ -59,19 +59,19 @@
                     </p>
                 </div>
 
-                <div class="col-lg-3 mb-md-3 mb-sm-3 mb-lg-0">
+                <div class="col-lg-3 col-sm-12 mb-md-3 mb-sm-3 mb-lg-0">
                     <a href="#" class="" target="_blank">
                         <img src="../Content/Images/testpicture1.jpg" class="w-100 h-100 img-hoverable" alt="feature-artist-name"/>
                     </a>
                 </div>
 
-                <div class="col-lg-3 mb-md-3 mb-sm-3 mb-lg-0">
+                <div class="col-lg-3 col-sm-6 mb-md-3 mb-sm-3 mb-lg-0">
                     <a href="#" class="" target="_blank">
                         <img src="../Content/Images/testpicture2.png" class="w-100 h-100 img-hoverable" alt="feature-artist-name"/>
                     </a>
                 </div>
 
-                <div class="col-lg-3 mb-md-3 mb-sm-3 mb-lg-0">
+                <div class="col-lg-3 col-sm-6 mb-md-3 mb-sm-3 mb-lg-0">
                     <a href="#" class="" target="_blank">
                         <img src="../Content/Images/testpicture3.jpg" class="w-100 h-100 img-hoverable" alt="feature-artist-name"/>
                     </a>
@@ -90,7 +90,7 @@
         <div class="row">
             <asp:Repeater ID="albumContainer" runat="server">
                 <ItemTemplate>
-                    <div class="col-md-2">
+                    <div class="col-lg-2 col-sm-4">
                         <div class="card border-0">
                             <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable" alt="album-name"/></a>    
                             <div class="card-body">
@@ -116,7 +116,7 @@
         <div class="row">
             <asp:Repeater ID="artistContainer" runat="server">
                 <ItemTemplate>
-                    <div class="col-md-2">
+                    <div class="col-lg-2 col-sm-4">
                         <div class="card border-0">
                             <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable" alt="artist-name"/></a>    
                             <div class="card-body">
@@ -141,16 +141,16 @@
         <div class="row">   
             <asp:Repeater ID="trackContainer" runat="server">
                 <ItemTemplate>
-                    <div class="col-md-2">
-                    <div class="card border-0">
-                        <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name"/></a>
-                        <div class="card-body">
-                            <p><%#Eval("TrackName")%></p>
-                            <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
-                            <p class="by-artist float-right" style="color:#767676;"><%#Eval("ArtistName")%></p>
-                        </div>
-                    </div>            
-                </div>
+                    <div class="col-lg-2 col-sm-4">
+                        <div class="card border-0">
+                            <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name"/></a>
+                            <div class="card-body">
+                                <p><%#Eval("TrackName")%></p>
+                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
+                                <p class="by-artist float-right" style="color:#767676;"><%#Eval("ArtistName")%></p>
+                            </div>
+                        </div>            
+                    </div>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
