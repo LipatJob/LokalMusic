@@ -1,106 +1,126 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="Collection.aspx.cs" Inherits="LokalMusic.Fan.Collection" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-	<style>
-		.user-info-container {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-		}
+    <style>
+        .user-info-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
 
-		.profile-picture {
-			width: 140px;
-			height: 140px;
-			object-fit: cover;
-			border: 2px solid black;
-			border-radius: 100%;
-			margin: 20px;
-		}
+        .profile-picture {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border: 2px solid black;
+            border-radius: 100%;
+            margin: 20px;
+        }
 
-		.collection-container {
-			display: grid;
-			grid-gap: 2rem;
-			grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-		}
+        .collection-container {
+            display: grid;
+            grid-gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+        }
 
-		.collection-item {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			border: 1px solid white;
-			padding: 10px;
-			transition: 0.1s ease-out all;
-		}
+        .collection-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid white;
+            padding: 10px;
+            transition: 0.1s ease-out all;
+        }
 
-			.collection-item:hover {
-				transition: border 0.1s ease-in-out !important;
-				border: 1px dotted #ffbaba;
-			}
+            .collection-item:hover {
+                transition: border 0.1s ease-in-out !important;
+                border: 1px dotted #ffbaba;
+            }
 
-		.item-link:link {
-			color: black;
-		}
+        .item-link:link, .item-link:visited {
+            color: black;
+        }
 
-		.item-picture {
-			width: 180px;
-			height: 180px;
-			margin-bottom: 8px;
-			border: 1px solid #e0e0e0;
-			object-fit: cover;
-		}
+        .item-link:hover {
+            text-decoration: none;
+        }
 
-		.artist-link {
-			color: gray;
-		}
-	</style>
+        .item-picture {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 8px;
+            border: 1px solid #e0e0e0;
+            object-fit: cover;
+        }
 
-	<div class="container">
-		<%-- User Information --%>
-		<div class="user-info-container">
-			<%-- Profile Picture --%>
-			<asp:Image ImageUrl="imageurl" ID="profilePicture" class="profile-picture shadow" runat="server" />
+        .artist-link {
+            color: gray;
+        }
+    </style>
 
-			<%-- User Information --%>
-			<div class="user-info">
-				<%-- Username --%>
-				<h3><%Response.Write(Model.Username);%></h3>
+    <div class="container">
+        <%-- User Information --%>
+        <div class="user-info-container">
+            <%-- Profile Picture --%>
+            <asp:Image ImageUrl="imageurl" ID="profilePicture" class="profile-picture shadow" runat="server" />
 
-				<%-- Date Joined --%>
-				<p>Member Since: <%Response.Write(Model.DateRegistered.ToShortDateString());%></p>
+            <%-- User Information --%>
+            <div class="user-info">
+                <%-- Username --%>
+                <h3><%Response.Write(Model.Username);%></h3>
 
-				<%-- Edit Profile Button --%>
-				<%if (Model.UserId == AuthenticationHelper.UserId)%>
-				<%{%>
-				<a href="~/Account/Settings" runat="server">
-					<input type="button" name="name" value="Edit Profile" class="btn btn-primary" />
-				</a>
-				<%}%>
-			</div>
-		</div>
+                <%-- Date Joined --%>
+                <p>Member Since: <%Response.Write(Model.DateRegistered.ToShortDateString());%></p>
 
-		<hr />
+                <%-- Edit Profile Button --%>
+                <%if (Model.UserId == AuthenticationHelper.UserId)%>
+                <%{%>
+                <a href="~/Account/Settings" runat="server">
+                    <input type="button" name="name" value="Edit Profile" class="btn btn-danger" />
+                </a>
+                <%}%>
+            </div>
+        </div>
 
-		<%-- Collection --%>
-		<h3>Collection</h3>
-		<div class="collection-container">
-			<asp:Repeater ID="collectionItemRepeater" runat="server">
-				<%-- Template for Collection Item --%>
-				<ItemTemplate>
-					<%-- Like to Product Page --%>
-					<a href='<%#Eval("GetUrl")%>' class="item-link">
-						<div class="collection-item">
-							<%-- Album Cover --%>
-							<asp:Image ImageUrl='<%#Eval("CoverLink")%>' runat="server" class="item-picture" />
+        <hr />
 
-							<%-- Album/Track Name --%>
-							<b><%#Eval("ProductName") %></b>
+        <%-- Collection --%>
+        <h3>Collection</h3>
+        <div class="collection-container">
+            <asp:Repeater ID="collectionItemRepeater" runat="server">
+                <%-- Template for Collection Item --%>
+                <ItemTemplate>
+                    <%-- Like to Product Page --%>
+                    <a href='<%#Eval("GetUrl")%>' class="item-link">
+                        <div class="collection-item">
+                            <%-- Album Cover --%>
+                            <asp:Image ImageUrl='<%#Eval("CoverLink")%>' runat="server" class="item-picture" />
 
-							<%-- Artist Name --%>
-							<p>By <%#Eval("ArtistName")%></p>
-						</div>
-					</a>
-				</ItemTemplate>
-			</asp:Repeater>
-		</div>
-	</div>
+                            <%-- Album/Track Name --%>
+                            <b><%#Eval("ProductName") %></b>
+
+                            <%-- Artist Name --%>
+                            <p>By <%#Eval("ArtistName")%></p>
+                        </div>
+                    </a>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+          <%if (collectionItemRepeater.Items.Count == 0) %>
+            <%{%>
+            <div style="width:100%; text-align:center; height: 300px; margin-top:50px;">
+                <p style="font-size:26px;">
+                    <%if(Model.UserId == AuthenticationHelper.UserId)%>
+                    <%{%>
+                        Buy Your first Album/Track on the <a href="~/Store/Search" runat="server" class="text-danger">Store</a>
+                    <%}%>
+                    <%else%>
+                    <%{%>
+                        <%=Model.Username%> Doesn't have Anything in their Collection
+                    <%}%>
+
+                </p>
+            </div>
+            <%}%>
+    </div>
 </asp:Content>

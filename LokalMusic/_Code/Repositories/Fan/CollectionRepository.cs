@@ -12,7 +12,7 @@ namespace LokalMusic._Code.Repositories.Fan
         {
             string query = "SELECT UserId, FileName, Username, DateRegistered FROM [ActiveUserInfo] LEFT JOIN FileInfo ON [ActiveUserInfo].ProfileImageId = FileInfo.FileId WHERE Username = @Username";
             var result = DbHelper.ExecuteDataTableQuery(query, ("Username", username));
-            string profileImage = "~/Content/Images/Logo.png";
+            string profileImage = "~/Content/Images/Old Logo.png";
             if (result.Rows[0].IsNull("FileName") == false)
             {
                 profileImage = (string)result.Rows[0]["FileName"];
