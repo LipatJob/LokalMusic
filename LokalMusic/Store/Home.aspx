@@ -3,80 +3,75 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        #featured-artist{
+        #featured-artist {
             background-color: #FFDCDC;
         }
 
-        h1, p{
+        h1, p {
             font-family: Montserrat;
         }
 
         #featured-artist p {
-            font-weight:400;
+            font-weight: 400;
         }
 
-        .view-all{
-            font-weight:500;
-            font-size:11px;
-
-            border:solid;
+        .view-all {
+            font-weight: 500;
+            font-size: 11px;
+            border: solid;
             border-width: 1px;
-            border-color: #dc3545 ;
+            border-color: #dc3545;
             border-radius: 5px;
             padding: 0px 3px 0px 3px;
         }
 
-        .view-all:hover, #best-selling-albums a:hover, #top-artists a:hover, #famous-tracks a:hover{
-            text-decoration: none;
-        }
+            .view-all:hover, #best-selling-albums a:hover, #top-artists a:hover, #famous-tracks a:hover {
+                text-decoration: none;
+            }
 
-        .card-body{
+        .card-body {
             margin: -14px -18px 0 -18px;
         }
 
-        .card-body p {
-            color: black;
-            font-size: 13px;
-            font-weight: 500;
-            margin: 0 0 0 0;
+            .card-body p {
+                color: black;
+                font-size: 13px;
+                font-weight: 500;
+                margin: 0 0 0 0;
+            }
+
+        .by-artist {
+            color: #808080;
         }
 
-        .by-artist{
-            color:#808080;
+        .featured-text{
+            font-size: 36px;
         }
-
     </style>
 
     <div id="featured-artist" class="pt-5 pb-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-12">
-                    <h1 class="text-center font-weight-bold">
-                        Featured<br />Artists
+                    <h1 class="text-center font-weight-bold featured-text">Featured<br />
+                        Albums
                     </h1>
                     <p class="text-center">
-                        Our Weekly Artist<br />Selection
+                        Albums Around<br />
+                        the Philippines
                     </p>
                 </div>
 
-                <div class="col-lg-3 col-sm-12 mb-md-3 mb-sm-3 mb-lg-0">
-                    <a href="#" class="" target="_blank">
-                        <img src="../Content/Images/testpicture1.jpg" class="w-100 h-100 img-hoverable" alt="feature-artist-name"/>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-sm-6 mb-md-3 mb-sm-3 mb-lg-0">
-                    <a href="#" class="" target="_blank">
-                        <img src="../Content/Images/testpicture2.png" class="w-100 h-100 img-hoverable" alt="feature-artist-name"/>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-sm-6 mb-md-3 mb-sm-3 mb-lg-0">
-                    <a href="#" class="" target="_blank">
-                        <img src="../Content/Images/testpicture3.jpg" class="w-100 h-100 img-hoverable" alt="feature-artist-name"/>
-                    </a>
-                </div>
-            </div>        
+                <asp:Repeater runat="server" ID="FeaturedProductRepeater">
+                    <ItemTemplate>
+                        <div class="col-lg-3 col-sm-12 mb-md-3 mb-sm-3 mb-lg-0">
+                            <a href="<%# Eval("MarketPage")%>"" class="" target="_blank">
+                                <img src="<%# Eval("ProductImage")%>"" class="img-hoverable" style="width:180px; height:auto;" alt="feature-artist-name" />
+                            </a>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
         </div>
     </div>
 
@@ -92,13 +87,14 @@
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0">
-                            <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable" alt="album-name"/></a>    
+                            <a href='<%#Eval("DetailsUrl") %>' runat="server">
+                                <img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable" alt="album-name" /></a>
                             <div class="card-body">
                                 <p><%#Eval("AlbumName")%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
-                                <p class="by-artist float-right" style="color:#767676;"><%#Eval("ArtistName")%></p>
+                                <p class="by-artist float-right" style="color: #767676;"><%#Eval("ArtistName")%></p>
                             </div>
-                        </div>        
+                        </div>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
@@ -110,7 +106,7 @@
         <div class="row mb-4">
             <h5 class="my-auto">Top Artists</h5>
             <a class="text-danger ml-2 view-all my-auto" id="artistViewAll" runat="server">View All</a>
-        </div> 
+        </div>
 
         <%--Artists--%>
         <div class="row">
@@ -118,7 +114,8 @@
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0">
-                            <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable" alt="artist-name"/></a>    
+                            <a href='<%#Eval("DetailsUrl") %>' runat="server">
+                                <img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable" alt="artist-name" /></a>
                             <div class="card-body">
                                 <p><%#Eval("ArtistName")%></p>
                                 <p style="font-weight: 400;"><%#Eval("Bio")%></p>
@@ -138,18 +135,19 @@
         </div>
 
         <%--Track--%>
-        <div class="row">   
+        <div class="row">
             <asp:Repeater ID="trackContainer" runat="server">
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0">
-                            <a href=<%#Eval("DetailsUrl") %> runat="server" ><img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name"/></a>
+                            <a href='<%#Eval("DetailsUrl") %>' runat="server">
+                                <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" /></a>
                             <div class="card-body">
                                 <p><%#Eval("TrackName")%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
-                                <p class="by-artist float-right" style="color:#767676;"><%#Eval("ArtistName")%></p>
+                                <p class="by-artist float-right" style="color: #767676;"><%#Eval("ArtistName")%></p>
                             </div>
-                        </div>            
+                        </div>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
