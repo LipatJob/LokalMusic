@@ -33,7 +33,7 @@
 
     <div class="signin-form">
         <%-- Brand Logo --%>
-        <asp:Image ImageUrl="~/Content/Images/Logo.png" runat="server" CssClass="login-brand-logo my-3" style="width: 150px; height: auto;"/>
+        <asp:Image ImageUrl="~/Content/Images/Old Logo.png" runat="server" CssClass="login-brand-logo my-3" style="width: 150px; height: auto;"/>
 
         <%-- Login Header --%>
         <div class="login-header">

@@ -29,11 +29,11 @@ namespace LokalMusic._Code.Repositories.Finance
 $@"
 SELECT
 	[Months].DateStart AS Date,
-	SUM([Transaction].ActualAmountPaid) AS TotalAmountUserPaid
+	SUM([OrderInfo].AmountPaid) AS TotalAmountUserPaid
 FROM {period}(@StartDate, @EndDate) AS Months
-LEFT JOIN [Transaction] ON
-	[Months].DateStart < = [Transaction].TransactionDate AND
-	[Months].DateEnd > [Transaction].TransactionDate
+LEFT JOIN [OrderInfo] ON
+	[Months].DateStart < = [OrderInfo].OrderDate AND
+	[Months].DateEnd > [OrderInfo].OrderDate
 GROUP BY [Months].DateStart
 ";
             List<string> labels = new List<string>();
@@ -57,15 +57,20 @@ GROUP BY [Months].DateStart
 
         private object GetFiguresValues(DateTime start, DateTime end)
         {
+
             string query =
 @"
 SELECT
-	SUM(ActualAmountPaid) AS NetSales
-FROM [Transaction]
+	SUM([OrderInfo].AmountPaid) - SUM([OrderInfo].AmountPaid) * .15 AS NetSales,
+	SUM([OrderInfo].AmountPaid) * .15 AS TotalArtistRevenue,
+	SUM([OrderInfo].AmountPaid) AS GrossSales,
+	COUNT([OrderInfo].OrderId) AS ProductsSold
+FROM [OrderInfo]
 WHERE
-	TransactionDate >= @StartDate AND
-	TransactionDate < @EndDate
+	[OrderInfo].OrderDate >= @StartDate AND
+	[OrderInfo].OrderDate < @EndDate;
 ";
+
             var values = DbHelper.ExecuteDataTableQuery(
                 query,
                 ("StartDate", start),
@@ -83,10 +88,10 @@ WHERE
 
             return new
             {
-                NetSales = values.Rows[0].IsNull("NetSales") ? 0 : values.Rows[0]["NetSales"],
-                GrossSales = 0,
-                TotalArtistRevenue = 0,
-                ProductsSold = 0,
+                NetSales = values.Rows[0]["NetSales"],
+                GrossSales = values.Rows[0]["GrossSales"],
+                TotalArtistRevenue = values.Rows[0]["TotalArtistRevenue"],
+                ProductsSold = values.Rows[0]["ProductsSold"],
             };
         }
     }
