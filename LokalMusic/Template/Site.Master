@@ -43,6 +43,7 @@
         .validation-message
         {
             color:red;
+            text-decoration:wavy;
         }
 
     </style>

@@ -82,7 +82,7 @@
                                 </div>
 
                                 <%-- Submit Profile Picture--%>
-                                <asp:Button ID="submitProfilePicture" Text="Update Picture" runat="server" CssClass="btn btn-primary mt-2" Style="width: 100%" OnClick="submitProfilePicture_Click" ValidationGroup="ChangeProfilePicture" />
+                                <asp:Button ID="submitProfilePicture" Text="Update Picture" runat="server" CssClass="btn btn-danger mt-2" Style="width: 100%" OnClick="submitProfilePicture_Click" ValidationGroup="ChangeProfilePicture" />
                                 <asp:CustomValidator ID="ProfilePictureFileCv" ErrorMessage="Error Message" ControlToValidate="ProfilePictureFile" runat="server" ValidationGroup="ChangeProfilePicture" OnServerValidate="ProfilePictureFileCv_ServerValidate" CssClass="validation-message" Display="Dynamic" />
 
                             </div>
@@ -122,7 +122,7 @@
                     <%-- Update Bio Button--%>
                     <div style="display: flex; flex-direction: column; width: 100%;">
                         <asp:CustomValidator ID="BioTxtCv" ErrorMessage="Error Message" ControlToValidate="BioTxt" runat="server" OnServerValidate="ConfirmNewPasswordTxtCv_ServerValidate" Display="Dynamic" ValidateEmptyText="True" CssClass="validation-message" ValidationGroup="ChangePassword" />
-                        <asp:Button ID="submitBtnUpdateBio" Text="Update Bio" runat="server" OnClick="submitBtnUpdateBio_Click" CssClass="btn btn-primary submitBtnUpdateBio" ValidationGroup="UpdateBio" />
+                        <asp:Button ID="submitBtnUpdateBio" Text="Update Bio" runat="server" OnClick="submitBtnUpdateBio_Click" CssClass="btn btn-danger submitBtnUpdateBio" ValidationGroup="UpdateBio" />
                     </div>
                 </asp:Panel>
                 <%} %>
@@ -164,7 +164,7 @@
 
                     <%-- Change Password Button--%>
                     <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-                        <asp:Button ID="submitBtnChangePassword" Text="Change Password" runat="server" OnClick="submitBtn_Click" CssClass="btn btn-primary" ValidationGroup="ChangePassword" />
+                        <asp:Button ID="submitBtnChangePassword" Text="Change Password" runat="server" OnClick="submitBtn_Click" CssClass="btn btn-danger" ValidationGroup="ChangePassword" />
                     </div>
                 </asp:Panel>
             </div>

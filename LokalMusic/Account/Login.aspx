@@ -38,7 +38,7 @@
         <%-- Login Header --%>
         <div class="login-header">
             <h3 class="my-3">Sign In</h3>
-            <small style="margin-left: auto; color: black;"><a href="~/Account/Register/Fan" runat="server"><u>or Create an Account</u></a> </small>
+            <small style="margin-left: auto; color: black;"><a href="~/Account/Register/Fan" runat="server" class="text-danger"><u>or Create an Account</u></a> </small>
         </div>
 
         <%-- Error Message --%>
@@ -60,7 +60,7 @@
 
         <%-- Submit Button --%>
         <div style="display: flex; flex-direction: row;">
-            <asp:Button ID="submitBtn" Text="Sign In" runat="server" CssClass="submit-btn btn btn-primary" OnClick="submitBtn_Click" />
+            <asp:Button ID="submitBtn" Text="Sign In" runat="server" CssClass="submit-btn btn btn-danger" OnClick="submitBtn_Click"/>
         </div>
     </div>
 </asp:Content>
