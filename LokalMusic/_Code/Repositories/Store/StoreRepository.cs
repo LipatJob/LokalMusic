@@ -14,6 +14,8 @@ namespace LokalMusic._Code.Repositories
         const string STATUS_PRODUCT_VISIBLE = "PUBLISHED";
         const string STATUS_ARTIST_ACTIVE = "ACTIVE";
 
+        private const int HOME_DISPLAY_LIMIT = 6;
+
         /* Summary Queries */
 
         public List<TrackSummary> GetSummarizedTracks(string sortBy = "Price", string orderBy = "ASC")
@@ -231,18 +233,150 @@ namespace LokalMusic._Code.Repositories
 
         public List<TrackSummary> GetHighestSoldTracks()
         {
-            return this.GetSummarizedTracks();
+            List<TrackSummary> tracks = new List<TrackSummary>();
+
+            string query = "SELECT TOP " + HOME_DISPLAY_LIMIT + " TrackId, Track.AlbumId, Album.UserId as ArtistId, TrackProduct.ProductName as TrackName, TrackProduct.Price, TrackProduct.DateAdded, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, GenreName as Genre, TrackFile.FileName as AudioClip, Track.ClipDuration as AudioClipDuration, Track.TrackDuration as AudioDuration, AlbumFile.FileName as AlbumCover " +
+                           "FROM Product as TrackProduct " +
+                           "INNER JOIN Track " +
+                           "ON TrackProduct.ProductId = Track.TrackId " +
+                           "INNER JOIN Album " +
+                           "ON Track.AlbumId = Album.AlbumId " +
+                           "INNER JOIN Product as AlbumProduct " +
+                           "ON Album.AlbumId = AlbumProduct.ProductId " +
+                           "INNER JOIN Genre " +
+                           "On Track.GenreId = Genre.GenreId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN FileInfo as AlbumFile " +
+                           "ON Album.AlbumCoverID = AlbumFile.FileId " +
+                           "INNER JOIN FileInfo as TrackFile " +
+                           "ON Track.ClipFileID = TrackFile.FileId " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')" +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')" +
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
+                           //"ORDER BY Price";
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    TrackSummary track = new TrackSummary(
+                        (int)values.Rows[i]["TrackId"],
+                        (int)values.Rows[i]["AlbumId"],
+                        (int)values.Rows[i]["ArtistId"],
+
+                        values.Rows[i]["TrackName"].ToString(),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+                        Convert.ToDateTime(values.Rows[i]["DateAdded"].ToString()),
+                        values.Rows[i]["AlbumName"].ToString(),
+                        values.Rows[i]["ArtistName"].ToString(),
+
+                        values.Rows[i]["Genre"].ToString().Substring(0, 1) + values.Rows[i]["Genre"].ToString().Substring(1).ToLower(),
+
+                        values.Rows[i]["AudioClip"].ToString(),
+                        TimeSpan.Parse(values.Rows[i]["AudioClipDuration"].ToString()),
+                        TimeSpan.Parse(values.Rows[i]["AudioDuration"].ToString()),
+
+                        values.Rows[i]["AlbumCover"].ToString()
+                        );
+
+                    tracks.Add(track);
+                }
+            }
+
+            return tracks;
         }
         
         public List<AlbumSummary> GetHighestSoldAlbums()
         {
-            return this.GetSummarizedAlbum();
+            List<AlbumSummary> albums = new List<AlbumSummary>();
+
+            string query = "SELECT TOP " + HOME_DISPLAY_LIMIT + " AlbumId, Album.UserId as ArtistId, ProductName as AlbumName, Price, ProducerName, FileInfo.FileName as AlbumCover, ArtistName, DateReleased " +
+                           "FROM Product " +
+                           "INNER JOIN Album " +
+                           "ON Product.ProductId = AlbumId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN FileInfo " +
+                           "On Album.AlbumCoverID = FileInfo.FileId " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')" +
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "') ";
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    AlbumSummary album = new AlbumSummary(
+                        (int)values.Rows[i]["AlbumId"],
+                        (int)values.Rows[i]["ArtistId"],
+
+                        values.Rows[i]["AlbumName"].ToString(),
+                        Decimal.Round(Decimal.Parse(values.Rows[i]["Price"].ToString()), 2),
+                        values.Rows[i]["ProducerName"].ToString(),
+                        values.Rows[i]["AlbumCover"].ToString(),
+
+                        values.Rows[i]["ArtistName"].ToString(),
+
+                        Convert.ToDateTime(values.Rows[i]["DateReleased"].ToString())
+                        );
+
+                    albums.Add(album);
+                }
+            }
+
+            return albums;
         }
 
         public List<ArtistSummary> GetMostPopularArtist()
         {
             // Most popular == artist that sold many albums
-            return this.GetSummarizedArtist();
+            List<ArtistSummary> artists = new List<ArtistSummary>();
+
+            string query = "SELECT TOP " + HOME_DISPLAY_LIMIT + " ArtistInfo.UserId as ArtistId, ArtistName, Bio, UserInfo.DateRegistered as DateJoined, FileInfo.FileName as ArtistProfileImage " +
+                           "FROM ArtistInfo " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "LEFT JOIN FileInfo " +
+                           "ON UserInfo.ProfileImageId = FileInfo.FileId " +
+                           "WHERE UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "') ";
+
+            var values = DbHelper.ExecuteDataTableQuery(query);
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    ArtistSummary artist = new ArtistSummary(
+                        (int)values.Rows[i]["ArtistId"],
+
+                        values.Rows[i]["ArtistName"].ToString(),
+                        values.Rows[i]["Bio"].ToString(),
+
+                        Convert.ToDateTime(values.Rows[i]["DateJoined"].ToString()),
+
+                        values.Rows[i]["ArtistProfileImage"].ToString()
+                        );
+
+                    // if there is no profile image, temporarily set the physical location to default photo
+                    if (artist.ArtistProfileImage == "" || artist.ArtistProfileImage == null)
+                        artist.ArtistProfileImage = "../Content/Images/default_artist_image.JPG";
+
+                    artists.Add(artist);
+                }
+            }
+
+            return artists;
         }
 
         public List<TrackSummary> GetTopTwoTracks( int artistId)
