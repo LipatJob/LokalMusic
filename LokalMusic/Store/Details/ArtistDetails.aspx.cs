@@ -25,13 +25,12 @@ namespace LokalMusic.Store.Details
 
         private void HandleUrlRequest()
         {
-            string urlParam = "";
+            string urlParam = (string)NavigationHelper.GetRouteValue("ArtistId");
+
+            // if the physical location is accessed without the expected url format
+            if (urlParam == null) this.InvalidRequest();
+
             int parsedParam = 0;
-
-            urlParam = (string)NavigationHelper.GetRouteValue("ArtistId");
-
-            if (urlParam == "" || urlParam == null) { this.InvalidRequest(); }
-
             int.TryParse(urlParam, out parsedParam);   
 
             // call presenter to update model
