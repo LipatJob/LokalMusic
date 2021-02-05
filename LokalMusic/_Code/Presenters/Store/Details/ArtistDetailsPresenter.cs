@@ -26,43 +26,37 @@ namespace LokalMusic._Code.Presenters.Store.Details
             return this.repository.GetAlbumsOfArtist(artistId);
         }
 
-        public (Artist, List<Album>) DetermineAlbumSummaries(Artist artist, List<Album> albums)
+        public (Artist, List<Album>) DetermineAristSummary(Artist artist, List<Album> albums)
         {
+            // SQL Queries were used because I did not want to query the whole track and perform LINQ commands or iterations, and
+            // LINQ commands were used because the List of Albums was already available.
+            // Track list is not readily available, hence, I used SQL Queries
+
             if (artist == null || albums.Count <= 0)
                 return (artist, albums);
 
-            // album and track count
-
-            // append genres -- will be using the repo and sql commands
-            // deteremine albums' track count using sql commands
-            string genres = "";
+            // Hashset automatically removes duplicates
+            HashSet<string> genres = new HashSet<string>();
             albums.ForEach( m => 
             {
-                m.Genres = GetAlbumGenres(m.AlbumId);
-                genres += m.Genres + ", "; // at this part, genres list may contain duplicated
-                artist.TrackCount += GetTrackCount(m.AlbumId);
+                genres.UnionWith(this.repository.GetAlbumGenres(m.AlbumId)); 
+                artist.TrackCount += this.repository.GetTrackCount(m.AlbumId);
             });
 
+            // set genre, join with ","
+            artist.Genres = string.Join(", ", genres);
 
-            // split genres to create a list
-            List<string> listGenre = genres.Split(',').Select(s => s.Trim()).ToList();
-            listGenre.RemoveAt(listGenre.Count - 1); // pop last element, because there is an extra ", "
-            
-
+            // use the list of albums to get the count
             artist.AlbumCount = albums.Count;
-            artist.Genres = string.Join(", ", listGenre.Distinct().ToList());
 
             return (artist, albums);
         }
 
-        public string GetAlbumGenres(int albumId)
+        public List<Album> DetermineAlbumsSummary(List<Album> albums)
         {
-            return this.repository.GetAlbumGenres(albumId);
-        }
 
-        public int GetTrackCount(int albumId)
-        {
-            return this.repository.GetTrackCount(albumId);
+            albums.ForEach( m => m.Genres = this.repository.GetGenresOfAlbum(m.AlbumId) );
+            return albums;
         }
     }
 }

@@ -77,16 +77,21 @@
                 <ItemTemplate>
 
                     <%--Image--%>
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-5">
 
                         <div class="w-100" id="album-img">
                             <img src=<%#Eval("AlbumCover") %> class="mx-auto d-block shadow rounded border w-100"/>
                         </div>
 
                         <div class="mt-3"  id="img-bottom">
-                            <div class="row mx-auto d-block">
-                                <p class="float-left"><%#Eval("AudioDuration") %> minutes</p>
-                                <p class="float-right">genre: <%#Eval("Genre") %></p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class=""><%#Eval("AudioDuration") %> minutes</p>
+                                </div>
+
+                                <div class="col-6">
+                                    <p class="text-right">genre: <%#Eval("Genre") %></p>
+                                </div>
                             </div>
                      
                             <%--Player--%>
@@ -98,7 +103,7 @@
                     </div>
 
                     <%--Description--%>
-                    <div class="col-md-9 w-100">
+                    <div class="col-lg-9 col-md-5 w-100">
 
                         <div class="row w-100 ml-2">
                             <h3 id="track-name" class=""><%#Eval("TrackName") %></h3>
