@@ -527,6 +527,51 @@ namespace LokalMusic._Code.Repositories
             return items.Count > 0 ? items : null;
         }
 
+        /* Helper Queries */
+        public string GetGenreOfAlbum(int albumId)
+        {
+            string query = "SELECT DISTINCT(GenreName) " +
+                           "FROM Product " +
+                           "INNER JOIN Track " +
+                           "ON ProductId = Track.TrackId " +
+                           "INNER JOIN Genre " +
+                           "ON Track.GenreId = Genre.GenreId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND Track.AlbumId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            List<string> genre = new List<string>();
+
+            if (valid)
+                for (int i = 0; i < values.Rows.Count; i++)
+                    genre.Add(values.Rows[i]["GenreName"].ToString().Substring(0, 1).ToUpper() + values.Rows[i]["GenreName"].ToString().Substring(1).ToLower());
+
+            return string.Join(", ", genre);
+        }
+
+        public (int, double) GetTrackCountAndDurationOfAlbum(int albumId)
+        {
+            string query = "SELECT TrackDuration " +
+                           "FROM Product " +
+                           "INNER JOIN Track " +
+                           "ON ProductId = Track.TrackId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND Track.AlbumId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            double totalDuration = 0;
+
+            if (valid)
+                for (int i = 0; i < values.Rows.Count; i++)
+                    totalDuration += TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()).TotalMinutes;
+
+            return (values.Rows.Count, Math.Round(totalDuration, 2));
+        }
+
         public string GetGenresOfArtist(int artistId)
         {
             string query = "SELECT DISTINCT(GenreName) " +

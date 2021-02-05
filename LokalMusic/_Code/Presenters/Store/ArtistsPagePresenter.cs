@@ -45,10 +45,10 @@ namespace LokalMusic._Code.Presenters.Store
                         artist.TrackTop2 = tracks[1];
                 }
 
+                // SQL Queries were used because I did not want to query the whole track and perform LINQ commands or iterations
                 artist.AlbumCount = this.repository.GetAlbumCountOfArtist(artist.ArtistId);
                 artist.TrackTotalCount = this.repository.GetTrackCountOfArtist(artist.ArtistId);
                 artist.Genre = this.repository.GetGenresOfArtist(artist.ArtistId);
-
             }
 
             return artists;
