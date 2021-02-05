@@ -64,9 +64,9 @@
 
                 <asp:Repeater runat="server" ID="FeaturedProductRepeater">
                     <ItemTemplate>
-                        <div class="col-lg-3 col-sm-12 mb-md-3 mb-sm-3 mb-lg-0">
+                        <div class="col-lg-3 col-sm-12 mb-md-3 mb-sm-3 mb-lg-0" style="display:flex; justify-content:center;">
                             <a href="<%# Eval("MarketPage")%>"" class="" target="_blank">
-                                <img src="<%# Eval("ProductImage")%>"" class="img-hoverable" style="width:180px; height:auto;" alt="feature-artist-name" />
+                                <img src="<%# Eval("ProductImage")%>"" class="img-hoverable" style="width:200px; height:auto;" alt="feature-artist-name" />
                             </a>
                         </div>
                     </ItemTemplate>
