@@ -1,4 +1,5 @@
 ﻿using LokalMusic._Code.Models.Store;
+using System;
 using System.Collections.Generic;
 
 namespace LokalMusic._Code.Repositories.Store
@@ -30,6 +31,11 @@ namespace LokalMusic._Code.Repositories.Store
         public void Home()
         {
             //
+        }
+
+        internal IList<FeaturedProduct> GetFeaturedProducts()
+        {
+            return this.repository.GetFeaturedProducts();
         }
     }
 }

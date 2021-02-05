@@ -3,6 +3,7 @@ using LokalMusic._Code.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 
 // Author - Gene Garcia
 
@@ -196,7 +197,7 @@ namespace LokalMusic._Code.Repositories
                            "ON ArtistInfo.UserId = UserInfo.UserId " +
                            "LEFT JOIN FileInfo " +
                            "ON UserInfo.ProfileImageId = FileInfo.FileId " +
-                           "WHERE UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '"+ STATUS_ARTIST_ACTIVE +"') " +
+                           "WHERE UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "') " +
                            "ORDER BY " + sortBy + " " + orderBy;
 
             var values = DbHelper.ExecuteDataTableQuery(query);
@@ -256,7 +257,7 @@ namespace LokalMusic._Code.Repositories
                            "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')" +
                            "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')" +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
-                           //"ORDER BY Price";
+            //"ORDER BY Price";
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
@@ -291,7 +292,7 @@ namespace LokalMusic._Code.Repositories
 
             return tracks;
         }
-        
+
         public List<AlbumSummary> GetHighestSoldAlbums()
         {
             List<AlbumSummary> albums = new List<AlbumSummary>();
@@ -379,7 +380,7 @@ namespace LokalMusic._Code.Repositories
             return artists;
         }
 
-        public List<TrackSummary> GetTopTwoTracks( int artistId)
+        public List<TrackSummary> GetTopTwoTracks(int artistId)
         {
             List<TrackSummary> tracks = new List<TrackSummary>();
 
@@ -594,8 +595,8 @@ namespace LokalMusic._Code.Repositories
             List<string> genre = new List<string>();
 
             if (valid)
-                for(int i = 0; i < values.Rows.Count; i++)
-                    genre.Add( values.Rows[i]["GenreName"].ToString().Substring(0,1).ToUpper() + values.Rows[i]["GenreName"].ToString().Substring(1).ToLower());
+                for (int i = 0; i < values.Rows.Count; i++)
+                    genre.Add(values.Rows[i]["GenreName"].ToString().Substring(0, 1).ToUpper() + values.Rows[i]["GenreName"].ToString().Substring(1).ToLower());
 
             return string.Join(", ", genre);
         }
@@ -628,9 +629,35 @@ namespace LokalMusic._Code.Repositories
                            "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND Album.UserId = @ArtistId";
 
-            int count = (int)DbHelper.ExecuteScalar(query, ("ArtistId" ,artistId));
+            int count = (int)DbHelper.ExecuteScalar(query, ("ArtistId", artistId));
 
             return count;
+        }
+
+        public IList<FeaturedProduct> GetFeaturedProducts()
+        {
+            string query = @"
+SELECT TOP 3
+	[Album].AlbumId,
+	[Album].UserId,
+	[FileInfo].FileName
+FROM [Album]
+	INNER JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
+ORDER BY NEWID();";
+
+            var result = DbHelper.ExecuteDataTableQuery(query);
+
+            IList<FeaturedProduct> products = new List<FeaturedProduct>();
+            foreach (DataRow row in result.Rows)
+            {
+                products.Add(new FeaturedProduct()
+                {
+                    ProductId = (int) row["AlbumId"],
+                    ArtistId = (int) row["UserId"],
+                    ProductImage = (string) row["FileName"]
+                });
+            }
+            return products;
         }
 
     }
