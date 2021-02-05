@@ -58,7 +58,29 @@ namespace LokalMusic._Code.Repositories.Cart
             return albums.Count > 0 ? albums : null;
         }
 
-        public List<CartArtist> GetArtist(int customerId)
+        public (int, double) GetTrackCountAndDurationOfAlbum(int albumId)
+        {
+            string query = "SELECT TrackDuration " +
+                           "FROM Product " +
+                           "INNER JOIN Track " +
+                           "ON ProductId = Track.TrackId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND Track.AlbumId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            double totalDuration = 0;
+
+            if (valid)
+                for (int i = 0; i < values.Rows.Count; i++)
+                    totalDuration += TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()).TotalMinutes;
+
+            return (values.Rows.Count, Math.Round(totalDuration, 2));
+        }
+
+
+        public List<CartArtist> GetArtistFromCart(int customerId)
         {
             List<CartArtist> artists = new List<CartArtist>();
 
@@ -161,18 +183,6 @@ namespace LokalMusic._Code.Repositories.Cart
             }
 
             return tracks.Count > 0 ? tracks : null;
-        }
-
-        public Decimal GetProductPrice(int productId)
-        {
-            string query = "SELECT * " +
-                           "FROM Product " +
-                           "WHERE ProductId = @ProductId " +
-                           "AND ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_VISIBLE +"')";
-
-            Decimal price = Decimal.Round(Decimal.Parse(DbHelper.ExecuteScalar(query, ("ProductId", productId)).ToString()));
-
-            return price;
         }
 
         public int CreateOrderInfo(int customerId, Decimal amountPaid, string paymentProvider)

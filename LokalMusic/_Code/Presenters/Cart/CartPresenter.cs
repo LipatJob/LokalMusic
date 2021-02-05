@@ -28,16 +28,30 @@ namespace LokalMusic._Code.Presenters.Cart
         public List<CartAlbum> GetCartAlbums()
         {
             return this.repository.GetAlbums(AuthenticationHelper.UserId);
+        }
 
+        public List<CartAlbum> GetCartAlbumsAdditionalDetails(List<CartAlbum> albums)
+        {
+            // track counts
+            // total minutes
+            foreach (CartAlbum album in albums)
+            {
+                if (album == null) break;
+                (album.TrackCount, album.TrackTotalMinutes) = this.repository.GetTrackCountAndDurationOfAlbum(album.AlbumId);
+            }
+
+            return albums;
         }
 
         public List<CartArtist> GetCartArtists()
         {
-            List<CartArtist> relatedArtistInCart = this.repository.GetArtist(AuthenticationHelper.UserId);
+            List<CartArtist> relatedArtistInCart = this.repository.GetArtistFromCart(AuthenticationHelper.UserId);
 
             if (relatedArtistInCart == null)
                 return null;
 
+            // 2 list of cart artist, because it might that not all relatedArtistInCart will have availble products in the cart
+            // probably, UNLISTED or WITHDRAWN product
             List<CartArtist> artists = new List<CartArtist>();
 
             // not null
