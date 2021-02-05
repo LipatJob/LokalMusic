@@ -50,9 +50,9 @@
     </style>
 
     <div id="featured-artist" class="pt-5 pb-4">
-        <div class="container">
+        <div class="container py-2">
             <div class="row">
-                <div class="col-lg-3 col-md-12">
+                <div class="col-lg-3 col-md-12" style="display:flex; flex-direction:column; justify-content:center;">
                     <h1 class="text-center font-weight-bold featured-text">Featured<br />
                         Albums
                     </h1>
