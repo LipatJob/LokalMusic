@@ -59,7 +59,7 @@
 
         <%-- Submit Button --%>
         <div style="display: flex; flex-direction: row;">
-            <asp:Button ID="submitBtn" Text="Sign In" runat="server" CssClass="submit-btn btn btn-primary" OnClick="submitBtn_Click" />
+            <asp:Button ID="submitBtn" Text="Sign In" runat="server" CssClass="submit-btn btn btn-danger" OnClick="submitBtn_Click" />
         </div>
     </div>
 </asp:Content>

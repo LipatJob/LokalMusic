@@ -12,7 +12,7 @@
                         <tr>
                             <th>Order Id</th>
                             <th>Username</th>
-                            <th>Transaction Date</th>
+                            <th>Order Date</th>
                             <th>Amount Paid</th>
                             <th>Action</th>
                         </tr>
@@ -108,7 +108,7 @@
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
-                                return `<button class="btn btn-primary" onclick="ViewReceipt(${row["OrderId"]}, this); return false;">Receipt Details</button></a>`;
+                                return `<button class="btn btn-outline-danger" onclick="ViewReceipt(${row["OrderId"]}, this); return false;">Details</button></a>`;
                             },
                             "width": "15%"
 
