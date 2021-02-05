@@ -1,6 +1,7 @@
 ﻿using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Repositories;
 using LokalMusic.Store;
+using System;
 using System.Collections.Generic;
 
 namespace LokalMusic._Code.Presenters.Store
@@ -42,10 +43,16 @@ namespace LokalMusic._Code.Presenters.Store
                         artist.TrackTop1 = tracks[0];
                     if (tracks.Count >= 2)
                         artist.TrackTop2 = tracks[1];
-                }                    
+                }
+
+                artist.AlbumCount = this.repository.GetAlbumCountOfArtist(artist.ArtistId);
+                artist.TrackTotalCount = this.repository.GetTrackCountOfArtist(artist.ArtistId);
+                artist.Genre = this.repository.GetGenresOfArtist(artist.ArtistId);
+
             }
 
             return artists;
         }
+
     }
 }

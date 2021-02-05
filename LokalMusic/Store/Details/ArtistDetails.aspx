@@ -67,7 +67,7 @@
 
                         <div class="mt-3"  id="img-bottom">
                             <div class="row mx-auto d-block">
-                                <p class=""><%#Eval("AlbumCount")%> albums, <%#Eval("TrackCount")%> tracks</p>
+                                <p class=""><%#Eval("AlbumCount")%> album(s), <%#Eval("TrackCount")%> track(s)</p>
                             </div>
                             <div class="row mx-auto d-block" style="margin-top: -10px;">
                                 <p class="">genre(s): <%#Eval("Genres")%></p>

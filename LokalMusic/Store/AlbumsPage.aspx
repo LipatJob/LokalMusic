@@ -47,7 +47,7 @@
                                     <div class="pt-xl-3"></div>
 
                                     <div class="mt-xl-5 mt-md-3 mb-0">
-                                        <p style="font-size:13px; color: #8F8F8F; font-weight:400;"><%#Eval("TrackCount")%> tracks, <%#Eval("TrackMinutes") %> minutes</p>
+                                        <p style="font-size:13px; color: #8F8F8F; font-weight:400;"><%#Eval("TrackCount")%> track(s), <%#Eval("TrackMinutes") %> minutes</p>
                                         <p style="font-size:13px; color: #8F8F8F; margin-top: -15px; font-weight:500;">released <%#Eval("DateReleased", "{0:MMMM dd, yyyy}") %></p>
                                         <p style="font-size:13px; color: #C4C4C4; margin-top: -15px; font-weight:400;">Genre(s): <%#Eval("Genre")%></p>
                                     </div>                            

@@ -527,5 +527,66 @@ namespace LokalMusic._Code.Repositories
             return items.Count > 0 ? items : null;
         }
 
+        public string GetGenresOfArtist(int artistId)
+        {
+            string query = "SELECT DISTINCT(GenreName) " +
+                           "FROM Product " +
+                           "INNER JOIN Album " +
+                           "ON Product.ProductId = Album.AlbumId " +
+                           "INNER JOIN Track " +
+                           "ON Album.AlbumId = Track.AlbumId " +
+                           "INNER JOIN Product as TrackProduct " +
+                           "ON TrackProduct.ProductId = Track.TrackId " +
+                           "INNER JOIN Genre " +
+                           "ON Genre.GenreId = Track.GenreId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND Album.UserId = @ArtistId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
+            bool valid = values.Rows.Count > 0;
+
+            List<string> genre = new List<string>();
+
+            if (valid)
+                for(int i = 0; i < values.Rows.Count; i++)
+                    genre.Add( values.Rows[i]["GenreName"].ToString().Substring(0,1).ToUpper() + values.Rows[i]["GenreName"].ToString().Substring(1).ToLower());
+
+            return string.Join(", ", genre);
+        }
+
+        public int GetTrackCountOfArtist(int artistId)
+        {
+            string query = "SELECT COUNT(Track.TrackId) as TrackCount " +
+                           "FROM Product " +
+                           "INNER JOIN Album " +
+                           "ON Product.ProductId = Album.AlbumId " +
+                           "INNER JOIN Track " +
+                           "ON Album.AlbumId = Track.AlbumId " +
+                           "INNER JOIN Product as TrackProduct " +
+                           "ON TrackProduct.ProductId = Track.TrackId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND Album.UserId = @ArtistId";
+
+            int count = (int)DbHelper.ExecuteScalar(query, ("ArtistId", artistId));
+
+            return count;
+        }
+
+        public int GetAlbumCountOfArtist(int artistId)
+        {
+            string query = "SELECT COUNT(Album.AlbumId) as AlbumCount " +
+                           "FROM Product " +
+                           "INNER JOIN Album " +
+                           "ON Product.ProductId = Album.AlbumId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND Album.UserId = @ArtistId";
+
+            int count = (int)DbHelper.ExecuteScalar(query, ("ArtistId" ,artistId));
+
+            return count;
+        }
+
     }
 }

@@ -53,8 +53,10 @@
                                 </div>
 
                                 <div class="col-md-6 col-md-6">
-                                    <h4 class="artist-name" style="color:#B82828;"><%#Eval("ArtistName")%></h4>
-                                    
+                                    <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
+                                        <h4 class="artist-name" style="color:#B82828;"><%#Eval("ArtistName")%></h4>
+                                    </a>
+
                                     <div class="pt-xl-3"></div>
 
                                     <div class="mt-xl-5 mt-md-3 mb-0">
@@ -68,7 +70,7 @@
                                 </div>
                                     
                                 <div class="col-md-3 col-xl-3 col-md-6 text-right top-tracks <%# Eval("TrackTop1") == null ? "invisible" : "" %>">
-                                    <h5 class="">Top Tracks</h5>
+                                    <h5 class="">Top Track(s)</h5>
 
                                     <div class="">
                                         <a href=<%#Eval("TrackTop1.DetailsUrl") %> runat="server">
