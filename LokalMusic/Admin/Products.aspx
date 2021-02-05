@@ -61,7 +61,7 @@
         function OnSuccess(response) {
             $("#productsTbl").DataTable(
                 {
-                    "pageLength": 8,
+                    "pageLength": 5,
                     bLengthChange: true,
                     lengthMenu: [[5, 10, -1], [5, 10, "All"]],
                     bFilter: true,
@@ -77,7 +77,7 @@
                         {
                             data: "MarketPage",
                             render: function (data) {
-                                data = `<a href="${data}"> Product Page </a>`;
+                                data = `<a href="${data}" class='text-danger'> Product Page </a>`;
                                 return data;
                             }
                         },
@@ -87,7 +87,7 @@
                                 if (row["ProductStatus"].toUpperCase() == "WITHDRAWN") {
                                     return `<button class="btn btn-secondary" onclick="RepublishItem(${row["ProductId"]}, this); return false;">Republish</button>`;
                                 }
-                                return `<button class="btn btn-primary" onclick="WithdrawItem(${row["ProductId"]}, this); return false;">Withdraw</button></a>`;
+                                return `<button class="btn btn-outline-danger" onclick="WithdrawItem(${row["ProductId"]}, this); return false;">Withdraw</button></a>`;
                             }
                         },
                     ],
@@ -119,7 +119,7 @@
         }
 
         function ChangeToRepublish(id, item) {
-            item.classList.remove('btn-primary');
+            item.classList.remove('btn-outline-danger');
             item.classList.add('btn-secondary');
             item.innerHTML = "Republish";
             item.onclick = function () { RepublishItem(id, item); return false; };
@@ -145,7 +145,7 @@
 
         function ChangeToWithdraw(id, item) {
             item.classList.remove('btn-secondary');
-            item.classList.add('btn-primary');
+            item.classList.add('btn-outline-danger');
             item.innerHTML = "Withdraw"
             item.onclick = function () { WithdrawItem(id, item); return false; };
         }

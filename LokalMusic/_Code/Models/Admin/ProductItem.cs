@@ -1,5 +1,6 @@
 ﻿using LokalMusic._Code.Helpers;
 using System;
+using System.Globalization;
 
 namespace LokalMusic._Code.Models.Admin
 {
@@ -11,7 +12,9 @@ namespace LokalMusic._Code.Models.Admin
         public string ProductName { get; set; }
         public string ArtistName { get; set; }
         public DateTime DateListed { get; set; }
-        public string ProductType { get; set; }
+
+        private string _productType;
+        public string ProductType { get { return _productType; } set { _productType = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower()); } }
 
         public string MarketPage
         {
