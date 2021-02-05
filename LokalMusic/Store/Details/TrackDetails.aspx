@@ -69,7 +69,16 @@
     </style>
 
     <div class="container">
-        <h1 class="mb-5  mt-5">Lokal Track</h1>
+
+        <nav aria-label="breadcrumb" class="mt-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/Store/Home.aspx" runat="server">Home</a></li>
+                <li class="breadcrumb-item"><a href="~/Store/TracksPage.aspx" runat="server">Tracks</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Details</li>
+            </ol>
+        </nav>
+
+        <h1 class="mb-4 mt-4">Lokal Track</h1>
 
         <div class="row">
 
@@ -120,7 +129,7 @@
                         <div class="row ml-2">
                             <p id="artist-name">
                                 <span class="sub">by</span> 
-                                <a href=<%#Eval("TrackArtistUrl") %> class="redirect-link" target="_blank" runat="server"><%#Eval("ArtistName") %></a>
+                                <a href=<%#Eval("TrackArtistUrl") %> class="redirect-link" runat="server"><%#Eval("ArtistName") %></a>
                             </p>
                         </div>
 

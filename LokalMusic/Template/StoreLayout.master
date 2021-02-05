@@ -39,6 +39,24 @@
             border: none;
             background: none;
         }
+
+        .breadcrumb{
+            background-color: #FFFFFF;
+        }
+        
+        .breadcrumb-item a{
+            color: #B82828;
+            font-weight: 500;
+        }
+
+        .breadcrumb-item a:hover{
+            color: #ff7171;
+            text-decoration:none;
+        }
+
+        .breadcrumb .active{
+            color:#ff7171;
+        }
     </style>
 
     <%--Nav--%>

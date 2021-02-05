@@ -65,7 +65,16 @@
     </style>
 
     <div class="container">
-        <h1 class="mb-5  mt-5">Lokal Album</h1>
+
+        <nav aria-label="breadcrumb" class="mt-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/Store/Home.aspx" runat="server">Home</a></li>
+                <li class="breadcrumb-item"><a href="~/Store/AlbumsPage.aspx" runat="server">Albums</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Details</li>
+            </ol>
+        </nav>
+
+        <h1 class="mb-4 mt-4">Lokal Album</h1>
 
         <div class="row">
 
