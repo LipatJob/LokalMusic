@@ -15,6 +15,14 @@
     </style>
 
     <div class="container">
+
+        <nav aria-label="breadcrumb" class="">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/Store/Home.aspx" runat="server">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tracks</li>
+            </ol>
+        </nav>
+
         <h1 class="mb-4">Lokal Tracks</h1>
 
         <div class="pt-4 pb-4 pl-3 pr-3" style="background-color: #F4F4F4;">
@@ -39,12 +47,12 @@
                             <ItemTemplate>
                                 <tr class="text-center">
                                     <td class="float-right">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server">
                                             <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable"/>
                                         </a>
                                     </td>   
                                     <td class="emphasize">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank" class="titleLink">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
                                             <%#Eval("TrackName") %>
                                         </a>
                                     </td>

@@ -23,6 +23,14 @@
     </style>
 
     <div class="container">
+
+        <nav aria-label="breadcrumb" class="">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/Store/Home.aspx" runat="server">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Albums</li>
+            </ol>
+        </nav>
+
         <h1 class="mb-4">Lokal Albums</h1>
 
         <div class="pt-3 pb-2 pl-3 pr-3" style="background-color: #F4F4F4;">
