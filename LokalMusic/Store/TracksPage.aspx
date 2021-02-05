@@ -51,7 +51,7 @@
                                     <td><%#Eval("AlbumName") %></td>
                                     <td><%#Eval("ArtistName") %></td>
                                     <td><%#Eval("Genre") %></td>
-                                    <td><%#Eval("AudioDuration") %></td>
+                                    <td><%#Eval("AudioDuration", "{0:g}") %></td>
                                     <td class="emphasize">₱<%#Eval("Price") %></td>
                                     <td>
                                         <button onclick='AddToCart(<%#Eval("TrackId")%>); return false;'>
