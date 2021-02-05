@@ -111,7 +111,7 @@
 
             <div id="product-display" class="sidenav">
                 <div class="text-center  side-container">
-                    <p class="side-links mt-3"><%=AuthenticationHelper.Username%></p>
+                    <p class="side-links mt-3"><%=BackendAuthenticationHelper.Username%></p>
                     <hr style="width: 150px; background: #525252; margin-top:0px;" />
                     <a href="~/Finance/Reports" runat="server" class="side-links productsSideItem">Reports</a>
                     <a href="~/Finance/Receipts" runat="server" class="side-links usersSideItem">Receipts</a>
