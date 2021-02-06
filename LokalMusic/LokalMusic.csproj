@@ -297,12 +297,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\default_artist_image.JPG" />
     <Content Include="Content\Images\default_cover.jpg" />
+    <Content Include="Content\Images\Logo New Updated.png" />
     <Content Include="Content\Images\New Logo.png" />
-    <Content Include="Content\Images\testpicture1.jpg" />
-    <Content Include="Content\Images\testpicture2.png" />
     <Content Include="Content\Images\cart.png" />
     <Content Include="Content\Images\Old Logo.png" />
-    <Content Include="Content\Images\testpicture3.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Fan\Collection.aspx" />
     <Content Include="favicon.ico" />

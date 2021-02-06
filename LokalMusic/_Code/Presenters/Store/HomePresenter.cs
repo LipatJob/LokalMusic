@@ -33,7 +33,7 @@ namespace LokalMusic._Code.Repositories.Store
             //
         }
 
-        internal IList<FeaturedProduct> GetFeaturedProducts()
+        public IList<FeaturedProduct> GetFeaturedProducts()
         {
             return this.repository.GetFeaturedProducts();
         }
