@@ -4,12 +4,6 @@
 <asp:Content ID="StoreContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        /*.nav-link {
-            font-size: 17px;
-            font-weight: 500;
-            color: #5E5E5E;
-        }*/
-        
         #joinSignIn .btn{
             font-weight: 700;
             font-size: 14px;
@@ -69,9 +63,9 @@
             transition: transform .5s;
         }
         .img-hoverable:hover {
-          -ms-transform: scale(1.25); /* IE 9 */
-          -webkit-transform: scale(1.25); /* Safari 3-8 */
-          transform: scale(1.25); 
+          -ms-transform: scale(1.1); /* IE 9 */
+          -webkit-transform: scale(1.1); /* Safari 3-8 */
+          transform: scale(1.1); 
         }
     </style>
 
@@ -92,10 +86,18 @@
                 </li>
             </ul>--%>
 
-            <div class="form-inline my-2 my-lg-0 ml-auto">
-                <input type="text" id="SearchTxt" class="form-control mr-sm-2 border-0" placeholder="Search" runat="server" />
-                <%--<input type="button" ID="SearchBtn" value="Search" class="btn btn-light my-2 my-sm-0" runat="server" onclick="" />--%>
-                <asp:Button ID="SearchBtn" runat="server" Text="Search" CssClass="btn btn-light my-2 my-sm-0" OnClick="SearchBtn_Click" />
+            <div class="form-inline ml-auto mr-md-3">
+                <div class="input-group">
+                
+                    <input type="text" id="SearchTxt" class="form-control border-0" placeholder="Search" runat="server" />
+                    <div class="input-group-append">
+                        <%--<asp:Button ID="SearchBtn" runat="server" Text="Search" CssClass="btn btn-primary my-2 my-sm-0" OnClick="SearchBtn_Click" />--%>
+                        <button id="SearchBtn" runat="server" class="btn btn-danger" onserverclick="SearchBtn_Click">
+                            <span class="bi bi-search"></span>
+                        </button>
+                    </div>
+
+                </div>
             </div>
 
             <%--Authentication--%>
@@ -149,17 +151,19 @@
              <%}
                else
                {%>
-                    <div id="joinSignIn">
-                        <ul class="navbar-nav ml-xl-4">
-                            <li class="nav-item mr-xl-2">
-                                <%--<a class="nav-link" href="~/Account/Register/Fan" runat="server">Join</a>--%>
-                                <a class="btn btn-outline-danger badge-pill pl-4 pr-4" href="~/Account/Register/Fan" runat="server">JOIN</a>
-                            </li>
-                            <li class="nav-item ml-xl-2 mr-xl-2">
-                                <%--<a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>--%>
-                                <a class="btn btn-danger badge-pill pl-4 pr-4" href="~/Account/Login" runat="server">SIGN IN</a>
-                            </li>
-                        </ul>
+                    <div id="joinSignIn" class="">
+                        <div class="">
+                            <ul class="navbar-nav">
+                                <li class="nav-item ml-md-2 mr-md-1">
+                                    <%--<a class="nav-link" href="~/Account/Register/Fan" runat="server">Join</a>--%>
+                                    <a class="btn btn-outline-danger badge-pill pl-4 pr-4" href="~/Account/Register/Fan" runat="server">JOIN</a>
+                                </li>
+                                <li class="nav-item ml-md-1 mr-md-2">
+                                    <%--<a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>--%>
+                                    <a class="btn btn-danger badge-pill pl-4 pr-4" href="~/Account/Login" runat="server">SIGN IN</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
              <%}%>
 
