@@ -279,7 +279,6 @@
   <ItemGroup>
     <Content Include="Account\Register\Artist.aspx" />
     <Content Include="Account\Register\Fan.aspx" />
-    <Content Include="Account\OldSettings.aspx" />
     <Content Include="Account\Settings\Default.aspx" />
     <Content Include="Account\Settings\Profile.aspx" />
     <Content Include="Account\Settings\Purchases.aspx" />
@@ -478,13 +477,6 @@
     </Compile>
     <Compile Include="Account\Register\Fan.aspx.designer.cs">
       <DependentUpon>Fan.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\OldSettings.aspx.cs">
-      <DependentUpon>OldSettings.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\OldSettings.aspx.designer.cs">
-      <DependentUpon>OldSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Settings\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -783,6 +775,8 @@
     <Compile Include="_Code\Presenters\Account\Register\RegisterArtistPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\Register\RegisterFanPresenter.cs" />
     <Compile Include="_Code\Presenters\Account\SettingsPresenter.cs" />
+    <Compile Include="_Code\Presenters\Account\Settings\ProfileSettingsPresenter.cs" />
+    <Compile Include="_Code\Presenters\Account\Settings\AccountSettingsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\AdminLoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\ProductsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
@@ -863,6 +857,10 @@
     <Compile Include="_Code\Views\Account\ISettingsViewModel.cs" />
     <Compile Include="_Code\Views\Account\Register\IRegisterArtistViewModel.cs" />
     <Compile Include="_Code\Views\Account\Register\IRegisterFanViewModel.cs" />
+    <Compile Include="_Code\Models\Account\Settings\IAccountSettingsModel.cs" />
+    <Compile Include="_Code\Models\Account\Settings\IProfileSettingsModel.cs" />
+    <Compile Include="_Code\Views\Account\Settings\IAccountSettingsViewModel.cs" />
+    <Compile Include="_Code\Views\Account\Settings\IProfileSettingsModel.cs" />
     <Compile Include="_Code\Views\Publish\IAddAlbumViewModel.cs" />
     <Compile Include="_Code\Views\Publish\IAddTrackViewModel.cs" />
     <Compile Include="_Code\Views\Publish\IEditAlbumViewModel.cs" />

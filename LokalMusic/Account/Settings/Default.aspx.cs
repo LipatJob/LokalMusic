@@ -2,6 +2,7 @@
 using LokalMusic._Code.Presenters.Account;
 using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
+using LokalMusic._Code.Views.Account.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +12,17 @@ using System.Web.UI.WebControls;
 
 namespace LokalMusic.Account.Settings
 {
-    public partial class Default : System.Web.UI.Page, ISettingsViewModel
+    public partial class Default : System.Web.UI.Page, IAccountSettingsViewModel
     {
-        SettingsPresenter presenter;
+        AccountSettingsPresenter presenter;
         public Default()
         {
-            presenter = new SettingsPresenter(this, new SettingsRepository());
+            presenter = new AccountSettingsPresenter(this, new SettingsRepository());
 
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            presenter.PageLoad();
             if (IsPasswordChanged())
             {
                 ShowPasswordChangedMessage();
@@ -32,10 +34,6 @@ namespace LokalMusic.Account.Settings
         public string OldPassword { get => OldPasswordTxt.Text; }
         public string NewPassword { get => NewPasswordTxt.Text; }
         public string ConfrimNewPassword { get => ConfirmNewPasswordTxt.Text; }
-        public string ProfileImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ArtistBio { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ArtistName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public HttpPostedFile UploadedProfilePicture => throw new NotImplementedException();
 
         private bool IsPasswordChanged()
         {

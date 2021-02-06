@@ -2,6 +2,7 @@
 using LokalMusic._Code.Presenters.Account;
 using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
+using LokalMusic._Code.Views.Account.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,28 +12,28 @@ using System.Web.UI.WebControls;
 
 namespace LokalMusic.Account.Settings
 {
-    public partial class Profile : System.Web.UI.Page, ISettingsViewModel
+    public partial class Profile : System.Web.UI.Page, IProfileSettingsViewModel
     {
-        public string Username { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string OldPassword { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string NewPassword { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ConfrimNewPassword { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ProfileImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ArtistBio { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ArtistName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public HttpPostedFile UploadedProfilePicture => throw new NotImplementedException();
+        public string ProfileImage { get => ProfilePictureImg.ImageUrl; set => ProfilePictureImg.ImageUrl = value; }
+        public string ArtistBio { get => BioTxt.Text; set => BioTxt.Text = value; }
+        public string ArtistName { get => ArtistNameTxt.Text; set => ArtistNameTxt.Text = value; }
+
+        public HttpPostedFile UploadedProfilePicture => ProfilePictureFile.PostedFile;
+
 
         private string[] validFileFormats = new[] { ".jpg", ".png", ".gif" };
-        SettingsPresenter presenter;
+
+        ProfileSettingsPresenter presenter;
+
         public Profile()
         {
-            presenter = new SettingsPresenter(this, new SettingsRepository());
+            presenter = new ProfileSettingsPresenter(this, new SettingsRepository());
 
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            presenter.PageLoad();
             if (IsProfileImageChanged())
             {
                 ShowProfileImageChangedMessage();
