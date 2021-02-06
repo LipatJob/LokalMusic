@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Profile" Language="C#" MasterPageFile="~/Template/SettingsLayout.master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="LokalMusic.Account.Settings.Profile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SettingsContent" runat="server">
-    <script> $(".profile-nav-item").addClass("active"); </script>
+
 
     <%if (AuthenticationHelper.UserType == AuthenticationHelper.ARTIST_USER_TYPE)%>
     <%{%>
@@ -37,16 +37,16 @@
         <div class="change-profile-picture-container">
             <div class="change-profile-picture mb-3">
                 <%-- Profile Picture--%>
-                <asp:Image ID="ProfilePictureImg" ImageUrl="~/Content/Images/Logo.png" runat="server" CssClass="profile-picture shadow mb-3" />
+                <asp:Image ID="ProfilePictureImg" mageUrl="~/Content/Images/Logo.png" runat="server" CssClass="profile-picture shadow mb-3 ProfilePictureImg" />
 
                 <%-- Profile Picture File Upload--%>
                 <div class="custom-file">
-                    <asp:FileUpload runat="server" ID="ProfilePictureFile" CssClass="form-control-file custom-file-input" accept="image/*" />
+                    <asp:FileUpload runat="server" ID="ProfilePictureFile" CssClass="form-control-file custom-file-input ProfilePictureFile" accept="image/*" />
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
 
                 <%-- Submit Profile Picture--%>
-                <asp:Button ID="submitProfilePicture" Text="Update Picture" runat="server" CssClass="btn btn-danger mt-2" Style="width: 100%" OnClick="submitProfilePicture_Click" ValidationGroup="ChangeProfilePicture" />
+                <asp:Button ID="submitProfilePicture" Text="Update Picture" runat="server" disabled CssClass="btn btn-danger mt-2 submitProfilePicture" Style="width: 100%" OnClick="submitProfilePicture_Click" ValidationGroup="ChangeProfilePicture" />
                 <asp:CustomValidator ID="ProfilePictureFileCv" ErrorMessage="Error Message" ControlToValidate="ProfilePictureFile" runat="server" ValidationGroup="ChangeProfilePicture" OnServerValidate="ProfilePictureFileCv_ServerValidate" CssClass="validation-message" Display="Dynamic" />
 
             </div>
@@ -60,4 +60,20 @@
             </button>
         </div>
     </div>
+    <script>
+        $('document').ready(function () {
+            $(".profile-nav-item").addClass("active");
+            $(".ProfilePictureFile").change(function () {
+                if (this.files && this.files[0]) {
+                    $(".submitProfilePicture").prop('disabled', false);
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('.ProfilePictureImg').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+
+    </script>
 </asp:Content>

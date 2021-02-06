@@ -28,13 +28,13 @@ namespace LokalMusic._Code.Presenters.Account
         public void UpdateProfilePicture()
         {
             repository.ChangeProfilePicture(AuthenticationHelper.UserId, viewModel.UploadedProfilePicture);
-            NavigationHelper.Redirect("~/Account/Settings?ProfileImageChanged=True");
+            NavigationHelper.Redirect("~/Account/Settings/Profile?ProfileImageChanged=True");
         }
 
         internal void UpdateBio()
         {
             repository.UpdateArtistBio(AuthenticationHelper.UserId, viewModel.ArtistBio);
-            NavigationHelper.Redirect("~/Account/Settings?ArtistBioChanged=True");
+            NavigationHelper.Redirect("~/Account/Settings/Profile?ArtistBioChanged=True");
         }
     }
 }
