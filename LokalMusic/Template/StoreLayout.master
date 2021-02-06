@@ -27,10 +27,6 @@
             font-size: 16px;
         }
 
-        .img-hoverable:hover {
-            border: 1px solid #F82B2B;
-        }
-
         .titleLink {
             color: #B82828;
             font-weight: 700;
@@ -66,6 +62,16 @@
 
         .body-content{
             height:100%;
+        }
+
+        /* Zoom */
+        .img-hoverable{
+            transition: transform .5s;
+        }
+        .img-hoverable:hover {
+          -ms-transform: scale(1.25); /* IE 9 */
+          -webkit-transform: scale(1.25); /* Safari 3-8 */
+          transform: scale(1.25); 
         }
     </style>
 
