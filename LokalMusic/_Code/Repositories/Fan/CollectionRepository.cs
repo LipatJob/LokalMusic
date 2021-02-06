@@ -12,7 +12,7 @@ namespace LokalMusic._Code.Repositories.Fan
         {
             string query = "SELECT UserId, FileName, Username, DateRegistered FROM [ActiveUserInfo] LEFT JOIN FileInfo ON [ActiveUserInfo].ProfileImageId = FileInfo.FileId WHERE Username = @Username";
             var result = DbHelper.ExecuteDataTableQuery(query, ("Username", username));
-            string profileImage = "~/Content/Images/Logo.png";
+            string profileImage = "~/Content/Images/Old Logo.png";
             if (result.Rows[0].IsNull("FileName") == false)
             {
                 profileImage = (string)result.Rows[0]["FileName"];
@@ -41,15 +41,15 @@ SELECT
 	[ArtistInfo].UserId AS ArtistId,
 	[Product].ProductId AS TrackId,
 	[Album].AlbumId AS AlbumId
-FROM [Transaction]
-	INNER JOIN [TransactionProduct] ON [Transaction].TransactionId = [TransactionProduct].TransactionId
-	INNER JOIN [Product] ON [TransactionProduct].ProductId = [Product].ProductId
+FROM [OrderInfo]
+	INNER JOIN [ProductOrder] ON [ProductOrder].OrderId = [OrderInfo].OrderId
+	INNER JOIN [Product] ON [ProductOrder].ProductId = [Product].ProductId
 	INNER JOIN [ProductType] ON [ProductType].ProductTypeId = [Product].ProductTypeId
 	INNER JOIN [Album] ON [Album].AlbumId = [Product].ProductId
 	INNER JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
 	INNER JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
 WHERE
-	[Transaction].UserId = @UserId
+	[OrderInfo].CustomerId = @UserId
 ";
             var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
             foreach (DataRow row in result.Rows)
@@ -59,7 +59,7 @@ WHERE
                     CoverLink = (string)row["FileName"],
                     ProductName = (string)row["ProductName"],
                     ArtistName = (string)row["ArtistName"],
-                    ProductType = (string)row["ProductName"],
+                    ProductType = (string)row["ProductType"],
                     ArtistId = (int)row["ArtistId"],
                     TrackId = (int)row["TrackId"],
                     AlbumId = (int)row["AlbumId"],

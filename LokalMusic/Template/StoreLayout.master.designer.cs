@@ -21,7 +21,7 @@ namespace LokalMusic.Template
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchTxt;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText SearchTxt;
 
         /// <summary>
         /// SearchBtn control.

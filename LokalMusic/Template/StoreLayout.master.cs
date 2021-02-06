@@ -10,9 +10,14 @@ namespace LokalMusic.Template
             CollectionLink.HRef = $"~/Fan/{AuthenticationHelper.Username}";
         }
 
-        protected void Search(object sender, EventArgs e)
+        protected void SearchBtn_Click(object sender, EventArgs e)
         {
-            
+            if(SearchTxt.Value != "")
+            {
+                string searchUrl = NavigationHelper.CreateAbsoluteUrl($"/Store/Search/{SearchTxt.Value}");
+                NavigationHelper.Redirect(searchUrl);
+            }
+                
         }
     }
 }

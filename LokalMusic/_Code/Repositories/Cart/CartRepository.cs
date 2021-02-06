@@ -9,7 +9,7 @@ namespace LokalMusic._Code.Repositories.Cart
 {
     public class CartRepository
     {
-        const string STATUS_PRODUCT_LISTED = "LISTED";
+        const string STATUS_PRODUCT_VISIBLE = "PUBLISHED";
         const string STATUS_ARTIST_ACTIVE = "ACTIVE";
 
         public List<CartAlbum> GetAlbums(int customerId)
@@ -29,7 +29,7 @@ namespace LokalMusic._Code.Repositories.Cart
                            "INNER JOIN FileInfo " +
                            "ON Album.AlbumCoverID = FileInfo.FileId " +
                            "WHERE UserCart.UserId = @CustomerId " +
-                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("CustomerId", customerId));
@@ -58,7 +58,29 @@ namespace LokalMusic._Code.Repositories.Cart
             return albums.Count > 0 ? albums : null;
         }
 
-        public List<CartArtist> GetArtist(int customerId)
+        public (int, double) GetTrackCountAndDurationOfAlbum(int albumId)
+        {
+            string query = "SELECT TrackDuration " +
+                           "FROM Product " +
+                           "INNER JOIN Track " +
+                           "ON ProductId = Track.TrackId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND Track.AlbumId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            double totalDuration = 0;
+
+            if (valid)
+                for (int i = 0; i < values.Rows.Count; i++)
+                    totalDuration += TimeSpan.Parse(values.Rows[i]["TrackDuration"].ToString()).TotalMinutes;
+
+            return (values.Rows.Count, Math.Round(totalDuration, 2));
+        }
+
+
+        public List<CartArtist> GetArtistFromCart(int customerId)
         {
             List<CartArtist> artists = new List<CartArtist>();
 
@@ -117,8 +139,8 @@ namespace LokalMusic._Code.Repositories.Cart
                            "INNER JOIN UserInfo " +
                            "ON Album.UserId = UserInfo.UserId " +
                            "WHERE UserCart.UserId = @CustomerId AND Album.UserId = @ArtistId " +
-                           "AND TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
-                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')" +
                            "AND Album.AlbumId NOT IN " +
                                                     "(SELECT Album.AlbumId " +
@@ -163,5 +185,86 @@ namespace LokalMusic._Code.Repositories.Cart
             return tracks.Count > 0 ? tracks : null;
         }
 
+        public int CreateOrderInfo(int customerId, Decimal amountPaid, string paymentProvider)
+        {
+            string query = "INSERT INTO OrderInfo (CustomerId, OrderDate, AmountPaid, PaymentProvider) " +
+                           "OUTPUT INSERTED.OrderId " +
+                           "VALUES(@CustomerId, @OrderDate, @AmountPaid, @PaymentProvider)";
+
+            int orderId = (int) DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("OrderDate", DateTime.Now), ("AmountPaid", amountPaid), ("PaymentProvider", paymentProvider));
+
+            return orderId;
+        }
+
+        public bool CreateProductOrder(int orderId, int productId, Decimal productPrice)
+        {
+            string query = "INSERT INTO ProductOrder (ProductId, OrderId, OrderDate, ProductPrice) "+
+                           "VALUES(@ProductId, @OrderId, @OrderDate, @ProductPrice)";
+
+            int affectedRow = DbHelper.ExecuteNonQuery(query, ("ProductId", productId), ("OrderId", orderId), ("OrderDate", DateTime.Now), ("ProductPrice", productPrice));
+
+            return affectedRow > 0 ? true : false;
+        }
+
+        public void RemoveOrderedItemFromCart(int customerId, int productId, string productType)
+        {
+            if (productType.ToUpper() == "ALBUM")
+            {
+                // remove album
+                RemoveAlbumFromCart(customerId, productId);
+                // remove other track also
+                List<int> trackIds = GetAlbumTrackIds(productId);
+
+                foreach (int id in trackIds)
+                    RemoveTrackFromCart(customerId, id);
+            }
+            else if (productType.ToUpper() == "TRACK")
+            {
+                // simply remove the track
+                RemoveTrackFromCart(customerId, productId);
+            }
+        }
+
+        public void RemoveTrackFromCart(int customerId, int trackId)
+        {
+            string query = "DELETE FROM UserCart " +
+                           "WHERE UserId = @CustomerId " +
+                           "AND ProductId = @TrackId ";
+
+            int affectedRow = DbHelper.ExecuteNonQuery(query, ("CustomerId", customerId), ("TrackId", trackId));
+        }
+
+        public List<int> GetAlbumTrackIds(int albumId)
+        {
+            List<int> trackIds = new List<int>();
+
+            string query = "SELECT TrackId " +
+                           "FROM Product as AlbumProduct " +
+                           "INNER JOIN Track " +
+                           "ON AlbumProduct.ProductId = Track.AlbumId " +
+                           "WHERE AlbumProduct.ProductId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                for (int i = 0; i < values.Rows.Count; i++)
+                {
+                    trackIds.Add( (int)values.Rows[i]["TrackId"] );
+                }
+            }
+
+            return trackIds;
+        }
+
+        public void RemoveAlbumFromCart(int customerId, int albumId)
+        {
+            string query = "DELETE FROM UserCart " +
+                           "WHERE UserId = @CustomerId " +
+                           "AND ProductId = @AlbumId ";
+
+            int affectedRow = DbHelper.ExecuteNonQuery(query, ("CustomerId", customerId), ("AlbumId", albumId));
+        }
     }
 }

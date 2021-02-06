@@ -38,7 +38,7 @@ namespace LokalMusic._Code.Presenters.Store.Details
             List<string> genres = new List<string>();
             tracks.ForEach(m => {
                 genres.Add(m.Genre.Substring(0, 1).ToUpper() + m.Genre.Substring(1).ToLower());
-                album.MinuteCount += m.AudioDuration.TotalMinutes;
+                album.MinuteCount += Math.Round(m.AudioDuration.TotalMinutes, 2);
             } );
 
             album.Genres = string.Join(", ", genres.Distinct().ToList());

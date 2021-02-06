@@ -38,6 +38,18 @@ namespace LokalMusic._Code.Helpers
             return () => value1.CompareTo(value2) >= 0;
         }
 
+        public static Func<bool> IsValidPrice(string value)
+        {
+            decimal validDecimal;
+
+            if (decimal.TryParse(value, out validDecimal))
+            {
+                return () => validDecimal.CompareTo((decimal)0) > 0;
+            }
+            else
+                return () => false;
+        }
+
         // String Comparators
         public static Func<bool> IsValidRegex(string value, string pattern, RegexOptions options = RegexOptions.None)
         {

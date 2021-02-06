@@ -1,10 +1,6 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Repositories.Publish.Album.Track;
 using LokalMusic._Code.Views.Publish;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Presenters.Publish.Album.Track
 {
@@ -12,8 +8,8 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
     {
         private EditTrackRepository editTrackRepository;
         private IEditTrackViewModel viewModel;
-        private int AlbumId;
-        private int TrackId;
+        private int AlbumId => int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
+        private int TrackId => int.Parse((string)NavigationHelper.GetRouteValue("TrackId"));
 
         public EditTrackPresenter(IEditTrackViewModel viewModel, EditTrackRepository editTrackRepository)
         {
@@ -32,9 +28,6 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
                 NavigationHelper.Redirect("~");
             }
 
-            AlbumId = int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
-            TrackId = int.Parse((string)NavigationHelper.GetRouteValue("TrackId"));
-
             editTrackRepository.GetArtistName(AuthenticationHelper.UserId, viewModel);
             editTrackRepository.GetAlbumName(AlbumId, viewModel);
 
@@ -48,7 +41,7 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
 
         public void EditTrack()
         {
-            editTrackRepository.EditTrack(viewModel, TrackId);
+            editTrackRepository.EditTrack(viewModel, TrackId, viewModel.UploadedTrackFile, viewModel.UploadedClipFile);
         }
 
         public void UnlistTrack()

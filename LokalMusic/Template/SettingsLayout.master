@@ -1,0 +1,65 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Template/StoreLayout.master" AutoEventWireup="true" CodeBehind="SettingsLayout.master.cs" Inherits="LokalMusic.Template.SettingsLayout" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .settings-navigation {
+        }
+
+        .settings-content {
+            padding: 0 40px;
+        }
+
+        .nav-pills .active {
+            background-color: #dc3545 !important;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin: 20px;
+            border: 2px solid black;
+            border-radius: 100%;
+        }
+
+        .change-profile-picture-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        .change-profile-picture {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 250px
+        }
+    </style>
+    <div style="height:100%;">
+        <div class="container" style="height:100%;">
+            <div class="row"  style="height:100%;">
+                <div class="col-3" style="border-right: 1px solid black;">
+                    <ul class="nav nav-pills flex-column settings-navigation">
+                        <li class="nav-item">
+                            <h5>Settings</h5>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link account-nav-item" href="~/Account/Settings" runat="server">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link profile-nav-item" href="~/Account/Settings/Profile" runat="server">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link purchases-nav-item" href="~/Account/Settings/Purchases" runat="server">Purchases</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-9">
+                    <div class="settings-content container" style="padding: 0 160px;">
+                        <asp:ContentPlaceHolder ID="SettingsContent" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>

@@ -34,7 +34,9 @@ namespace LokalMusic._Code.Helpers
 
         public static void ClearUserSession()
         {
-            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session[UserIdSessionName] = null;
+            HttpContext.Current.Session[UsernameSessionName] = null;
+
         }
 
         public static string Username

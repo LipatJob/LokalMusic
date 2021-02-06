@@ -26,7 +26,10 @@
                 <table style="width: 100%;">
                     <tr>
                         <td>Track Name</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="trackNameTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;">
+                            <asp:TextBox ID="trackNameTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:CustomValidator ID="trackNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackNameTxtCv_ServerValidate"></asp:CustomValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td>Genre</td>
@@ -38,7 +41,10 @@
                     </tr>
                     <tr>
                         <td>Price</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;">
+                            <asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -51,9 +57,6 @@
                 <div style="margin-bottom:20px;">
                     <asp:FileUpload ID="trackFile" runat="server" />
                 </div>
-                <div>
-                    <asp:Button ID="uploadTrackFileBtn" runat="server" Text="Upload Track File" CssClass="btn btn-publish" OnClick="uploadTrackFileBtn_Click" />
-                </div>
 
                 <p style="margin-top:50px">Clip File</p>
                 <div style="margin-bottom:20px;">
@@ -63,15 +66,12 @@
                 <div style="margin-bottom:20px;">
                     <asp:FileUpload ID="clipFile" runat="server" />
                 </div>
-                <div>
-                    <asp:Button ID="uploadClipFileBtn" runat="server" Text="Upload Clip File" CssClass="btn btn-publish" OnClick="uploadClipFileBtn_Click" />
-                </div>
             </div>            
         </div>
 
         <div class="row float-right" style="margin-top: 40px">
             <div class="col-12">
-                <asp:LinkButton ID="unlistBtn" runat="server" ForeColor="#B82828" OnClick="unlistBtn_Click">Unlist Album</asp:LinkButton>
+                <asp:LinkButton ID="unlistBtn" runat="server" ForeColor="#B82828" OnClick="unlistBtn_Click">Unlist Track</asp:LinkButton>
                 &emsp;
                 <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" OnClick="cancelBtn_Click" />
                 &emsp;

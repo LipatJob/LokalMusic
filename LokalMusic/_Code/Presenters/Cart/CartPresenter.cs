@@ -28,16 +28,30 @@ namespace LokalMusic._Code.Presenters.Cart
         public List<CartAlbum> GetCartAlbums()
         {
             return this.repository.GetAlbums(AuthenticationHelper.UserId);
+        }
 
+        public List<CartAlbum> GetCartAlbumsAdditionalDetails(List<CartAlbum> albums)
+        {
+            // track counts
+            // total minutes
+            foreach (CartAlbum album in albums)
+            {
+                if (album == null) break;
+                (album.TrackCount, album.TrackTotalMinutes) = this.repository.GetTrackCountAndDurationOfAlbum(album.AlbumId);
+            }
+
+            return albums;
         }
 
         public List<CartArtist> GetCartArtists()
         {
-            List<CartArtist> relatedArtistInCart = this.repository.GetArtist(AuthenticationHelper.UserId);
+            List<CartArtist> relatedArtistInCart = this.repository.GetArtistFromCart(AuthenticationHelper.UserId);
 
             if (relatedArtistInCart == null)
                 return null;
 
+            // 2 list of cart artist, because it might that not all relatedArtistInCart will have availble products in the cart
+            // probably, UNLISTED or WITHDRAWN product
             List<CartArtist> artists = new List<CartArtist>();
 
             // not null
@@ -52,6 +66,32 @@ namespace LokalMusic._Code.Presenters.Cart
             }
 
             return artists;
+        }
+
+        public bool ProcessCustomerOrder(List<CheckoutItem> checkoutItems, string paymentProvider)
+        {
+            bool status = false;
+
+            if (checkoutItems != null)
+                if (checkoutItems.Count > 0)
+                {
+                    // create order id first
+                    int orderId = this.repository.CreateOrderInfo(AuthenticationHelper.UserId, checkoutItems.Sum(m => m.Price), paymentProvider);
+
+                    if (orderId != 0)
+                        // create many productorder per checkitems
+                        foreach (var item in checkoutItems)
+                        {
+                            // insert to database
+                            status = this.repository.CreateProductOrder(orderId, item.ProductId, item.Price);
+
+                            //remove from cart
+                            if (status)
+                                this.repository.RemoveOrderedItemFromCart(AuthenticationHelper.UserId, item.ProductId, item.ProductType);
+                        }
+                }
+
+            return status;
         }
     }
 }

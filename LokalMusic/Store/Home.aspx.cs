@@ -1,27 +1,24 @@
 ﻿using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Repositories;
 using LokalMusic._Code.Repositories.Store;
-using LokalMusic._Code.Views.Store;
 using System;
 using System.Collections.Generic;
 
 namespace LokalMusic.Store
 {
-    public partial class Home : System.Web.UI.Page, IHomeViewModel
+    public partial class Home : System.Web.UI.Page
     {
-
-        // private Model modelName;
-        // public Model ModelName { get {return this.modelName;} set { this.modelName = value; }
 
         private HomePresenter presenter;
 
-        public List<ArtistSummary> topArtists;
-        public List<AlbumSummary> bestSellingAlbums;
-        public List<TrackSummary> famousTracks;
+        public IList<ArtistSummary> topArtists;
+        public IList<AlbumSummary> bestSellingAlbums;
+        public IList<TrackSummary> famousTracks;
+        public IList<FeaturedProduct> featuredProducts;
 
         public Home()
         {
-            this.presenter = new HomePresenter(this, new StoreRepository());
+            this.presenter = new HomePresenter(new StoreRepository());
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -34,12 +31,18 @@ namespace LokalMusic.Store
             this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
             this.topArtists = this.presenter.GetTopArtists();
             this.famousTracks = this.presenter.GetFamousTracks();
+            this.featuredProducts = this.presenter.GetFeaturedProducts();
+
 
             this.BindModels();
         }
 
         private void BindModels()
         {
+            //Featured Products
+            FeaturedProductRepeater.DataSource = this.featuredProducts;
+            FeaturedProductRepeater.DataBind();
+
             // Albums
             albumContainer.DataSource = this.bestSellingAlbums;
             albumContainer.DataBind();
@@ -53,6 +56,6 @@ namespace LokalMusic.Store
             trackContainer.DataBind();
         }
 
-        
+
     }
 }

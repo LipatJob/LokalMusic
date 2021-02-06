@@ -3,7 +3,6 @@
 <asp:Content ID="StoreContentWithSideNav" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        
         /* The side navigation menu */
         .sidenav {
             
@@ -64,8 +63,6 @@
             .sidenav {padding-top: 15px;}
             .sidenav a {font-size: 18px;}
         }
-
-        
 
         thead{
             font-family: Montserrat;

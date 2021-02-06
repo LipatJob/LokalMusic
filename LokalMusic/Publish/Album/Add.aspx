@@ -25,7 +25,10 @@
                 <table style="width: 100%;">
                     <tr>
                         <td>Album Name</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="albumNameTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;">
+                            <asp:TextBox ID="albumNameTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:CustomValidator ID="albumNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="albumNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="albumNameTxtCv_ServerValidate"></asp:CustomValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td>Description</td>
@@ -33,7 +36,10 @@
                     </tr>
                     <tr>
                         <td>Date Released</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="dateReleasedTxt" runat="server" Width="500" Height="36" placeholder="MM/DD/YYYY"></asp:TextBox></td>
+                        <td style="padding-left:24px;">
+                            <asp:TextBox ID="dateReleasedTxt" runat="server" Width="500" Height="36" placeholder="MM/DD/YYYY"></asp:TextBox><br />
+                            <asp:CustomValidator ID="dateReleasedTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="dateReleasedTxt" CssClass="validation-message" OnServerValidate="dateReleasedTxtCv_ServerValidate" ValidateEmptyText="True"></asp:CustomValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td>Producer</td>
@@ -41,7 +47,10 @@
                     </tr>
                     <tr>
                         <td>Price</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;">
+                            <asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36">0.00</asp:TextBox><br />
+                            <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -51,10 +60,8 @@
                     <asp:Image ID="albumCoverPreview" runat="server" ImageUrl="~\Content\Images\default_cover.jpg" Width="200" Height="200" />
                 </div>
                 <div style="margin-bottom:20px;">
-                    <asp:FileUpload ID="albumCoverFile" accept="image/*" runat="server" />
-                </div>
-                <div>
-                    <asp:Button ID="uploadPictureBtn" runat="server" Text="Upload Picture" CssClass="btn btn-publish" OnClick="uploadPictureBtn_Click" />
+                    <asp:FileUpload ID="albumCoverFile" accept="image/*" runat="server" /><br />
+                    <asp:CustomValidator ID="albumCoverFileCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="albumCoverFile" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="albumCoverFileCv_ServerValidate"></asp:CustomValidator>
                 </div>
             </div>            
         </div>

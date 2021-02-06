@@ -10,11 +10,10 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
     public class ProductDetailsRepository
     {
 
-        const string STATUS_PRODUCT_LISTED = "LISTED";
+        const string STATUS_PRODUCT_VISIBLE = "PUBLISHED";
         const string STATUS_ARTIST_ACTIVE = "ACTIVE";
 
         // Main queries for details
-
         public Track GetTrackDetails(int trackId, int albumId, int artistId)
         {
             Track trackDetails = null;
@@ -40,8 +39,8 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                            "LEFT JOIN FileInfo as ArtistImageFile " +
                            "ON UserInfo.ProfileImageId = ArtistImageFile.FileId " +
                            "WHERE Track.TrackId = @TrackId AND Album.AlbumId = @AlbumId AND ArtistInfo.UserId = @ArtistId " +
-                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_LISTED +"') " +
-                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '"+ STATUS_PRODUCT_VISIBLE +"') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("TrackId", trackId), ("AlbumId", albumId), ("ArtistId", artistId));
@@ -72,7 +71,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                     );
             }
 
-            return trackDetails != null ? trackDetails : new Track();
+            return trackDetails;
         }
 
         public Album GetAlbumDetails(int albumId, int artistId)
@@ -90,7 +89,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                            "INNER JOIN UserInfo " +
                            "ON ArtistInfo.UserId = UserInfo.UserId " +
                            "WHERE Album.AlbumId = @AlbumId AND ArtistInfo.UserId = @ArtistId " +
-                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId), ("ArtistId", artistId));
@@ -113,7 +112,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                     );
             }
 
-            return albumDetails != null ? albumDetails : new Album(); ;
+            return albumDetails;
         }
 
         public Artist GetArtistDetails(int artistId)
@@ -149,13 +148,12 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                     artistDetails.ArtistImage = "~/Content/Images/default_artist_image.JPG";
             }
 
-            return artistDetails != null ? artistDetails : new Artist();
+            return artistDetails;
         }
 
         // End Main queries for details
 
         // List queries
-
         public List<Track> GetTracksOfAlbum(int albumId, int artistId)
         {
             List<Track> tracks = new List<Track>();
@@ -181,8 +179,8 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                            "LEFT JOIN FileInfo as ArtistImageFile " +
                            "ON UserInfo.ProfileImageId = ArtistImageFile.FileId " +
                            "WHERE Album.AlbumId = @AlbumId AND ArtistInfo.UserId = @ArtistId " +
-                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
-                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "') " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId), ("ArtistId", artistId));
@@ -235,7 +233,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                            "INNER JOIN UserInfo " +
                            "ON ArtistInfo.UserId = UserInfo.UserId " +
                            "WHERE ArtistInfo.UserId = @ArtistId " +
-                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_LISTED + "')  " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')  " +
                            "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
@@ -268,9 +266,8 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
         // End List queries
 
-        // Non-core additional queries
-
-        public string GetAlbumGenres(int albumId)
+        // helper queries
+        public List<string> GetAlbumGenres(int albumId)
         {
             List<string> genreList = new List<string>();
 
@@ -295,7 +292,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                 }
             }
 
-            return string.Join(", ", genreList.Distinct().ToList());
+            return genreList;
         }
 
         public int GetTrackCount(int albumId)
@@ -319,6 +316,29 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
             }
 
             return trackCount;
+        }
+
+        public string GetGenresOfAlbum(int albumId)
+        {
+            string query = "SELECT DISTINCT(GenreName) " +
+                           "FROM Product " +
+                           "INNER JOIN Track " +
+                           "ON ProductId = Track.TrackId " +
+                           "INNER JOIN Genre " +
+                           "ON Track.GenreId = Genre.GenreId " +
+                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND Track.AlbumId = @AlbumId";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
+            bool valid = values.Rows.Count > 0;
+
+            List<string> genre = new List<string>();
+
+            if (valid)
+                for (int i = 0; i < values.Rows.Count; i++)
+                    genre.Add(values.Rows[i]["GenreName"].ToString().Substring(0, 1).ToUpper() + values.Rows[i]["GenreName"].ToString().Substring(1).ToLower());
+
+            return string.Join(", ", genre);
         }
 
         // End Non-core additional queries
