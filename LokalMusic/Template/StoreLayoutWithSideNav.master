@@ -5,7 +5,6 @@
     <style>
         /* The side navigation menu */
         .sidenav {
-            
             height: 100%; /* 100% Full-height */
             width: 200px; /* 0 width - change this with JavaScript */
             position: fixed; /* Stay in place */
@@ -84,12 +83,19 @@
             font-weight: 600;
             color: #F82B2B;
         }
+
+        #sidebar-toggle{
+            font-size: 20px; 
+            color:#B82828
+        }
+
+        #sidebar-toggle:hover{
+            color:#ff7171;
+        }
     </style>
 
-    <div id="product-display" class="sidenav sticky">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        
-        <div class="text-center mt-3 linkContainer">
+    <div id="product-display" class="sidenav sticky shadow-sm">        
+        <div class="text-center linkContainer" style="margin-top:-20px;">
             <p>Display By</p>
             <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
             <a class="side-links" id="tracks_page" runat="server">Lokal Tracks</a>
@@ -113,27 +119,29 @@
             
             <hr style="width: 150px; background:#525252;"/>
             <%--<asp:Button ID="filter" runat="server" OnClick="filterBtn_Click" Text="Filter" CssClass="filter-btn border-0 mx-auto d-block"/>--%>
-            
         </div>
-
     </div>
 
 
     <div class="" id="main">
-        <span onclick="openNav()">open</span>
+        <span onclick="toggleNav()" class="bi bi-caret-left-square-fill" id="sidebar-toggle"></span>
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
 
     <script>
-        function openNav() {
-          document.getElementById("product-display").style.width = "200px";
-          document.getElementById("main").style.marginLeft = "200px";
 
-        }
+        function toggleNav() {
 
-        function closeNav() {
-          document.getElementById("product-display").style.width = "0";
-          document.getElementById("main").style.marginLeft = "0";
+            var navWidth = document.getElementById('product-display'), style = window.getComputedStyle(navWidth), width = style.getPropertyValue('width');
+
+            if (width == "0px") {
+                document.getElementById("product-display").style.width = "200px";
+                document.getElementById("main").style.marginLeft = "200px";
+
+            } else if (width == "200px") {
+                document.getElementById("product-display").style.width = "0";
+                document.getElementById("main").style.marginLeft = "0";
+            }
         }
     </script>
 

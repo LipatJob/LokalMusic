@@ -58,21 +58,30 @@
             height:100%;
         }
 
+        .cart:hover{
+            color:#B82828;
+        }
+
+        .cart{
+            color: black;
+            font-weight: 700;
+        }
+
         /* Zoom */
         .img-hoverable{
             transition: transform .5s;
         }
         .img-hoverable:hover {
-          -ms-transform: scale(1.1); /* IE 9 */
-          -webkit-transform: scale(1.1); /* Safari 3-8 */
-          transform: scale(1.1); 
+          -ms-transform: scale(1.09); /* IE 9 */
+          -webkit-transform: scale(1.09); /* Safari 3-8 */
+          transform: scale(1.09); 
         }
     </style>
 
     <%--Nav--%>
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <a class="navbar-brand" href="../Store/Home.aspx" runat="server">
-            <img src="~/Content/Images/Logo New Updated.png"  height="45" class="d-inline-block my-auto ml-xl-3" alt="" runat="server">
+        <a class="navbar-brand ml-xl-3" href="../Store/Home.aspx" runat="server">
+            <img src="~/Content/Images/Logo New Updated.png"  height="45" class="d-inline-block my-auto " alt="" runat="server">
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +98,7 @@
             <div class="form-inline ml-auto mr-md-3">
                 <div class="input-group">
                 
-                    <input type="text" id="SearchTxt" class="form-control border-0" placeholder="Search" runat="server" />
+                    <input type="text" id="SearchTxt" class="form-control border-0 rounded" placeholder="Search" runat="server" />
                     <div class="input-group-append">
                         <%--<asp:Button ID="SearchBtn" runat="server" Text="Search" CssClass="btn btn-primary my-2 my-sm-0" OnClick="SearchBtn_Click" />--%>
                         <button id="SearchBtn" runat="server" class="btn btn-danger" onserverclick="SearchBtn_Click">
@@ -104,14 +113,16 @@
             <% if (AuthenticationHelper.LoggedIn)
                 {%>
                     <div>
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown ml-xl-4">
+                        <ul class="navbar-nav ml-xl-2 mr-xl-2 mt-sm-1 mb-md-1">
+                            <li class="nav-item dropdown">
 
-                                <a class="nav-link dropdown-toggle active" href="~/Account/Collection" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server">
-                                    <% Response.Write(AuthenticationHelper.Username); %>
+                                <a class="nav-link dropdown-toggle" href="~/Account/Collection" id="navbarDropdown" 
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server"
+                                    style="font-weight:600; font-size:17px; ">
+                                    <span style="color:#B82828;"><% Response.Write(AuthenticationHelper.Username); %></span>
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item" runat="server" id="CollectionLink">Collection</a>
                                     <a class="dropdown-item" href="~/Account/Settings" runat="server">Settings</a>
@@ -154,11 +165,11 @@
                     <div id="joinSignIn" class="">
                         <div class="">
                             <ul class="navbar-nav">
-                                <li class="nav-item ml-md-2 mr-md-1">
+                                <li class="nav-item ml-md-2 mr-md-1 mb-sm-1 mt-sm-1 mb-0 mt-0">
                                     <%--<a class="nav-link" href="~/Account/Register/Fan" runat="server">Join</a>--%>
                                     <a class="btn btn-outline-danger badge-pill pl-4 pr-4" href="~/Account/Register/Fan" runat="server">JOIN</a>
                                 </li>
-                                <li class="nav-item ml-md-1 mr-md-2">
+                                <li class="nav-item ml-md-1 mr-md-2 mb-sm-1 mt-sm-1 mb-0 mt-0">
                                     <%--<a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>--%>
                                     <a class="btn btn-danger badge-pill pl-4 pr-4" href="~/Account/Login" runat="server">SIGN IN</a>
                                 </li>
@@ -169,14 +180,11 @@
 
             <% if (AuthenticationHelper.LoggedIn)
             {%>
-                <div>
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link ml-xl-4" href="~/Cart/CartPage.aspx" runat="server">
-                                <img src="~/Content/Images/cart.png" width="20" height="20" class="d-block my-auto" alt="" runat="server">
-                            </a>
-                        </li>
-                    </ul>
+                <div class="mb-2">
+                    <a class="ml-xl-2 mr-md-4 cart" href="~/Cart/CartPage.aspx" runat="server">
+                    <%--<img src="~/Content/Images/cart.png" width="20" height="20" class="d-block my-auto" alt="" runat="server">--%>
+                        <span class="bi bi-cart2" style="font-size:25px;"></span>
+                    </a>
                 </div>
             <%}%>
 
