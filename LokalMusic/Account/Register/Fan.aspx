@@ -28,12 +28,12 @@
 
     <div class="signin-form">
         <%-- Brand Logo --%>
-        <asp:Image ImageUrl="~/Content/Images/Logo.png" Style="width: 150px; height: auto;" runat="server" CssClass="my-3" />
+        <asp:Image ImageUrl="~/Content/Images/Old Logo.png" Style="width: 150px; height: auto;" runat="server" CssClass="my-3" />
 
         <%-- Login Header --%>
         <div class="login-header">
             <h4 class="my-3">Create an Account</h4>
-            <small style="margin-left: auto; color: black;"><a href="~/Account/Login" runat="server"><u>or Sign in </u></a></small>
+            <small style="margin-left: auto; color: black;"><a href="~/Account/Login" class="text-danger" runat="server"><u>or Sign in </u></a></small>
         </div>
 
         <%-- Username --%>
@@ -73,11 +73,11 @@
         </div>
 
         <%-- Register Button--%>
-        <asp:Button ID="submitBtn" Text="Create an Account" runat="server" CssClass="btn btn-primary mb-3" OnClick="submitBtn_Click" />
-        
+        <asp:Button ID="submitBtn" Text="Create an Account" runat="server" CssClass="btn btn-danger mb-3" OnClick="submitBtn_Click" />
+
         <hr />
 
         <%-- Go to Artist Signup Page --%>
-        <a href="~/Account/Register/Artist" style="text-align: center;" runat="server">Create an Artist Account</a>
+        <a href="~/Account/Register/Artist" class="text-danger" style="text-align: center; margin-bottom:40px;" runat="server">Create an Artist Account</a>
     </div>
 </asp:Content>

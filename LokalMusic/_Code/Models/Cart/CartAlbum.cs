@@ -31,7 +31,7 @@ namespace LokalMusic._Code.Models.Cart
         public string AlbumCoverAddress { get; set; }
 
         public int TrackCount { get; set; }
-        public int TrackTotalMinutes { get; set; }
+        public double TrackTotalMinutes { get; set; }
 
         public string DetailsUrl 
         {

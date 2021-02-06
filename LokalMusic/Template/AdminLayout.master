@@ -90,8 +90,8 @@
 
         <%--Nav--%>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="../Store/Home.aspx" runat="server">
-                <img src="~/Content/Images/Logo.png" width="68" height="50" class="d-inline-block align-top ml-xl-5" alt="" runat="server">
+            <a class="navbar-brand" href="#" runat="server">
+                <img src="~/Content/Images/New Logo.png" width="105" height="40" class="d-inline-block my-auto ml-xl-5" alt="" runat="server">
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -110,12 +110,12 @@
 
             <div id="product-display" class="sidenav">
                 <div class="text-center  side-container">
-                    <p class="side-links mt-3"><%Response.Write(AuthenticationHelper.Username); %></p>
+                    <p class="side-links mt-3"><%Response.Write(BackendAuthenticationHelper.Username); %></p>
                     <hr style="width: 150px; background: #525252; margin-top:0px;" />
                     <a href="~/Admin/Products" runat="server" class="side-links productsSideItem">Products</a>
                     <a href="~/Admin/Users" runat="server" class="side-links usersSideItem">Users</a>
                     <hr style="margin-top: auto; width: 150px; background: #525252;" />
-                    <a style="" href="~" class="pb-3" runat="server">Return to Store</a>
+                    <a style="" href="~/Admin/Signout" class="pb-3" runat="server">Signout</a>
                 </div>
             </div>
 

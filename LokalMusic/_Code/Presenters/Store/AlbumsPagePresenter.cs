@@ -1,18 +1,15 @@
 ﻿using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Repositories;
-using LokalMusic._Code.Views.Store;
 using System.Collections.Generic;
 
 namespace LokalMusic._Code.Presenters.Store
 {
     public class AlbumsPagePresenter
     {
-        private IAlbumsPage view;
         private StoreRepository repository;
 
-        public AlbumsPagePresenter(IAlbumsPage view, StoreRepository repo)
+        public AlbumsPagePresenter(StoreRepository repo)
         {
-            this.view = view;
             this.repository = repo;
         }
 
@@ -41,16 +38,9 @@ namespace LokalMusic._Code.Presenters.Store
                 if (tracks == null)
                     break;
 
-                album.TrackCount = tracks.Count;
-
-                double totalMinutes = 0;
-                tracks.ForEach(m =>{ totalMinutes += m.AudioDuration.TotalMinutes; });
-                album.TrackMinutes = System.Math.Round(totalMinutes, 2);
-
-                List<string> genres = new List<string>();
-                tracks.ForEach(m => genres.Add( m.Genre.Substring(0,1).ToUpper() + m.Genre.Substring(1).ToLower() ));
-
-                album.Genre = string.Join(", ", genres);
+                // SQL Queries were used because I did not want to query the whole track and perform LINQ commands or iterations
+                (album.TrackCount, album.TrackMinutes) = this.repository.GetTrackCountAndDurationOfAlbum(album.AlbumId);
+                album.Genre = this.repository.GetGenreOfAlbum(album.AlbumId);
             }
 
             return albums;

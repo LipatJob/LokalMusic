@@ -14,6 +14,8 @@ namespace LokalMusic._Code.Helpers
         public const int ADD_TO_CART_EXISTING = 2;
         public const int ADD_TO_CART_BOUGHT = 3;
         public const int ADD_TO_CART_LOGIN = 4;
+        public const int ADD_TO_CART_ALBUMBOUGHT = 5;
+        public const int ADD_TO_CART_OWNPRODUCT = 6;
 
 
         public static int AddProductToCart(int productId)
@@ -28,8 +30,24 @@ namespace LokalMusic._Code.Helpers
             if (AddToCartRepository.IsProductBought(productId, AuthenticationHelper.UserId))
                 return ADD_TO_CART_BOUGHT;
 
-            // if album is added, remove all of its tracks in the database; or,
-            // formulate an sql query that will not obtain cart product tracks, if its album are retrieved
+            if (AddToCartRepository.IsProductATrack(productId))
+            {
+                if (AddToCartRepository.IsTrackOfAlbumBought(productId, AuthenticationHelper.UserId))
+                {
+                    return ADD_TO_CART_ALBUMBOUGHT;
+                }  
+                else if (AddToCartRepository.IsUsersProductTrack(productId, AuthenticationHelper.UserId))
+                {
+                    return ADD_TO_CART_OWNPRODUCT;
+                }                    
+            }
+            else
+            {
+                // product is an album
+                if (AddToCartRepository.IsUsersProductAlbum(productId, AuthenticationHelper.UserId))
+                    return ADD_TO_CART_OWNPRODUCT;
+            }
+
             if (AddToCartRepository.AddToCart(productId, AuthenticationHelper.UserId) == 0)
                 return ADD_TO_CART_ERROR;
 
@@ -48,6 +66,10 @@ namespace LokalMusic._Code.Helpers
                 return "Unable to add to your cart. Try again later.";
             else if (category == ADD_TO_CART_LOGIN)
                 return "Please login or create an account first."; //find a way to implement auto redirect
+            else if (category == ADD_TO_CART_ALBUMBOUGHT)
+                return "This track's album is already in your collection.";
+            else if (category == ADD_TO_CART_OWNPRODUCT)
+                return "You cannot purchase your own product.";
             else
                 return "Something went wrong. Try again.";
         }

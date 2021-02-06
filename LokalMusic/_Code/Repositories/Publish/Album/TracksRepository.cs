@@ -3,8 +3,7 @@ using LokalMusic._Code.Models.Publish.Albums;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
+using System.Globalization;
 
 namespace LokalMusic._Code.Repositories.Publish.Albums
 {
@@ -49,7 +48,7 @@ WHERE Album.AlbumId = @AlbumId
                         TrackCoverLink = (string)row["TrackCoverLink"],
                         TrackName = (string)row["TrackName"],
                         DateAdded = (DateTime)row["DateAdded"],
-                        Genre = (string)row["Genre"],
+                        Genre = new CultureInfo("en").TextInfo.ToTitleCase(row["Genre"].ToString().ToLower()),
                         Duration = (TimeSpan)row["Duration"],
                         Price = (decimal)row["Price"],
                         SalesCount = (int)row["SalesCount"]
@@ -87,19 +86,5 @@ WHERE Album.AlbumId = @AlbumId
 
             return albumName;
         }
-        /**
-        public int GetAlbumId(string urlAlbumName)
-        {
-            string query = "SELECT ProductId FROM Product WHERE REPLACE(ProductName,' ','') = @URLName";
-            var result = DbHelper.ExecuteDataTableQuery(query, ("URLName", urlAlbumName));
-
-            var albumId = 0;
-            foreach (DataRow row in result.Rows)
-            {
-                albumId = (int)row["ProductId"];
-            }
-
-            return albumId;
-        }**/
     }
 }

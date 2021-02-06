@@ -20,9 +20,6 @@ namespace LokalMusic.Store.Details
         public AlbumDetails()
         {
             this.presenter = new AlbumDetailsPresenter(new ProductDetailsRepository());
-
-            this.HandleUrlRequest();
-            this.presenter.DetermineTrackSummaries(albumDetails, tracks);
         }
 
         private void HandleUrlRequest()
@@ -33,12 +30,14 @@ namespace LokalMusic.Store.Details
             urlParams.Add((string)NavigationHelper.GetRouteValue("AlbumId"));
             urlParams.Add((string)NavigationHelper.GetRouteValue("ArtistId"));
 
+            // if the physical location is accessed without the expected url format
+            urlParams.ForEach(m => { if (m == null) InvalidRequest(); });
+
             int tempParam = 0;
             foreach (string param in urlParams)
             {
                 int.TryParse(param, out tempParam);
                 parsedParams.Add(tempParam);
-
                 tempParam = 0;
             }
 
@@ -64,6 +63,9 @@ namespace LokalMusic.Store.Details
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.HandleUrlRequest();
+            this.presenter.DetermineTrackSummaries(albumDetails, tracks);
+
             List<Album> temp = new List<Album>();
             temp.Add(this.albumDetails);
             albumContainer.DataSource = temp;

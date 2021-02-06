@@ -26,7 +26,10 @@
                 <table style="width: 100%;">
                     <tr>
                         <td>Track Name</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="trackNameTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;">
+                            <asp:TextBox ID="trackNameTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:CustomValidator ID="trackNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackNameTxtCv_ServerValidate"></asp:CustomValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td>Genre</td>
@@ -38,7 +41,10 @@
                     </tr>
                     <tr>
                         <td>Price</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36"></asp:TextBox></td>
+                        <td style="padding-left:24px;">
+                            <asp:TextBox ID="priceTxt" runat="server" Width="500" Height="36"></asp:TextBox><br />
+                            <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -49,10 +55,8 @@
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
-                    <asp:FileUpload ID="trackFile" runat="server" />
-                </div>
-                <div>
-                    <asp:Button ID="uploadTrackFileBtn" runat="server" Text="Upload Track File" CssClass="btn btn-publish" OnClick="uploadTrackFileBtn_Click" />
+                    <asp:FileUpload ID="trackFile" runat="server" /><br />
+                    <asp:CustomValidator ID="trackFileCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackFile" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackFileCv_ServerValidate"></asp:CustomValidator>
                 </div>
 
                 <p style="margin-top:50px">Clip File</p>
@@ -61,10 +65,8 @@
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
-                    <asp:FileUpload ID="clipFile" runat="server" />
-                </div>
-                <div>
-                    <asp:Button ID="uploadClipFileBtn" runat="server" Text="Upload Clip File" CssClass="btn btn-publish" OnClick="uploadClipFileBtn_Click" />
+                    <asp:FileUpload ID="clipFile" runat="server" /><br />
+                    <asp:CustomValidator ID="clipFileCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="clipFile" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="clipFileCv_ServerValidate"></asp:CustomValidator>
                 </div>
             </div>            
         </div>

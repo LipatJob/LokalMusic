@@ -21,20 +21,16 @@ namespace LokalMusic.Store.Details
         public ArtistDetails()
         {
             this.presenter = new ArtistDetailsPresenter(new ProductDetailsRepository());
-
-            this.HandleUrlRequest();
-            (this.artistDetails, this.albums) = this.presenter.DetermineAlbumSummaries(artistDetails, albums);
         }
 
         private void HandleUrlRequest()
         {
-            string urlParam = "";
+            string urlParam = (string)NavigationHelper.GetRouteValue("ArtistId");
+
+            // if the physical location is accessed without the expected url format
+            if (urlParam == null) this.InvalidRequest();
+
             int parsedParam = 0;
-
-            urlParam = (string)NavigationHelper.GetRouteValue("ArtistId");
-
-            if (urlParam == "" || urlParam == null) { this.InvalidRequest(); }
-
             int.TryParse(urlParam, out parsedParam);   
 
             // call presenter to update model
@@ -53,6 +49,10 @@ namespace LokalMusic.Store.Details
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.HandleUrlRequest();
+            (this.artistDetails, this.albums) = this.presenter.DetermineAristSummary(artistDetails, albums);
+            this.albums = this.presenter.DetermineAlbumsSummary(albums);
+
             List<Artist> temp = new List<Artist>();
             temp.Add(this.artistDetails);
             artistContainer.DataSource = temp;
