@@ -11,6 +11,10 @@
             font-family: Montserrat;
         }
 
+        h5{
+            font-size: 21px;
+        }
+
         #featured-artist p {
             font-weight: 400;
         }
@@ -47,6 +51,7 @@
         .featured-text{
             font-size: 36px;
         }
+
     </style>
 
     <div id="featured-artist" class="pt-5 pb-4">
@@ -66,7 +71,7 @@
                     <ItemTemplate>
                         <div class="col-lg-3 col-md-4 col-sm-5 mb-lg-0 mx-auto mb-sm-4 mb-4">
                             <a href="<%# Eval("MarketPage")%>"" class="" target="_blank">
-                                <img src="<%# Eval("ProductImage")%>"" class="img-hoverable mx-auto d-block" style="width:200px; height:auto;" alt="feature-artist-name" />
+                                <img src="<%# Eval("ProductImage")%>"" class="img-hoverable mx-auto d-block shadow rounded" style="width:200px; height:auto;" alt="feature-artist-name" />
                             </a>
                         </div>
                     </ItemTemplate>
@@ -75,7 +80,7 @@
         </div>
     </div>
 
-    <div id="best-selling-albums" class="container mt-4">
+    <div id="best-selling-albums" class="container mt-5">
         <div class="row mb-4">
             <h5 class="my-auto">Bestselling Albums</h5>
             <a class="text-danger ml-2 view-all my-auto" id="albumViewAll" runat="server">View All</a>
@@ -90,7 +95,7 @@
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
                                 <img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable" alt="album-name" /></a>
                             <div class="card-body">
-                                <p><%#Eval("AlbumName")%></p>
+                                <p class="productName"><%#Eval("AlbumName")%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
                                 <p class="by-artist float-right" style="color: #767676;"><%#Eval("ArtistName")%></p>
                             </div>
@@ -117,7 +122,7 @@
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
                                 <img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable" alt="artist-name" /></a>
                             <div class="card-body">
-                                <p><%#Eval("ArtistName")%></p>
+                                <p class="productName"><%#Eval("ArtistName")%></p>
                                 <p style="font-weight: 400;"><%#Eval("Bio")%></p>
                             </div>
                         </div>
@@ -143,7 +148,7 @@
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
                                 <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" /></a>
                             <div class="card-body">
-                                <p><%#Eval("TrackName")%></p>
+                                <p class="productName"><%#Eval("TrackName")%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
                                 <p class="by-artist float-right" style="color: #767676;"><%#Eval("ArtistName")%></p>
                             </div>

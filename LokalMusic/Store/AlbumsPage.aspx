@@ -49,7 +49,7 @@
                                 </div>
 
                                 <div class="col-md-6 col-md-6">
-                                    <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink"><h4 class="album-title"><%#Eval("AlbumName")%></h4></a>
+                                    <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink"><h4 class="album-title titleLink"><%#Eval("AlbumName")%></h4></a>
                                     <p style="font-size:18px; color: #5E5E5E; margin-top: -5px; font-weight:500;"><%#Eval("ArtistName")%></p>
                                     
                                     <div class="pt-xl-3"></div>
@@ -65,8 +65,7 @@
                                     <h4 class="album-price">₱<%#Eval("Price")%></h4>
                                     
                                     <div class="mt-xl-4 pt-xl-5 mt-md-5">
-                                        <%--GetURL--%>
-                                        <a class="btn btn-danger mt-xl-5 mt-md-3" style="background-color: #B82828; font-size: 12px; font-weight: 600"  onclick='AddToCart(<%#Eval("AlbumId")%>); return false;'>Add to Cart</a>     
+                                        <a class="btn btn-danger mt-xl-5 mt-md-3" style="background-color: #B82828; font-size: 12px; font-weight: 600"  onclick='AddToCart(<%#Eval("AlbumId")%>)'>Add to Cart</a>     
                                     </div>
                                 </div>
                             </div>

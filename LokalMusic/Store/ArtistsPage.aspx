@@ -62,7 +62,7 @@
 
                                 <div class="col-md-6 col-md-6 ">
                                     <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
-                                        <h4 class="artist-name" style="color:#B82828;"><%#Eval("ArtistName")%></h4>
+                                        <h4 class="artist-name titleLink" style="color:#B82828;"><%#Eval("ArtistName")%></h4>
                                     </a>
 
                                     <div class="pt-xl-3"></div>
