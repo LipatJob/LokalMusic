@@ -40,17 +40,20 @@
             flex-shrink: 0;
         }
 
-        .validation-message
-        {
+        .validation-message{
             color:red;
             text-decoration:wavy;
+        }
+
+        .body-form{
+            height:100%;
         }
 
     </style>
 
 </head>
 <body>
-    <form runat="server">
+    <form runat="server" class="body-form">
         <asp:ScriptManager runat="server" EnablePageMethods="true">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>

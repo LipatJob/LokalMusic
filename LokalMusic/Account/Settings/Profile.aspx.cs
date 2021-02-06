@@ -1,5 +1,4 @@
 ﻿using LokalMusic._Code.Helpers;
-using LokalMusic._Code.Models.Account;
 using LokalMusic._Code.Presenters.Account;
 using LokalMusic._Code.Repositories.Account;
 using LokalMusic._Code.Views.Account;
@@ -7,59 +6,41 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Script.Services;
-using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace LokalMusic.Account
+namespace LokalMusic.Account.Settings
 {
-    public partial class Settings : System.Web.UI.Page, ISettingsViewModel
+    public partial class Profile : System.Web.UI.Page, ISettingsViewModel
     {
-        private string[] validFileFormats = new[]{ ".jpg", ".png", ".gif" };
+        public string Username { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string OldPassword { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string NewPassword { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ConfrimNewPassword { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ProfileImage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ArtistBio { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ArtistName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public HttpPostedFile UploadedProfilePicture => throw new NotImplementedException();
+
+        private string[] validFileFormats = new[] { ".jpg", ".png", ".gif" };
         SettingsPresenter presenter;
-        public Settings()
+        public Profile()
         {
             presenter = new SettingsPresenter(this, new SettingsRepository());
 
         }
 
-        public string Username { get => UsernameTxt.Text; set => UsernameTxt.Text = value; }
-        public string Email { get => EmailTxt.Text; set => EmailTxt.Text = value; }
-        public string OldPassword { get => OldPasswordTxt.Text; }
-        public string NewPassword { get => NewPasswordTxt.Text; }
-        public string ConfrimNewPassword { get => ConfirmNewPasswordTxt.Text; }
-        public string ProfileImage { get => ProfilePictureImg.ImageUrl; set => ProfilePictureImg.ImageUrl = value; }
-        public string ArtistBio { get => BioTxt.Text; set => BioTxt.Text = value; }
-        public string ArtistName { get => ArtistNameTxt.Text; set => ArtistNameTxt.Text= value; }
-
-
-        public HttpPostedFile UploadedProfilePicture => ProfilePictureFile.PostedFile;
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!Page.IsPostBack)
-            {
-                presenter.PageLoad();
-            }
-
-            if (IsPasswordChanged())
-            {
-                ShowPasswordChangedMessage();
-            }
-            else if(IsProfileImageChanged())
+            if (IsProfileImageChanged())
             {
                 ShowProfileImageChangedMessage();
             }
-            else if(IsBioChanged())
+            else if (IsBioChanged())
             {
                 ShowBioChangedMessage();
             }
-        }
-        private bool IsPasswordChanged()
-        {
-            return Request.QueryString["PasswordChanged"] == "True";
         }
 
         private bool IsProfileImageChanged()
@@ -78,11 +59,6 @@ namespace LokalMusic.Account
             changeProfilePictureMessage.InnerText = "Successfully changed Profile Image";
         }
 
-        private void ShowPasswordChangedMessage()
-        {
-            changePasswordSuccessAlert.Visible = true;
-            changePasswordSuccessMessage.InnerText = "Successfully changed Password";
-        }
 
         private void ShowBioChangedMessage()
         {
@@ -90,57 +66,9 @@ namespace LokalMusic.Account
             changeBioSuccessMessage.InnerText = "Successfuly changed Bio ";
         }
 
-
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static List<PaymentHistoryItem> GetPaymentHistory()
-        {
-            return SettingsPresenter.GetPaymentHistory();
-        }
-
-        protected void OldPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            new ValidationHelper((IValidator)source, args)
-                .AddRule(
-                    rule: ValidUtils.IsNotEmpty(OldPassword),
-                    errorMessage: "This is a required field")
-                .AddRule(
-                    rule: () => presenter.CheckOldPassword(),
-                    errorMessage: "Please check your old password")
-                .Validate();
-        }
-
-
-        protected void NewPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            ValidUtils.CreatePasswordValidator((IValidator)source, args, NewPassword).Validate();
-        }
-
-
-        protected void ConfirmNewPasswordTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            new ValidationHelper((IValidator)source, args)
-                .AddRule(
-                    rule: ValidUtils.IsNotEmpty(ConfrimNewPassword),
-                    errorMessage: "This is a required field")
-                .AddRule(
-                    rule: () => NewPassword == ConfrimNewPassword,
-                    errorMessage: "Password confirmation does not match")
-                .Validate();
-        }
-
-
-        protected void submitBtn_Click(object sender, EventArgs e)
-        {
-            if(Page.IsValid)
-            {
-                presenter.ChangePassword();
-            }
-        }
-
         protected void submitBtnUpdateBio_Click(object sender, EventArgs e)
         {
-            if(Page.IsValid)
+            if (Page.IsValid)
             {
                 presenter.UpdateBio();
             }
@@ -149,7 +77,7 @@ namespace LokalMusic.Account
 
         protected void submitProfilePicture_Click(object sender, EventArgs e)
         {
-            if(Page.IsValid)
+            if (Page.IsValid)
             {
                 presenter.UpdateProfilePicture();
             }
@@ -190,7 +118,7 @@ namespace LokalMusic.Account
             file.InputStream.Position = 0;
             try
             {
-                if(validFileFormats.Contains(GetFileType(file.FileName)) == false)
+                if (validFileFormats.Contains(GetFileType(file.FileName)) == false)
                 {
                     return false;
                 }
@@ -216,6 +144,9 @@ namespace LokalMusic.Account
             return fileName.Substring(fileName.LastIndexOf('.'));
         }
 
+        protected void BioTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
 
+        }
     }
 }
