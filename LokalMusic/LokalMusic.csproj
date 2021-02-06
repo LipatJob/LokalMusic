@@ -279,7 +279,10 @@
   <ItemGroup>
     <Content Include="Account\Register\Artist.aspx" />
     <Content Include="Account\Register\Fan.aspx" />
-    <Content Include="Account\Settings.aspx" />
+    <Content Include="Account\OldSettings.aspx" />
+    <Content Include="Account\Settings\Default.aspx" />
+    <Content Include="Account\Settings\Profile.aspx" />
+    <Content Include="Account\Settings\Purchases.aspx" />
     <Content Include="Account\Signout.aspx" />
     <Content Include="Admin\Login.aspx" />
     <Content Include="Admin\Products.aspx" />
@@ -301,7 +304,6 @@
     <Content Include="Content\Images\Old Logo.png" />
     <Content Include="Content\Images\testpicture3.jpg" />
     <Content Include="Content\Site.css" />
-    <Content Include="Default.aspx" />
     <Content Include="Fan\Collection.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Finance\Receipts.aspx" />
@@ -479,12 +481,33 @@
     <Compile Include="Account\Register\Fan.aspx.designer.cs">
       <DependentUpon>Fan.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\Settings.aspx.cs">
-      <DependentUpon>Settings.aspx</DependentUpon>
+    <Compile Include="Account\OldSettings.aspx.cs">
+      <DependentUpon>OldSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Account\Settings.aspx.designer.cs">
-      <DependentUpon>Settings.aspx</DependentUpon>
+    <Compile Include="Account\OldSettings.aspx.designer.cs">
+      <DependentUpon>OldSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Settings\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Settings\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Settings\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Settings\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Settings\Purchases.aspx.cs">
+      <DependentUpon>Purchases.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Settings\Purchases.aspx.designer.cs">
+      <DependentUpon>Purchases.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Signout.aspx.cs">
       <DependentUpon>Signout.aspx</DependentUpon>
@@ -693,6 +716,13 @@
     <Compile Include="Template\PublishLayout.master.designer.cs">
       <DependentUpon>PublishLayout.master</DependentUpon>
     </Compile>
+    <Compile Include="Template\SettingsLayout.master.cs">
+      <DependentUpon>SettingsLayout.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template\SettingsLayout.master.designer.cs">
+      <DependentUpon>SettingsLayout.master</DependentUpon>
+    </Compile>
     <Compile Include="Template\StoreLayout.master.cs">
       <DependentUpon>StoreLayout.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -807,13 +837,6 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -849,9 +872,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="About\" />
-    <Folder Include="App_Data\uploads\" />
     <Folder Include="Pages\" />
-    <Folder Include="Temporary\" />
     <Folder Include="_Code\Views\Admin\" />
     <Folder Include="_Code\Views\Fan\" />
   </ItemGroup>
@@ -865,6 +886,7 @@
     <Content Include="Template\FinanceLayout.master" />
     <Content Include="Template\StoreLayout.master" />
     <Content Include="Template\PublishLayout.master" />
+    <Content Include="Template\SettingsLayout.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

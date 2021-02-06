@@ -11,7 +11,7 @@ namespace LokalMusic.Account
 {
 
 
-    public partial class Settings
+    public partial class OldSettings
     {
 
         /// <summary>

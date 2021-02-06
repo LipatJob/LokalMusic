@@ -14,14 +14,19 @@ namespace LokalMusic
 
         public static void RegisterCustomRoutes(RouteCollection routes)
         {
+            // Account
             routes.MapPageRoute(
                 "Collection",
                 "Fan/{Username}",
                 "~/Fan/Collection.aspx"
             );
+            routes.MapPageRoute(
+                "DefaultSettings",
+                "Account/Settings",
+                "~/Account/Settings/Default.aspx"
+            );
 
             // Products Page
-
             routes.MapPageRoute(
                 "TrackPage",
                 "Store/Tracks/{SortBy}/{OrderBy}",
@@ -29,7 +34,6 @@ namespace LokalMusic
                 false,
                 new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
                 );
-
             routes.MapPageRoute(
                 "AlbumPage",
                 "Store/Albums/{SortBy}/{OrderBy}",
@@ -37,7 +41,6 @@ namespace LokalMusic
                 false,
                 new RouteValueDictionary { { "SortBy", "S1" }, { "OrderBy", "ASC" } }
                 );
-
             routes.MapPageRoute(
                 "ArtistPage",
                 "Store/Artists/{SortBy}/{OrderBy}",
@@ -58,51 +61,38 @@ namespace LokalMusic
             // End Products Page
 
             // Product Details
-
             routes.MapPageRoute(
                 "TrackDetails",
                 "Store/{ArtistId}/{AlbumId}/{TrackID}",
                 "~/Store/Details/TrackDetails.aspx");
-
             routes.MapPageRoute(
                 "AlbumDetails",
                 "Store/{ArtistId}/{AlbumId}",
                 "~/Store/Details/AlbumDetails.aspx");
-
             routes.MapPageRoute(
                 "ArtistDetails",
                 "Store/{ArtistId}",
                 "~/Store/Details/ArtistDetails.aspx");
 
-            // End Product Details
 
             // Publish Pages
-
             routes.MapPageRoute(
                 "Tracks",
                 "Publish/Album/{AlbumId}",
-                "~/Publish/Album/Tracks.aspx"
-                );
-
+                "~/Publish/Album/Tracks.aspx");
             routes.MapPageRoute(
                 "AddTrack",
                 "Publish/Album/{AlbumId}/Track/Add",
-                "~/Publish/Album/Track/AddTrack.aspx"
-                );
-
+                "~/Publish/Album/Track/AddTrack.aspx");
             routes.MapPageRoute(
                 "EditAlbum",
                 "Publish/Album/{AlbumId}/Edit",
-                "~/Publish/Album/Edit.aspx"
-                );
-
+                "~/Publish/Album/Edit.aspx");
             routes.MapPageRoute(
                 "EditTrack",
                 "Publish/Album/{AlbumId}/Track/{TrackId}/Edit",
-                "~/Publish/Album/Track/EditTrack.aspx"
-                );
+                "~/Publish/Album/Track/EditTrack.aspx");
 
-            // End Publish Pages
         }
 
 
