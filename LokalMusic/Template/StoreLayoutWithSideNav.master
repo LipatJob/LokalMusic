@@ -76,6 +76,10 @@
             color: black
         }
 
+        .my-button:active{
+            color:#B82828;
+        }
+
         .filter-btn{
             font-family:Montserrat;
             background-color: #FAFAFA;
@@ -124,7 +128,7 @@
 
 
     <div class="" id="main">
-        <span onclick="toggleNav()" class="bi bi-caret-left-square-fill" id="sidebar-toggle"></span>
+        <span onclick="toggleNav()" class="bi bi-caret-left-square-fill mt-2" style="position:absolute;" id="sidebar-toggle"></span>
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
 
