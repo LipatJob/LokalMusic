@@ -636,14 +636,13 @@ namespace LokalMusic._Code.Repositories
 
         public IList<FeaturedProduct> GetFeaturedProducts()
         {
-            string query = @"
-SELECT TOP 3
-	[Album].AlbumId,
-	[Album].UserId,
-	[FileInfo].FileName
-FROM [Album]
-	INNER JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
-ORDER BY NEWID();";
+            string query = @"SELECT TOP 3
+	                            [Album].AlbumId,
+	                            [Album].UserId,
+	                            [FileInfo].FileName
+                            FROM [Album]
+	                            INNER JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
+                            ORDER BY NEWID();";
 
             var result = DbHelper.ExecuteDataTableQuery(query);
 

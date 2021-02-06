@@ -25,20 +25,20 @@
             padding: 0px 3px 0px 3px;
         }
 
-            .view-all:hover, #best-selling-albums a:hover, #top-artists a:hover, #famous-tracks a:hover {
-                text-decoration: none;
-            }
+        .view-all:hover, #best-selling-albums a:hover, #top-artists a:hover, #famous-tracks a:hover {
+            text-decoration: none;
+        }
 
         .card-body {
             margin: -14px -18px 0 -18px;
         }
 
-            .card-body p {
-                color: black;
-                font-size: 13px;
-                font-weight: 500;
-                margin: 0 0 0 0;
-            }
+        .card-body p {
+            color: black;
+            font-size: 13px;
+            font-weight: 500;
+            margin: 0 0 0 0;
+        }
 
         .by-artist {
             color: #808080;
@@ -52,7 +52,7 @@
     <div id="featured-artist" class="pt-5 pb-4">
         <div class="container py-2">
             <div class="row">
-                <div class="col-lg-3 col-md-12" style="display:flex; flex-direction:column; justify-content:center;">
+                <div class="col-lg-3 col-sm-12">
                     <h1 class="text-center font-weight-bold featured-text">Featured<br />
                         Albums
                     </h1>
@@ -64,9 +64,9 @@
 
                 <asp:Repeater runat="server" ID="FeaturedProductRepeater">
                     <ItemTemplate>
-                        <div class="col-lg-3 col-sm-12 mb-md-3 mb-sm-3 mb-lg-0" style="display:flex; justify-content:center;">
+                        <div class="col-lg-3 col-md-4 col-sm-5 mb-lg-0 mx-auto mb-sm-4 mb-4">
                             <a href="<%# Eval("MarketPage")%>"" class="" target="_blank">
-                                <img src="<%# Eval("ProductImage")%>"" class="img-hoverable" style="width:200px; height:auto;" alt="feature-artist-name" />
+                                <img src="<%# Eval("ProductImage")%>"" class="img-hoverable mx-auto d-block" style="width:200px; height:auto;" alt="feature-artist-name" />
                             </a>
                         </div>
                     </ItemTemplate>
