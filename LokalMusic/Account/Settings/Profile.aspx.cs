@@ -33,6 +33,10 @@ namespace LokalMusic.Account.Settings
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (AuthenticationHelper.LoggedIn == false)
+            {
+                NavigationHelper.RedirectReturnAddress("~/Account/Login");
+            }
             presenter.PageLoad();
             if (IsProfileImageChanged())
             {

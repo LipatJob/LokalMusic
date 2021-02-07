@@ -36,6 +36,20 @@
             <small style="margin-left: auto; color: black;"><a href="~/Account/Login" class="text-danger" runat="server"><u>or Sign in </u></a></small>
         </div>
 
+        <%-- First Name and Last Name--%>
+        <div class="row form-group">
+            <div class="col-6" style="padding: 0; padding-right: 6px;">
+                <asp:Label Text="First Name" runat="server" />
+                <asp:TextBox ID="FirstNameTxt" runat="server" CssClass="form-control" />
+                <asp:RequiredFieldValidator ErrorMessage="This is a required field" ControlToValidate="FirstNameTxt" runat="server" CssClass="validation-message" Display="Dynamic" />
+            </div>
+            <div class="col-6" style="padding: 0; padding-left: 6px;">
+                <asp:Label Text="Last Name" runat="server" />
+                <asp:TextBox ID="LastNameTxt" runat="server" CssClass="form-control" />
+                <asp:RequiredFieldValidator ErrorMessage="This is a required field" ControlToValidate="LastNameTxt" runat="server" CssClass="validation-message" Display="Dynamic" />
+            </div>
+        </div>
+
         <%-- Username --%>
         <div class="form-group">
             <asp:Label Text="Username" runat="server" />
@@ -78,6 +92,6 @@
         <hr />
 
         <%-- Go to Artist Signup Page --%>
-        <a href="~/Account/Register/Artist" class="text-danger" style="text-align: center; margin-bottom:40px;" runat="server">Create an Artist Account</a>
+        <a href="~/Account/Register/Artist" class="text-danger" style="text-align: center; margin-bottom: 40px;" runat="server">Create an Artist Account</a>
     </div>
 </asp:Content>
