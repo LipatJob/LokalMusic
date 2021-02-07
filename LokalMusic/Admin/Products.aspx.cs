@@ -21,16 +21,16 @@ namespace LokalMusic.Admin
         }
 
         [WebMethod]
-        public static bool Unlist(int productId)
+        public static bool WithdrawItem(int productId)
         {
-            ProductsPresenter.UnlistItem(productId);
+            ProductsPresenter.WithdrawItem(productId);
             return true;
         }
 
         [WebMethod]
-        public static bool Relist(int productId)
+        public static bool RepublishItem(int productId)
         {
-            ProductsPresenter.RelistItem(productId);
+            ProductsPresenter.RepublishItem(productId);
             return true;
         }
 

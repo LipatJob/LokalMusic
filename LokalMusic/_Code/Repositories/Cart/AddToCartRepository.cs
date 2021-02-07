@@ -1,8 +1,4 @@
 ﻿using LokalMusic._Code.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LokalMusic._Code.Repositories.Cart
 {
@@ -25,6 +21,30 @@ namespace LokalMusic._Code.Repositories.Cart
                            "WHERE ProductId = @ProductId AND CustomerId = @CustomerId";
 
             return DbHelper.ExecuteScalar(query, ("CustomerId", userId), ("ProductId", productId)) != null ? true : false;
+        }
+
+        public static bool IsUsersProductAlbum(int productId, int userId)
+        {
+            string query = "SELECT Product.ProductId " +
+                           "FROM Product " +
+                           "INNER JOIN Album " +
+                           "ON Product.ProductId = Album.AlbumId " +
+                           "WHERE Album.UserId = @UserArtistId AND Product.ProductId = @ProductId";
+
+            return DbHelper.ExecuteScalar(query, ("UserArtistId", userId), ("ProductId", productId)) != null ? true : false;
+        }
+
+        public static bool IsUsersProductTrack(int productId, int userId)
+        {
+            string query = "SELECT Product.ProductId " +
+                           "FROM Product " +
+                           "INNER JOIN Track " +
+                           "ON Product.ProductId = Track.TrackId " +
+                           "INNER JOIN Album " +
+                           "ON Track.AlbumId = Album.AlbumId " +
+                           "WHERE Album.UserId = @UserArtistId AND Product.ProductId = @ProductId";
+
+            return DbHelper.ExecuteScalar(query, ("UserArtistId", userId), ("ProductId", productId)) != null ? true : false;
         }
 
         public static bool IsProductATrack(int productId)

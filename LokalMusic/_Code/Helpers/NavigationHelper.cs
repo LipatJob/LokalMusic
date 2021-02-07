@@ -15,15 +15,9 @@ namespace LokalMusic._Code.Helpers
             HttpContext.Current.Response.Redirect(url);
         }
 
-        public static string GetParameterizedRoute(string routeName, object routeParameters)
+        public static void RedirectReturnAddress(string url)
         {
-            var dict = new RouteValueDictionary(routeParameters);
-            var data = RouteTable.Routes.GetVirtualPath(HttpContext.Current.Request.RequestContext, routeName, dict);
-            if (data != null)
-            {
-                return data.VirtualPath;
-            }
-            return null;
+            Redirect(url+ $"?ReturnAddress={HttpContext.Current.Request.Url.AbsolutePath}");
         }
 
         public static object GetRouteValue(string key)

@@ -30,7 +30,7 @@ namespace LokalMusic.Template
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchBtn;
+        protected global::System.Web.UI.HtmlControls.HtmlButton SearchBtn;
 
         /// <summary>
         /// navbarDropdown control.

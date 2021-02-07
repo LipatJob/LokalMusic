@@ -19,8 +19,6 @@ namespace LokalMusic.Store.Details
         public TrackDetails()
         {
             this.presenter = new TrackDetailsPresenter(new ProductDetailsRepository());
-
-            this.HandleUrlRequest();
         }
 
         private void HandleUrlRequest()
@@ -32,15 +30,17 @@ namespace LokalMusic.Store.Details
             urlParams.Add((string)NavigationHelper.GetRouteValue("AlbumId"));
             urlParams.Add((string)NavigationHelper.GetRouteValue("ArtistId"));
 
+            // if the physical location is accessed without the expected url format
+            urlParams.ForEach(m=>{ if (m == null) InvalidRequest(); });
+
             int tempParam = 0;
             foreach (string param in urlParams)
             {
                 int.TryParse(param, out tempParam);
                 parsedParams.Add( tempParam );
-
                 tempParam = 0;
             }
-
+                
             // call presenter to update model
             trackDetails = this.presenter.GetTrackDetails(
                 parsedParams[0],
@@ -59,6 +59,9 @@ namespace LokalMusic.Store.Details
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.HandleUrlRequest();
+
+
             List<Track> tempTracks = new List<Track>();
             tempTracks.Add(this.trackDetails);
             trackContainer.DataSource = tempTracks;

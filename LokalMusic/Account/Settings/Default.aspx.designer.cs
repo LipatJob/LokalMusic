@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LokalMusic.Account
+namespace LokalMusic.Account.Settings
 {
 
 
-    public partial class Settings
+    public partial class Default
     {
 
         /// <summary>
@@ -31,60 +31,6 @@ namespace LokalMusic.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EmailTxt;
-
-        /// <summary>
-        /// ProfilePictureImg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ProfilePictureImg;
-
-        /// <summary>
-        /// ProfilePictureFile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ProfilePictureFile;
-
-        /// <summary>
-        /// submitProfilePicture control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submitProfilePicture;
-
-        /// <summary>
-        /// ProfilePictureFileCv control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator ProfilePictureFileCv;
-
-        /// <summary>
-        /// changeProfilePictureAlert control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeProfilePictureAlert;
-
-        /// <summary>
-        /// changeProfilePictureMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeProfilePictureMessage;
 
         /// <summary>
         /// changePasswordSuccessAlert control.
@@ -159,12 +105,12 @@ namespace LokalMusic.Account
         protected global::System.Web.UI.WebControls.CustomValidator ConfirmNewPasswordTxtCv;
 
         /// <summary>
-        /// submitBtn control.
+        /// submitBtnChangePassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submitBtn;
+        protected global::System.Web.UI.WebControls.Button submitBtnChangePassword;
     }
 }

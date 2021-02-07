@@ -15,7 +15,14 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <%--data tables--%>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css"/>
+
+    <%--bootstrap icons--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+
     <style>
         html, body{
             height:100%;
@@ -40,16 +47,20 @@
             flex-shrink: 0;
         }
 
-        .validation-message
-        {
+        .validation-message{
             color:red;
+            text-decoration:wavy;
+        }
+
+        .body-form{
+            height:100%;
         }
 
     </style>
 
 </head>
 <body>
-    <form runat="server">
+    <form runat="server" class="body-form">
         <asp:ScriptManager runat="server" EnablePageMethods="true">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>

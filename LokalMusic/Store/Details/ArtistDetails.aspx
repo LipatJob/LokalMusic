@@ -51,7 +51,16 @@
     </style>
 
     <div class="container">
-        <h1 class="mb-5  mt-5">Lokal Artist</h1>
+
+        <nav aria-label="breadcrumb" class="mt-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/Store/Home.aspx" runat="server">Home</a></li>
+                <li class="breadcrumb-item"><a href="~/Store/ArtistPage.aspx" runat="server">Artists</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Details</li>
+            </ol>
+        </nav>
+
+        <h1 class="mb-4 mt-4">Lokal Artist</h1>
 
         <div class="row">
 
@@ -59,25 +68,28 @@
                 <ItemTemplate>
 
                     <%--Image--%>
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-5">
 
                         <div class="w-100" id="artist-img">
                             <img src=<%#Eval("ArtistImage") %> runat="server" alt="artist's profile image" class="mx-auto d-block shadow rounded border w-100"/>
                         </div>
 
                         <div class="mt-3"  id="img-bottom">
-                            <div class="row mx-auto d-block">
-                                <p class=""><%#Eval("AlbumCount")%> albums, <%#Eval("TrackCount")%> tracks</p>
-                            </div>
-                            <div class="row mx-auto d-block" style="margin-top: -10px;">
-                                <p class="">genre(s): <%#Eval("Genres")%></p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class=""><%#Eval("AlbumCount")%> album(s), <%#Eval("TrackCount")%> track(s)</p>
+                                </div>
+
+                                <div class="col-6">
+                                    <p class="text-right">genre(s): <%#Eval("Genres")%></p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
 
                     <%--Bio--%>
-                    <div class="col-md-9 w-100">
+                    <div class="col-lg-9 col-md-5 w-100">
 
                         <div class="row w-100 ml-2">
                             <h3 id="artist-name" class=""><%#Eval("ArtistName")%></h3>
