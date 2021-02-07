@@ -7,7 +7,7 @@
         }
     </style>
 
-    <div class="container" style="margin-top:60px;margin-bottom:100px;">
+    <div class="container">
         <div>
             <h1><strong><asp:Label ID="artistName" runat="server" Text="Artist/Band Name"></asp:Label></strong></h1>
             <hr />
@@ -37,7 +37,7 @@
                     <tr>
                         <td>Date Released</td>
                         <td style="padding-left:24px;">
-                            <asp:TextBox ID="dateReleasedTxt" runat="server" type="number" step=".01" min="0" max="214748.3647" Width="500" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="dateReleasedTxt" runat="server" TextMode="Date" Width="500" CssClass="form-control"></asp:TextBox>
                             <asp:CustomValidator ID="dateReleasedTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="dateReleasedTxt" CssClass="validation-message" OnServerValidate="dateReleasedTxtCv_ServerValidate" ValidateEmptyText="True"></asp:CustomValidator>
                         </td>
                     </tr>
@@ -48,7 +48,7 @@
                     <tr>
                         <td>Price</td>
                         <td style="padding-left:24px;">
-                            <asp:TextBox ID="priceTxt" runat="server" Width="500" CssClass="form-control">0.00</asp:TextBox>
+                            <asp:TextBox ID="priceTxt" runat="server" type="number" step=".01" min="0" max="214748.3647" Width="500" CssClass="form-control"></asp:TextBox>
                             <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
                         </td>
                     </tr>

@@ -14,21 +14,21 @@ namespace LokalMusic._Code.Repositories.Publish
         {
             string query = @"
 SELECT
-    TransactionProduct.TransactionId,
-    MAX([Transaction].TransactionDate) AS Date,
+    OrderInfo.OrderId,
+    MAX(OrderInfo.OrderDate) AS Date,
     MAX(UserInfo.Username) AS Customer,
     STRING_AGG(Product.ProductName + ' (' + ProductType.TypeName + ')' , ', ') AS Products,
-    SUM(TransactionProduct.AmountPaid) AS TotalPrice
-FROM Product
+    SUM(ProductOrder.ProductPrice) AS AmountPaid
+FROM ProductOrder
+    LEFT JOIN Product ON ProductOrder.ProductId = Product.ProductId
     LEFT JOIN Track ON Track.TrackId = Product.ProductId
     LEFT JOIN Album ON Album.AlbumId = COALESCE(Track.AlbumId, Product.ProductId)
     LEFT JOIN ArtistInfo ON ArtistInfo.UserId = Album.UserId
-    RIGHT JOIN TransactionProduct ON Product.ProductId = TransactionProduct.ProductId
-    LEFT JOIN [Transaction] ON TransactionProduct.TransactionId = [Transaction].TransactionId
-    LEFT JOIN UserInfo ON [Transaction].UserId = UserInfo.UserId
+    LEFT JOIN OrderInfo ON ProductOrder.OrderId = OrderInfo.OrderId
+    LEFT JOIN UserInfo ON OrderInfo.CustomerId = UserInfo.UserId
     LEFT JOIN ProductType ON Product.ProductTypeId = ProductType.ProductTypeId
 WHERE ArtistInfo.UserId = @ArtistId
-GROUP BY TransactionProduct.TransactionId
+GROUP BY OrderInfo.OrderId
 ";
             var result = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
 
@@ -37,11 +37,11 @@ GROUP BY TransactionProduct.TransactionId
             {
                 items.Add(new SalesItem()
                 {
-                    TransactionID = (int)row["TransactionId"],
+                    OrderID = (int)row["OrderId"],
                     Date = (DateTime)row["Date"],
                     Customer = (string)row["Customer"],
                     Products = ((string)row["Products"]).Replace("ALBUM", "Album").Replace("TRACK", "Track"),
-                    TotalPrice = (decimal)row["TotalPrice"]
+                    AmountPaid = (decimal)row["AmountPaid"]
                 });
             }
 
