@@ -301,6 +301,7 @@
     <Content Include="Content\Images\cart.png" />
     <Content Include="Content\Images\Old Logo.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="ErrorPage.aspx" />
     <Content Include="Fan\Collection.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Finance\Receipts.aspx" />
@@ -540,6 +541,13 @@
     </Compile>
     <Compile Include="Cart\CartPage.aspx.designer.cs">
       <DependentUpon>CartPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Fan\Collection.aspx.cs">
       <DependentUpon>Collection.aspx</DependentUpon>

@@ -74,6 +74,14 @@ namespace LokalMusic
                 "Store/{ArtistId}",
                 "~/Store/Details/ArtistDetails.aspx");
 
+            // error page
+            routes.MapPageRoute(
+                "ErrorPage",
+                "Error/{msg}/{handler}",
+                "~/ErrorPage.aspx",
+                false,
+                new RouteValueDictionary { { "msg", "###" }, { "handler", "*" } }
+                );
 
             // Publish Pages
             routes.MapPageRoute(
