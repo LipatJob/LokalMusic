@@ -123,6 +123,27 @@ SELECT SCOPE_IDENTITY();
 
             return int.Parse(genreId.ToString());
         }
+
+        public bool ValidateMaxTrackCount(int albumId)
+        {
+            string query = @"
+SELECT COUNT(TrackId) AS TrackCount
+FROM Track
+LEFT JOIN Product
+ON Track.TrackId = Product.ProductId
+WHERE Track.AlbumId = @AlbumId
+AND Product.ProductStatusId != 2;
+";
+            var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
+
+            bool maxReached;
+            if ((int)result >= 20)
+                maxReached = true;
+            else
+                maxReached = false;
+
+            return maxReached;
+        }
     }
 
 

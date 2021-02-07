@@ -16,9 +16,12 @@
                 </a>
                 &emsp;
                 <a id="addTrack" href="~/Publish/Album/Add" runat="server">
-                    <input type="button" name="addTrackBtn" class="btn btn-publish" value="Add Track" />
+                    <input type="button" id="addTrackBtn" name="addTrackBtn" class="btn btn-publish" value="Add Track" runat="server" />
                 </a>
             </div>
+        </div>
+        <div style="text-align: right; margin-top: 5px;">
+            <asp:Label ID="maxAlert" runat="server" Text="Max track count for album reached" ForeColor="Red" Display="Dynamic"></asp:Label>
         </div>
         <div>
             <table id="albumTable" class="table table-striped table-hover dt-responsive" style="margin-top:30px"> 
