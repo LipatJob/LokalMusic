@@ -110,12 +110,12 @@
 
             <div id="product-display" class="sidenav">
                 <div class="text-center  side-container">
-                    <p class="side-links mt-3"><%Response.Write(AuthenticationHelper.Username); %></p>
+                    <p class="side-links mt-3"><%Response.Write(BackendAuthenticationHelper.Username); %></p>
                     <hr style="width: 150px; background: #525252; margin-top:0px;" />
                     <a href="~/Admin/Products" runat="server" class="side-links productsSideItem">Products</a>
                     <a href="~/Admin/Users" runat="server" class="side-links usersSideItem">Users</a>
                     <hr style="margin-top: auto; width: 150px; background: #525252;" />
-                    <a style="" href="~" class="pb-3" runat="server">Return to Store</a>
+                    <a style="" href="~/Admin/Signout" class="pb-3" runat="server">Signout</a>
                 </div>
             </div>
 

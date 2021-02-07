@@ -30,7 +30,16 @@ namespace LokalMusic._Code.Presenters.Account
             if (IsLoginSuccessful(userId))
             {
                 AuthenticationHelper.UserId = userId;
-                NavigationHelper.Redirect("~/Store/Home");
+
+                if(NavigationHelper.QueryString("ReturnAddress") != null)
+                {
+                    NavigationHelper.Redirect(NavigationHelper.QueryString("ReturnAddress"));
+                }
+                else
+                {
+                    NavigationHelper.Redirect("~/Store/Home");
+                }
+
                 return true;
             }
             else

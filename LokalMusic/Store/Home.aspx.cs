@@ -11,9 +11,10 @@ namespace LokalMusic.Store
 
         private HomePresenter presenter;
 
-        public List<ArtistSummary> topArtists;
-        public List<AlbumSummary> bestSellingAlbums;
-        public List<TrackSummary> famousTracks;
+        public IList<ArtistSummary> topArtists;
+        public IList<AlbumSummary> bestSellingAlbums;
+        public IList<TrackSummary> famousTracks;
+        public IList<FeaturedProduct> featuredProducts;
 
         public Home()
         {
@@ -30,12 +31,18 @@ namespace LokalMusic.Store
             this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
             this.topArtists = this.presenter.GetTopArtists();
             this.famousTracks = this.presenter.GetFamousTracks();
+            this.featuredProducts = this.presenter.GetFeaturedProducts();
+
 
             this.BindModels();
         }
 
         private void BindModels()
         {
+            //Featured Products
+            FeaturedProductRepeater.DataSource = this.featuredProducts;
+            FeaturedProductRepeater.DataBind();
+
             // Albums
             albumContainer.DataSource = this.bestSellingAlbums;
             albumContainer.DataBind();
@@ -49,6 +56,6 @@ namespace LokalMusic.Store
             trackContainer.DataBind();
         }
 
-        
+
     }
 }

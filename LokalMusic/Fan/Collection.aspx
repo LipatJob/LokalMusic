@@ -37,8 +37,12 @@
                 border: 1px dotted #ffbaba;
             }
 
-        .item-link:link {
+        .item-link:link, .item-link:visited {
             color: black;
+        }
+
+        .item-link:hover {
+            text-decoration: none;
         }
 
         .item-picture {
@@ -72,7 +76,7 @@
                 <%if (Model.UserId == AuthenticationHelper.UserId)%>
                 <%{%>
                 <a href="~/Account/Settings" runat="server">
-                    <input type="button" name="name" value="Edit Profile" class="btn btn-primary" />
+                    <input type="button" name="name" value="Edit Profile" class="btn btn-danger" />
                 </a>
                 <%}%>
             </div>
@@ -102,5 +106,21 @@
                 </ItemTemplate>
             </asp:Repeater>
         </div>
+          <%if (collectionItemRepeater.Items.Count == 0) %>
+            <%{%>
+            <div style="width:100%; text-align:center; height: 300px; margin-top:50px;">
+                <p style="font-size:26px;">
+                    <%if(Model.UserId == AuthenticationHelper.UserId)%>
+                    <%{%>
+                        Buy Your first Album/Track on the <a href="~/Store/Search" runat="server" class="text-danger">Store</a>
+                    <%}%>
+                    <%else%>
+                    <%{%>
+                        <%=Model.Username%> Doesn't have Anything in their Collection
+                    <%}%>
+
+                </p>
+            </div>
+            <%}%>
     </div>
 </asp:Content>

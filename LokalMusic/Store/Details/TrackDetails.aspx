@@ -69,7 +69,16 @@
     </style>
 
     <div class="container">
-        <h1 class="mb-5  mt-5">Lokal Track</h1>
+
+        <nav aria-label="breadcrumb" class="mt-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="~/Store/Home.aspx" runat="server">Home</a></li>
+                <li class="breadcrumb-item"><a href="~/Store/TracksPage.aspx" runat="server">Tracks</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Details</li>
+            </ol>
+        </nav>
+
+        <h1 class="mb-4 mt-4">Lokal Track</h1>
 
         <div class="row">
 
@@ -77,16 +86,21 @@
                 <ItemTemplate>
 
                     <%--Image--%>
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-5">
 
                         <div class="w-100" id="album-img">
                             <img src=<%#Eval("AlbumCover") %> class="mx-auto d-block shadow rounded border w-100"/>
                         </div>
 
                         <div class="mt-3"  id="img-bottom">
-                            <div class="row mx-auto d-block">
-                                <p class="float-left"><%#Eval("AudioDuration") %> minutes</p>
-                                <p class="float-right">genre: <%#Eval("Genre") %></p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class=""><%#Eval("AudioDuration") %> minutes</p>
+                                </div>
+
+                                <div class="col-6">
+                                    <p class="text-right">genre: <%#Eval("Genre") %></p>
+                                </div>
                             </div>
                      
                             <%--Player--%>
@@ -98,7 +112,7 @@
                     </div>
 
                     <%--Description--%>
-                    <div class="col-md-9 w-100">
+                    <div class="col-lg-9 col-md-5 w-100">
 
                         <div class="row w-100 ml-2">
                             <h3 id="track-name" class=""><%#Eval("TrackName") %></h3>
@@ -115,7 +129,7 @@
                         <div class="row ml-2">
                             <p id="artist-name">
                                 <span class="sub">by</span> 
-                                <a href=<%#Eval("TrackArtistUrl") %> class="redirect-link" target="_blank" runat="server"><%#Eval("ArtistName") %></a>
+                                <a href=<%#Eval("TrackArtistUrl") %> class="redirect-link" runat="server"><%#Eval("ArtistName") %></a>
                             </p>
                         </div>
 

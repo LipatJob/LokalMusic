@@ -7,11 +7,12 @@ namespace LokalMusic.Template
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(AuthenticationHelper.LoggedIn == false)
+            if(BackendAuthenticationHelper.LoggedIn == false)
             {
-                Response.Redirect("~/Account/Login");
+
+                NavigationHelper.Redirect("~/Admin/Login");
             }
-            else if(AuthenticationHelper.UserType != AuthenticationHelper.ADMIN_USER_TYPE)
+            else if(BackendAuthenticationHelper.UserType != BackendAuthenticationHelper.ADMIN_USER_TYPE)
             {
                 Response.Redirect("~");
             }

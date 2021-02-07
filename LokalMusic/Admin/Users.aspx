@@ -75,7 +75,7 @@
                         {
                             data: "ProfilePage",
                             render: function (data) {
-                                data = `<a href="${data}"> Profile </a>`;
+                                data = `<a href="${data}" class='text-danger'> Profile </a>`;
                                 return data;
                             }
                         },
@@ -85,7 +85,7 @@
                                 if (row["UserStatus"] != "ACTIVE") {
                                     return `<button class="btn btn-secondary" onclick="ReactivateUser(${row["UserId"]}, this); return false;">Reactivate</button>`;
                                 }
-                                return `<button class="btn btn-primary" onclick="DeactivateUser(${row["UserId"]}, this); return false;">Deactivate</button></a>`;
+                                return `<button class="btn btn-outline-danger" onclick="DeactivateUser(${row["UserId"]}, this); return false;">Deactivate</button></a>`;
                             }
 
                         },
@@ -118,7 +118,7 @@
         }
 
         function ChangeToReactivate(id, item) {
-            item.classList.remove('btn-primary');
+            item.classList.remove('btn-outline-danger');
             item.classList.add('btn-secondary');
             item.innerHTML = "Reactivate";
             item.onclick = function () { ReactivateUser(id, item); return false; };
@@ -144,7 +144,7 @@
 
         function ChangeToDeactivate(id, item) {
             item.classList.remove('btn-secondary');
-            item.classList.add('btn-primary');
+            item.classList.add('btn-outline-danger');
             item.innerHTML = "Deactivate"
             item.onclick = function () { DeactivateUser(id, item); return false; };
         }

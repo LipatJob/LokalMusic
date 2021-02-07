@@ -20,7 +20,6 @@ namespace LokalMusic.Cart
 
         public CartPage()
         {
-            //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please login or create an account first.');window.location.href='Cart/CartPage.aspx';", true);
             this.presenter = new CartPresenter(new CartRepository());
 
         }
@@ -30,6 +29,8 @@ namespace LokalMusic.Cart
             presenter.PageLoad();
 
             this.albums = this.presenter.GetCartAlbums();
+            if (albums != null)
+                this.albums = this.presenter.GetCartAlbumsAdditionalDetails(this.albums);
 
             this.artists = this.presenter.GetCartArtists();
 

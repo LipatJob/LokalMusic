@@ -98,7 +98,7 @@
                                             </div>
 
                                             <%--title and other description--%>
-                                            <div class="col-md-7">
+                                            <div class="col-md-6">
                                                 <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
                                                     <h4 class="card-title" style="color:#AA3A3A; font-size:24px;"><%#Eval("TrackName") %></h4>
                                                 </a>
@@ -108,12 +108,12 @@
                                                 </a>
 
                                                 <div class="">
-                                                    <p class="mb-0" style="color:#8F8F8F; font-size: 16px;"><%#Eval("AudioLength") %> minutes</p>
+                                                    <p class="mb-0" style="color:#8F8F8F; font-size: 16px;"><%#Eval("AudioLength") %> minute(s)</p>
                                                 </div>
                                             </div>
 
                                             <%--price--%>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <p class="text-right" style="color:#AA3A3A; font-size:26px; font-weight:600">₱<%#Eval("Price") %></p>
                                             </div>
                                         </div>  
@@ -164,7 +164,7 @@
                                     </a>
 
                                     <div class="mt-xl-4 pt-xl-2 mt-md-4 pt-md-2 mt-sm-0 pt-sm-0">
-                                        <p class="mb-0" style="color:#8F8F8F; font-size: 15px;"><%#Eval("TrackCount") %> tracks, <%#Eval("TrackTotalMinutes") %> minutes.</p>
+                                        <p class="mb-0" style="color:#8F8F8F; font-size: 15px;"><%#Eval("TrackCount") %> track(s), <%#Eval("TrackTotalMinutes") %> minute(s)</p>
                                     </div>
                                 </div>
 

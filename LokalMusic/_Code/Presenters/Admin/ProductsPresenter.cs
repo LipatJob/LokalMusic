@@ -22,16 +22,16 @@ namespace LokalMusic._Code.Presenters.Admin
             return repository.GetProducts();
         }
 
-        public static void UnlistItem(int productId)
+        public static void WithdrawItem(int productId)
         {
             var repository = new ProductsRepository();
-            repository.UnlistItem(productId);
+            repository.WithdrawItem(productId);
         }
 
-        public static void RelistItem(int productId)
+        public static void RepublishItem(int productId)
         {
             var repository = new ProductsRepository();
-            repository.RelistItem(productId);
+            repository.RepublishItem(productId);
         }
     }
 }
