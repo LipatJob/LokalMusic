@@ -1,10 +1,23 @@
 ﻿<%@ Page Title="Account" Language="C#" MasterPageFile="~/Template/SettingsLayout.master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="LokalMusic.Account.Settings.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SettingsContent" runat="server">
-     <script> $(".account-nav-item").addClass("active"); </script>
+    <script> $(".account-nav-item").addClass("active"); </script>
     <div>
         <h5>Account Details</h5>
 
+        <%-- First Name and Last Name --%>
+        <div class="container">
+            <div class="row form-group">
+                <div class="col-6" style="padding: 0; padding-right: 6px;">
+                    <asp:Label Text="First Name" runat="server" />
+                    <asp:TextBox ID="FirstNameTxt" runat="server" ValidateRequestMode="Disabled" CssClass="form-control" ReadOnly="true" />
+                </div>
+                <div class="col-6" style="padding: 0; padding-left: 6px;">
+                    <asp:Label Text="Last Name" runat="server" />
+                    <asp:TextBox ID="LastNameTxt" runat="server" ValidateRequestMode="Disabled" CssClass="form-control" ReadOnly="true" />
+                </div>
+            </div>
+        </div>
         <%-- Username --%>
         <div class="form-group">
             <asp:Label Text="Username" runat="server" />
