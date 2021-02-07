@@ -36,7 +36,6 @@
         }
 
         .body-content{
-            margin-top:auto;
         }
 
         nav {
