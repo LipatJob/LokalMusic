@@ -38,6 +38,24 @@ namespace LokalMusic.Publish.Album.Track
 
             AlbumId = NavigationHelper.GetRouteValue("AlbumId").ToString();
             viewTracks.HRef = "~/Publish/Album/" + AlbumId;
+
+            ValidateMaxTrackCount();
+        }
+
+        private void ValidateMaxTrackCount()
+        {
+            bool maxReached = Presenter.ValidateMaxTrackCount();
+
+            if (maxReached)
+            {
+                addBtn.Enabled = false;
+                maxAlert.Visible = true;
+            }
+            else
+            {
+                addBtn.Enabled = true;
+                maxAlert.Visible = false;
+            }
         }
 
         protected void addBtn_Click(object sender, EventArgs e)
