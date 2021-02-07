@@ -8,7 +8,7 @@
         }
     </style>
 
-    <div class="container" style="margin-top:60px;margin-bottom:140px;">
+    <div class="container">
         <div>
             <h1><strong><asp:Label ID="artistName" runat="server" Text="Artist/Band Name"></asp:Label></strong></h1>
             <hr />
@@ -71,7 +71,7 @@
             </div>            
         </div>
 
-        <div class="row float-right" style="margin-top: 40px">
+        <div class="row float-right" style="margin-top: 40px;>
             <div class="col-12">
                 <asp:Label ID="maxAlert" runat="server" Text="Max track count for album reached" ForeColor="Red" Display="Dynamic"></asp:Label>
                 &emsp;

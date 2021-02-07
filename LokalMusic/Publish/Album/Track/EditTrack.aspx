@@ -8,7 +8,7 @@
         }
     </style>
 
-    <div class="container" style="margin-top:60px;margin-bottom:140px;">
+    <div class="container">
         <div>
             <h1><strong><asp:Label ID="artistName" runat="server" Text="Artist/Band Name"></asp:Label></strong></h1>
             <hr />
