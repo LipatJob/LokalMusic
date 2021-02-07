@@ -32,7 +32,7 @@
 
         <%-- Login Header --%>
         <div class="login-header">
-            <h4 class="my-3">Create an Account</h4>
+            <h4 class="my-3">Create a Fan Account</h4>
             <small style="margin-left: auto; color: black;"><a href="~/Account/Login" class="text-danger" runat="server"><u>or Sign in </u></a></small>
         </div>
 
