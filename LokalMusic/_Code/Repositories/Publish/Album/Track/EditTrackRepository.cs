@@ -90,9 +90,7 @@ WHERE ProductId = @trackId;
 
 UPDATE Track
 SET GenreId = @genreId,
-Description = @description,
-TrackDuration = @trackFileDuration,
-ClipDuration = @clipFileDuration
+Description = @description
 WHERE TrackId = @trackId;";
 
             string fileIdQuery = @"
@@ -106,9 +104,7 @@ WHERE TrackId = @trackId;";
                 ("price", model.Price),
                 ("trackId", trackId),
                 ("genreId", genreId),
-                ("description", model.Description),
-                ("trackFileDuration", model.TrackFileDuration),
-                ("clipFileDuration", model.ClipFileDuration)
+                ("description", model.Description)
                 );
 
             var result = DbHelper.ExecuteDataTableQuery(
@@ -137,6 +133,9 @@ WHERE TrackId = @trackId;";
             string fileName = trackId + Path.GetExtension(trackFile.FileName);
             string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile, true);
             model.TrackFile = fileLocation;
+
+            string query = "UPDATE Track SET TrackDuration = @trackFileDuration WHERE TrackId = @trackId;";
+            DbHelper.ExecuteNonQuery(query, ("trackFileDuration", model.TrackFileDuration), ("trackId", trackId));
         }
 
         private void UploadClipFile(IEditTrackModel model, int trackId, HttpPostedFile clipFile)
@@ -147,6 +146,9 @@ WHERE TrackId = @trackId;";
             string fileName = trackId + Path.GetExtension(clipFile.FileName);
             string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.CLIPS_CONTAINER_NAME, clipFile, true);
             model.ClipFile = fileLocation;
+
+            string query = "UPDATE Track SET ClipDuration = @clipFileDuration WHERE TrackId = @trackId;";
+            DbHelper.ExecuteNonQuery(query, ("clipFileDuration", model.ClipFileDuration), ("trackId", trackId));
         }
 
         private int EditInGenre(IEditTrackModel model)
