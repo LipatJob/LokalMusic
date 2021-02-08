@@ -41,7 +41,7 @@ WHERE Album.AlbumId = @AlbumId
             var Items = new List<TracksItem>();
             foreach (DataRow row in result.Rows)
             {
-                if ((int)row["ProductStatusId"] == 1)
+                if ((int)row["ProductStatusId"] != 2)
                 {
                     Items.Add(new TracksItem()
                     {

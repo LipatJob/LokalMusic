@@ -71,11 +71,13 @@
 
         <div class="row float-right" style="margin-top: 40px">
             <div class="col-12">
-                <asp:LinkButton ID="unlistBtn" runat="server" ForeColor="#B82828" OnClick="unlistBtn_Click" CausesValidation="False">Unlist Track</asp:LinkButton>
+                <asp:LinkButton ID="withdrawBtn" runat="server" ForeColor="#B82828" OnClick="withdrawBtn_Click" CausesValidation="False">Withdraw Track</asp:LinkButton>
                 &emsp;
                 <asp:Button ID="cancelBtn" runat="server" Text="Cancel" CssClass="btn btn-publish-light" OnClick="cancelBtn_Click" CausesValidation="False" />
                 &emsp;
                 <asp:Button ID="saveBtn" runat="server" Text="Save" CssClass="btn btn-publish" OnClick="saveBtn_Click" />
+                &emsp;
+                <asp:Button ID="publishUnpublishBtn" runat="server" Text="Publish" CssClass="btn btn-publish" OnClick="publishUnpublishBtn_Click" />
             </div>
         </div>
     
