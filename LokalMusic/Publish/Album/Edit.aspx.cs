@@ -21,12 +21,13 @@ namespace LokalMusic.Publish.Album
         public string ArtistName { get => artistName.Text; set => artistName.Text = value; }
         public string AlbumName { get => albumNameTxt.Text; set => albumNameTxt.Text = value; }
         public string Description { get => descriptionTxt.Text; set => descriptionTxt.Text = value; }
-        public DateTime DateReleased { get => Convert.ToDateTime(dateReleasedTxt.Text); set => dateReleasedTxt.Text = value.ToString(); }
+        public DateTime DateReleased { get => Convert.ToDateTime(dateReleasedTxt.Text); set => dateReleasedTxt.Text = value.ToString("yyyy-MM-dd"); }
         public string Producer { get => producerTxt.Text; set => producerTxt.Text = value; }
         public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = String.Format("{0:N}", value); }
         public string AlbumCover { get => albumCoverPreview.ImageUrl; set => albumCoverPreview.ImageUrl = value; }
         public HttpPostedFile UploadedAlbumCover => albumCoverFile.PostedFile;
         public bool AlbumCoverIsUpdated { get; set; }
+        public string Status { get; set; }
         
 
         protected void Page_Load(object sender, EventArgs e)
@@ -34,7 +35,26 @@ namespace LokalMusic.Publish.Album
             if (!Page.IsPostBack)
             {
                 Presenter.PageLoad();
+                SetPublishUnpublishBtn();
+            }
+        }
 
+        private void SetPublishUnpublishBtn()
+        {
+            if (Status == "PUBLISHED")
+            {
+                publishUnpublishBtn.Text = "Unpublish";
+                publishUnpublishBtn.Enabled = true;
+            }
+            else
+            {
+                publishUnpublishBtn.Text = "Publish";
+
+                bool hasTrack = Presenter.GetAlbumHasTrack();
+                if (hasTrack)
+                    publishUnpublishBtn.Enabled = true;
+                else
+                    publishUnpublishBtn.Enabled = false;
             }
         }
 
@@ -56,9 +76,26 @@ namespace LokalMusic.Publish.Album
             Presenter.LoadAlbumDetails();
         }
 
-        protected void unlistBtn_Click(object sender, EventArgs e)
+        protected void withdrawBtn_Click(object sender, EventArgs e)
         {
-            Presenter.UnlistAlbum();
+            Presenter.WithdrawAlbum();
+            NavigationHelper.Redirect("~/Publish/Albums");
+        }
+
+        protected void publishUnpublishBtn_Click(object sender, EventArgs e)
+        {
+            string status = Presenter.GetAlbumStatus();
+
+            if (status == "PUBLISHED")
+            {
+                Presenter.UnpublishAlbum();
+            }
+            else
+            {
+                saveBtn_Click(saveBtn, EventArgs.Empty);
+                Presenter.PublishAlbum();
+            }
+
             NavigationHelper.Redirect("~/Publish/Albums");
         }
 

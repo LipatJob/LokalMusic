@@ -35,14 +35,13 @@ FileInfo.FileName AS TrackFile,
 Track.TrackDuration AS TrackFileDuration,
 (SELECT FileName FROM Track LEFT JOIN FileInfo 
 ON Track.ClipFileID = FileInfo.FileId WHERE TrackId = @trackId) AS ClipFile,
-Track.ClipDuration AS ClipFileDuration
+Track.ClipDuration AS ClipFileDuration,
+ProductStatus.StatusName AS Status
 FROM Track
-LEFT JOIN Product
-ON Track.TrackId = Product.ProductId
-LEFT JOIN Genre 
-ON Track.GenreId = Genre.GenreId
-LEFT JOIN FileInfo
-ON Track.TrackFileID = FileInfo.FileId
+LEFT JOIN Product ON Track.TrackId = Product.ProductId
+LEFT JOIN Genre ON Track.GenreId = Genre.GenreId
+LEFT JOIN FileInfo ON Track.TrackFileID = FileInfo.FileId
+LEFT JOIN ProductStatus ON Product.ProductStatusId = ProductStatus.ProductStatusId
 WHERE TrackId = @trackId
 ";
 
@@ -56,6 +55,17 @@ WHERE TrackId = @trackId
             model.TrackFileDuration = (TimeSpan)result.Rows[0]["TrackFileDuration"];
             model.ClipFile = (string)result.Rows[0]["ClipFile"];
             model.ClipFileDuration = (TimeSpan)result.Rows[0]["ClipFileDuration"];
+            model.Status = (string)result.Rows[0]["Status"];
+        }
+        public bool GetAlbumIsPublished(int albumId)
+        {
+            string query = "SELECT ProductStatusId FROM Product WHERE ProductId = @AlbumId";
+            var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
+
+            if ((int)result == 1)
+                return true;
+            else
+                return false;
         }
 
         public void EditTrack(IEditTrackModel model, int trackId, HttpPostedFile trackFile, HttpPostedFile clipFile)
@@ -80,9 +90,7 @@ WHERE ProductId = @trackId;
 
 UPDATE Track
 SET GenreId = @genreId,
-Description = @description,
-TrackDuration = @trackFileDuration,
-ClipDuration = @clipFileDuration
+Description = @description
 WHERE TrackId = @trackId;";
 
             string fileIdQuery = @"
@@ -96,9 +104,7 @@ WHERE TrackId = @trackId;";
                 ("price", model.Price),
                 ("trackId", trackId),
                 ("genreId", genreId),
-                ("description", model.Description),
-                ("trackFileDuration", model.TrackFileDuration),
-                ("clipFileDuration", model.ClipFileDuration)
+                ("description", model.Description)
                 );
 
             var result = DbHelper.ExecuteDataTableQuery(
@@ -127,6 +133,9 @@ WHERE TrackId = @trackId;";
             string fileName = trackId + Path.GetExtension(trackFile.FileName);
             string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.TRACKS_CONTAINER_NAME, trackFile, true);
             model.TrackFile = fileLocation;
+
+            string query = "UPDATE Track SET TrackDuration = @trackFileDuration WHERE TrackId = @trackId;";
+            DbHelper.ExecuteNonQuery(query, ("trackFileDuration", model.TrackFileDuration), ("trackId", trackId));
         }
 
         private void UploadClipFile(IEditTrackModel model, int trackId, HttpPostedFile clipFile)
@@ -137,6 +146,9 @@ WHERE TrackId = @trackId;";
             string fileName = trackId + Path.GetExtension(clipFile.FileName);
             string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.CLIPS_CONTAINER_NAME, clipFile, true);
             model.ClipFile = fileLocation;
+
+            string query = "UPDATE Track SET ClipDuration = @clipFileDuration WHERE TrackId = @trackId;";
+            DbHelper.ExecuteNonQuery(query, ("clipFileDuration", model.ClipFileDuration), ("trackId", trackId));
         }
 
         private int EditInGenre(IEditTrackModel model)
@@ -156,10 +168,34 @@ WHERE TrackId = @trackId;";
             return int.Parse(genreId.ToString());
         }
 
-        public void UnlistTrack(int trackId)
+        public void WithdrawTrack(int trackId)
         {
             string query = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @trackId";
-            DbHelper.ExecuteScalar(query, ("trackId", trackId));
+            DbHelper.ExecuteNonQuery(query, ("trackId", trackId));
+        }
+
+        public string GetTrackStatus(int trackId)
+        {
+            string query = @"
+SELECT ProductStatus.StatusName FROM Product 
+LEFT JOIN ProductStatus ON Product.ProductStatusId = ProductStatus.ProductStatusId 
+WHERE Product.ProductId = @TrackId
+";
+            var result = DbHelper.ExecuteScalar(query, ("TrackId", trackId));
+
+            return (string)result;
+        }
+
+        public void UnpublishTrack(int trackId)
+        {
+            string query = "UPDATE Product SET ProductStatusId = 4 WHERE ProductId = @trackId";
+            DbHelper.ExecuteNonQuery(query, ("trackId", trackId));
+        }
+
+        public void PublishTrack(int trackId)
+        {
+            string query = "UPDATE Product SET ProductStatusId = 1 WHERE ProductId = @trackId";
+            DbHelper.ExecuteNonQuery(query, ("trackId", trackId));
         }
     }
 }
