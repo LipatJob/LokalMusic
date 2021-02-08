@@ -28,7 +28,7 @@
 
         <h1 class="mb-4">Lokal Tracks</h1>
 
-        <div class="pt-4 pb-4 pl-4 pr-4 rounded" style="background-color: #faf9f9;">
+        <div class="pt-3 pb-2 pl-3 pr-3 rounded" style="background-color: #faf9f9;">
             <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
                 <table class="table table-striped">
                     <thead>
