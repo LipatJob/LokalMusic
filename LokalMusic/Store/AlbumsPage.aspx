@@ -33,7 +33,7 @@
 
         <h1 class="mb-4">Lokal Albums</h1>
 
-        <div class="pt-3 pb-2 pl-3 pr-3" style="background-color: #F4F4F4;">
+        <div class="pt-3 pb-2 pl-3 pr-3 rounded" style="background-color: #F4F4F4;">
 
             <asp:Repeater ID="albumContainer" runat="server">
                 <ItemTemplate>
