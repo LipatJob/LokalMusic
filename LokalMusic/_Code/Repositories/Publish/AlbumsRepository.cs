@@ -24,7 +24,9 @@ SELECT
     (SELECT
         COUNT(TrackId) AS TrackCount
     FROM Track
-    WHERE Track.AlbumId = Album.AlbumId) AS TrackCount,
+    LEFT JOIN Product ON Track.TrackId = Product.ProductId
+    WHERE Track.AlbumId = Album.AlbumId
+    AND Product.ProductStatusId != 2) AS TrackCount,
     (SELECT
         COUNT(TransactionId)
     FROM TransactionProduct

@@ -25,12 +25,12 @@ Album.Description,
 Album.DateReleased,
 Album.ProducerName AS Producer,
 Product.Price,
-FileInfo.FileName AS AlbumCover
+FileInfo.FileName AS AlbumCover,
+ProductStatus.StatusName AS Status
 FROM Album
-LEFT JOIN Product
-ON Album.AlbumId = Product.ProductId
-LEFT JOIN FileInfo
-ON Album.AlbumCoverID = FileInfo.FileId
+LEFT JOIN Product ON Album.AlbumId = Product.ProductId
+LEFT JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
+LEFT JOIN ProductStatus ON Product.ProductStatusId = ProductStatus.ProductStatusId
 WHERE Product.ProductId = @AlbumId
 ";
 
@@ -42,6 +42,24 @@ WHERE Product.ProductId = @AlbumId
             model.Producer = (string)result.Rows[0]["Producer"];
             model.Price = (decimal)result.Rows[0]["Price"];
             model.AlbumCover = (string)result.Rows[0]["AlbumCover"];
+            model.Status = (string)result.Rows[0]["Status"];
+        }
+
+        public bool GetAlbumHasTrack(int albumId)
+        {
+            string query = @"
+SELECT COUNT(TrackId) AS TrackCount
+FROM Track
+LEFT JOIN Product ON Track.TrackId = Product.ProductId
+WHERE Track.AlbumId = @AlbumId
+AND Product.ProductStatusId != 2
+";
+            var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
+
+            if ((int)result > 0)
+                return true;
+            else
+                return false;
         }
 
         public void EditAlbum(IEditAlbumModel model, int albumId, HttpPostedFile albumCover)
@@ -97,19 +115,49 @@ WHERE AlbumId = @albumId;";
             }
         }
 
-
-        public void UnlistAlbum(int albumId)
+        public void WithdrawAlbum(int albumId)
         {
-            string query = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @albumId " +
-                "SELECT TrackId FROM Track WHERE AlbumId = @albumId";
-            var result = DbHelper.ExecuteDataTableQuery(query, ("albumId", albumId));
+            string query = @"
+UPDATE Product 
+SET ProductStatusId = 2
+WHERE ProductId = @AlbumId
+OR ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)
+";
+            DbHelper.ExecuteNonQuery(query, ("AlbumId", albumId));
+        }
 
-            foreach (DataRow row in result.Rows)
-            {
-                int trackId = (int)row["TrackId"];
-                string query2 = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @trackId";
-                DbHelper.ExecuteScalar(query2, ("trackId", trackId));
-            }
+        public string GetAlbumStatus(int albumId)
+        {
+            string query = @"
+SELECT ProductStatus.StatusName FROM Product 
+LEFT JOIN ProductStatus ON Product.ProductStatusId = ProductStatus.ProductStatusId 
+WHERE Product.ProductId = @AlbumId
+";
+            var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
+
+            return (string)result;
+        }
+
+        public void UnpublishAlbum(int albumId)
+        {
+            string query = @"
+UPDATE Product 
+SET ProductStatusId = 4 
+WHERE ProductId = @AlbumId
+OR ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)
+";
+            DbHelper.ExecuteNonQuery(query, ("AlbumId", albumId));
+        }
+
+        public void PublishAlbum(int albumId)
+        {
+            string query = @"
+UPDATE Product 
+SET ProductStatusId = 1
+WHERE ProductId = @AlbumId
+OR ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)
+";
+            DbHelper.ExecuteNonQuery(query, ("AlbumId", albumId));
         }
     }
 }
