@@ -76,6 +76,10 @@
           -webkit-transform: scale(1.07); /* Safari 3-8 */
           transform: scale(1.07); 
         }
+
+        .dropdown-item.active, .dropdown-item:active {
+            background-color: #B82828;
+        }
     </style>
 
     <%--Nav--%>
