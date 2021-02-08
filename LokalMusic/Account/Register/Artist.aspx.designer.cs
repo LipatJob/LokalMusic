@@ -15,6 +15,24 @@ namespace LokalMusic.Account.Register
     {
 
         /// <summary>
+        /// FirstNameTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FirstNameTxt;
+
+        /// <summary>
+        /// LastNameTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LastNameTxt;
+
+        /// <summary>
         /// ArtistNameTxt control.
         /// </summary>
         /// <remarks>

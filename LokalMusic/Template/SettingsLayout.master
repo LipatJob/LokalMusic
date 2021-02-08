@@ -34,11 +34,19 @@
             align-items: center;
             width: 250px
         }
+
+        .nav-link:link{
+            color:black;
+        }
+
+        .nav-link:visited{
+            color:black;
+        }
     </style>
     <div style="height:100%;">
         <div class="container" style="height:100%;">
             <div class="row"  style="height:100%;">
-                <div class="col-3" style="border-right: 1px solid black;">
+                <div class="col-3 pt-3" style="border-right: 1px solid gray;">
                     <ul class="nav nav-pills flex-column settings-navigation">
                         <li class="nav-item">
                             <h5>Settings</h5>
@@ -54,7 +62,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-9">
+                <div class="col-9 pt-3">
                     <div class="settings-content container" style="padding: 0 160px;">
                         <asp:ContentPlaceHolder ID="SettingsContent" runat="server"></asp:ContentPlaceHolder>
                     </div>
