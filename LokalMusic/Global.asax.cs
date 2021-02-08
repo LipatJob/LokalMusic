@@ -14,5 +14,15 @@ namespace LokalMusic
             RouteConfig.RegisterCustomRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        void Application_Error(object sender, EventArgs e)
+        {
+            // Code that runs when an unhandled error occurs
+            // Exception Ex = Server.GetLastError();
+            // Server.ClearError();
+            // ExceptionLogging.LogErrorToEventViewer(Ex);
+            // Server.Transfer("ErrorPage.aspx");
+
+        }
     }
 }

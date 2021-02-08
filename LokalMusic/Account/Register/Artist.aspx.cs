@@ -17,6 +17,10 @@ namespace LokalMusic.Account.Register
         {
             presenter = new RegisterArtistPresenter(this, new RegisterArtistRepository());
         }
+
+        public string FirstName { get => FirstNameTxt.Text; }
+        public string LastName { get => LastNameTxt.Text; }
+
         public string ArtistName { get => ArtistNameTxt.Text; }
         public string Email { get => EmailTxt.Text; }
         public string Username { get => UsernameTxt.Text; }

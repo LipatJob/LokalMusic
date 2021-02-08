@@ -17,7 +17,8 @@ namespace LokalMusic.Account.Register
         {
             presenter = new RegisterFanPresenter(this, new RegisterFanRepository());
         }
-
+        public string FirstName { get => FirstNameTxt.Text; }
+        public string LastName { get => LastNameTxt.Text; }
         public string Email { get => EmailTxt.Text; }
         public string Username { get => UsernameTxt.Text;  }
         public string Password { get => PasswordTxt.Text;  }
