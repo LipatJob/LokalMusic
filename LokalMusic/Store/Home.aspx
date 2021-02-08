@@ -4,7 +4,9 @@
 
     <style>
         #featured-artist {
-            background-color: #FFDCDC;
+/*            background-color: #FFDCDC;*/
+            background-color: #bd4f6c;
+            background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
         }
 
         h1, p {
@@ -36,7 +38,7 @@
         .card-body {
             margin: -14px -18px 0 -18px;
         }
-
+        
         .card-body p {
             color: black;
             font-size: 13px;
@@ -52,19 +54,24 @@
             font-size: 36px;
         }
 
+        .featured-text-display{
+            color: #FFDCDC;
+        }
     </style>
 
     <div id="featured-artist" class="pt-5 pb-4">
         <div class="container py-2">
             <div class="row">
                 <div class="col-lg-3 col-sm-12">
-                    <h1 class="text-center font-weight-bold featured-text">Featured<br />
-                        Albums
-                    </h1>
-                    <p class="text-center">
-                        Albums Around<br />
-                        the Philippines
-                    </p>
+                    <div class="">
+                        <h1 class="text-center font-weight-bold featured-text featured-text-display">Featured<br />
+                            Albums
+                        </h1>
+                        <p class="text-center featured-text-display" style="font-weight: 600;">
+                            Albums Around<br />
+                            the Philippines
+                        </p>
+                    </div>
                 </div>
 
                 <asp:Repeater runat="server" ID="FeaturedProductRepeater">
@@ -82,7 +89,7 @@
 
     <div id="best-selling-albums" class="container mt-5">
         <div class="row mb-4">
-            <h5 class="my-auto">Bestselling Albums</h5>
+            <h5 class="my-auto ml-4 ml-sm-0">Bestselling Albums</h5>
             <a class="text-danger ml-2 view-all my-auto" id="albumViewAll" runat="server">View All</a>
         </div>
 
@@ -91,7 +98,7 @@
             <asp:Repeater ID="albumContainer" runat="server">
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
-                        <div class="card border-0">
+                        <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
                                 <img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable" alt="album-name" /></a>
                             <div class="card-body">
@@ -109,7 +116,7 @@
 
     <div id="top-artists" class="container mt-4">
         <div class="row mb-4">
-            <h5 class="my-auto">Top Artists</h5>
+            <h5 class="my-auto ml-4 ml-sm-0">Top Artists</h5>
             <a class="text-danger ml-2 view-all my-auto" id="artistViewAll" runat="server">View All</a>
         </div>
 
@@ -118,7 +125,7 @@
             <asp:Repeater ID="artistContainer" runat="server">
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
-                        <div class="card border-0">
+                        <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
                                 <img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable" alt="artist-name" /></a>
                             <div class="card-body">
@@ -135,7 +142,7 @@
 
     <div id="famous-tracks" class="container mt-4">
         <div class="row mb-4">
-            <h5 class="my-auto">Famous Tracks</h5>
+            <h5 class="my-auto ml-4 ml-sm-0">Famous Tracks</h5>
             <a class="text-danger ml-2 view-all my-auto" id="trackViewAll" runat="server">View All</a>
         </div>
 
@@ -144,7 +151,7 @@
             <asp:Repeater ID="trackContainer" runat="server">
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
-                        <div class="card border-0">
+                        <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
                                 <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" /></a>
                             <div class="card-body">
