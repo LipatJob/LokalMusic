@@ -16,6 +16,8 @@ namespace LokalMusic._Code.Models.Publish.Albums
 
         public string TrackName { get; set; }
 
+        public string Status { get; set; }
+
         public DateTime DateAdded { get; set; }
 
         public string Genre { get; set; }

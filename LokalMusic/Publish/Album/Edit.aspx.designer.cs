@@ -114,13 +114,13 @@ namespace LokalMusic.Publish.Album
         protected global::System.Web.UI.WebControls.FileUpload albumCoverFile;
 
         /// <summary>
-        /// unlistBtn control.
+        /// withdrawBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton unlistBtn;
+        protected global::System.Web.UI.WebControls.LinkButton withdrawBtn;
 
         /// <summary>
         /// cancelBtn control.
@@ -139,5 +139,14 @@ namespace LokalMusic.Publish.Album
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button saveBtn;
+
+        /// <summary>
+        /// publishUnpublishBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button publishUnpublishBtn;
     }
 }

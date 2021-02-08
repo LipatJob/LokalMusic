@@ -45,7 +45,7 @@
 
         <h1 class="mb-4">Lokal Artists</h1>
 
-        <div class="pt-3 pb-2 pl-3 pr-3" style="background-color: #F4F4F4;">
+        <div class="pt-3 pb-2 pl-3 pr-3 rounded" style="background-color: #F4F4F4;">
 
             <asp:Repeater ID="artistContainer" runat="server">
                 <ItemTemplate>
@@ -62,7 +62,7 @@
 
                                 <div class="col-md-6 col-md-6 ">
                                     <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
-                                        <h4 class="artist-name" style="color:#B82828;"><%#Eval("ArtistName")%></h4>
+                                        <h4 class="artist-name titleLink" style="color:#B82828;"><%#Eval("ArtistName")%></h4>
                                     </a>
 
                                     <div class="pt-xl-3"></div>

@@ -4,7 +4,8 @@
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <style>
         .nav-header {
-            font: 700 20px verdana;
+            margin-left:8px;
+            font: 600 18px verdana;
         }
 
         #timer {
@@ -90,10 +91,9 @@
 
         <%--Nav--%>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#" runat="server">
-                <img src="~/Content/Images/New Logo.png" width="105" height="40" class="d-inline-block my-auto ml-xl-5" alt="" runat="server">
+            <a class="navbar-brand ml-xl-3" href="/Finance/Reports" runat="server">
+                <img src="~/Content/Images/Logo New Updated.png" height="45" class="d-inline-block my-auto ml-xl-5" alt="" runat="server">
             </a>
-
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <span class="nav-header">Finance</span>
@@ -121,7 +121,7 @@
             </div>
 
 
-            <div class="container body-content">
+            <div class="container body-content pt-3">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
             </div>
         </div>

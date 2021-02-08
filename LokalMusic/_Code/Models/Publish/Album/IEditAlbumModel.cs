@@ -19,5 +19,7 @@ namespace LokalMusic._Code.Models.Publish.Album
         string AlbumCover { get; set; }
 
         bool AlbumCoverIsUpdated { get; set; }
+
+        string Status { get; set; }
     }
 }

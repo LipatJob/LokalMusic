@@ -16,6 +16,8 @@ namespace LokalMusic._Code.Repositories.Account
         {
             string detailsQuery = @"
 SELECT
+    FirstName,
+    LastName,
 	Email,
 	Username
 FROM UserInfo
@@ -24,6 +26,8 @@ WHERE [UserInfo].UserId = @UserId;
             var query = DbHelper.ExecuteDataTableQuery(detailsQuery, ("UserId", userId));
             model.Email = (string)query.Rows[0]["Email"];
             model.Username = (string)query.Rows[0]["Username"];
+            model.FirstName = (string)query.Rows[0]["FirstName"];
+            model.LastName = (string)query.Rows[0]["LastName"];
 
         }
 

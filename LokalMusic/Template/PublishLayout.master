@@ -9,7 +9,7 @@
         }
 
         .btn-publish:hover{
-            background-color: #3e3e3e;
+            background-color: #B82828;
             color: white;
         }
         
@@ -26,9 +26,13 @@
         a:hover{
             text-decoration: none;
         }
+
+        .redtext{
+            color: #B82828;
+        }
     </style>
 
-    <div class="body-content">
+    <div style="padding-top: 60px; padding-bottom: 140px;">
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
 

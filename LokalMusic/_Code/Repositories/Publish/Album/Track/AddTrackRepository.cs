@@ -48,7 +48,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album.Track
         {
             string query = @"
 INSERT INTO Product(ProductTypeId,ProductStatusId,DateAdded,Price,ProductName)
-VALUES (2,1,@dateAdded,@price,@trackName)
+VALUES (2,4,@dateAdded,@price,@trackName)
 
 SELECT SCOPE_IDENTITY();
 ";
@@ -122,6 +122,27 @@ SELECT SCOPE_IDENTITY();
             }
 
             return int.Parse(genreId.ToString());
+        }
+
+        public bool ValidateMaxTrackCount(int albumId)
+        {
+            string query = @"
+SELECT COUNT(TrackId) AS TrackCount
+FROM Track
+LEFT JOIN Product
+ON Track.TrackId = Product.ProductId
+WHERE Track.AlbumId = @AlbumId
+AND Product.ProductStatusId != 2;
+";
+            var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
+
+            bool maxReached;
+            if ((int)result >= 20)
+                maxReached = true;
+            else
+                maxReached = false;
+
+            return maxReached;
         }
     }
 

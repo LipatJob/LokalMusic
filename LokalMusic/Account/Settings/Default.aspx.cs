@@ -22,6 +22,10 @@ namespace LokalMusic.Account.Settings
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (AuthenticationHelper.LoggedIn == false)
+            {
+                NavigationHelper.RedirectReturnAddress("~/Account/Login");
+            }
             presenter.PageLoad();
             if (IsPasswordChanged())
             {
@@ -34,6 +38,8 @@ namespace LokalMusic.Account.Settings
         public string OldPassword { get => OldPasswordTxt.Text; }
         public string NewPassword { get => NewPasswordTxt.Text; }
         public string ConfrimNewPassword { get => ConfirmNewPasswordTxt.Text; }
+        public string FirstName { get => FirstNameTxt.Text; set => FirstNameTxt.Text = value; }
+        public string LastName { get => LastNameTxt.Text; set => LastNameTxt.Text = value; }
 
         private bool IsPasswordChanged()
         {

@@ -3,8 +3,7 @@ using LokalMusic._Code.Models.Publish;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
+using System.Globalization;
 
 namespace LokalMusic._Code.Repositories.Publish
 {
@@ -18,13 +17,16 @@ SELECT
     Product.ProductId,
     FileInfo.FileName AS AlbumCoverLink,
     Product.ProductName AS AlbumName,
+    ProductStatus.StatusName AS Status,
     Product.DateAdded,
     Album.ProducerName AS Producer,
     Product.Price,
     (SELECT
         COUNT(TrackId) AS TrackCount
     FROM Track
-    WHERE Track.AlbumId = Album.AlbumId) AS TrackCount,
+    LEFT JOIN Product ON Track.TrackId = Product.ProductId
+    WHERE Track.AlbumId = Album.AlbumId
+    AND Product.ProductStatusId != 2) AS TrackCount,
     (SELECT
         COUNT(TransactionId)
     FROM TransactionProduct
@@ -32,6 +34,7 @@ SELECT
 FROM Product
     RIGHT JOIN Album ON Product.ProductId = Album.AlbumId
     LEFT JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
+    LEFT JOIN ProductStatus ON Product.ProductStatusId = ProductStatus.ProductStatusId
 WHERE Album.UserId = @ArtistId
 ";
 
@@ -40,13 +43,14 @@ WHERE Album.UserId = @ArtistId
             var items = new List<AlbumsItem>();
             foreach (DataRow row in result.Rows)
             {
-                if ((int)row["ProductStatusId"] == 1)
+                if ((int)row["ProductStatusId"] != 2)
                 {
                     items.Add(new AlbumsItem()
                     {
                         AlbumId = (int)row["ProductId"],
                         AlbumCoverLink = (string)row["AlbumCoverLink"],
                         AlbumName = (string)row["AlbumName"],
+                        Status = new CultureInfo("en").TextInfo.ToTitleCase(row["Status"].ToString().ToLower()),
                         DateAdded = (DateTime)row["DateAdded"],
                         Producer = (string)row["Producer"],
                         Price = (decimal)row["Price"],

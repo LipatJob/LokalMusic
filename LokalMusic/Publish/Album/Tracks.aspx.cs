@@ -9,6 +9,7 @@ namespace LokalMusic.Publish
     public partial class Tracks : System.Web.UI.Page
     {
         private TracksPresenter Presenter;
+        private int AlbumId;
 
         public TracksModel Model { get; set; }
 
@@ -21,13 +22,36 @@ namespace LokalMusic.Publish
             TrackItemRepeater.DataSource = Model.TracksItems;
             TrackItemRepeater.DataBind();
 
-            int AlbumId = int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
+            AlbumId = int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
             addTrack.HRef = "~/Publish/Album/" + AlbumId + "/Track/Add";
+
+            if (Model.TracksItems.Count < 1)
+                instruction.Visible = true;
+            else
+                instruction.Visible = false;
+
+            ValidateMaxTrackCount();
         }
 
         public Tracks()
         {
             Presenter = new TracksPresenter(this, new TracksRepository());
+        }
+
+        private void ValidateMaxTrackCount()
+        {
+            bool maxReached = Presenter.ValidateMaxTrackCount();
+
+            if (maxReached)
+            {
+                addTrackBtn.Disabled = true;
+                maxAlert.Visible = true;
+            }
+            else
+            {
+                addTrackBtn.Disabled = false;
+                maxAlert.Visible = false;
+            }
         }
     }
 }

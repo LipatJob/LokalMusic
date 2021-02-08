@@ -27,5 +27,7 @@ namespace LokalMusic._Code.Models.Publish.Album.Track
         bool TrackIsUpdated { get; set; }
 
         bool ClipIsUpdated { get; set; }
+
+        string Status { get; set; }
     }
 }

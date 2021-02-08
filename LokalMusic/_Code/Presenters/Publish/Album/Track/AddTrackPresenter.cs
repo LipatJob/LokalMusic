@@ -37,5 +37,10 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
         {
             addTrackRepository.AddTrack(viewModel, AlbumId, viewModel.UploadedTrackFile, viewModel.UploadedClipFile);
         }
+
+        public bool ValidateMaxTrackCount()
+        {
+            return addTrackRepository.ValidateMaxTrackCount(AlbumId);
+        }
     }
 }

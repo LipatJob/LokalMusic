@@ -45,5 +45,9 @@ namespace LokalMusic._Code.Presenters.Publish.Albums
             };
         }
 
+        public bool ValidateMaxTrackCount()
+        {
+            return tracksRepository.ValidateMaxTrackCount(AlbumId);
+        }
     }
 }

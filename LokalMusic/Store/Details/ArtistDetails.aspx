@@ -3,11 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        #img-bottom p {
-            color: #969696;
-            font-size: 13px;
-        }
-
         #artist-img img{
             min-width: 200px;
             min-height: 10px;
@@ -17,7 +12,7 @@
             color: #B82828;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight:600;
-            font-size: 25px;
+            font-size: 28px;
         }
 
         #price{
@@ -28,25 +23,12 @@
             font-size: 23px;
         }
 
-         #location{
-            font-size:16px;
-            color: #3C3C3C;
-            font-weight: 600;
-        }
-
-        #location{
-            margin-top: -8px;
-        }
-        
-
-        #bio p {
-            line-height: 30px;
-        }
-
-        #date-released{
+        .text-grey{
             color: #757575;
-            font-weight: 600;
-            font-size: 13px;
+        }
+
+        .text-dark{
+            color: #3C3C3C;
         }
     </style>
 
@@ -64,17 +46,38 @@
 
         <div class="row">
 
-            <asp:Repeater ID="artistContainer" runat="server">
-                <ItemTemplate>
+            <%--Summary--%>
+            <div class="col-lg-3 col-md-4 ml-sm-0 mr-sm-0 ml-5 mr-5 ">
 
-                    <%--Image--%>
-                    <div class="col-lg-3 col-md-5">
+                <asp:Repeater ID="artistContainer" runat="server">
+                    <ItemTemplate>
 
+                        <%--photo--%>
                         <div class="w-100" id="artist-img">
                             <img src=<%#Eval("ArtistImage") %> runat="server" alt="artist's profile image" class="mx-auto d-block shadow rounded border w-100"/>
                         </div>
 
-                        <div class="mt-3"  id="img-bottom">
+                        <%--left aligned--%>
+                        <div class="mt-4">
+                            <h4 id="artist-name"><%#Eval("ArtistName")%></h4>
+
+                            <p class="text-grey" style="font-weight:600; font-size: 15px;">
+                                <i><%#Eval("Location")%></i>
+                            </p>
+
+                            <p style="font-size: 14px; font-weight: 700; margin-top: -10px;" class="text-dark">
+                                <%#Eval("Genres")%>
+                            </p>
+                        </div>
+
+                        <%--right aligned--%>
+                        <div class="text-right">
+                            <p style="font-weight: 600; color:black; margin-top: -10px;"><%#Eval("Bio")%></p>
+
+                            <p style="font-size: 14px; font-weight: 600; margin-top: -7px;">joined <%#Eval("DateJoined", "{0:MMMM dd, yyyy}")%></p>
+                        </div>
+
+                        <%--<div class="mt-3"  id="img-bottom">
                             <div class="row">
                                 <div class="col-6">
                                     <p class=""><%#Eval("AlbumCount")%> album(s), <%#Eval("TrackCount")%> track(s)</p>
@@ -84,86 +87,57 @@
                                     <p class="text-right">genre(s): <%#Eval("Genres")%></p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>--%>
+                    </ItemTemplate>
+                </asp:Repeater>
 
-
-                    <%--Bio--%>
-                    <div class="col-lg-9 col-md-5 w-100">
-
-                        <div class="row w-100 ml-2">
-                            <h3 id="artist-name" class=""><%#Eval("ArtistName")%></h3>
-                        </div>
-
-                        <div class="row ml-2">
-                            <p id="location"><%#Eval("Location")%></p>
-                        </div>
-
-                        <div class="row ml-2 mt-2" id="bio">
-                            <p><%#Eval("Bio")%></p>
-                        </div>
-
-
-                        <div class="row ml-2 mt-sm-3">
-                            <p id="date-released">joined <%#Eval("DateJoined", "{0:MMMM dd, yyyy}")%></p>
-                        </div>
-                    </div>
-
-                </ItemTemplate>
-            </asp:Repeater>
-
-        </div>
-
-        <%--list of albums --%>
-
-        <h5 class="mt-4" style="color:#7A7A7A; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Artist's Albums</h5>
-
-        <div class="p-3 mt-4" style="background-color: #F4F4F4;">
-            <div class="table-responsive shadow-sm rounded" style="background-color: #FFFFFF">
-                <table class="table table-striped">
-
-                    <thead>
-                        <tr class="text-center font-weight-bold">
-                            <td></td>
-                            <td >Album Name</td>
-                            <td>Genres</td>
-                            <td>Price</td>
-                            <td>Add to Cart</td>
-                        </tr>
-                    </thead>
-                
-                    <tbody>
-
-                        <asp:Repeater ID="albumsContainer" runat="server">
-                            <ItemTemplate>
-
-                                <tr class="text-center h-100 my-auto">
-                                    <td class="">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server">
-                                            <img src=<%#Eval("AlbumCover") %> width="35" height="35" class="mx-auto img-hoverable" runat="server" style="margin: -5px;"/>
-                                        </a>
-                                    </td> 
-                                    <td class="emphasize">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
-                                            <%#Eval("AlbumName") %>
-                                        </a>
-                                    </td>
-                                    <td><%#Eval("Genres") %></td>
-                                    <td class="emphasize">₱<%#Eval("Price") %></td>
-                                    <td>
-                                        <button onclick='AddToCart(<%#Eval("AlbumId")%>); return false;'> <%-- GetUrl --%>
-                                            <img src="../../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                            </ItemTemplate>
-                        </asp:Repeater>
-
-                    </tbody>
-
-                </table>
             </div>
+
+            <%--artists--%>
+            <div class="col-lg-9 col-md-8">
+                <div class="row">
+                    <asp:Repeater ID="albumsContainer" runat="server">
+                        <ItemTemplate>
+                         
+                        <div class="col-lg-5 col-sm-6 pb-4 ml-lg-4">
+                            <div class="card bg-white shadow border-0 rounded ml-sm-1 mr-sm-1 ml-5 mr-5 h-100">
+                                <div class="card-body" style="margin-bottom: -8px;">
+
+                                    <%--date released & genre(s)--%>
+                                    <div class="row" style="margin-top:-8px;">
+                                        <div class="<%--col-6--%>col-12">
+                                            <p class="text-dark" style="font-size:14px; font-weight:600;"><i><%#Eval("ReleaseDate", "{0:MMM-dd-yy}") %></i></p>
+                                        </div>
+
+                                        <%--<div class="col-6 text-right">
+                                            <p class="text-grey" style="font-size:14px; font-weight:600;"><i><%#Eval("Genres") %></i></p>
+                                        </div>--%>
+                                    </div>
+
+                                    <%--album cover--%>
+                                    <a href=<%#Eval("DetailsUrl") %> runat="server">
+                                        <img src=<%#Eval("AlbumCover") %>  class="mx-auto img-hoverable w-100" runat="server" style="margin: -5px;"/>
+                                    </a>
+
+                                    <div class="mt-3">
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
+                                            <span style="font-size:17px;"><%#Eval("AlbumName") %></span>
+                                        </a>
+
+                                        <button class="float-right" style="padding: 0; margin:0; margin-top: -8px; background: -webkit-linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"  onclick='AddToCart(<%#Eval("AlbumId")%>)'>
+                                            <span class="bi bi-cart-plus-fill cart" style="font-size:22px; margin:0; padding: 0; "></span>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+            </div>
+
         </div>
 
     </div>

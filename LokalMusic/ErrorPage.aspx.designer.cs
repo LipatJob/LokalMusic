@@ -7,38 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LokalMusic.Publish
+namespace LokalMusic
 {
 
 
-    public partial class Albums
+    public partial class ErrorPage
     {
 
         /// <summary>
-        /// ArtistName control.
+        /// errorTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ArtistName;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorTitle;
 
         /// <summary>
-        /// AlbumItemRepeater control.
+        /// errorText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater AlbumItemRepeater;
-
-        /// <summary>
-        /// instruction control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl instruction;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorText;
     }
 }

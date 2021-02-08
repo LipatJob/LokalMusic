@@ -30,6 +30,7 @@ namespace LokalMusic.Publish.Album.Track
         public TimeSpan TrackFileDuration { get; set; }
         public string ClipFile { get => clipSource.Src; set => clipSource.Src = value; }
         public TimeSpan ClipFileDuration { get; set; }
+        public string Status { get; set; }
         public HttpPostedFile UploadedTrackFile => trackFile.PostedFile;
         public HttpPostedFile UploadedClipFile => clipFile.PostedFile;
 
@@ -43,6 +44,26 @@ namespace LokalMusic.Publish.Album.Track
                 Presenter.PageLoad();
 
                 viewTracks.HRef = "~/Publish/Album/" + AlbumId;
+                SetPublishUnpublishBtn();
+            }
+        }
+
+        private void SetPublishUnpublishBtn()
+        {
+            if (Status == "PUBLISHED")
+            {
+                publishUnpublishBtn.Text = "Unpublish";
+                publishUnpublishBtn.Enabled = true;
+            }
+            else
+            {
+                publishUnpublishBtn.Text = "Publish";
+
+                bool albumIsPublished = Presenter.GetAlbumIsPublished();
+                if (albumIsPublished)
+                    publishUnpublishBtn.Enabled = true;
+                else
+                    publishUnpublishBtn.Enabled = false;
             }
         }
 
@@ -69,6 +90,29 @@ namespace LokalMusic.Publish.Album.Track
             Presenter.LoadTrackDetails();
         }
 
+        protected void withdrawBtn_Click(object sender, EventArgs e)
+        {
+            Presenter.WithdrawTrack();
+            NavigationHelper.Redirect("~/Publish/Album/" + AlbumId);
+        }
+
+        protected void publishUnpublishBtn_Click(object sender, EventArgs e)
+        {
+            string status = Presenter.GetTrackStatus();
+
+            if (status == "PUBLISHED")
+            {
+                Presenter.UnpublishTrack();
+            }
+            else
+            {
+                saveBtn_Click(saveBtn, EventArgs.Empty);
+                Presenter.PublishTrack();
+            }
+
+            NavigationHelper.Redirect("~/Publish/Album/" + AlbumId);
+        }
+
         protected void trackNameTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
             new ValidationHelper((IValidator)source, args)
@@ -80,25 +124,17 @@ namespace LokalMusic.Publish.Album.Track
 
         protected void priceTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            decimal validDecimal;
-
             new ValidationHelper((IValidator)source, args)
                 .AddRule(
                     rule: ValidUtils.IsNotEmpty(priceTxt.Text),
-                    errorMessage: "Please enter the track price")
-                .AddRule(
-                    rule: () => decimal.TryParse(priceTxt.Text, out validDecimal),
-                    errorMessage: "Please enter numbers only")
+                    errorMessage: "Please enter the album price")
                 .AddRule(
                     rule: ValidUtils.IsValidPrice(priceTxt.Text),
                     errorMessage: "Price should be more than zero")
+                .AddRule(
+                    rule: () => decimal.Parse(priceTxt.Text) < (decimal)214748.3647,
+                    errorMessage: "Price can't be more than 214,748.3647")
                 .Validate();
-        }
-
-        protected void unlistBtn_Click(object sender, EventArgs e)
-        {
-            Presenter.UnlistTrack();
-            NavigationHelper.Redirect("~/Publish/Album/" + AlbumId);
         }
     }
 }

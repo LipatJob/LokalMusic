@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Models.Store;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Store;
 using LokalMusic._Code.Repositories;
 using LokalMusic._Code.Repositories.Store;
 using System;
@@ -23,6 +24,10 @@ namespace LokalMusic.Store
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Exception Ex = Server.GetLastError();
+            //Server.ClearError();
+            //NavigationHelper.Redirect("Error/404/Error encountered in home");
+
             // bind url to view links
             albumViewAll.HRef = $"~/Store/Albums/{"s1"}/{"asc"}";
             artistViewAll.HRef = $"~/Store/Artists/{"s1"}/{"asc"}";

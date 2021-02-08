@@ -30,7 +30,7 @@ namespace LokalMusic._Code.Repositories.Publish.Album
             string query = @"
 INSERT INTO Product(ProductTypeId,ProductStatusId,DateAdded,Price,ProductName)
 VALUES
-(1,1,@dateAdded,@price,@albumName);
+(1,4,@dateAdded,@price,@albumName);
 
 SELECT SCOPE_IDENTITY();
 ";
