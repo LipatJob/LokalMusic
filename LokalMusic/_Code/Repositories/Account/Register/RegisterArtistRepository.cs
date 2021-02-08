@@ -25,12 +25,14 @@ namespace LokalMusic._Code.Repositories.Account.Register
             int userStatusId = GetUserStatusId();
 
             string query = @"
-INSERT INTO UserInfo(UserTypeId, UserStatusId, Email, Username, Password, DateRegistered)
-VALUES (@userTypeId, @userStatusId, @email, @username, @password, @dateRegistered)
+INSERT INTO UserInfo(FirstName, LastName, UserTypeId, UserStatusId, Email, Username, Password, DateRegistered)
+VALUES (@firstName, @lastName, @userTypeId, @userStatusId, @email, @username, @password, @dateRegistered)
 SELECT CONVERT(int, SCOPE_IDENTITY())";
 
             userId = (int) DbHelper.ExecuteScalar(
                 query,
+                ("firstName", model.FirstName),
+                ("lastName", model.LastName),
                 ("userTypeId", userTypeId),
                 ("userStatusId", userStatusId),
                 ("email", model.Email),

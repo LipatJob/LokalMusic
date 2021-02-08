@@ -38,6 +38,24 @@ namespace LokalMusic.Publish.Album.Track
 
             AlbumId = NavigationHelper.GetRouteValue("AlbumId").ToString();
             viewTracks.HRef = "~/Publish/Album/" + AlbumId;
+
+            ValidateMaxTrackCount();
+        }
+
+        private void ValidateMaxTrackCount()
+        {
+            bool maxReached = Presenter.ValidateMaxTrackCount();
+
+            if (maxReached)
+            {
+                addBtn.Enabled = false;
+                maxAlert.Visible = true;
+            }
+            else
+            {
+                addBtn.Enabled = true;
+                maxAlert.Visible = false;
+            }
         }
 
         protected void addBtn_Click(object sender, EventArgs e)
@@ -69,18 +87,16 @@ namespace LokalMusic.Publish.Album.Track
 
         protected void priceTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            decimal validDecimal;
-
             new ValidationHelper((IValidator)source, args)
                 .AddRule(
                     rule: ValidUtils.IsNotEmpty(priceTxt.Text),
-                    errorMessage: "Please enter the track price")
-                .AddRule(
-                    rule: () => decimal.TryParse(priceTxt.Text, out validDecimal),
-                    errorMessage: "Please enter numbers only")
+                    errorMessage: "Please enter the album price")
                 .AddRule(
                     rule: ValidUtils.IsValidPrice(priceTxt.Text),
                     errorMessage: "Price should be more than zero")
+                .AddRule(
+                    rule: () => decimal.Parse(priceTxt.Text) < (decimal)214748.3647,
+                    errorMessage: "Price can't be more than 214,748.3647")
                 .Validate();
         }
 

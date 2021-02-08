@@ -18,6 +18,7 @@ SELECT
     Track.AlbumId,
     FileInfo.[FileName] AS TrackCoverLink,
     Product.ProductName AS TrackName,
+    ProductStatus.StatusName AS Status,
     Product.DateAdded,
     Genre.GenreName AS Genre,
     Track.TrackDuration AS Duration,
@@ -31,6 +32,7 @@ FROM Track
     LEFT JOIN Product ON Track.TrackId = Product.ProductId
     LEFT JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
     LEFT JOIN Genre ON Track.GenreId = Genre.GenreId
+    LEFT JOIN ProductStatus ON Product.ProductStatusId = ProductStatus.ProductStatusId
 WHERE Album.AlbumId = @AlbumId
 ";
 
@@ -39,7 +41,7 @@ WHERE Album.AlbumId = @AlbumId
             var Items = new List<TracksItem>();
             foreach (DataRow row in result.Rows)
             {
-                if ((int)row["ProductStatusId"] == 1)
+                if ((int)row["ProductStatusId"] != 2)
                 {
                     Items.Add(new TracksItem()
                     {
@@ -47,6 +49,7 @@ WHERE Album.AlbumId = @AlbumId
                         AlbumId = (int)row["AlbumId"],
                         TrackCoverLink = (string)row["TrackCoverLink"],
                         TrackName = (string)row["TrackName"],
+                        Status = new CultureInfo("en").TextInfo.ToTitleCase(row["Status"].ToString().ToLower()),
                         DateAdded = (DateTime)row["DateAdded"],
                         Genre = new CultureInfo("en").TextInfo.ToTitleCase(row["Genre"].ToString().ToLower()),
                         Duration = (TimeSpan)row["Duration"],
@@ -85,6 +88,27 @@ WHERE Album.AlbumId = @AlbumId
             }
 
             return albumName;
+        }
+
+        public bool ValidateMaxTrackCount(int albumId)
+        {
+            string query = @"
+SELECT COUNT(TrackId) AS TrackCount
+FROM Track
+LEFT JOIN Product
+ON Track.TrackId = Product.ProductId
+WHERE Track.AlbumId = @AlbumId
+AND Product.ProductStatusId != 2;
+";
+            var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
+
+            bool maxReached;
+            if ((int)result >= 20)
+                maxReached = true;
+            else
+                maxReached = false;
+
+            return maxReached;
         }
     }
 }

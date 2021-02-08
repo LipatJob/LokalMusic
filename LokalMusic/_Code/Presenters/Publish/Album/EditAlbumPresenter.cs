@@ -36,14 +36,34 @@ namespace LokalMusic._Code.Presenters.Publish.Album
             editAlbumRepository.GetAlbumDetails(viewModel, AlbumId);
         }
 
+        public bool GetAlbumHasTrack()
+        {
+            return editAlbumRepository.GetAlbumHasTrack(AlbumId);
+        }
+
         public void EditAlbum()
         {
             editAlbumRepository.EditAlbum(viewModel, AlbumId, viewModel.UploadedAlbumCover);
         }
         
-        public void UnlistAlbum()
+        public void WithdrawAlbum()
         {
-            editAlbumRepository.UnlistAlbum(AlbumId);
+            editAlbumRepository.WithdrawAlbum(AlbumId);
+        }
+
+        public string GetAlbumStatus()
+        {
+            return editAlbumRepository.GetAlbumStatus(AlbumId);
+        }
+
+        public void UnpublishAlbum()
+        {
+            editAlbumRepository.UnpublishAlbum(AlbumId);
+        }
+
+        public void PublishAlbum()
+        {
+            editAlbumRepository.PublishAlbum(AlbumId);
         }
     }
 }

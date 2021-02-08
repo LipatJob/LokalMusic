@@ -2,6 +2,8 @@
 {
     public interface IRegisterFanModel
     {
+        string FirstName { get; }
+        string LastName { get; }
         string Email { get; }
         string Username { get; }
         string Password { get; }

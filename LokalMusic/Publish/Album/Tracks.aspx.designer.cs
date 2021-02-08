@@ -42,6 +42,24 @@ namespace LokalMusic.Publish
         protected global::System.Web.UI.HtmlControls.HtmlAnchor addTrack;
 
         /// <summary>
+        /// addTrackBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton addTrackBtn;
+
+        /// <summary>
+        /// maxAlert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label maxAlert;
+
+        /// <summary>
         /// TrackItemRepeater control.
         /// </summary>
         /// <remarks>
@@ -49,5 +67,14 @@ namespace LokalMusic.Publish
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater TrackItemRepeater;
+
+        /// <summary>
+        /// instruction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl instruction;
     }
 }
