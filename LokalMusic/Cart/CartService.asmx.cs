@@ -25,11 +25,11 @@ namespace LokalMusic.Store
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public string AddProductToCart(string productId)
+        public object AddProductToCart(string productId)
         {
-            // add try catch
             int addToCartStatus = AddToCartHelper.AddProductToCart(int.Parse(productId));
-            return AddToCartHelper.GetAddToCartMessage(addToCartStatus);
+
+            return new object[] { addToCartStatus, AddToCartHelper.GetAddToCartMessage(addToCartStatus) };
         }
 
         [WebMethod(EnableSession = true)]
