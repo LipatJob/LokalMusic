@@ -34,6 +34,23 @@ namespace LokalMusic.Store
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
+        public void RemoveProductFromCart(object productIds)
+        {
+            string[] tempIds = Regex.Split(productIds.ToString(), ",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+
+            for (int i = 0; i < tempIds.Length; i++)
+                tempIds[i] = tempIds[i].Replace(']', ' ').Replace('[', ' ').Replace('"', ' ').Trim();
+
+            List<int> pIds = new List<int>();
+
+            foreach (string id in tempIds)
+                pIds.Add( int.Parse(id) );
+
+            AddToCartHelper.RemoveProductsFromCart(pIds);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod]
         public bool ProcessCheckout(object forCheckout, string paymentProvider)
         {
             List<CheckoutItem> cart = new List<CheckoutItem>();
