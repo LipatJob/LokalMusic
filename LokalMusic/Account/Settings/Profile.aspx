@@ -20,7 +20,7 @@
         <div class="change-profile-picture-container">
             <div class="change-profile-picture mb-3">
                 <%-- Profile Picture--%>
-                <asp:Image ID="ProfilePictureImg" mageUrl="~/Content/Images/Logo.png" runat="server" CssClass="profile-picture shadow mb-3 ProfilePictureImg" />
+                <asp:Image ID="ProfilePictureImg" runat="server" CssClass="profile-picture shadow mb-3 ProfilePictureImg" />
 
                 <%-- Profile Picture File Upload--%>
                 <div class="custom-file">

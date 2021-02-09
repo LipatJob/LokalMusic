@@ -14,7 +14,7 @@ namespace LokalMusic.Account.Settings
 {
     public partial class Profile : System.Web.UI.Page, IProfileSettingsViewModel
     {
-        public string ProfileImage { get => ProfilePictureImg.ImageUrl; set => ProfilePictureImg.ImageUrl = value; }
+        public string ProfileImage { get => ProfilePictureImg.ImageUrl; set => ProfilePictureImg.ImageUrl = value + $"?t={DateTime.Now.Millisecond}"; }
         public string ArtistBio { get => BioTxt.Text; set => BioTxt.Text = value; }
         public string ArtistName { get => ArtistNameTxt.Text; set => ArtistNameTxt.Text = value; }
 
@@ -37,7 +37,12 @@ namespace LokalMusic.Account.Settings
             {
                 NavigationHelper.RedirectReturnAddress("~/Account/Login");
             }
-            presenter.PageLoad();
+
+            if(!Page.IsPostBack)
+            {
+                presenter.PageLoad();
+
+            }
             if (IsProfileImageChanged())
             {
                 ShowProfileImageChangedMessage();
