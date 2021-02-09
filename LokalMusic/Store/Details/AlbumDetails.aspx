@@ -107,7 +107,7 @@
 
                         <div class="row w-100 ml-2">
                             <h3 id="album-name" class=""><%#Eval("AlbumName") %></h3>
-                            <p id="price" class="ml-auto">₱<%#Eval("Price") %></p> 
+                            <p id="price" class="ml-auto">₱<%#Eval("Price", "{0:n}") %></p> 
                         </div>
 
                 
@@ -170,7 +170,7 @@
                                         </a>
                                     </td>
                                     <td><%#Eval("Genre") %></td>
-                                    <td class="emphasize">₱<%#Eval("Price") %></td>
+                                    <td class="emphasize">₱<%#Eval("Price", "{0:n}") %></td>
                                     <td>
                                         <button onclick='AddToCart(<%#Eval("TrackId")%>); return false;'> <%-- GetUrl --%>
                                             <img src="../../Content/Images/cart.png" class="" width="20" height="20" runat="server"/>

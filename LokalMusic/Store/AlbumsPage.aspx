@@ -62,7 +62,7 @@
                                 </div>
 
                                 <div class="col-md-3 col-xl-3 col-md-6 text-right">
-                                    <h4 class="album-price">₱<%#Eval("Price")%></h4>
+                                    <h4 class="album-price">₱<%#Eval("Price", "{0:n}")%></h4>
                                     
                                     <div class="mt-xl-4 pt-xl-5 mt-md-5">
                                         <a class="btn btn-danger mt-xl-5 mt-md-3" style="background-color: #B82828; font-size: 12px; font-weight: 600"  onclick='AddToCart(<%#Eval("AlbumId")%>)'>Add to Cart</a>     
