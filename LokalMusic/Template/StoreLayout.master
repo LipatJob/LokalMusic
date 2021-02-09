@@ -209,8 +209,16 @@
                 data: "{ 'productId' : '" + productId + "'}",
                 //data: JSON.stringify(trackId),
                 dataType: "json",
-                success: function (message) {
-                    alert(message.d);
+                success: function (result) {
+
+                    var needsLogin = '<%Response.Write(AddToCartHelper.ADD_TO_CART_LOGIN);%>';
+
+                    if (result.d[0] == needsLogin) {
+                        window.location.href = "/Account/Login?ReturnAddress=" + window.location.pathname;
+                    } else {
+                        alert(result.d[1]);
+                    }
+
                 },
                 error: function () {
                     alert("An Error has occured");
