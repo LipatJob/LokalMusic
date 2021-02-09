@@ -77,7 +77,7 @@
                 <asp:Repeater runat="server" ID="FeaturedProductRepeater">
                     <ItemTemplate>
                         <div class="col-lg-3 col-md-4 col-sm-5 mb-lg-0 mx-auto mb-sm-4 mb-4">
-                            <a href="<%# Eval("MarketPage")%>"" class="" target="_blank">
+                            <a href="<%# Eval("MarketPage")%>"" class="">
                                 <img src="<%# Eval("ProductImage")%>"" class="img-hoverable mx-auto d-block shadow rounded" style="width:200px; height:auto;" alt="feature-artist-name" />
                             </a>
                         </div>
@@ -103,7 +103,7 @@
                                 <img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable" alt="album-name" /></a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("AlbumName")%></p>
-                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
+                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price", "{0:n}")%></p>
                                 <p class="by-artist float-right" style="color: #767676;"><%#Eval("ArtistName")%></p>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                                 <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" /></a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("TrackName")%></p>
-                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
+                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price", "{0:n}")%></p>
                                 <p class="by-artist float-right" style="color: #767676;"><%#Eval("ArtistName")%></p>
                             </div>
                         </div>

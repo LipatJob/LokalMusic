@@ -75,6 +75,10 @@
           -webkit-transform: scale(1.07); /* Safari 3-8 */
           transform: scale(1.07); 
         }
+
+        .dropdown-item.active, .dropdown-item:active {
+            background-color: #B82828;
+        }
     </style>
 
     <%--Nav--%>
@@ -204,8 +208,16 @@
                 data: "{ 'productId' : '" + productId + "'}",
                 //data: JSON.stringify(trackId),
                 dataType: "json",
-                success: function (message) {
-                    alert(message.d);
+                success: function (result) {
+
+                    var needsLogin = '<%Response.Write(AddToCartHelper.ADD_TO_CART_LOGIN);%>';
+
+                    if (result.d[0] == needsLogin) {
+                        window.location.href = "/Account/Login?ReturnAddress=" + window.location.pathname;
+                    } else {
+                        alert(result.d[1]);
+                    }
+
                 },
                 error: function () {
                     alert("An Error has occured");
