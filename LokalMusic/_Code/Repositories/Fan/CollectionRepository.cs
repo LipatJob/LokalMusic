@@ -42,12 +42,13 @@ SELECT
 	[Product].ProductId AS TrackId,
 	[Album].AlbumId AS AlbumId
 FROM [OrderInfo]
-	INNER JOIN [ProductOrder] ON [ProductOrder].OrderId = [OrderInfo].OrderId
-	INNER JOIN [Product] ON [ProductOrder].ProductId = [Product].ProductId
-	INNER JOIN [ProductType] ON [ProductType].ProductTypeId = [Product].ProductTypeId
-	INNER JOIN [Album] ON [Album].AlbumId = [Product].ProductId
-	INNER JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
-	INNER JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
+	LEFT JOIN [ProductOrder] ON [ProductOrder].OrderId = [OrderInfo].OrderId
+	LEFT JOIN [Product] ON [ProductOrder].ProductId = [Product].ProductId
+	LEFT JOIN [ProductType] ON [ProductType].ProductTypeId = [Product].ProductTypeId
+	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
+	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId , [Product].ProductId)
+	LEFT JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
+	LEFT JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
 WHERE
 	[OrderInfo].CustomerId = @UserId;
 ";
