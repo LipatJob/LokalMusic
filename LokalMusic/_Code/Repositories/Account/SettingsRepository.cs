@@ -1,6 +1,7 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Models.Account;
 using LokalMusic._Code.Models.Account.Settings;
+using LokalMusic._Code.Models.Finance;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -75,35 +76,35 @@ FROM UserInfo
 
         }
 
-        public IList<PaymentHistoryItem> GetPaymentHistory(int? userId)
+        public IList<ReceiptListItem> GetPaymentHistory(int? userId)
         {
-            string productNameQuery = @"
+            string query = @"
 SELECT
-	[OrderInfo].OrderId AS OrderId,
-	MAX([OrderInfo].OrderDate) AS OrderDate,
-	STRING_AGG(ProductName, ', ') AS ItemsPurchased,
-	SUM([ProductOrder].ProductPrice) AS Amount
+	[OrderInfo].OrderId,
+	[OrderInfo].OrderDate,
+	[UserInfo].Username,
+	[OrderInfo].AmountPaid
 FROM [OrderInfo]
-	INNER JOIN [ProductOrder] ON
-		[ProductOrder].OrderId = [OrderInfo].OrderId
-	INNER JOIN Product ON
-		[Product].ProductId = [ProductOrder].ProductId
-WHERE [OrderInfo].CustomerId = @UserId
-GROUP BY [OrderInfo].OrderId
-ORDER BY OrderDate DESC;
+	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
+WHERE [UserInfo].UserId = @UserId
+ORDER BY [OrderInfo].OrderDate ASC;
 ";
-            var result = DbHelper.ExecuteDataTableQuery(productNameQuery, ("UserId", userId));
 
-            return result.AsEnumerable().Select((row) =>
+            var receipts = new List<ReceiptListItem>();
+            var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
+
+            foreach (var row in result.AsEnumerable())
             {
-                return new PaymentHistoryItem()
+                receipts.Add(new ReceiptListItem()
                 {
-                    TransactionId = (int)row["OrderId"],
-                    TransactionDate = (DateTime)row["OrderDate"],
-                    ItemsPurchased = (string)row["ItemsPurchased"],
-                    Amount = (decimal)row["Amount"]
-                };
-            }).ToList();
+                    OrderId = (int)row["OrderId"],
+                    AmountPaid = (decimal)row["AmountPaid"],
+                    OrderDate = (DateTime)row["OrderDate"],
+                    Username = (string)row["Username"]
+                });
+            }
+
+            return receipts;
         }
 
         public void ChangeProfilePicture(int userId, HttpPostedFile file)
@@ -145,6 +146,81 @@ ORDER BY OrderDate DESC;
         {
             string query = "SELECT ProfileImageId FROM UserInfo WHERE UserId = @UserId";
             return DbHelper.ExecuteScalar(query, ("UserId", userId)) != null;
+        }
+
+        internal IList<ReceiptListItem> GetReceipts(int userId)
+        {
+
+            string query = @"
+SELECT
+	[OrderInfo].OrderId,
+	[OrderInfo].OrderDate,
+	[UserInfo].Username,
+	[OrderInfo].AmountPaid
+FROM [OrderInfo]
+	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
+WHERE [UserInfo].UserId = @UserId;
+ORDER BY [OrderInfo].OrderDate DESC;
+";
+
+            var receipts = new List<ReceiptListItem>();
+            var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
+
+            foreach (var row in result.AsEnumerable())
+            {
+                receipts.Add(new ReceiptListItem()
+                {
+                    OrderId = (int)row["OrderId"],
+                    AmountPaid = (decimal)row["AmountPaid"],
+                    OrderDate = (DateTime)row["OrderDate"],
+                    Username = (string)row["Username"]
+                });
+            }
+
+            return receipts;
+        }
+
+        internal ReceiptModel GetReceiptModel(int receiptId)
+        {
+            string modelQuery = @"
+SELECT
+	[OrderInfo].OrderId,
+	[OrderInfo].OrderDate,
+	[UserInfo].Username,
+	[OrderInfo].AmountPaid
+FROM [OrderInfo]
+	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
+WHERE [OrderInfo].OrderId = @OrderId;";
+            var modelResult = DbHelper.ExecuteDataTableQuery(modelQuery, ("OrderId", receiptId)).Rows[0];
+            var model = new ReceiptModel()
+            {
+                OrderId = (int)modelResult["OrderId"],
+                AmountPaid = (decimal)modelResult["AmountPaid"],
+                OrderDate = (DateTime)modelResult["OrderDate"],
+                Username = (string)modelResult["Username"],
+                Products = new List<ReceiptProductItem>()
+            };
+
+            string productsQuery = @"
+SELECT
+	[Product].ProductName + ' (' + [ProductType].TypeName+')' AS ProductName,
+	[ProductOrder].ProductPrice
+FROM [ProductOrder]
+	LEFT JOIN [Product] ON [Product].ProductId = [ProductOrder].ProductId
+	LEFT JOIN [ProductType] ON [Product].ProductTypeId = [ProductType].ProductTypeId
+WHERE [ProductOrder].OrderId = @OrderId;";
+
+            var productsResult = DbHelper.ExecuteDataTableQuery(productsQuery, ("OrderId", receiptId));
+            foreach (var row in productsResult.AsEnumerable())
+            {
+                model.Products.Add(new ReceiptProductItem()
+                {
+                    ProductPrice = (decimal)row["ProductPrice"],
+                    ProductName = (string)row["ProductName"]
+                });
+            }
+
+            return model;
         }
     }
 }
