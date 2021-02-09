@@ -52,7 +52,7 @@
             <asp:TextBox ID="ArtistNameTxt" runat="server" ValidateRequestMode="Disabled" CssClass="form-control" ReadOnly="true" />
         </div>
         <div class="form-group">
-            <asp:Label Text="Bio" runat="server" />
+            <asp:Label Text="Bio" runat="server"  MaxLength="500" />
             <asp:TextBox ID="BioTxt" runat="server" CssClass="form-control" TextMode="MultiLine" ValidationGroup="UpdateBio" />
         </div>
         <%-- Update Bio Button--%>
