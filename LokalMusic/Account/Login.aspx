@@ -46,14 +46,14 @@
 
         <%-- Email --%>
         <div class="form-group">
-            <asp:Label Text="Email" runat="server" />
+            <asp:Label Text="Email" runat="server"  MaxLength="100"/>
             <asp:TextBox ID="EmailTxt" runat="server" CssClass="form-control" type="email" />
             <asp:RequiredFieldValidator ErrorMessage="Please enter your Email" ControlToValidate="EmailTxt" runat="server" CssClass="validation-message" Display="Dynamic"/>
         </div>
 
         <%-- Password --%>
         <div class="form-group">
-            <asp:Label Text="Password" runat="server" />
+            <asp:Label Text="Password" runat="server"  MaxLength="100"/>
             <asp:TextBox ID="PasswordTxt" runat="server" CssClass="form-control" type="password" />
             <asp:RequiredFieldValidator ErrorMessage="Please enter your password" ControlToValidate="PasswordTxt" runat="server" CssClass="validation-message" Display="Dynamic" />
         </div>
