@@ -309,6 +309,7 @@
     <Content Include="Finance\Receipts.aspx" />
     <Content Include="Finance\Reports.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Playlist.aspx" />
     <Content Include="Publish\Albums.aspx" />
     <Content Include="Publish\Album\Add.aspx" />
     <Content Include="Publish\Album\Edit.aspx" />
@@ -571,6 +572,13 @@
     </Compile>
     <Compile Include="Finance\Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Playlist.aspx.cs">
+      <DependentUpon>Playlist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Playlist.aspx.designer.cs">
+      <DependentUpon>Playlist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Publish\Albums.aspx.cs">
       <DependentUpon>Albums.aspx</DependentUpon>
