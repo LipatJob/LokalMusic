@@ -49,7 +49,7 @@ FROM [OrderInfo]
 	INNER JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
 	INNER JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
 WHERE
-	[OrderInfo].CustomerId = @UserId
+	[OrderInfo].CustomerId = @UserId;
 ";
             var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
             foreach (DataRow row in result.Rows)
