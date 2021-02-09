@@ -61,7 +61,7 @@
         <div class="row">
 
             <%--products--%>
-            <div class="col-xl-8">
+            <div class="col-xl-8 mb-xl-0 mb-4">
                 <h3 class="mb-3">Individual Tracks per Artists</h3>
 
                 <%--individual tracks r--%>
@@ -184,6 +184,10 @@
             <%--summary and checkout--%>
             <div class="col-xl-4">
 
+                <div class="text-right mb-2">
+                    <button type="button" id="removeFromCart" onclick="RemoveSelected()" class="btn btn-dark btn-sm" style="font-weight: 600">Remove From Cart</button>
+                </div>
+
                 <%--summary of selected products--%>
                 <div class="card shadow-sm mb-3 border-0" style="background-color: #F4F4F4;">
                     <div class="card-body">
@@ -231,26 +235,26 @@
                         <div class="form-row mt-3">
                             <div class="col-12">
                                 <label for="cardHolderName" class="bg-white w-100 pl-2 rounded pb-0">CARDHOLDER'S NAME</label>
-                                <input type="text" id="cardHolderName" name="cardHolderName" class="form-control border-0 pt-0" placeholder="" required>
+                                <input type="text" id="cardHolderName" name="cardHolderName" class="form-control border-0 pt-0" placeholder="">
                             </div>
                         </div>
 
                         <div class="form-row mt-3">
                             <div class="col-12">
                                 <label for="cardNumber" class="bg-white w-100 pl-2 rounded pb-0">CARD NUMBER</label>
-                                <input type="number" id="cardNumber" name="cardNumber" class="form-control border-0 pt-0"  required min="1000000000000000" max="9999999999999999">
+                                <input type="number" id="cardNumber" name="cardNumber" class="form-control border-0 pt-0"  min="1000000000000000" max="9999999999999999">
                             </div>
                         </div>
 
                         <div class="form-row mt-3">
                             <div class="col-md-8">
                                 <label for="expDate" class="bg-white w-100 pl-2 rounded pb-0">EXPIRATION DATE</label>
-                                <input type="month" id="expDate" name="expDate" class="form-control border-0 pt-0" required>
+                                <input type="month" id="expDate" name="expDate" class="form-control border-0 pt-0" >
                             </div>
 
                             <div class="col-md-4">
                                 <label for="securityCode" class="bg-white w-100 pl-2 rounded pb-0">SEC CODE</label>
-                                <input type="text" id="securityCode" name="securityCode" class="form-control border-0 pt-0" required>
+                                <input type="text" id="securityCode" name="securityCode" class="form-control border-0 pt-0" >
                             </div>
                         </div>
 
@@ -382,8 +386,15 @@
                         contentType: "application/json; charset=utf-8",
                         data: "{ 'forCheckout' : '" + JSON.stringify(items) + "', 'paymentProvider' : '" + providerName + "'}",
                         dataType: "json",
-                        success: function (message) {
-                            alert(message.d);
+                        success: function (result) {
+                            if (result.d) {
+                                username = '<%Response.Write(AuthenticationHelper.Username);%>';
+                                window.location.href = "/Fan/" + username;
+                            }
+                            else {
+                                alert("Something went wrong. Try again later.");
+                            }
+
                         },
                         error: function () {
                             alert("An Error has occured");
@@ -393,6 +404,30 @@
             }
             else {
                 alert("You have not selected any products for checkout.");
+            }
+        }
+
+        function RemoveSelected(){
+            var productIds = [];
+            for (var productId in forCheckout) {
+                productIds.push(productId);
+                console.log(productId);
+            }
+
+            if (productIds.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Cart/CartService.asmx/RemoveProductFromCart",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{ 'productIds' : '" + JSON.stringify(productIds) + "'}",
+                    dataType: "json",
+                    success: function () {
+                        window.location.reload();
+                    },
+                    error: function () {
+                        alert("An Error has occured");
+                    }
+                });
             }
         }
 
