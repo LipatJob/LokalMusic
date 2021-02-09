@@ -34,7 +34,7 @@ namespace LokalMusic.Store
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public string ProcessCheckout(object forCheckout, string paymentProvider)
+        public bool ProcessCheckout(object forCheckout, string paymentProvider)
         {
             List<CheckoutItem> cart = new List<CheckoutItem>();
 
@@ -65,7 +65,8 @@ namespace LokalMusic.Store
             }
 
             bool status = new CartPresenter(new CartRepository()).ProcessCustomerOrder(cart, paymentProvider);
-            return status ? "Your order and payment has been processed successfully. You can view product in your collections." : "Something went wrong. Try again later.";
+
+            return status; /*? "Your order and payment has been processed successfully. You can view product in your collections." : "Something went wrong. Try again later.";*/
         }
     }
 }

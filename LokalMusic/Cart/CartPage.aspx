@@ -382,8 +382,15 @@
                         contentType: "application/json; charset=utf-8",
                         data: "{ 'forCheckout' : '" + JSON.stringify(items) + "', 'paymentProvider' : '" + providerName + "'}",
                         dataType: "json",
-                        success: function (message) {
-                            alert(message.d);
+                        success: function (result) {
+                            if (result.d) {
+                                username = '<%Response.Write(AuthenticationHelper.Username);%>';
+                                window.location.href = "/Fan/" + username;
+                            }
+                            else {
+                                alert("Something went wrong. Try again later.");
+                            }
+
                         },
                         error: function () {
                             alert("An Error has occured");
