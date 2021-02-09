@@ -90,5 +90,13 @@ namespace LokalMusic._Code.Repositories.Cart
             return DbHelper.ExecuteNonQuery(query, ("ProductId", productId), ("UserId", userId));
         }
 
+        public static int RemoveFromCart(int productId, int userId)
+        {
+            string query = "DELETE FROM UserCart WHERE UserId = @UserId AND ProductId = @ProductId";
+
+            int affected = DbHelper.ExecuteNonQuery(query, ("UserId", userId), ("ProductId", productId));
+            return affected;
+        }
+
     }
 }
