@@ -64,7 +64,6 @@
         .cart{
             color: black;
             font-weight: 700;
-            
         }
 
         /* Zoom */
@@ -74,7 +73,7 @@
         .img-hoverable:hover {
           -ms-transform: scale(1.07); /* IE 9 */
           -webkit-transform: scale(1.07); /* Safari 3-8 */
-          transform: scale(1.07); 
+          transform: scale(1.07);
         }
 
         .dropdown-item.active, .dropdown-item:active {
@@ -101,7 +100,7 @@
 
             <div class="form-inline ml-auto mr-md-3">
                 <div class="input-group">
-                
+
                     <input type="text" id="SearchTxt" class="form-control border-0 rounded" placeholder="Search" runat="server" />
                     <div class="input-group-append">
                         <%--<asp:Button ID="SearchBtn" runat="server" Text="Search" CssClass="btn btn-primary my-2 my-sm-0" OnClick="SearchBtn_Click" />--%>
@@ -120,7 +119,7 @@
                         <ul class="navbar-nav ml-xl-2 mr-xl-2 mt-sm-1 mb-md-1">
                             <li class="nav-item dropdown">
 
-                                <a class="nav-link dropdown-toggle" href="~/Account/Collection" id="navbarDropdown" 
+                                <a class="nav-link dropdown-toggle" href="~/Account/Collection" id="navbarDropdown"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server"
                                     style="font-weight:600; font-size:17px; ">
                                     <span style="color:#B82828;"><% Response.Write(AuthenticationHelper.Username); %></span>
