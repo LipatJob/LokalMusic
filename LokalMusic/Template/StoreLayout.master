@@ -198,8 +198,71 @@
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
 
-    <%--AJAX Add to Cart--%>
+    <%--model for track details--%>
+    <div class="modal fade border-0" id="trackModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #bd4f6c; background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);">
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row my-auto mx-auto">
+                                <span id="price" class="" style="color: white; font-weight: 600; font-size: 20px;">₱699.99</span>
+                                <button type="button" class="rounded-0 ml-2" id="addToCart" <%--onclick='AddToCart(<%#Eval("AlbumId")%>)'--%>>
+                                    <img src="~/Content/Images/cart-white.png" class="mb-1" runat="server" width="18" />
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-4"></div>
+
+                        <div class="col-4">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" style="color:white">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pl-0 pr-0">
+                        <img src="#" id="cover" alt="album-cover" class="mx-auto d-block w-50 mt-5 mb-3 shadow-lg" style="border-radius:20px;"/>
+
+                        <%--titles--%>
+                        <div class="text-center" style="color: white">
+                            <p id="track" style="font-size:28px; font-weight:600;">Hello</p>
+                            <p id="artist" style="color:#FFDCDC; font-size:18px; font-weight:500; margin-top:-12px">Adele</p>
+                            <p id="album" style="color:#FFDCDC; font-size:16px; font-weight:500; margin-top:-12px">24</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer border-0 mb-3" >
+                    <div class="row  mx-auto my-auto ">
+                        <div class="col-10 mx-auto my-auto ">
+                            <audio controls src="" id="clip" style="margin-top:5px"></audio>
+                        </div>
+                        <div class="col-2 mx-auto my-auto ">
+                            <button type="button" data-toggle="collapse" data-target="#descriptionCollapse" aria-controls="descriptionCollapse"><img src="~/Content/Images/information-white.png" runat="server" height="25" /></button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 collapse pl-4 pr-4 mt-4 pt-3" id="descriptionCollapse">
+                            <div class="card" style="background-color:#ee6f57;">
+                                <div class="card-body p-5">
+                                     <p id="description" style="color:white; font-weight:600; line-height:30px;"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script>
+        //AJAX Add to Cart
         function AddToCart(productId) {
             $.ajax({
                 type: "POST",
@@ -224,6 +287,38 @@
                 }
             });
             return false;
+        }
+
+        //AJAX Get Track Details
+        function GetTrack(trackId) {
+            $.ajax({
+                type: "POST",
+                url: "/Store/TracksService.asmx/GetTrack",
+                contentType: "application/json; charset=utf-8",
+                data: "{ 'trackId' : '" + trackId + "'}",
+                dataType: "json",
+                success: function (data) {
+                    ShowTrackModel(data.d);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status, thrownError);
+                }
+            });
+        }
+
+        function ShowTrackModel(data) {
+            $("#trackModal").modal('show');
+            $("#track").text(data["TrackName"]);
+            $("#artist").text(data["ArtistName"]);
+            $("#album").text(data["AlbumName"]);
+            $("#price").text("₱"+data["Price"]);
+            $("#description").text(data["Description"]);
+            $("#cover").attr("src", data["AlbumCover"]);
+            $("#clip").attr("src", data["AudioAddress"]);
+            $('#addToCart').attr("onclick", "").click(function () {
+                AddToCart(data["TrackId"]);
+                return false;
+            })
         }
     </script>
 

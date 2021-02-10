@@ -4,6 +4,8 @@ namespace LokalMusic._Code.Models.Store
 {
     public class TrackSummary
     {
+        public TrackSummary() { }
+
         public TrackSummary(int trackId, int albumId, int artistId, string trackName, decimal price, DateTime dateAdded, string albumName, string artistName, string genre, string audioClip, TimeSpan audioClipDuration, TimeSpan audioDuration, string albumCover)
         {
             TrackId = trackId;
