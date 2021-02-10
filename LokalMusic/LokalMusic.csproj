@@ -294,13 +294,15 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\cart-white.PNG" />
+    <Content Include="Content\Images\cart.png" />
     <Content Include="Content\Images\default_artist_image.JPG" />
     <Content Include="Content\Images\default_cover.jpg" />
     <Content Include="Content\Images\Logo New Updated.png" />
     <Content Include="Content\Images\lokal_logo_with_L.png" />
     <Content Include="Content\Images\lokal_logo_puzzle_O.png" />
     <Content Include="Content\Images\New Logo.png" />
-    <Content Include="Content\Images\cart.png" />
+    <Content Include="Content\Images\cart old.png" />
     <Content Include="Content\Images\Old Logo.png" />
     <Content Include="Content\Site.css" />
     <Content Include="ErrorPage.aspx" />
@@ -309,6 +311,7 @@
     <Content Include="Finance\Receipts.aspx" />
     <Content Include="Finance\Reports.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Playlist.aspx" />
     <Content Include="Publish\Albums.aspx" />
     <Content Include="Publish\Album\Add.aspx" />
     <Content Include="Publish\Album\Edit.aspx" />
@@ -571,6 +574,13 @@
     </Compile>
     <Compile Include="Finance\Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Playlist.aspx.cs">
+      <DependentUpon>Playlist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Playlist.aspx.designer.cs">
+      <DependentUpon>Playlist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Publish\Albums.aspx.cs">
       <DependentUpon>Albums.aspx</DependentUpon>
