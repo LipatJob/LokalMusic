@@ -225,7 +225,7 @@
                     </div>
 
                     <div class="pl-0 pr-0">
-                        <img src="../Content/Images/default_cover.jpg" runat="server" class="mx-auto d-block w-50 mt-5 mb-3 shadow-lg" style="border-radius:20px;"/>
+                        <img src="#" id="cover" alt="album-cover" class="mx-auto d-block w-50 mt-5 mb-3 shadow-lg" style="border-radius:20px;"/>
 
                         <%--titles--%>
                         <div class="text-center" style="color: white">
@@ -239,7 +239,7 @@
 
                 <div class="modal-footer border-0 mb-3" >
                     <div class="mx-auto my-auto row">
-                         <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3"></audio>
+                         <audio controls src="" id="clip"></audio>
                          <button type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-top:-5px;"><img src="~/Content/Images/information-white.png" runat="server" height="23" /></button>
                     </div>
 
@@ -303,6 +303,12 @@
         function ShowTrackModel(data) {
             $("#trackModal").modal('show');
             $("#track").text(data["TrackName"]);
+            $("#artist").text(data["ArtistName"]);
+            $("#album").text(data["AlbumName"]);
+            $("#price").text("₱"+data["Price"]);
+            $("#description").text(data["Description"]);
+            $("#cover").attr("src", data["AlbumCover"]);
+            $("#clip").attr("src", data["AudioAddress"]);
         }
     </script>
 
