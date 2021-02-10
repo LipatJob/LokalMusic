@@ -99,39 +99,39 @@
                     <asp:Repeater ID="albumsContainer" runat="server">
                         <ItemTemplate>
                          
-                        <div class="col-lg-5 col-sm-6 pb-4 ml-lg-4">
-                            <div class="card bg-white shadow border-0 rounded ml-sm-1 mr-sm-1 ml-5 mr-5 h-100">
-                                <div class="card-body" style="margin-bottom: -8px;">
+                            <div class="col-lg-4 col-sm-6 pb-4">
+                                <div class="card bg-white shadow border-0 rounded ml-sm-1 mr-sm-1 ml-5 mr-5 h-100">
+                                    <div class="card-body" style="margin-bottom: -8px;">
 
-                                    <%--date released & genre(s)--%>
-                                    <div class="row" style="margin-top:-8px;">
-                                        <div class="<%--col-6--%>col-12">
-                                            <p class="text-dark" style="font-size:14px; font-weight:600;"><i><%#Eval("ReleaseDate", "{0:MMM-dd-yy}") %></i></p>
+                                        <%--date released & genre(s)--%>
+                                        <div class="row" style="margin-top:-8px;">
+                                            <div class="<%--col-6--%>col-12">
+                                                <p class="text-dark" style="font-size:14px; font-weight:600;"><i><%#Eval("ReleaseDate", "{0:MMM-dd-yy}") %></i></p>
+                                            </div>
+
+                                            <%--<div class="col-6 text-right">
+                                                <p class="text-grey" style="font-size:14px; font-weight:600;"><i><%#Eval("Genres") %></i></p>
+                                            </div>--%>
                                         </div>
 
-                                        <%--<div class="col-6 text-right">
-                                            <p class="text-grey" style="font-size:14px; font-weight:600;"><i><%#Eval("Genres") %></i></p>
-                                        </div>--%>
-                                    </div>
-
-                                    <%--album cover--%>
-                                    <a href=<%#Eval("DetailsUrl") %> runat="server">
-                                        <img src=<%#Eval("AlbumCover") %>  class="mx-auto img-hoverable w-100" runat="server" style="margin: -5px;"/>
-                                    </a>
-
-                                    <div class="mt-3">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
-                                            <span style="font-size:17px;"><%#Eval("AlbumName") %></span>
+                                        <%--album cover--%>
+                                        <a href=<%#Eval("DetailsUrl") %> runat="server">
+                                            <img src=<%#Eval("AlbumCover") %>  class="mx-auto img-hoverable w-100" runat="server" style="margin: -5px;"/>
                                         </a>
 
-                                        <button class="float-right" style="padding: 0; margin:0; margin-top: -8px; background: -webkit-linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"  onclick='AddToCart(<%#Eval("AlbumId")%>)'>
-                                            <span class="bi bi-cart-plus-fill cart" style="font-size:22px; margin:0; padding: 0; "></span>
-                                        </button>
-                                    </div>
+                                        <div class="mt-3">
+                                            <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
+                                                <span style="font-size:17px;"><%#Eval("AlbumName") %></span>
+                                            </a>
 
+                                            <button class="float-right" style="padding: 0; margin:0; margin-top: -8px; background: -webkit-linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"  onclick='AddToCart(<%#Eval("AlbumId")%>)'>
+                                                <span class="bi bi-cart-plus-fill cart" style="font-size:22px; margin:0; padding: 0; "></span>
+                                            </button>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                         </ItemTemplate>
                     </asp:Repeater>
