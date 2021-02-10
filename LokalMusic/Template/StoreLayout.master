@@ -200,7 +200,7 @@
     </div>
 
     <%--model for track details--%>
-    <div class="modal fade border-0" id="trackModel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade border-0" id="trackModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="background-color: #bd4f6c; background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);">
 
@@ -285,24 +285,24 @@
 
         //AJAX Get Track Details
         function GetTrack(trackId) {
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Store/TracksService/GetTrack",
-            //    contentType: "application/json; charset=utf-8",
-            //    dataType: "json",
-            //    data: `{trackId: '${trackId}'}`,
-            //    success: (data) => ShowTrackModel(data["d"]),
-            //    error: function (data) {
-            //        alert(JSON.stringify(data));
-            //    }
-            //})
-            console.log(trackId);
-            ShowTrackModel(1);
+            $.ajax({
+                type: "POST",
+                url: "/Store/TracksService.asmx/GetTrack",
+                contentType: "application/json; charset=utf-8",
+                data: "{ 'trackId' : '" + trackId + "'}",
+                dataType: "json",
+                success: function (data) {
+                    ShowTrackModel(data.d);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status, thrownError);
+                }
+            });
         }
 
         function ShowTrackModel(data) {
-            $("#trackModel").modal('show');
-            $("#track").text("track");
+            $("#trackModal").modal('show');
+            $("#track").text(data["TrackName"]);
         }
     </script>
 
