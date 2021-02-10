@@ -1,4 +1,6 @@
-﻿using LokalMusic._Code.Models.Store;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Store;
+using LokalMusic._Code.Models.Store.Details;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +22,11 @@ namespace LokalMusic.Store
     {
 
         [WebMethod]
-        public TrackSummary GetTrack(int trackId)
+        public Track GetTrack(int trackId)
         {
-            var a = trackId;
+            Track track = TracksHelper.GetTrack(trackId);
 
-            TrackSummary s = new TrackSummary();
-
-            s.TrackName = "Hellooooow";
-
-            return s;
+            return track;
         }
     }
 }

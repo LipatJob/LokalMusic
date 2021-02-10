@@ -152,7 +152,7 @@
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
-                           <a runat="server" onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>'>
+                           <a runat="server" onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
                                 <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" />
                             </a>
                             <div class="card-body">
