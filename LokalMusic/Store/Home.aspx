@@ -152,8 +152,9 @@
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
-                            <a href='<%#Eval("DetailsUrl") %>' runat="server">
-                                <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" /></a>
+                           <a runat="server" onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>'>
+                                <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" />
+                            </a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("TrackName")%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price", "{0:n}")%></p>
