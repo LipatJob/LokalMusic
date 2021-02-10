@@ -65,6 +65,7 @@
         .cart{
             color: black;
             font-weight: 700;
+            
         }
 
         /* Zoom */
