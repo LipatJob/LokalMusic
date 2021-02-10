@@ -72,11 +72,11 @@
                                         <p style="font-size:13px; color: #8F8F8F; margin-top: -15px; font-weight:500;">joined <%#Eval("DateJoined", "{0:MMMM dd, yyyy}") %></p>
                                         <p style="font-size:13px; color: #CF2A2A; margin-top: -15px; font-weight:500;">
                                             <a href=<%#Eval("DetailsUrl") %> runat="server" class="creatorProfileLink" style="color: #CF2A2A;">https://lokal.azurewebsites.net/Store/<%#Eval("ArtistName") %></a>
-                                        </p>                                        
+                                        </p>
                                         <p style="font-size:13px; color: #C4C4C4; margin-top: -15px; font-weight:400;">Genre(s): <%#Eval("Genre")%></p>
-                                    </div>                            
+                                    </div>
                                 </div>
-                                    
+
                                 <div class="col-md-3 col-xl-3 col-md-6 text-right top-tracks <%# Eval("TrackTop1") == null ? "invisible" : "" %>">
                                     <h5 class="">Top Track(s)</h5>
 
@@ -92,7 +92,7 @@
                                                     <img src=<%#Eval("TrackTop1.AlbumCover")%> width="45" height="45" class="mx-auto d-block img-hoverable" runat="server" alt="track1"/>
                                                 </div>
                                             </div>
-                                        </a>                                        
+                                        </a>
                                     </div>
 
                                     <div class="<%# Eval("TrackTop2") == null ? "invisible" : "" %>">
@@ -106,7 +106,7 @@
                                                     <img src=<%#Eval("TrackTop2.AlbumCover")%> width="45" height="45" class="mx-auto d-block img-hoverable" runat="server" alt="track2" />
                                                 </div>
                                             </div>
-                                        </a>                                        
+                                        </a>
                                     </div>
 
                                 </div>

@@ -2,14 +2,20 @@
 
 <asp:Content ID="AdminLayout" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         .nav-header {
-            margin-left:8px;
+            margin-left: 8px;
             font: 600 18px verdana;
         }
 
         #timer {
             font-size: 20px;
+        }
+
+        .montserrat {
+            font-family: 'Montserrat', sans-serif;
         }
 
         /* The side navigation menu */
@@ -78,25 +84,25 @@
         .side-container {
             display: flex;
             flex-direction: column;
-            flex-grow:1;
-            height:100%;
+            flex-grow: 1;
+            height: 100%;
         }
 
-        .sidebar-active{
+        .sidebar-active {
             background-color: #D7D7D7;
         }
     </style>
 
-    <div style="display:flex; flex-direction:column; height:100vh">
+    <div style="display: flex; flex-direction: column; height: 100vh">
 
         <%--Nav--%>
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand ml-xl-3" href="/Admin/Products" runat="server">
-                <img src="~/Content/Images/lokal_logo_puzzle_O.png"  height="30" class="d-inline-block my-auto " alt="" runat="server">
+                <img src="~/Content/Images/lokal_logo_puzzle_O.png" height="30" class="d-inline-block my-auto" alt="" runat="server">
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <span class="nav-header">Admin</span>
+                    <span class="nav-header montserrat" style="font-size: 1.8rem; font-weight: 600;">Admin</span>
                 </li>
             </ul>
 
@@ -107,12 +113,12 @@
             </ul>
         </nav>
 
-        <div style="display: flex; flex-direction: row; align-items: stretch; flex-grow:1">
+        <div style="display: flex; flex-direction: row; align-items: stretch; flex-grow: 1">
 
             <div id="product-display" class="sidenav">
                 <div class="text-center  side-container">
                     <p class="side-links mt-3"><%Response.Write(BackendAuthenticationHelper.Username); %></p>
-                    <hr style="width: 150px; background: #525252; margin-top:0px;" />
+                    <hr style="width: 150px; background: #525252; margin-top: 0px;" />
                     <a href="~/Admin/Products" runat="server" class="side-links productsSideItem">Products</a>
                     <a href="~/Admin/Users" runat="server" class="side-links usersSideItem">Users</a>
                     <hr style="margin-top: auto; width: 150px; background: #525252;" />
