@@ -1,4 +1,5 @@
 ﻿using LokalMusic._Code.Models.Account;
+using LokalMusic._Code.Models.Finance;
 using LokalMusic._Code.Presenters.Account;
 using LokalMusic._Code.Repositories.Account;
 using System;
@@ -21,9 +22,15 @@ namespace LokalMusic.Account.Settings
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static List<PaymentHistoryItem> GetPaymentHistory()
+        public static List<ReceiptListItem> GetPaymentHistory()
         {
             return SettingsPresenter.GetPaymentHistory();
+        }
+
+        [WebMethod]
+        public static ReceiptModel GetReceipt(int receiptId)
+        {
+            return SettingsPresenter.GetReceiptModel(receiptId);
         }
     }
 }
