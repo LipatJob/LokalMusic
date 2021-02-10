@@ -1,28 +1,59 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="Playlist.aspx.cs" Inherits="LokalMusic.Playlist" %>
+﻿<%@ Page Title="Playlist" Language="C#" MasterPageFile="~/Template/Site.Master" AutoEventWireup="true" CodeBehind="Playlist.aspx.cs" Inherits="LokalMusic.Playlist" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
-        body{
+
+        /* The side navigation menu */
+        .sidebar {
+          margin: 0;
+          padding: 0;
+          width: 400px;
+          background-color: #f1f1f1;
+          position: fixed;
+          height: 100%;
+          overflow: auto;
+        }
+
+        /* Sidebar links */
+        /*.sidebar a {
+          display: block;
+          color: black;
+          padding: 16px;
+          text-decoration: none;
+        }*/
+
+        /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+        div.content {
+          margin-left: 400px;
+          padding: 1px 16px;
+          height: 1000px;
+        }
+
+        /* On screens that are less than 700px wide, make the sidebar into a topbar */
+        @media screen and (max-width: 800px) {
+          .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+          }
+          .sidebar {float: left;}
+          div.content {margin-left: 0;}
+        }
+
+        /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+        @media screen and (max-width: 400px) {
+          .sidebar {
+            text-align: center;
+            float: none;
+          }
+        }
+
+        body, .card{
             background-color: #bd4f6c;
             background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
             background-repeat: no-repeat;
             background-attachment: fixed;
-        }
-
-        .partition{
-            
-        }
-
-        #playlist-partition{
-            
-        }
-
-        #menu-partition {
-            background-color: #F4F4F4;
-            height: 100vh;
-            right: 0;
-            position: fixed;
         }
 
         .bold-text{
@@ -34,284 +65,256 @@
         }
 
         .album-name{
-            color:#B82828;
+            color:white/*#B82828*/;
             font-weight:600;
         }
 
         .artist-name{
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             color:#3C3C3C;
         }
 
-        ol li p{
-            font-weight:600;
+        .track-name{
+            color:#ffd8d8;
+            font-weight: 600;
+            font-size:20px;
+            margin-bottom:7px;
         }
 
-        @media (min-width: 34em) {
+
+        @media (min-width: 0px) {
             .card-columns {
-                -webkit-column-count: 1;
-                -moz-column-count:1;
-                column-count:1;
+                column-count: 1;
             }
         }
 
-        @media (min-width: 76em) {
+        @media (min-width: 1600px) {
             .card-columns {
-                -webkit-column-count: 2;
-                -moz-column-count:2;
-                column-count:2;
+                column-count: 2;
             }
         }
-    
 
     </style>
 
-    <div class="">
+    <div>
 
-        <div class="row">
+        <!-- The sidebar -->
+        <div class="sidebar">
+            
+            <div class="mt-md-5 pt-md-5 mt-3"></div>
 
-        <div class="col-sm-8 col-9 partition" id="playlist-partition">
+            <img src="Content/Images/lokal_logo_puzzle_O.png" alt="LOKAL-Logo" runat="server" class="mx-auto d-block w-50"/>
 
-            <div class="card-columns mt-4 pr-sm-5 mr-sm-4 pr-0 mr-0">
-
-                <div class="mt-3">
-                    <div class="card ml-5 mr-5">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <img src="Content/Images/default_cover.jpg" class="w-100 mx-auto my-auto d-block shadow" alt="album-cover" runat="server" />
-                                </div>
-
-                                <div class="col-sm-8">
-                                    <h3 class="album-name">Ya-anam</h3>
-                                    <p class="artist-name">by Simply Almonds</p>
-
-                                    <ol>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class=" mt-3">
-                    <div class="card ml-5 mr-5">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <img src="Content/Images/default_cover.jpg" class="w-100 mx-auto my-auto d-block shadow" alt="album-cover" runat="server" />
-                                </div>
-
-                                <div class="col-sm-8">
-                                    <h3 class="album-name">Lezned</h3>
-                                    <p class="artist-name">by Simply Almonds</p>
-
-                                    <ol>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-3">
-                    <div class="card ml-5 mr-5">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <img src="Content/Images/default_cover.jpg" class="w-100 mx-auto my-auto d-block shadow" alt="album-cover" runat="server" />
-                                </div>
-
-                                <div class="col-sm-8">
-                                    <h3 class="album-name">Kups Manas</h3>
-                                    <p class="artist-name">by Simply Denzel</p>
-
-                                    <ol>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-3">
-                    <div class="card ml-5 mr-5">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <img src="Content/Images/default_cover.jpg" class="w-100 mx-auto my-auto d-block shadow" alt="album-cover" runat="server" />
-                                </div>
-
-                                <div class="col-sm-8">
-                                    <h3 class="album-name">Lezy Mana</h3>
-                                    <p class="artist-name">by Denzel-the-Superman</p>
-
-                                    <ol>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class=" mt-3">
-                    <div class="card ml-5 mr-5">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <img src="Content/Images/default_cover.jpg" class="w-100 mx-auto my-auto d-block shadow" alt="album-cover" runat="server" />
-                                </div>
-
-                                <div class="col-sm-8">
-                                    <h3 class="album-name">DM</h3>
-                                    <p class="artist-name">by DM Lang Sakalam</p>
-
-                                    <ol>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-3">
-                    <div class="card ml-5 mr-5">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <img src="Content/Images/default_cover.jpg" class="w-100 mx-auto my-auto d-block shadow" alt="album-cover" runat="server" />
-                                </div>
-
-                                <div class="col-sm-8">
-                                    <h3 class="album-name">Ya-anam</h3>
-                                    <p class="artist-name">by Simply Almonds</p>
-
-                                    <ol>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                        <li>
-                                            <p>Track Name</p>
-                                            <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
-                                            </audio>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-sm-4 col-3 partition" id="menu-partition">
-            <div id="content">
-                <img src="Content/Images/lokal_logo_puzzle_O.png" alt="LOKAL-Logo" runat="server" class="w-75 mt-5 pt-5 mx-auto d-block" />
-
-                <%--links--%>
-                <div class="mx-auto text-center mt-5">
-                    <a href="Store/Home" class="btn btn-outline-danger badge-pill bold-text pl-3 pr-3"><span>Home</span></a>
+            <div class="mx-auto text-center mt-md-5 mt-3 mb-md-0 mb-3">
+                <a href="#" class="btn btn-outline-danger badge-pill bold-text"><span>Return</span></a>
                     
-                    <a href="#" class="btn btn-outline-info badge-pill bold-text pl-3 pr-3"><span>Collection</span></a>
+                <a href="#" class="btn btn-outline-info badge-pill bold-text"><span>Collection</span></a>
 
-                    <a href="#" class="btn btn-dark badge-pill bold-text pl-3 pr-3"><span>Signout</span></a>
-                </div>
+                <a href="#" class="btn btn-dark badge-pill bold-text"><span>Signout</span></a>
             </div>
+
         </div>
 
+        <!-- Page content -->
+        <div class="content">
+            <div class="row">
+
+                <%--<div class="col-1"></div>--%>
+
+                <%--Repeater: 1st part--%>
+                <div class="col-xl-5 col-lg-12">
+                    <div class="card shadow-lg mt-3">
+                        <div class="card-body">
+
+                            <%--image and information--%>
+                            <div class="row mb-4">
+                                <div class="col-5">
+                                    <img src="Content/Images/default_cover.jpg" class="mx-auto my-auto d-block shadow w-100" alt="album-cover" runat="server" />
+                                </div>
+
+                                <div class="col-7">
+                                    <h3 class="album-name mt-sm-4 mt-md-0">Ya-anam</h3>
+                                    <p class="artist-name"><span>by</span> Simply Almonds</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>       
+                    
+                    <div class="card shadow-lg mt-3">
+                        <div class="card-body">
+
+                            <%--image and information--%>
+                            <div class="row">
+                                <div class="col-5">
+                                    <img src="Content/Images/default_cover.jpg" class="mx-auto my-auto d-block shadow w-100" alt="album-cover" runat="server" />
+                                </div>
+
+                                <div class="col-7">
+                                    <h3 class="album-name mt-sm-4 mt-md-0">Ya-anam</h3>
+                                    <p class="artist-name"><span>by</span> Simply Almonds</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card shadow-lg mt-3">
+                        <div class="card-body">
+
+                            <%--image and information--%>
+                            <div class="row mb-4">
+                                <div class="col-5">
+                                    <img src="Content/Images/default_cover.jpg" class="mx-auto my-auto d-block shadow w-100" alt="album-cover" runat="server" />
+                                </div>
+
+                                <div class="col-7">
+                                    <h3 class="album-name mt-sm-4 mt-md-0">Ya-anam</h3>
+                                    <p class="artist-name"><span>by</span> Simply Almonds</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-1 col-0"></div>
+
+                <%--Repeater: 2nd part--%>
+                <div class="col-xl-5 col-lg-12">
+                    <div class="card shadow-lg mt-3">
+                        <div class="card-body">
+
+                            <%--image and information--%>
+                            <div class="row">
+                                <div class="col-5">
+                                    <img src="Content/Images/default_cover.jpg" class="mx-auto my-auto d-block shadow w-100" alt="album-cover" runat="server" />
+                                </div>
+
+                                <div class="col-7">
+                                    <h3 class="album-name mt-sm-4 mt-md-0">Ya-anam</h3>
+                                    <p class="artist-name"><span>by</span> Simply Almonds</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card shadow-lg mt-3">
+                        <div class="card-body">
+
+                            <%--image and information--%>
+                            <div class="row mb-4">
+                                <div class="col-5">
+                                    <img src="Content/Images/default_cover.jpg" class="mx-auto my-auto d-block shadow w-100" alt="album-cover" runat="server" />
+                                </div>
+
+                                <div class="col-7">
+                                    <h3 class="album-name mt-sm-4 mt-md-0">Ya-anam</h3>
+                                    <p class="artist-name"><span>by</span> Simply Almonds</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card shadow-lg mt-3">
+                        <div class="card-body">
+
+                            <%--image and information--%>
+                            <div class="row mb-4">
+                                <div class="col-5">
+                                    <img src="Content/Images/default_cover.jpg" class="mx-auto my-auto d-block shadow w-100" alt="album-cover" runat="server" />
+                                </div>
+
+                                <div class="col-7">
+                                    <h3 class="album-name mt-sm-4 mt-md-0">Ya-anam</h3>
+                                    <p class="artist-name"><span>by</span> Simply Almonds</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="text-center">
+                                    <p class="track-name">Track Name</p>
+                                    <audio controls src="https://lokalmusicfs.blob.core.windows.net/clips/5_clip3.mp3" class="w-100">
+                                    </audio>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <%--<div class="col-1"></div>--%>
+
+            </div>
         </div>
 
     </div>
 
 </asp:Content>
-
-<%--<img src="Content/Images/lokal_logo_puzzle_O.png" alt="LOKAL-Logo" runat="server" class="w-50"/>
-
-<%--links--%>
-<%--<div class="mx-auto text-center mt-5">
-    <a href="#" class="btn btn-outline-danger badge-pill bold-text">Return to Home</a>
-                    
-    <a href="#" class="btn btn-outline-info badge-pill bold-text">Go to Collection</a>
-
-    <a href="#" class="btn btn-dark badge-pill bold-text">Signout</a>
-</div>--%>
