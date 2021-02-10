@@ -209,7 +209,7 @@
                         <div class="col-4">
                             <div class="row my-auto mx-auto">
                                 <span id="price" class="" style="color: white; font-weight: 600; font-size: 20px;">₱699.99</span>
-                                <button type="button" class="rounded-0 ml-2" onclick='AddToCart(<%#Eval("AlbumId")%>)'>
+                                <button type="button" class="rounded-0 ml-2" id="addToCart" <%--onclick='AddToCart(<%#Eval("AlbumId")%>)'--%>>
                                     <img src="~/Content/Images/cart-white.png" class="mb-1" runat="server" width="18" />
                                 </button>
                             </div>
@@ -238,15 +238,22 @@
                 </div>
 
                 <div class="modal-footer border-0 mb-3" >
-                    <div class="mx-auto my-auto row">
-                         <audio controls src="" id="clip"></audio>
-                         <button type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-top:-5px;"><img src="~/Content/Images/information-white.png" runat="server" height="23" /></button>
+                    <div class="row  mx-auto my-auto ">
+                        <div class="col-10 mx-auto my-auto ">
+                            <audio controls src="" id="clip" style="margin-top:5px"></audio>
+                        </div>
+                        <div class="col-2 mx-auto my-auto ">
+                            <button type="button" data-toggle="collapse" data-target="#descriptionCollapse" aria-controls="descriptionCollapse"><img src="~/Content/Images/information-white.png" runat="server" height="25" /></button>
+                        </div>
                     </div>
 
-                    <div class="collapse pl-4 pr-4 mt-4 pt-3" id="collapseExample">
-                        <div class="card card-body" style="background-color:#ee6f57;">
-                            <p id="description" style="color:white; font-weight:600; line-height:30px;">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 
-                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                    <div class="row">
+                        <div class="col-12 collapse pl-4 pr-4 mt-4 pt-3" id="descriptionCollapse">
+                            <div class="card" style="background-color:#ee6f57;">
+                                <div class="card-body p-5">
+                                     <p id="description" style="color:white; font-weight:600; line-height:30px;"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -309,6 +316,10 @@
             $("#description").text(data["Description"]);
             $("#cover").attr("src", data["AlbumCover"]);
             $("#clip").attr("src", data["AudioAddress"]);
+            $('#addToCart').attr("onclick", "").click(function () {
+                AddToCart(data["TrackId"]);
+                return false;
+            })
         }
     </script>
 
