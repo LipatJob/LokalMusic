@@ -26,8 +26,8 @@ namespace LokalMusic._Code.Repositories.Finance
 
             return new
             {
-                chart = GetChartValues(start, end, period),
-                figures = GetFiguresValues(start, end)
+                figures = GetFiguresValues(start, end),
+                chart = GetChartValues(start, end, period)
             };
         }
 
@@ -92,7 +92,7 @@ namespace LokalMusic._Code.Repositories.Finance
         {
             if (period == MONTHLY)
             {
-                return new DateTime(end.Year, end.Month, 1);
+                return new DateTime(end.Year, end.Month, DateTime.DaysInMonth(end.Year, end.Month));
             }
             else if (period == WEEKLY)
             {
@@ -155,10 +155,10 @@ GROUP BY [Months].DateStart
             string query =
 @"
 SELECT
-	SUM([OrderInfo].AmountPaid) - SUM([OrderInfo].AmountPaid) * .15 AS NetSales,
-	SUM([OrderInfo].AmountPaid) * .15 AS TotalArtistRevenue,
-	SUM([OrderInfo].AmountPaid) AS GrossSales,
-	COUNT([OrderInfo].OrderId) AS ProductsSold
+	COALESCE(SUM([OrderInfo].AmountPaid) - SUM([OrderInfo].AmountPaid) * .15, 0) AS NetSales,
+	COALESCE(SUM([OrderInfo].AmountPaid) * .15, 0) AS TotalArtistRevenue,
+	COALESCE(SUM([OrderInfo].AmountPaid), 0) AS GrossSales,
+	COALESCE(COUNT([OrderInfo].OrderId), 0) AS ProductsSold
 FROM [OrderInfo]
 WHERE
 	[OrderInfo].OrderDate >= @StartDate AND
@@ -169,23 +169,17 @@ WHERE
                 query,
                 ("StartDate", start),
                 ("EndDate", end));
-            if (values.Rows.Count == 0)
-            {
-                return new
-                {
-                    NetSales = 0,
-                    GrossSales = 0,
-                    TotalArtistRevenue = 0,
-                    ProductsSold = 0,
-                };
-            }
 
+            string startString = start.ToString();
+            string endString = end.ToString();
             return new
             {
                 NetSales = values.Rows[0]["NetSales"],
                 GrossSales = values.Rows[0]["GrossSales"],
                 TotalArtistRevenue = values.Rows[0]["TotalArtistRevenue"],
                 ProductsSold = values.Rows[0]["ProductsSold"],
+                startString,
+                endString
             };
         }
     }
