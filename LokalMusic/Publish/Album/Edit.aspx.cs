@@ -23,7 +23,7 @@ namespace LokalMusic.Publish.Album
         public string Description { get => descriptionTxt.Text; set => descriptionTxt.Text = value; }
         public DateTime DateReleased { get => Convert.ToDateTime(dateReleasedTxt.Text); set => dateReleasedTxt.Text = value.ToString("yyyy-MM-dd"); }
         public string Producer { get => producerTxt.Text; set => producerTxt.Text = value; }
-        public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = String.Format("{0:N}", value); }
+        public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = value.ToString("F2"); }
         public string AlbumCover { get => albumCoverPreview.ImageUrl; set => albumCoverPreview.ImageUrl = value; }
         public HttpPostedFile UploadedAlbumCover => albumCoverFile.PostedFile;
         public bool AlbumCoverIsUpdated { get; set; }
@@ -35,6 +35,7 @@ namespace LokalMusic.Publish.Album
             if (!Page.IsPostBack)
             {
                 Presenter.PageLoad();
+                dateReleasedTxt.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 SetPublishUnpublishBtn();
 
                 priceTxt_TextChanged(priceTxt, EventArgs.Empty);

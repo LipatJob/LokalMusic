@@ -30,7 +30,7 @@
                         <tr>
                             <td style="text-align: right"><asp:Image ID="trackCover" runat="server" ImageUrl=<%#Eval("TrackCoverLink") %> Height="70" Width="70" /></td>
                             <td style="vertical-align: middle"><strong class="redtext"><%#Eval("TrackName") %></strong></td>
-                            <td style="vertical-align: middle">Status: <%#Eval("Status") %><br />Date Added: <%#Eval("DateAdded","{0:MM/dd/yyyy}") %></td>
+                            <td style="vertical-align: middle">Status: <%#Eval("Status") %><br />Date Added: <%#Eval("DateAdded","{0:dd MMM yyyy}") %></td>
                             <td style="vertical-align: middle">Genre: <%#Eval("Genre") %><br />Duration: <%#Eval("Duration","{0:hh\\:mm\\:ss}") %></td>
                             <td style="vertical-align: middle">Sales: <%#Eval("SalesCount") %><br />Price: <%#Eval("Price","{0:N}") %></td>
                             <td style="vertical-align: middle">

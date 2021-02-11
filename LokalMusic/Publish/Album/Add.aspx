@@ -21,12 +21,12 @@
             <div class="col-8">
                 <div class="form-group">
                     <asp:Label Text="Album Name" runat="server" />
-                    <asp:TextBox ID="albumNameTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="albumNameTxt" runat="server" Width="500" CssClass="form-control" MaxLength="70"></asp:TextBox>
                     <asp:CustomValidator ID="albumNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="albumNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="albumNameTxtCv_ServerValidate"></asp:CustomValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Description" runat="server" />
-                    <asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" TextMode="MultiLine" CssClass="form-control" MaxLength="2000"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Date Released" runat="server" />
@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Producer" runat="server" />
-                    <asp:TextBox ID="producerTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="producerTxt" runat="server" Width="500" CssClass="form-control" MaxLength="70"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Price (₱)" runat="server" />
