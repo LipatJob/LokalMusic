@@ -50,12 +50,12 @@
                             <ItemTemplate>
                                 <tr class="text-center ">
                                     <td class="float-right">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server">
+                                        <a onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
                                             <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable"/>
                                         </a>
                                     </td>   
                                     <td class="emphasize my-auto">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
+                                        <a  onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="titleLink">
                                             <%#Eval("TrackName") %>
                                         </a>
                                     </td>

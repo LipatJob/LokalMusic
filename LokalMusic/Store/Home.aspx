@@ -4,7 +4,7 @@
 
     <style>
         #featured-artist {
-/*            background-color: #FFDCDC;*/
+         /* background-color: #FFDCDC;*/
             background-color: #bd4f6c;
             background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
         }
@@ -152,7 +152,7 @@
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
-                           <a runat="server" onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
+                           <a  onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
                                 <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" />
                             </a>
                             <div class="card-body">
