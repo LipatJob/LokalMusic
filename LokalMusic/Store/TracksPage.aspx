@@ -66,8 +66,7 @@
                                     <td class="emphasize">₱<%#Eval("Price", "{0:n}") %></td>
                                     <td class="">
                                         <button onclick='AddToCart(<%#Eval("TrackId")%>)' class="p-0" style="margin-top: -12px;">
-                                            <%--<img src="../Content/Images/cart.png" class="" width="20" height="20" runat="server" />--%>
-                                            <span class="bi bi-cart-plus cart" style="font-size: 22px;"></span>
+                                            <img src="~/Content/Images/cart.png" class="" width="20" height="20" runat="server" />
                                         </button>
                                     </td>
                                 </tr>
