@@ -170,8 +170,10 @@
             });
             updateReport();
         }
-        frequency.onchange = function () { updateReport(); }
-
+        frequency.onchange = function () {
+            checkDate();
+            updateReport();
+        }
 
         function checkDate()
         {
