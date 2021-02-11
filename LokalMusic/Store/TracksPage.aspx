@@ -51,7 +51,7 @@
                                 <tr class="text-center ">
                                     <td class="float-right">
                                         <a onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
-                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable"/>
+                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable shadow-sm"/>
                                         </a>
                                     </td>   
                                     <td class="emphasize my-auto">
