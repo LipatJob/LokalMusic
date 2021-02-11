@@ -90,15 +90,6 @@
             font-weight: 600;
             color: #F82B2B;
         }
-
-        #sidebar-toggle{
-            font-size: 20px; 
-            color:#B82828
-        }
-
-        #sidebar-toggle:hover{
-            color:#ff7171;
-        }
     </style>
 
     <div id="product-display" class="sidenav sticky shadow-sm">        
@@ -131,7 +122,9 @@
 
 
     <div class="" id="main">
-        <span onclick="toggleNav()" class="bi bi-caret-left-square-fill mt-2" style="position:absolute;" id="sidebar-toggle"></span>
+        <span onclick="toggleNav()" class="mt-2" style="position:absolute;" id="sidebar-toggle">
+            <img runat="server" src="~/Content/Images/menu.png" width="22"/>
+        </span>
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
 
