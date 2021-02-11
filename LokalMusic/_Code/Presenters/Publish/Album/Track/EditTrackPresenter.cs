@@ -39,9 +39,14 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
             editTrackRepository.GetTrackDetails(viewModel, TrackId);
         }
 
-        public bool GetAlbumIsPublished()
+        public bool CheckIfLastPublished()
         {
-            return editTrackRepository.GetAlbumIsPublished(AlbumId);
+            return editTrackRepository.CheckIfLastPublished(AlbumId);
+        }
+
+        public bool CheckAlbumIsPublished()
+        {
+            return editTrackRepository.CheckAlbumIsPublished(AlbumId);
         }
 
         public void EditTrack()

@@ -25,7 +25,7 @@ namespace LokalMusic.Publish.Album.Track
         public string TrackName { get => trackNameTxt.Text; set => trackNameTxt.Text = value; }
         public string Genre { get => genreTxt.Text; set => genreTxt.Text = new CultureInfo("en").TextInfo.ToTitleCase(value.ToLower()); }
         public string Description { get => descriptionTxt.Text; set => descriptionTxt.Text = value; }
-        public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = String.Format("{0:N}", value); }
+        public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = value.ToString("F2"); }
         public string TrackFile { get => trackSource.Src; set => trackSource.Src = value; }
         public TimeSpan TrackFileDuration { get; set; }
         public string ClipFile { get => clipSource.Src; set => clipSource.Src = value; }
@@ -53,13 +53,18 @@ namespace LokalMusic.Publish.Album.Track
             if (Status == "PUBLISHED")
             {
                 publishUnpublishBtn.Text = "Unpublish";
-                publishUnpublishBtn.Enabled = true;
+
+                bool lastPublishedTrack = Presenter.CheckIfLastPublished();
+                if (lastPublishedTrack)
+                    publishUnpublishBtn.Enabled = false;
+                else
+                    publishUnpublishBtn.Enabled = true;
             }
             else
             {
                 publishUnpublishBtn.Text = "Publish";
 
-                bool albumIsPublished = Presenter.GetAlbumIsPublished();
+                bool albumIsPublished = Presenter.CheckAlbumIsPublished();
                 if (albumIsPublished)
                     publishUnpublishBtn.Enabled = true;
                 else

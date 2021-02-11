@@ -30,6 +30,7 @@ namespace LokalMusic.Publish.Album
         protected void Page_Load(object sender, EventArgs e)
         {
             Presenter.PageLoad();
+            dateReleasedTxt.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
         protected void addBtn_Click(object sender, EventArgs e)

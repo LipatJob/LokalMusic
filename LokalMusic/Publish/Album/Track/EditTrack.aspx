@@ -21,16 +21,16 @@
             <div class="col-8">
                 <div class="form-group">
                     <asp:Label Text="Track Name" runat="server" />
-                    <asp:TextBox ID="trackNameTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="trackNameTxt" runat="server" Width="500" CssClass="form-control" MaxLength="70"></asp:TextBox>
                     <asp:CustomValidator ID="trackNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackNameTxtCv_ServerValidate"></asp:CustomValidator>
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Genre" runat="server" />
-                    <asp:TextBox ID="genreTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="genreTxt" runat="server" Width="500" CssClass="form-control" MaxLength="70"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Description" runat="server" />
-                    <asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" CssClass="form-control" TextMode="MultiLine" MaxLength="2000"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Price (₱)" runat="server" />
