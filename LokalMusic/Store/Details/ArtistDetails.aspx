@@ -16,10 +16,9 @@
         }
 
         #price {
-            color: #AA3A3A;
             font-weight: 600;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 23px;
+            font-size: 14px;
         }
 
         .text-grey {
@@ -94,7 +93,7 @@
 
             <%--artists--%>
             <div class="col-lg-9 col-md-8">
-                <div class="row">
+                <div class="row">   
                     <asp:Repeater ID="albumsContainer" runat="server">
                         <ItemTemplate>
 
@@ -102,33 +101,29 @@
                                 <div class="card bg-white shadow border-0 rounded ml-sm-1 mr-sm-1 ml-5 mr-5 h-100">
                                     <%--album cover--%>
                                     <a href='<%#Eval("DetailsUrl") %>' runat="server">
-                                        <img src='<%#Eval("AlbumCover") %>' class="mx-auto img-hoverable w-100" runat="server" style="margin: -5px;" />
+                                        <img src='<%#Eval("AlbumCover") %>' class="mx-auto card-image w-100" runat="server"/>
                                     </a>
 
-                                    <div class="card-body" style="margin-bottom: -8px;">
-
-                                        <%--date released & genre(s)--%>
-                                        <div class="row" style="margin-top: -8px;">
-
-                                            <%--<div class="col-6 text-right">
-                                                <p class="text-grey" style="font-size:14px; font-weight:600;"><i><%#Eval("Genres") %></i></p>
-                                            </div>--%>
-                                        </div>
-
-                                        <div class="mt-2">
-                                            <a href='<%#Eval("DetailsUrl") %>' runat="server" class="titleLink">
-                                                <span style="font-size: 17px;"><%#Eval("AlbumName") %></span>
-                                            </a>
-
-
-                                            <button class="float-right" style="padding: 0; margin: 0; margin-top: -8px; background: -webkit-linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" onclick='AddToCart(<%#Eval("AlbumId")%>)'>
-                                                <span class="bi bi-cart-plus-fill cart" style="font-size: 22px; margin: 0; padding: 0;"></span>
-                                            </button>
-                                            <p class="text-dark" style="font-size: 14px; font-weight: 600;"><i><%#Eval("ReleaseDate", "{0:MMM-dd-yy}") %></i></p>
-
-                                        </div>
-
+                                    <div class="card-img-overlay text-right" style="height:55px;">
+                                        <button type="button" class="btn btn-light btn-sm shadow-lg my-auto" style="font-size: 12px; font-weight: 600" onclick='AddToCart(<%#Eval("AlbumId")%>)'>
+                                            <span id="price" class="mr-1">₱<%#Eval("Price", "{0:n}") %></span>
+                                            <img src="~/Content/Images/cart.png" runat="server" width="18"/>
+                                        </button>
                                     </div>
+
+                                    <div class="card-body pl-3 pr-3 pb-0 pt-0">
+                                        <div class="row mt-2">
+                                            <div class="col-12">
+                                                <a href='<%#Eval("DetailsUrl") %>' runat="server" class="titleLink">
+                                                    <span style="font-size: 17px;"><%#Eval("AlbumName") %></span>
+                                                </a>
+
+                                                <p class="text-dark" style="font-size: 14px; font-weight: 600;"><i><%#Eval("ReleaseDate", "{0:MMM-dd-yy}") %></i></p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 

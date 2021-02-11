@@ -306,9 +306,11 @@
     <Content Include="Content\Images\Logo New Updated.png" />
     <Content Include="Content\Images\lokal_logo_with_L.png" />
     <Content Include="Content\Images\lokal_logo_puzzle_O.png" />
+    <Content Include="Content\Images\menu.png" />
     <Content Include="Content\Images\New Logo.png" />
     <Content Include="Content\Images\cart old.png" />
     <Content Include="Content\Images\Old Logo.png" />
+    <Content Include="Content\Images\search-white.png" />
     <Content Include="Content\Site.css" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="Fan\Collection.aspx" />

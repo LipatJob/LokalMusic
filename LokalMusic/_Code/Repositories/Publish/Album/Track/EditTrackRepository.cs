@@ -57,9 +57,21 @@ WHERE TrackId = @trackId
             model.ClipFileDuration = (TimeSpan)result.Rows[0]["ClipFileDuration"];
             model.Status = (string)result.Rows[0]["Status"];
         }
-        public bool GetAlbumIsPublished(int albumId)
+
+        public bool CheckIfLastPublished(int albumId)
         {
-            string query = "SELECT ProductStatusId FROM Product WHERE ProductId = @AlbumId";
+            string query = "SELECT COUNT(TrackId) FROM Track LEFT JOIN Product ON Track.TrackId = Product.ProductId WHERE AlbumId = @AlbumId AND ProductStatusId = 1;";
+            var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
+
+            if ((int)result <= 1)
+                return true;
+            else
+                return false;
+        }
+
+        public bool CheckAlbumIsPublished(int albumId)
+        {
+            string query = "SELECT ProductStatusId FROM Product WHERE ProductId = @AlbumId;";
             var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
 
             if ((int)result == 1)

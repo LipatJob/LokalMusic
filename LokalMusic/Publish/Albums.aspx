@@ -21,7 +21,7 @@
                         <tr>
                             <td style="text-align: right"><asp:Image ID="albumCover" runat="server" ImageUrl=<%#Eval("AlbumCoverLink") %> Height="70" Width="70" /></td>
                             <td style="vertical-align: middle"><strong class="redtext"><%#Eval("AlbumName") %></strong></td>
-                            <td style="vertical-align: middle">Status: <%#Eval("Status") %><br />Date Added: <%#Eval("DateAdded","{0:MM/dd/yyyy}") %></td>
+                            <td style="vertical-align: middle">Status: <%#Eval("Status") %><br />Date Added: <%#Eval("DateAdded","{0:dd MMM yyyy}") %></td>
                             <td style="vertical-align: middle">Tracks: <%#Eval("TrackCount") %><br />Producer: <%#Eval("Producer") %></td>
                             <td style="vertical-align: middle">Sales: <%#Eval("SalesCount") %><br />Price: <%#Eval("Price","{0:N}") %></td>
                             <td style="vertical-align: middle">
@@ -37,7 +37,9 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </table>
-            <p id="instruction" style="font-size: x-large; text-align:center;" runat="server">Add your first album</p>
+            <a id="addAlbumInstruction" href="~/Publish/Album/Add" runat="server" style="color: #212529;">
+                <p style="font-size: x-large; text-align:center;" runat="server">Add your first album</p>            
+            </a>
         </div>
     </div>
 
