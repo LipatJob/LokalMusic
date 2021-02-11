@@ -93,7 +93,7 @@
 
             <%--artists--%>
             <div class="col-lg-9 col-md-8">
-                <div class="row">
+                <div class="row">   
                     <asp:Repeater ID="albumsContainer" runat="server">
                         <ItemTemplate>
 
@@ -104,7 +104,7 @@
                                         <img src='<%#Eval("AlbumCover") %>' class="mx-auto card-image w-100" runat="server"/>
                                     </a>
 
-                                    <div class="card-img-overlay text-right">
+                                    <div class="card-img-overlay text-right" style="height:55px;">
                                         <button type="button" class="btn btn-light btn-sm shadow-lg my-auto" style="font-size: 12px; font-weight: 600" onclick='AddToCart(<%#Eval("AlbumId")%>)'>
                                             <span id="price" class="mr-1">₱<%#Eval("Price", "{0:n}") %></span>
                                             <img src="~/Content/Images/cart.png" runat="server" width="18"/>
