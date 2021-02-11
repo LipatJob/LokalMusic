@@ -42,9 +42,9 @@ namespace LokalMusic.Publish.Album.Track
             if (!Page.IsPostBack)
             {
                 Presenter.PageLoad();
-
-                viewTracks.HRef = "~/Publish/Album/" + AlbumId;
                 SetPublishUnpublishBtn();
+
+                priceTxt_TextChanged(priceTxt, EventArgs.Empty);
             }
         }
 
@@ -87,7 +87,7 @@ namespace LokalMusic.Publish.Album.Track
 
         protected void cancelBtn_Click(object sender, EventArgs e)
         {
-            Presenter.LoadTrackDetails();
+            NavigationHelper.Redirect("~/Publish/Album/" + AlbumId);
         }
 
         protected void withdrawBtn_Click(object sender, EventArgs e)
@@ -135,6 +135,41 @@ namespace LokalMusic.Publish.Album.Track
                     rule: () => decimal.Parse(priceTxt.Text) < (decimal)214748.3647,
                     errorMessage: "Price can't be more than 214,748.3647")
                 .Validate();
+        }
+
+        protected void trackFileCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: () => trackFile.HasFile,
+                    errorMessage: "Please upload a track file")
+                .Validate();
+        }
+
+        protected void clipFileCv_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            new ValidationHelper((IValidator)source, args)
+                .AddRule(
+                    rule: () => clipFile.HasFile,
+                    errorMessage: "Please upload a clip file")
+                .Validate();
+        }
+
+        protected void priceTxt_TextChanged(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(priceTxt.Text, out decimal priceInput))
+            {
+                decimal feeAmount = priceInput * 0.15m;
+                decimal earningsAmount = priceInput - feeAmount;
+
+                earnings.Text = earningsAmount.ToString("N2");
+                transactionFee.Text = feeAmount.ToString("N2");
+            }
+            else
+            {
+                earnings.Text = "0.00";
+                transactionFee.Text = "0.00";
+            }
         }
     }
 }
