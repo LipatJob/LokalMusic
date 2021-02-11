@@ -15,7 +15,7 @@
                     <input type="button" name="viewAlbumsBtn" class="btn btn-publish" value="View Albums" />
                 </a>
                 &emsp;
-                <a id="addTrack" href="~/Publish/Album/Add" runat="server">
+                <a id="addTrack" runat="server">
                     <input type="button" id="addTrackBtn" name="addTrackBtn" class="btn btn-publish" value="Add Track" runat="server" />
                 </a>
             </div>
@@ -42,7 +42,9 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </table>
-            <p id="instruction" style="font-size: x-large; text-align:center;" runat="server">Add your first track</p>
+            <a id="addTrackInstruction" runat="server" style="color: #212529;">
+                <p style="font-size: x-large; text-align:center;" runat="server">Add your first track</p>            
+            </a>
         </div>
     </div>
 

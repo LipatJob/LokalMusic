@@ -2,12 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <style>
-        td{
-            padding-bottom:48px;
-        }
-    </style>
-
     <div class="container">
         <div>
             <h1><strong><asp:Label ID="artistName" runat="server" Text="Artist/Band Name"></asp:Label></strong></h1>
@@ -16,37 +10,29 @@
 
         <div style="margin-top:30px" class="d-flex justify-content-between">
             <h4><asp:Label ID="albumName" runat="server" Text="Album Name"></asp:Label> - Add Track</h4>
-            <a id="viewTracks" runat="server">
-                <input type="button" name="viewTracksBtn" class="btn btn-publish" value="View Tracks" />
-            </a>
         </div>
 
-        <div style="margin-top:80px;" class="row">
+        <div style="margin:80px auto 0px auto; width: 90%;" class="row">
             <div class="col-8">
-                <table style="width: 100%;">
-                    <tr>
-                        <td>Track Name</td>
-                        <td style="padding-left:24px;">
-                            <asp:TextBox ID="trackNameTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox>
-                            <asp:CustomValidator ID="trackNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackNameTxtCv_ServerValidate"></asp:CustomValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Genre</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="genreTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td>Description</td>
-                        <td style="padding-left:24px;"><asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" CssClass="form-control" TextMode="MultiLine"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td>Price</td>
-                        <td style="padding-left:24px;">
-                            <asp:TextBox ID="priceTxt" runat="server" type="number" step=".01" min="0" max="214748.3647" Width="500" CssClass="form-control"></asp:TextBox>
-                            <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
-                        </td>
-                    </tr>
-                </table>
+                <div class="form-group">
+                    <asp:Label Text="Track Name" runat="server" />
+                    <asp:TextBox ID="trackNameTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox>
+                    <asp:CustomValidator ID="trackNameTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackNameTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackNameTxtCv_ServerValidate"></asp:CustomValidator>
+                </div>
+                <div class="form-group">
+                    <asp:Label Text="Genre" runat="server" />
+                    <asp:TextBox ID="genreTxt" runat="server" Width="500" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="form-group">
+                    <asp:Label Text="Description" runat="server" />
+                    <asp:TextBox ID="descriptionTxt" runat="server" Width="500" Height="120" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                </div>
+                <div class="form-group">
+                    <asp:Label Text="Price (₱)" runat="server" />
+                    <asp:TextBox ID="priceTxt" runat="server" type="number" step=".01" min="0" max="214748.3647" Width="500" CssClass="form-control" AutoPostBack="True" OnTextChanged="priceTxt_TextChanged"></asp:TextBox>
+                    <p style="font-size: small; color: #525252;">Earnings: ₱<asp:Label ID="earnings" runat="server" Text="0.00"></asp:Label> (Transaction fee: ₱<asp:Label ID="transactionFee" runat="server" Text="0.00"></asp:Label>)</p>
+                    <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
+                </div>
             </div>
             <div class="col-4">
                 <p>Track File</p>
@@ -55,9 +41,13 @@
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
-                    <asp:FileUpload ID="trackFile" runat="server" /><br />
+                    <div class="custom-file">
+                        <asp:FileUpload runat="server" ID="trackFile" CssClass="form-control-file custom-file-input trackFile"/>
+                        <label class="custom-file-label" for="custom-file">Choose file</label>
+                    </div>
                     <asp:CustomValidator ID="trackFileCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="trackFile" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="trackFileCv_ServerValidate"></asp:CustomValidator>
                 </div>
+                
 
                 <p style="margin-top:50px">Clip File</p>
                 <div style="margin-bottom:20px;">
@@ -65,13 +55,16 @@
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
-                    <asp:FileUpload ID="clipFile" runat="server" /><br />
+                    <div class="custom-file">
+                        <asp:FileUpload runat="server" ID="clipFile" CssClass="form-control-file custom-file-input clipFile"/>
+                        <label class="custom-file-label" for="custom-file">Choose file</label>
+                    </div>
                     <asp:CustomValidator ID="clipFileCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="clipFile" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="clipFileCv_ServerValidate"></asp:CustomValidator>
                 </div>
             </div>            
         </div>
 
-        <div class="row float-right" style="margin-top: 40px;>
+        <div class="row float-right" style="margin-top: 40px;">
             <div class="col-12">
                 <asp:Label ID="maxAlert" runat="server" Text="Max track count for album reached" ForeColor="Red" Display="Dynamic"></asp:Label>
                 &emsp;

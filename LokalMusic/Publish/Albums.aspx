@@ -37,7 +37,9 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </table>
-            <p id="instruction" style="font-size: x-large; text-align:center;" runat="server">Add your first album</p>
+            <a id="addAlbumInstruction" href="~/Publish/Album/Add" runat="server" style="color: #212529;">
+                <p style="font-size: x-large; text-align:center;" runat="server">Add your first album</p>            
+            </a>
         </div>
     </div>
 
