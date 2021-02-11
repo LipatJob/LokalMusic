@@ -158,10 +158,27 @@
         frequency.value = "WEEKLY";
         updateReport();
 
-        startDate.onchange = function () { updateReport(); }
-        endDate.onchange = function () { updateReport(); }
+
+        startDate.onchange = function () {
+            checkDate();
+            updateReport();
+        }
+        endDate.onchange = function () {
+            checkDate();
+            $("#startDate").attr({
+                "max": endDate.value,
+            });
+            updateReport();
+        }
         frequency.onchange = function () { updateReport(); }
 
+
+        function checkDate()
+        {
+            if (startDate.value > endDate.value) {
+                startDate.value = endDate.value;
+            }
+        }
 
         function updateReport() {
             callWebService(startDate.value, endDate.value, frequency.value);
