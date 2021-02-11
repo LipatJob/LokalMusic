@@ -28,11 +28,6 @@ namespace LokalMusic._Code.Presenters.Publish.Album
             }
 
             editAlbumRepository.GetArtistName(AuthenticationHelper.UserId, viewModel);
-            LoadAlbumDetails();
-        }
-
-        public void LoadAlbumDetails()
-        {
             editAlbumRepository.GetAlbumDetails(viewModel, AlbumId);
         }
 

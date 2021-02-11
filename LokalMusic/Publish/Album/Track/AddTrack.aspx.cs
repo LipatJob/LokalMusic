@@ -12,7 +12,7 @@ namespace LokalMusic.Publish.Album.Track
     public partial class AddTrack : System.Web.UI.Page, IAddTrackViewModel
     {
         private AddTrackPresenter Presenter;
-        private string AlbumId;
+        private string AlbumId => NavigationHelper.GetRouteValue("AlbumId").ToString();
 
         public AddTrack()
         {
@@ -35,10 +35,6 @@ namespace LokalMusic.Publish.Album.Track
         protected void Page_Load(object sender, EventArgs e)
         {
             Presenter.PageLoad();
-
-            AlbumId = NavigationHelper.GetRouteValue("AlbumId").ToString();
-            viewTracks.HRef = "~/Publish/Album/" + AlbumId;
-
             ValidateMaxTrackCount();
         }
 
@@ -69,11 +65,7 @@ namespace LokalMusic.Publish.Album.Track
 
         protected void cancelBtn_Click(object sender, EventArgs e)
         {
-            trackNameTxt.Text = "";
-            genreTxt.Text = "";
-            descriptionTxt.Text = "";
-            priceTxt.Text = "";
-
+            NavigationHelper.Redirect("~/Publish/Album/" + AlbumId);
         }
 
         protected void trackNameTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
@@ -116,6 +108,23 @@ namespace LokalMusic.Publish.Album.Track
                     rule: () => clipFile.HasFile,
                     errorMessage: "Please upload a clip file")
                 .Validate();
+        }
+
+        protected void priceTxt_TextChanged(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(priceTxt.Text, out decimal priceInput))
+            {
+                decimal feeAmount = priceInput * 0.15m;
+                decimal earningsAmount = priceInput - feeAmount;
+
+                earnings.Text = earningsAmount.ToString("N2");
+                transactionFee.Text = feeAmount.ToString("N2");
+            }
+            else
+            {
+                earnings.Text = "0.00";
+                transactionFee.Text = "0.00";
+            }
         }
     }
 }

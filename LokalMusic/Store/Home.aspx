@@ -4,7 +4,7 @@
 
     <style>
         #featured-artist {
-/*            background-color: #FFDCDC;*/
+         /* background-color: #FFDCDC;*/
             background-color: #bd4f6c;
             background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
         }
@@ -100,7 +100,7 @@
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
-                                <img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable" alt="album-name" /></a>
+                                <img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable shadow-sm" alt="album-name" /></a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("AlbumName")%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price", "{0:n}")%></p>
@@ -127,7 +127,7 @@
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
-                                <img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable" alt="artist-name" /></a>
+                                <img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable shadow-sm" alt="artist-name" /></a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("ArtistName")%></p>
                                 <p style="font-weight: 400;"><%#Eval("Bio")%></p>
@@ -152,8 +152,8 @@
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
-                           <a runat="server" onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
-                                <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" />
+                           <a  onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
+                                <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable shadow-sm" alt="track-name" />
                             </a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("TrackName")%></p>

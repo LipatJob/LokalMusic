@@ -157,9 +157,7 @@
                     <asp:Repeater ID="tracksContainer" runat="server">
                         <ItemTemplate>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
-                                    <%#Eval("TrackName") %>
-                                </a>
+                                <a onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="titleLink"> <%#Eval("TrackName") %></a>
                                 <span class="badge badge-dark badge-pill pl-3 pr-3">₱<%#Eval("Price", "{0:n}") %></span>
                             </li>
                         </ItemTemplate>
