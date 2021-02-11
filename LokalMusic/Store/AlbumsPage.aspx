@@ -44,7 +44,7 @@
                             <div class="row w-100 ">
                                 <div class="col-xl-3">
                                     <a href=<%#Eval("DetailsUrl") %> runat="server">
-                                        <img src=<%#Eval("AlbumCover")%> alt="album_cover" class="d-block mx-auto mb-xl-0 mb-sm-2 img-hoverable" width="200" height="200"/>
+                                        <img src=<%#Eval("AlbumCover")%> alt="album_cover" class="d-block mx-auto mb-xl-0 mb-sm-2 img-hoverable shadow-sm" width="200" height="200"/>
                                     </a>
                                 </div>
 
