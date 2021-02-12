@@ -71,6 +71,7 @@ namespace LokalMusic.Publish.Album
                     AlbumCoverIsUpdated = false;
 
                 Presenter.EditAlbum();
+                NavigationHelper.Redirect("~/Publish/Albums");
             }
         }
 

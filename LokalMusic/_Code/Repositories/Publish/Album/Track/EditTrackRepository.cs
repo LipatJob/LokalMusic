@@ -1,6 +1,8 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Models.Publish.Album.Track;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Web;
 
@@ -56,6 +58,20 @@ WHERE TrackId = @trackId
             model.ClipFile = (string)result.Rows[0]["ClipFile"];
             model.ClipFileDuration = (TimeSpan)result.Rows[0]["ClipFileDuration"];
             model.Status = (string)result.Rows[0]["Status"];
+        }
+
+        public void GetGenreList(IEditTrackModel model)
+        {
+            string query = "SELECT GenreName FROM Genre";
+            var result = DbHelper.ExecuteDataTableQuery(query);
+
+            List<string> genreList = new List<string> { };
+            foreach (DataRow row in result.Rows)
+            {
+                string genre = (string)row["GenreName"];
+                genreList.Add(genre);
+            }
+            model.Genres = genreList;
         }
 
         public bool CheckIfLastPublished(int albumId)

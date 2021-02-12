@@ -26,7 +26,8 @@
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Genre" runat="server" />
-                    <asp:TextBox ID="genreTxt" runat="server" Width="500" CssClass="form-control" MaxLength="70"></asp:TextBox>
+                    <asp:TextBox ID="genreTxt" list="genres" runat="server" Width="500" CssClass="form-control" MaxLength="70"></asp:TextBox>
+                    <datalist id="genres" runat="server" ClientIDMode="Static"></datalist>
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Description" runat="server" />
@@ -42,7 +43,7 @@
             <div class="col-4">
                 <p>Track File</p>
                 <div style="margin-bottom:20px;">
-                    <audio controls id="trackSource" src="" runat="server">
+                    <audio controls id="trackSource" class="trackSource" src="" runat="server">
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
@@ -54,7 +55,7 @@
 
                 <p style="margin-top:50px">Clip File</p>
                 <div style="margin-bottom:20px;">
-                    <audio controls id="clipSource" src="" runat="server">
+                    <audio controls id="clipSource" class="clipSource" src="" runat="server">
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
@@ -62,7 +63,6 @@
                         <asp:FileUpload runat="server" ID="clipFile" CssClass="form-control-file custom-file-input clipFile"/>
                         <label class="custom-file-label" for="custom-file">Choose file</label>
                     </div>
-                    <asp:CustomValidator ID="clipFileCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="clipFile" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="clipFileCv_ServerValidate"></asp:CustomValidator>
                 </div>
             </div>            
         </div>
@@ -76,4 +76,29 @@
         </div>
     
     </div>
+
+    <script>
+        $('document').ready(function () {
+            $(".trackFile").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('.trackSource').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+
+            $(".clipFile").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('.clipSource').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+
+    </script>
 </asp:Content>

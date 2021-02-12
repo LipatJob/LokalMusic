@@ -21,7 +21,8 @@
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Genre" runat="server" />
-                    <asp:TextBox ID="genreTxt" runat="server" Width="500" CssClass="form-control" MaxLength="70"></asp:TextBox>
+                    <asp:TextBox ID="genreTxt" list="genres" runat="server" Width="500" CssClass="form-control" MaxLength="70"></asp:TextBox>
+                    <datalist id="genres" runat="server" ClientIDMode="Static"></datalist>
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Description" runat="server" />
