@@ -32,7 +32,16 @@
                     <div class="col-xl-2 col-md-3 mb-5 ml-3 mr-3 shadow-sm">
                         <div class="card border-0">
                             <p class="mt-2" style="color:#7a7a7a; font-weight:600; font-size: 13px;"><%#Eval("ProductType") %></p>
-                            <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank"><img src="<%#Eval("ImageCoverAddress")%>" class="card-img-top img-hoverable" alt="catalogue-item"/></a>
+
+                            <%--for album link--%>
+                            <a href=<%#Eval("DetailsUrl") %> runat="server" target="_blank" class=<%# Eval("ProductType").Equals("ALBUM") ? "" : "d-none" %>>
+                                <img src="<%#Eval("ImageCoverAddress")%>" class="card-img-top img-hoverable" alt="catalogue-item"/>
+                            </a>
+                            
+                            <%--for track modal link--%>
+                            <a  onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class=<%# Eval("ProductType").Equals("TRACK") ? "" : "d-none" %>>
+                                <img src="<%#Eval("ImageCoverAddress")%>" class="card-img-top img-hoverable shadow-sm" alt="track-name" />
+                            </a>
                             <div class="card-body">
                                 <p><%#Eval("ProductName")%></p>
                                 <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
