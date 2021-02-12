@@ -22,30 +22,38 @@ namespace LokalMusic
         
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (!AuthenticationHelper.LoggedIn)
+            try
             {
-                NavigationHelper.RedirectReturnAddress("~/Account/Login.aspx");
+                if (!AuthenticationHelper.LoggedIn)
+                    NavigationHelper.RedirectReturnAddress("~/Account/Login.aspx");
+                else
+                {
+                    UserSeperatorHelper.AllowFrontendUsers();
+
+                    collectionLink.HRef = "~/Fan/" + AuthenticationHelper.Username;
+
+                    albums = presenter.GetAlbums();
+
+                    List<PlaylistAlbum> partition1;
+                    List<PlaylistAlbum> partition2;
+
+                    (partition1, partition2) = presenter.PartitionPlaylist(albums);
+
+                    // bind model to view
+                    partition1AlbumContainer.DataSource = partition1;
+                    partition1AlbumContainer.DataBind();
+
+                    partition2AlbumContainer.DataSource = partition2;
+                    partition2AlbumContainer.DataBind();
+                }
             }
-            else
+            catch (System.Data.SqlClient.SqlException x)
             {
-                UserSeperatorHelper.AllowFrontendUsers();
-
-                collectionLink.HRef = "~/Fan/" + AuthenticationHelper.Username;
-
-                albums = presenter.GetAlbums();
-
-                List<PlaylistAlbum> partition1;
-                List<PlaylistAlbum> partition2;
-
-                (partition1, partition2) = presenter.PartitionPlaylist(albums);
-
-                // bind model to view
-                partition1AlbumContainer.DataSource = partition1;
-                partition1AlbumContainer.DataBind();
-
-                partition2AlbumContainer.DataSource = partition2;
-                partition2AlbumContainer.DataBind();
+                NavigationHelper.Redirect("~/Error/Database");
+            }
+            catch (Exception x)
+            {
+                NavigationHelper.Redirect("~/Error/Error");
             }
         }
     }
