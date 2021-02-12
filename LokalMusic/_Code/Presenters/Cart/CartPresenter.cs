@@ -20,6 +20,8 @@ namespace LokalMusic._Code.Presenters.Cart
 
         public void PageLoad()
         {
+            UserSeperatorHelper.AllowFrontendUsers();
+
             if (AuthenticationHelper.LoggedIn == false)
                 NavigationHelper.RedirectReturnAddress("~/Account/Login.aspx");
 

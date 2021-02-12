@@ -22,8 +22,9 @@ namespace LokalMusic.Store
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            UserSeperatorHelper.AllowFrontendUsers();
+
             // handle url request
-            // get parameters
             string searchValue = (string)NavigationHelper.GetRouteValue("SearchVal");
 
             this.catalogueItems = this.presenter.GetSearchedProducts(searchValue);

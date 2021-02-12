@@ -15,7 +15,13 @@ namespace LokalMusic.Store
         public ArtistsPage()
         {
             this.presenter = new ArtistsPagePresenter(new StoreRepository());
+        }
+         
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            UserSeperatorHelper.AllowFrontendUsers();
 
+            // handle url request
             string sortby = (string)NavigationHelper.GetRouteValue("SortBy");
             string orderby = (string)NavigationHelper.GetRouteValue("OrderBy");
 
@@ -23,10 +29,8 @@ namespace LokalMusic.Store
                 this.artists = presenter.GetArtists();
             else
                 this.artists = presenter.GetArtists(sortby, orderby);
-        }
-         
-        protected void Page_Load(object sender, EventArgs e)
-        {
+
+            // bind model to view
             artistContainer.DataSource = this.artists;
             artistContainer.DataBind();
         }

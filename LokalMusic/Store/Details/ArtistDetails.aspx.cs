@@ -49,10 +49,15 @@ namespace LokalMusic.Store.Details
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            UserSeperatorHelper.AllowFrontendUsers();
+
             this.HandleUrlRequest();
+
+            // populate models' additional information
             (this.artistDetails, this.albums) = this.presenter.DetermineAristSummary(artistDetails, albums);
             this.albums = this.presenter.DetermineAlbumsSummary(albums);
 
+            // bind models to view
             List<Artist> temp = new List<Artist>();
             temp.Add(this.artistDetails);
             artistContainer.DataSource = temp;

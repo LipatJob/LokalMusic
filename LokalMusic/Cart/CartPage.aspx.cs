@@ -21,7 +21,6 @@ namespace LokalMusic.Cart
         public CartPage()
         {
             this.presenter = new CartPresenter(new CartRepository());
-
         }
 
         protected void Page_Load(object sender, EventArgs e)
