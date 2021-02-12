@@ -33,11 +33,11 @@
 
         <div class="card mx-auto shadow-lg text-center" style="width:35rem;">
             <div class="card-body">
-                <h1 id="errorTitle" runat="server" style="margin-top: -17px; font-weight: 700; font-size: 160px; background: -webkit-linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                <h1 id="errorTitle" runat="server" class="" style=" font-weight: 700; font-size: 5vw; background: -webkit-linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                     <%#Eval("error") %>
                 </h1>
 
-                <p id="errorText" runat="server" style="font-size: 16px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 600; color: #AA3A3A;">
+                <p id="errorText" runat="server" style="font-size: 1vw; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 600; color: #AA3A3A;">
                     <%#Eval("description") %>
                 </p>
 

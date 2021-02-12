@@ -63,22 +63,33 @@ namespace LokalMusic.Store.Details
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            UserSeperatorHelper.AllowFrontendUsers();
+            try
+            {
+                UserSeperatorHelper.AllowFrontendUsers();
 
-            this.HandleUrlRequest();
+                this.HandleUrlRequest();
 
-            // populate models' additional information
-            this.presenter.DetermineTrackSummaries(albumDetails, tracks);
+                // populate models' additional information
+                this.presenter.DetermineTrackSummaries(albumDetails, tracks);
 
 
-            // bind modesl to view
-            List<Album> temp = new List<Album>();
-            temp.Add(this.albumDetails);
-            albumContainer.DataSource = temp;
-            albumContainer.DataBind();
+                // bind modesl to view
+                List<Album> temp = new List<Album>();
+                temp.Add(this.albumDetails);
+                albumContainer.DataSource = temp;
+                albumContainer.DataBind();
 
-            tracksContainer.DataSource = this.tracks;
-            tracksContainer.DataBind();
+                tracksContainer.DataSource = this.tracks;
+                tracksContainer.DataBind();
+            }
+            catch (System.Data.SqlClient.SqlException x)
+            {
+                NavigationHelper.Redirect("~/Error/Database");
+            }
+            catch (Exception x)
+            {
+                NavigationHelper.Redirect("~/Error/Error");
+            }
         }
     }
 }

@@ -20,19 +20,30 @@ namespace LokalMusic.Store
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            UserSeperatorHelper.AllowFrontendUsers();
+            try
+            {
+                UserSeperatorHelper.AllowFrontendUsers();
 
-            string sortby = (string)NavigationHelper.GetRouteValue("SortBy");
-            string orderby = (string)NavigationHelper.GetRouteValue("OrderBy");
+                string sortby = (string)NavigationHelper.GetRouteValue("SortBy");
+                string orderby = (string)NavigationHelper.GetRouteValue("OrderBy");
 
-            if ((sortby == null || sortby == "") && (orderby == null || orderby == ""))
-                this.tracks = presenter.GetTracks();
-            else
-                this.tracks = presenter.GetTracks(sortby, orderby);
+                if ((sortby == null || sortby == "") && (orderby == null || orderby == ""))
+                    this.tracks = presenter.GetTracks();
+                else
+                    this.tracks = presenter.GetTracks(sortby, orderby);
 
-            // bind model to view
-            trackContainer.DataSource = this.tracks;
-            trackContainer.DataBind();
+                // bind model to view
+                trackContainer.DataSource = this.tracks;
+                trackContainer.DataBind();
+            }
+            catch (System.Data.SqlClient.SqlException x)
+            {
+                NavigationHelper.Redirect("~/Error/Database");
+            }
+            catch (Exception x)
+            {
+                NavigationHelper.Redirect("~/Error/Error");
+            }
         }
     }
 }
