@@ -318,7 +318,7 @@
     <Content Include="Finance\Receipts.aspx" />
     <Content Include="Finance\Reports.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Playlist.aspx" />
+    <Content Include="Fan\Playlist.aspx" />
     <Content Include="Publish\Albums.aspx" />
     <Content Include="Publish\Album\Add.aspx" />
     <Content Include="Publish\Album\Edit.aspx" />
@@ -583,11 +583,11 @@
     <Compile Include="Finance\Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Playlist.aspx.cs">
+    <Compile Include="Fan\Playlist.aspx.cs">
       <DependentUpon>Playlist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Playlist.aspx.designer.cs">
+    <Compile Include="Fan\Playlist.aspx.designer.cs">
       <DependentUpon>Playlist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Publish\Albums.aspx.cs">
@@ -781,8 +781,10 @@
     <Compile Include="_Code\Models\Cart\CartArtist.cs" />
     <Compile Include="_Code\Models\Cart\CartTrack.cs" />
     <Compile Include="_Code\Models\Cart\CheckoutItem.cs" />
+    <Compile Include="_Code\Models\Fan\PlaylistTrack.cs" />
     <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
+    <Compile Include="_Code\Models\Fan\PlaylistAlbum.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptListItem.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptModel.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptProductItem.cs" />
@@ -815,6 +817,7 @@
     <Compile Include="_Code\Presenters\Admin\ProductsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
     <Compile Include="_Code\Presenters\Cart\CartPresenter.cs" />
+    <Compile Include="_Code\Presenters\Fan\PlaylistPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\AlbumsPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
     <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
@@ -842,6 +845,7 @@
     <Compile Include="_Code\Repositories\Cart\AddToCartRepository.cs" />
     <Compile Include="_Code\Repositories\Cart\CartRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
+    <Compile Include="_Code\Repositories\Fan\PlaylistRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReceiptsRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\AlbumsRepository.cs" />
