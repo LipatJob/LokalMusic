@@ -57,6 +57,10 @@
         .featured-text-display{
             color: #FFDCDC;
         }
+
+        a:hover{
+            text-decoration: none;
+        }
     </style>
 
     <div id="featured-artist" class="pt-5 pb-4">
@@ -152,7 +156,7 @@
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
-                           <a  onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
+                           <a  onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="">
                                 <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable shadow-sm" alt="track-name" />
                             </a>
                             <div class="card-body">
