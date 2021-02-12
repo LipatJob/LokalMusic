@@ -11,7 +11,7 @@ namespace LokalMusic._Code.Presenters.Account
 {
     public class SettingsPresenter
     {
-        public static List<ReceiptListItem> GetPaymentHistory()
+        public static List<SalesListItem> GetPaymentHistory()
         {
             SettingsRepository repository = new SettingsRepository();
             return repository.GetPaymentHistory(AuthenticationHelper.UserId).ToList();
@@ -21,7 +21,7 @@ namespace LokalMusic._Code.Presenters.Account
         {
             SettingsRepository repository = new SettingsRepository();
             var model = repository.GetReceiptModel(receiptId);
-            if(model.Username != AuthenticationHelper.Username)
+            if(model.Name != AuthenticationHelper.Username)
             {
                 return null;
             }

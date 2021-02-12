@@ -76,7 +76,7 @@ FROM UserInfo
 
         }
 
-        public IList<ReceiptListItem> GetPaymentHistory(int? userId)
+        public IList<SalesListItem> GetPaymentHistory(int? userId)
         {
             string query = @"
 SELECT
@@ -90,17 +90,17 @@ WHERE [UserInfo].UserId = @UserId
 ORDER BY [OrderInfo].OrderDate ASC;
 ";
 
-            var receipts = new List<ReceiptListItem>();
+            var receipts = new List<SalesListItem>();
             var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
 
             foreach (var row in result.AsEnumerable())
             {
-                receipts.Add(new ReceiptListItem()
+                receipts.Add(new SalesListItem()
                 {
                     OrderId = (int)row["OrderId"],
                     AmountPaid = (decimal)row["AmountPaid"],
                     OrderDate = (DateTime)row["OrderDate"],
-                    Username = (string)row["Username"]
+                    Name = (string)row["Username"]
                 });
             }
 
@@ -148,7 +148,7 @@ ORDER BY [OrderInfo].OrderDate ASC;
             return DbHelper.ExecuteScalar(query, ("UserId", userId)) != null;
         }
 
-        internal IList<ReceiptListItem> GetReceipts(int userId)
+        internal IList<SalesListItem> GetReceipts(int userId)
         {
 
             string query = @"
@@ -163,17 +163,17 @@ WHERE [UserInfo].UserId = @UserId;
 ORDER BY [OrderInfo].OrderDate DESC;
 ";
 
-            var receipts = new List<ReceiptListItem>();
+            var receipts = new List<SalesListItem>();
             var result = DbHelper.ExecuteDataTableQuery(query, ("UserId", userId));
 
             foreach (var row in result.AsEnumerable())
             {
-                receipts.Add(new ReceiptListItem()
+                receipts.Add(new SalesListItem()
                 {
                     OrderId = (int)row["OrderId"],
                     AmountPaid = (decimal)row["AmountPaid"],
                     OrderDate = (DateTime)row["OrderDate"],
-                    Username = (string)row["Username"]
+                    Name = (string)row["Username"]
                 });
             }
 
@@ -197,7 +197,7 @@ WHERE [OrderInfo].OrderId = @OrderId;";
                 OrderId = (int)modelResult["OrderId"],
                 AmountPaid = (decimal)modelResult["AmountPaid"],
                 OrderDate = (DateTime)modelResult["OrderDate"],
-                Username = (string)modelResult["Username"],
+                Name = (string)modelResult["Username"],
                 Products = new List<ReceiptProductItem>()
             };
 

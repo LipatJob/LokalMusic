@@ -19,7 +19,7 @@ namespace LokalMusic._Code.Presenters.Finance
             this.repository = repository;
         }
 
-        internal static IList<ReceiptListItem> GetReceipts()
+        internal static IList<SalesListItem> GetReceipts()
         {
             var repository = new ReceiptsRepository();
             return repository.GetReceipts();
@@ -29,6 +29,13 @@ namespace LokalMusic._Code.Presenters.Finance
         {
             var repository = new ReceiptsRepository();
             return repository.GetReceiptModel(receiptId);
+        }
+
+        internal static SalesHistoryModel GetSalesHistory(DateTime start, DateTime end)
+        {
+            if(start > end) { return null; }
+            var repository = new ReceiptsRepository();
+            return repository.GetSalesHistoryModel(start, end);
         }
     }
 }
