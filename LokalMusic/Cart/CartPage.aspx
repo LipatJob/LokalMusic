@@ -88,19 +88,19 @@
                                                     id='<%#Eval("TrackId") %>'
                                                     class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"
                                                     onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2}, \"{3}\");", Eval("TrackId"), Eval("TrackName"), Eval("Price"), "TRACK") %>' />
-                                            </div>
+                                            </div>  
 
                                             <%--image--%>
                                             <div class="col-md-2 m-0 p-0">
-                                                <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
+                                                <a onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' >
                                                     <img src=<%#Eval("AlbumCover") %> class="mx-auto my-auto d-block img-responsive img-hoverable" width="100" height="100"/>
                                                 </a>
                                             </div>
 
                                             <%--title and other description--%>
                                             <div class="col-md-6">
-                                                <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
-                                                    <h4 class="card-title" style="color:#AA3A3A; font-size:24px;"><%#Eval("TrackName") %></h4>
+                                                <a onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>'>
+                                                    <h4 class="card-title titleLink" style="font-weight: 600"><%#Eval("TrackName") %></h4>
                                                 </a>
 
                                                 <a href=<%#Eval("TrackAlbumDetails") %> class="titleLink" target="_blank" runat="server">
@@ -146,8 +146,8 @@
 
                                 <%--image--%>
                                 <div class="col-md-3 m-0 p-0">
-                                    <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
-                                        <img src=<%#Eval("AlbumCoverAddress") %> class="mx-auto d-block img-responsive img-hoverable" width="150" height="150"/>
+                                    <a href=<%#Eval("DetailsUrl") %> class="" target="_blank" runat="server">
+                                        <img src=<%#Eval("AlbumCoverAddress") %> class="mx-auto d-block img-responsive img-hoverable shadow-sm" width="150" height="150"/>
                                     </a>
                                 </div>
 
@@ -155,8 +155,8 @@
                                 <div class="col-md-5 col-xl-5">
                                     <h6 class="" style="font-size:16px; color: #C4C4C4">Album</h6>
 
-                                    <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
-                                        <h4 class="card-title" style="color:#AA3A3A; font-size:28px;"><%#Eval("AlbumName") %></h4>
+                                    <a href=<%#Eval("DetailsUrl") %> class=" titleLink" target="_blank" runat="server">
+                                        <h4 class="card-title titleLink" style="font-weight: 600"><%#Eval("AlbumName") %></h4>
                                     </a>
 
                                     <a href=<%#Eval("AlbumArtistUrl") %> class="titleLink" target="_blank" runat="server">
