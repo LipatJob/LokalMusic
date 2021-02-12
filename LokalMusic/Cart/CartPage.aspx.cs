@@ -25,15 +25,26 @@ namespace LokalMusic.Cart
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            presenter.PageLoad();
+            try
+            {
+                presenter.PageLoad();
 
-            this.albums = this.presenter.GetCartAlbums();
-            if (albums != null)
-                this.albums = this.presenter.GetCartAlbumsAdditionalDetails(this.albums);
+                this.albums = this.presenter.GetCartAlbums();
+                if (albums != null)
+                    this.albums = this.presenter.GetCartAlbumsAdditionalDetails(this.albums);
 
-            this.artists = this.presenter.GetCartArtists();
+                this.artists = this.presenter.GetCartArtists();
 
-            this.BindModel();
+                this.BindModel();
+            }
+            catch (System.Data.SqlClient.SqlException x)
+            {
+                NavigationHelper.Redirect("~/Error/Database");
+            }
+            catch (Exception x)
+            {
+                NavigationHelper.Redirect("~/Error/Error");
+            }
         }
 
         protected void BindModel()
