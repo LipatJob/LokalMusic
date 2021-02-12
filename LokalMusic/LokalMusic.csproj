@@ -785,7 +785,6 @@
     <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
     <Compile Include="_Code\Models\Fan\PlaylistAlbum.cs" />
-    <Compile Include="_Code\Models\Finance\ReceiptListItem.cs" />
     <Compile Include="_Code\Models\Finance\SalesListItem.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptModel.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptProductItem.cs" />
