@@ -9,7 +9,7 @@ using System.Data;
 
 namespace LokalMusic._Code.Repositories.Finance
 {
-	public class ReceiptsRepository
+	public class SalesHistoryRepository
 	{
 
 		public SalesHistoryModel GetSalesHistoryModel(DateTime dateStart, DateTime dateEnd)

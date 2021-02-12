@@ -11,12 +11,12 @@ using System.Web.UI.WebControls;
 
 namespace LokalMusic.Finance
 {
-    public partial class Receipts : System.Web.UI.Page
+    public partial class SalesHistory : System.Web.UI.Page
     {
-        private ReceiptsPresenter presenter;
-        public Receipts()
+        private SalesHistoryPresenter presenter;
+        public SalesHistory()
         {
-            presenter = new ReceiptsPresenter(this, new ReceiptsRepository());
+            presenter = new SalesHistoryPresenter(this, new SalesHistoryRepository());
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,13 +26,13 @@ namespace LokalMusic.Finance
         [WebMethod]
         public static SalesHistoryModel GetSalesHistory(DateTime startDate, DateTime endDate)
         {
-            return ReceiptsPresenter.GetSalesHistory(startDate, endDate);
+            return SalesHistoryPresenter.GetSalesHistory(startDate, endDate);
         }
 
         [WebMethod]
         public static ReceiptModel GetReceipt(int receiptId)
         {
-            return ReceiptsPresenter.GetReceiptModel(receiptId);
+            return SalesHistoryPresenter.GetReceiptModel(receiptId);
         }
     }
 }
