@@ -11,9 +11,138 @@ namespace LokalMusic._Code.Repositories.Finance
 {
 	public class ReceiptsRepository
 	{
-		internal IList<ReceiptListItem> GetReceipts()
-		{
 
+		public SalesHistoryModel GetSalesHistoryModel(DateTime dateStart, DateTime dateEnd)
+        {
+
+			return new SalesHistoryModel {
+				MostBoughtProduct = GetMostBoughtProduct(dateStart, dateEnd),
+				LeastBoughtProduct = GetLeastBoughtProduct(dateStart, dateEnd),
+				SalesItems = GetSalesListItem(dateStart, dateEnd)
+			};
+        }
+
+		private IList<SalesListItem> GetSalesListItem(DateTime dateStart, DateTime dateEnd)
+		{
+			string query = @"
+SELECT
+	[OrderInfo].OrderId,
+	[OrderInfo].OrderDate,
+	[UserInfo].FirstName  + ' ' +[UserInfo].LastName AS Name,
+	[OrderInfo].AmountPaid
+FROM [OrderInfo]
+	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
+WHERE
+	[OrderInfo].OrderDate BETWEEN @StartDate AND @EndDate
+ORDER BY [OrderInfo].OrderDate ASC;
+";
+
+			var receipts = new List<SalesListItem>();
+			var result = DbHelper.ExecuteDataTableQuery(
+				query,
+				("StartDate", dateStart),
+				("EndDate", dateEnd));
+
+			foreach (var row in result.AsEnumerable())
+			{
+				receipts.Add(new SalesListItem()
+				{
+					OrderId = (int)row["OrderId"],
+					AmountPaid = (decimal)row["AmountPaid"],
+					OrderDate = (DateTime)row["OrderDate"],
+					Name = (string)row["Name"]
+				});
+			}
+
+			return receipts;
+		}
+
+		private SalesProductModel GetMostBoughtProduct(DateTime dateStart, DateTime dateEnd)
+        {
+			string query = @"
+WITH MostBoughtProduct AS (
+	SELECT TOP 1
+		MAX([ProductOrder].ProductId) AS ProductId,
+		COUNT([ProductOrder].ProductPrice) AS SoldCount
+	FROM [ProductOrder]
+	WHERE [ProductOrder].OrderDate BETWEEN @StartDate AND @EndDate
+	GROUP BY [ProductOrder].ProductId
+	ORDER BY SoldCount DESC
+)
+SELECT
+	[ArtistInfo].ArtistName,
+	[Product].ProductName,
+	[FileInfo].[FileName] AS AlbumCover,
+	[MostBoughtProduct].SoldCount
+FROM [Product]
+	INNER JOIN [MostBoughtProduct] ON [MostBoughtProduct].ProductId = [Product].ProductId
+	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
+	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId, [Product].ProductId)
+	LEFT JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
+	LEFT JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID;
+";
+			var result = DbHelper.ExecuteDataTableQuery(
+				query,
+				("StartDate", dateStart),
+				("EndDate", dateEnd));
+			if(result.Rows.Count == 0)
+            {
+				return null;
+            }
+
+			return new SalesProductModel
+			{
+				AlbumCover = (string) result.Rows[0]["AlbumCover"],
+				ArtistName = (string) result.Rows[0]["ArtistName"],
+				ProductName = (string) result.Rows[0]["ProductName"],
+			};
+        }
+
+		private SalesProductModel GetLeastBoughtProduct(DateTime dateStart, DateTime dateEnd)
+		{
+			string query = @"
+WITH MostBoughtProduct AS (
+	SELECT TOP 1
+		MAX([ProductOrder].ProductId) AS ProductId,
+		COUNT([ProductOrder].ProductPrice) AS SoldCount
+	FROM [ProductOrder]
+	WHERE [ProductOrder].OrderDate BETWEEN @StartDate AND @EndDate
+	GROUP BY [ProductOrder].ProductId
+	ORDER BY SoldCount ASC
+)
+SELECT
+	[ArtistInfo].ArtistName,
+	[Product].ProductName,
+	[FileInfo].[FileName] AS AlbumCover,
+	[MostBoughtProduct].SoldCount
+FROM [Product]
+	INNER JOIN [MostBoughtProduct] ON [MostBoughtProduct].ProductId = [Product].ProductId
+	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
+	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId, [Product].ProductId)
+	LEFT JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
+	LEFT JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID;
+";
+			var result = DbHelper.ExecuteDataTableQuery(
+				query,
+				("StartDate", dateStart),
+				("EndDate", dateEnd));
+			if (result.Rows.Count == 0)
+			{
+				return null;
+			}
+
+			return new SalesProductModel
+			{
+				AlbumCover = (string)result.Rows[0]["AlbumCover"],
+				ArtistName = (string)result.Rows[0]["ArtistName"],
+				ProductName = (string)result.Rows[0]["ProductName"],
+			};
+		}
+
+
+
+		internal IList<SalesListItem> GetReceipts()
+		{
 			string query = @"
 SELECT
 	[OrderInfo].OrderId,
@@ -25,17 +154,17 @@ FROM [OrderInfo]
 ORDER BY [OrderInfo].OrderDate ASC;
 ";
 
-			var receipts = new List<ReceiptListItem>();
+			var receipts = new List<SalesListItem>();
 			var result = DbHelper.ExecuteDataTableQuery(query);
 
             foreach (var row in result.AsEnumerable())
             {
-				receipts.Add(new ReceiptListItem()
+				receipts.Add(new SalesListItem()
 				{
 					OrderId = (int) row["OrderId"],
 					AmountPaid = (decimal) row["AmountPaid"],
 					OrderDate = (DateTime) row["OrderDate"],
-					Username = (string) row["Username"]
+					Name = (string) row["Username"]
 				});
             }
 
@@ -48,7 +177,7 @@ ORDER BY [OrderInfo].OrderDate ASC;
 SELECT
 	[OrderInfo].OrderId,
 	[OrderInfo].OrderDate,
-	[UserInfo].Username,
+	[UserInfo].FirstName  + ' ' +[UserInfo].LastName AS Name,
 	[OrderInfo].AmountPaid
 FROM [OrderInfo]
 	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
@@ -59,7 +188,7 @@ WHERE [OrderInfo].OrderId = @OrderId;";
 				OrderId = (int)modelResult["OrderId"],
 				AmountPaid = (decimal)modelResult["AmountPaid"],
 				OrderDate = (DateTime)modelResult["OrderDate"],
-				Username = (string)modelResult["Username"],
+				Name = (string)modelResult["Name"],
 				Products = new List<ReceiptProductItem>()
 			};
 

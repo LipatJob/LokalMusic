@@ -24,9 +24,9 @@ namespace LokalMusic.Finance
         }
 
         [WebMethod]
-        public static IList<ReceiptListItem> GetReceipts()
+        public static SalesHistoryModel GetSalesHistory(DateTime startDate, DateTime endDate)
         {
-            return ReceiptsPresenter.GetReceipts();
+            return ReceiptsPresenter.GetSalesHistory(startDate, endDate);
         }
 
         [WebMethod]

@@ -783,9 +783,11 @@
     <Compile Include="_Code\Models\Cart\CheckoutItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
-    <Compile Include="_Code\Models\Finance\ReceiptListItem.cs" />
+    <Compile Include="_Code\Models\Finance\SalesListItem.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptModel.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptProductItem.cs" />
+    <Compile Include="_Code\Models\Finance\SalesHistoryModel.cs" />
+    <Compile Include="_Code\Models\Finance\SalesProductModel.cs" />
     <Compile Include="_Code\Models\Publish\AlbumsItem.cs" />
     <Compile Include="_Code\Models\Publish\AlbumsModel.cs" />
     <Compile Include="_Code\Models\Publish\Album\IAddAlbumModel.cs" />

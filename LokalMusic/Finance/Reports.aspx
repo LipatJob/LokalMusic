@@ -74,12 +74,12 @@
             <div class="date-selection-container">
                 <div class="mx-2">
                     <label for="startDate">Start Date </label>
-                    <input type="date" name="startDate" id="startDate" class="form-control"/>
+                    <input type="date" name="startDate" id="startDate" class="form-control" />
                 </div>
 
                 <div class="mx-2">
                     <label for="endDate">End Date </label>
-                    <input type="date" name="endDate" id="endDate" class="form-control"/>
+                    <input type="date" name="endDate" id="endDate" class="form-control" />
                 </div>
                 <div class="mx-2">
                     <label for="frequency">Frequency</label>
@@ -89,41 +89,41 @@
                         <option class="dropdown-item" value="YEARLY">Yearly</option>
                     </select>
                 </div>
+            </div>
         </div>
-    </div>
-    <div class="figure-container">
-        <%-- Net Sales --%>
-        <div class="figure-item">
-            <h5>Net Sales</h5>
-            <span class="figure-amount" id="netSales">0</span>
+        <div class="figure-container">
+            <%-- Net Sales --%>
+            <div class="figure-item">
+                <h5>Net Sales</h5>
+                <span class="figure-amount" id="netSales">0</span>
 
+            </div>
+
+            <%-- Gross Sales --%>
+            <div class="figure-item">
+                <h5>Gross Sales</h5>
+                <span class="figure-amount" id="grossSales">0</span>
+
+            </div>
+
+            <%-- Total Artist Revenue --%>
+            <div class="figure-item">
+                <h5>Total Artist Revenue </h5>
+                <span class="figure-amount" id="totalArtistRevenue">0</span>
+
+            </div>
+
+            <%-- Products Sold --%>
+            <div class="figure-item">
+                <h5>Products Sold</h5>
+                <span class="figure-amount" id="productsSold">0</span>
+            </div>
         </div>
 
-        <%-- Gross Sales --%>
-        <div class="figure-item">
-            <h5>Gross Sales</h5>
-            <span class="figure-amount" id="grossSales">0</span>
-
+        <%-- Graph --%>
+        <div class="graph-container">
+            <canvas id="graph"></canvas>
         </div>
-
-        <%-- Total Artist Revenue --%>
-        <div class="figure-item">
-            <h5>Total Artist Revenue </h5>
-            <span class="figure-amount" id="totalArtistRevenue">0</span>
-
-        </div>
-
-        <%-- Products Sold --%>
-        <div class="figure-item">
-            <h5>Products Sold</h5>
-            <span class="figure-amount" id="productsSold">0</span>
-        </div>
-    </div>
-
-    <%-- Graph --%>
-    <div class="graph-container">
-        <canvas id="graph"></canvas>
-    </div>
     </div>
     <script>
         var ctx = document.getElementById('graph').getContext('2d');
@@ -175,8 +175,7 @@
             updateReport();
         }
 
-        function checkDate()
-        {
+        function checkDate() {
             if (startDate.value > endDate.value) {
                 startDate.value = endDate.value;
             }
@@ -214,8 +213,7 @@
 
         }
 
-        function updateChart(response)
-        {
+        function updateChart(response) {
             removeData(chart);
             addData(chart, response.labels, response.data);
         }

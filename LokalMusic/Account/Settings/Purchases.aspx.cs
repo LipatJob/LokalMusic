@@ -22,7 +22,7 @@ namespace LokalMusic.Account.Settings
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static List<ReceiptListItem> GetPaymentHistory()
+        public static List<SalesListItem> GetPaymentHistory()
         {
             return SettingsPresenter.GetPaymentHistory();
         }
