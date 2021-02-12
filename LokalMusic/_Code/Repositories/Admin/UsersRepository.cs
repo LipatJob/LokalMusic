@@ -28,6 +28,7 @@ INNER JOIN [UserStatus] ON
 	[UserStatus].UserStatusId = [UserInfo].UserStatusId
 INNER JOIN [UserType] ON
 	[UserType].UserTypeId = [UserInfo].UserTypeId
+WHERE [UserType].TypeName IN ('FAN', 'ARTIST')
 ";
             return DbHelper.ExecuteDataTableQuery(query).AsEnumerable().Select((row) =>
             {
