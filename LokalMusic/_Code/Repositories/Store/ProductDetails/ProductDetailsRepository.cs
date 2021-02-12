@@ -18,7 +18,8 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
         {
             Track trackDetails = null;
 
-            string query = "SELECT Genre.GenreName as Genre, Track.TrackId, Product.ProductName as TrackName, Product.Price, TrackAudioFile.FileName as AudioAddress, Track.Description, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, AlbumFile.FileName as AlbumCover " +
+            string query = "SELECT Genre.GenreName as Genre, Track.TrackId, Product.ProductName as TrackName, Product.Price, TrackAudioFile.FileName as AudioAddress, " +
+                           "Track.Description, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, AlbumFile.FileName as AlbumCover " +
                            "FROM Product " +
                            "INNER JOIN Track " +
                            "ON Product.ProductId = Track.TrackId " +
