@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using LokalMusic._Code.Repositories.Store.ProductDetails;
 
 // Author - Gene Garcia
 
@@ -71,6 +72,13 @@ namespace LokalMusic._Code.Repositories
 
                         values.Rows[i]["AlbumCover"].ToString()
                         );
+
+                    // check if product is in cart or bought by the user
+                    if (AuthenticationHelper.LoggedIn)
+                        track.AddableToCart = ProductDetailsRepository.AddableToCart(track.TrackId, AuthenticationHelper.UserId);
+                    else
+                        track.AddableToCart = true;
+                    
 
                     tracks.Add(track);
                 }

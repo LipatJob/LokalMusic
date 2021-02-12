@@ -21,7 +21,7 @@ namespace LokalMusic.Store
     public class WebService1 : System.Web.Services.WebService
     {
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Track GetTrack(int trackId)
         {
             Track track = TracksHelper.GetTrack(trackId);

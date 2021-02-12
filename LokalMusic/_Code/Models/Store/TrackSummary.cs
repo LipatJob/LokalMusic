@@ -57,6 +57,8 @@ namespace LokalMusic._Code.Models.Store
 
         public string AlbumCover { get; set; }
 
+        public bool AddableToCart { get; set; } // true if the track is not in cart or not bought
+
         public string DetailsUrl { 
             get { 
                 return $"~/Store/" + this.ArtistId + "/" + this.AlbumId + "/" + this.TrackId;
