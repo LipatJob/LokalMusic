@@ -104,8 +104,8 @@
                                         <img src='<%#Eval("AlbumCover") %>' class="mx-auto card-image w-100" runat="server"/>
                                     </a>
 
-                                    <div class="card-img-overlay text-right" style="height:55px;">
-                                        <button type="button" class="btn btn-light btn-sm shadow-lg my-auto" style="font-size: 12px; font-weight: 600" onclick='AddToCart(<%#Eval("AlbumId")%>)'>
+                                    <div class="card-img-overlay text-right <%# Eval("AddableToCart").Equals(true) ? "visible" : "invisible" %>" style="height:55px;">
+                                        <button type="button" class="btn btn-light btn-sm shadow-lg my-auto " style="font-size: 12px; font-weight: 600" onclick='AddToCart(<%#Eval("AlbumId")%>)'>
                                             <span id="price" class="mr-1">₱<%#Eval("Price", "{0:n}") %></span>
                                             <img src="~/Content/Images/cart.png" runat="server" width="18"/>
                                         </button>
