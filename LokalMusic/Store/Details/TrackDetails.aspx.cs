@@ -59,9 +59,11 @@ namespace LokalMusic.Store.Details
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            UserSeperatorHelper.AllowFrontendUsers();
+
             this.HandleUrlRequest();
 
-
+            // bind model to view
             List<Track> tempTracks = new List<Track>();
             tempTracks.Add(this.trackDetails);
             trackContainer.DataSource = tempTracks;

@@ -24,9 +24,7 @@ namespace LokalMusic.Store
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Exception Ex = Server.GetLastError();
-            //Server.ClearError();
-            //NavigationHelper.Redirect("Error/404/Error encountered in home");
+            UserSeperatorHelper.AllowFrontendUsers();
 
             // bind url to view links
             albumViewAll.HRef = $"~/Store/Albums/{"s1"}/{"asc"}";

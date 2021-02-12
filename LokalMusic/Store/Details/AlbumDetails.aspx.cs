@@ -63,9 +63,15 @@ namespace LokalMusic.Store.Details
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            UserSeperatorHelper.AllowFrontendUsers();
+
             this.HandleUrlRequest();
+
+            // populate models' additional information
             this.presenter.DetermineTrackSummaries(albumDetails, tracks);
 
+
+            // bind modesl to view
             List<Album> temp = new List<Album>();
             temp.Add(this.albumDetails);
             albumContainer.DataSource = temp;
