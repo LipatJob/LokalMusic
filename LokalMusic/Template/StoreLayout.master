@@ -206,11 +206,13 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-4">
-                            <div class="row my-auto mx-auto">
-                                <span id="price" class="" style="color: white; font-weight: 600; font-size: 20px;">₱699.99</span>
-                                <button type="button" class="rounded-0 ml-2" id="addToCart" <%--onclick='AddToCart(<%#Eval("AlbumId")%>)'--%>>
-                                    <img src="~/Content/Images/cart-white.png" class="mb-1" runat="server" width="18" />
-                                </button>
+                            <div class="row my-auto mx-auto " >
+                                <div id="forVisible">
+                                    <span id="price" class="" style="color: white; font-weight: 600; font-size: 20px;">₱699.99 </span>
+                                    <button type="button" class="rounded-0 ml-2" id="addToCart" <%--onclick='AddToCart(<%#Eval("AlbumId")%>)'--%>>
+                                        <img src="~/Content/Images/cart-white.png" class="mb-1" runat="server" width="18" />
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -307,6 +309,10 @@
         }
 
         function ShowTrackModel(data) {
+            $('#trackModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
             $("#trackModal").modal('show');
             $("#track").text(data["TrackName"]);
             $("#artist").text(data["ArtistName"]);
@@ -315,10 +321,21 @@
             $("#description").text(data["Description"]);
             $("#cover").attr("src", data["AlbumCover"]);
             $("#clip").attr("src", data["AudioAddress"]);
+            $('#addToCart').unbind('click');
+            $('#addToCart').unbind('onclick');
             $('#addToCart').attr("onclick", "").click(function () {
                 AddToCart(data["TrackId"]);
                 return false;
-            })
+            });
+
+            $("#forVisible").removeClass("visible");
+            $("#forVisible").removeClass("invisible");
+
+            var visibility = "invisible";
+            console.log(data['AddableToCart']);
+            if (data['AddableToCart'] == true) visibility = "visible";
+
+            $("#forVisible").addClass(visibility);
         }
     </script>
 

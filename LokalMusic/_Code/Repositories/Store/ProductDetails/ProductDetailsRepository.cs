@@ -57,10 +57,44 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                 trackDetails.Description = values.Rows[0]["Description"].ToString();
                 trackDetails.AlbumName = values.Rows[0]["AlbumName"].ToString();
                 trackDetails.ArtistName = values.Rows[0]["ArtistName"].ToString();
-                trackDetails.AlbumCover = values.Rows[0]["AlbumCover"].ToString(); 
+                trackDetails.AlbumCover = values.Rows[0]["AlbumCover"].ToString();
+
+                // check if product is in cart or bought by the user
+                if (AuthenticationHelper.LoggedIn)
+                    trackDetails.AddableToCart = AddableToCart(trackDetails.TrackId, AuthenticationHelper.UserId);
+                else
+                    trackDetails.AddableToCart = true;
+                
             }
 
             return trackDetails;
+        }
+
+        public static bool AddableToCart(int productId, int customerId)
+        {
+            string query = "SELECT ProductId " +
+                           "FROM OrderInfo " +
+                           "INNER JOIN ProductOrder " +
+                           "ON OrderInfo.OrderId = ProductOrder.OrderId " +
+                           "WHERE OrderInfo.CustomerId = @CustomerId AND ProductId = @ProductId";
+
+            bool addable = DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("ProductId", productId)) == null ? true: false;
+
+            // if not addable at this point, return it already
+            if (addable == false)
+                return addable;
+
+            // else check in user cart
+
+            query = "SELECT UserId " +
+                    "FROM UserCart " +
+                    "WHERE UserId = @CustomerId AND ProductId = @ProductId";
+
+
+            addable = DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("ProductId", productId)) == null ? true : false;
+
+            //return the bool value. if it is false the add to cart button will not be shown.
+            return addable;
         }
 
         // Main queries for details
