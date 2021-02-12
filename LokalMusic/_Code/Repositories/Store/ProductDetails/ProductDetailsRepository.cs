@@ -70,32 +70,6 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
             return trackDetails;
         }
 
-        public static bool AddableToCart(int productId, int customerId)
-        {
-            string query = "SELECT ProductId " +
-                           "FROM OrderInfo " +
-                           "INNER JOIN ProductOrder " +
-                           "ON OrderInfo.OrderId = ProductOrder.OrderId " +
-                           "WHERE OrderInfo.CustomerId = @CustomerId AND ProductId = @ProductId";
-
-            bool addable = DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("ProductId", productId)) == null ? true: false;
-
-            // if not addable at this point, return it already
-            if (addable == false)
-                return addable;
-
-            // else check in user cart
-
-            query = "SELECT UserId " +
-                    "FROM UserCart " +
-                    "WHERE UserId = @CustomerId AND ProductId = @ProductId";
-
-
-            addable = DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("ProductId", productId)) == null ? true : false;
-
-            //return the bool value. if it is false the add to cart button will not be shown.
-            return addable;
-        }
 
         // Main queries for details
         public Track GetTrackDetails(int trackId, int albumId, int artistId)
@@ -194,6 +168,11 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
                     values.Rows[0]["ArtistName"].ToString()
                     );
+
+                if (AuthenticationHelper.LoggedIn)
+                    albumDetails.AddableToCart = AddableToCart(albumDetails.AlbumId, AuthenticationHelper.UserId);
+                else
+                    albumDetails.AddableToCart = true;
             }
 
             return albumDetails;
@@ -341,6 +320,11 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                         values.Rows[i]["ArtistName"].ToString()
                         );
 
+                    if (AuthenticationHelper.LoggedIn)
+                        album.AddableToCart = AddableToCart(album.AlbumId, AuthenticationHelper.UserId);
+                    else
+                        album.AddableToCart = true;
+
                     albums.Add(album);
                 }
             }
@@ -351,6 +335,33 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
         // End List queries
 
         // helper queries
+        public static bool AddableToCart(int productId, int customerId)
+        {
+            string query = "SELECT ProductId " +
+                           "FROM OrderInfo " +
+                           "INNER JOIN ProductOrder " +
+                           "ON OrderInfo.OrderId = ProductOrder.OrderId " +
+                           "WHERE OrderInfo.CustomerId = @CustomerId AND ProductId = @ProductId";
+
+            bool addable = DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("ProductId", productId)) == null ? true : false;
+
+            // if not addable at this point, return it already
+            if (addable == false)
+                return addable;
+
+            // else check in user cart
+
+            query = "SELECT UserId " +
+                    "FROM UserCart " +
+                    "WHERE UserId = @CustomerId AND ProductId = @ProductId";
+
+
+            addable = DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("ProductId", productId)) == null ? true : false;
+
+            //return the bool value. if it is false the add to cart button will not be shown.
+            return addable;
+        }
+
         public List<string> GetAlbumGenres(int albumId)
         {
             List<string> genreList = new List<string>();

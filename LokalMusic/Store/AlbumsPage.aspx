@@ -67,7 +67,7 @@
                                     <div class="mt-xl-4 pt-xl-5 mt-md-5"></div>
                                     <div class="mt-xl-2"></div>
                                     <div class="mb-0 pb-0">
-                                        <a class="btn btn-danger mt-xl-5 mt-md-3" style="background-color: #B82828; font-size: 12px; font-weight: 600"  onclick='AddToCart(<%#Eval("AlbumId")%>)'>Add to Cart</a>     
+                                        <a class="btn btn-danger mt-xl-5 mt-md-3 <%# Eval("AddableToCart").Equals(true) ? "visible" : "invisible" %>" style="background-color: #B82828; font-size: 12px; font-weight: 600"  onclick='AddToCart(<%#Eval("AlbumId")%>)'>Add to Cart</a>     
                                     </div>
                                 </div>
                             </div>

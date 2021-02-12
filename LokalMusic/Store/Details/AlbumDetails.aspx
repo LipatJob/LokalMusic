@@ -99,7 +99,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row <%# Eval("AddableToCart").Equals(true) ? "visible" : "invisible" %>">
                                 <div class="col-12">
 
                                     <%--add to cart--%>

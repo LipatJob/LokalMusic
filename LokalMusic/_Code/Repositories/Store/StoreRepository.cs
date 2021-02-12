@@ -126,6 +126,12 @@ namespace LokalMusic._Code.Repositories
                         Convert.ToDateTime(values.Rows[i]["DateReleased"].ToString())
                         );
 
+                    // check if product is in cart or bought by the user
+                    if (AuthenticationHelper.LoggedIn)
+                        album.AddableToCart = ProductDetailsRepository.AddableToCart(album.AlbumId, AuthenticationHelper.UserId);
+                    else
+                        album.AddableToCart = true;
+
                     albums.Add(album);
                 }
             }
