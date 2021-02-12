@@ -22,7 +22,7 @@ SELECT
 	[OrderInfo].AmountPaid
 FROM [OrderInfo]
 	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
-ORDER BY [OrderInfo].OrderDate DESC;
+ORDER BY [OrderInfo].OrderDate ASC;
 ";
 
 			var receipts = new List<ReceiptListItem>();
