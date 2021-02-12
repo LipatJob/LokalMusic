@@ -3,6 +3,7 @@ using LokalMusic._Code.Presenters.Publish.Album.Track;
 using LokalMusic._Code.Repositories.Publish.Album.Track;
 using LokalMusic._Code.Views.Publish;
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -29,6 +30,7 @@ namespace LokalMusic.Publish.Album.Track
         public TimeSpan TrackFileDuration { get; set; }
         public string ClipFile { get => clipSource.Src; set => clipSource.Src = value; }
         public TimeSpan ClipFileDuration { get; set; }
+        public IList<string> Genres { get; set; }
         public HttpPostedFile UploadedTrackFile => trackFile.PostedFile;
         public HttpPostedFile UploadedClipFile => clipFile.PostedFile;
 
@@ -36,6 +38,7 @@ namespace LokalMusic.Publish.Album.Track
         {
             Presenter.PageLoad();
             ValidateMaxTrackCount();
+            GetGenreItems();
         }
 
         private void ValidateMaxTrackCount()
@@ -52,6 +55,16 @@ namespace LokalMusic.Publish.Album.Track
                 addBtn.Enabled = true;
                 maxAlert.Visible = false;
             }
+        }
+
+        private void GetGenreItems()
+        {
+            Presenter.GetGenreList();
+
+            var builder = new System.Text.StringBuilder();
+            foreach (string genre in Genres)
+                builder.Append(String.Format("<option value='{0}'>", genre));
+            genres.InnerHtml = builder.ToString();
         }
 
         protected void addBtn_Click(object sender, EventArgs e)

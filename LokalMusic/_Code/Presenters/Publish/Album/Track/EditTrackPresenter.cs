@@ -30,13 +30,12 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
 
             editTrackRepository.GetArtistName(AuthenticationHelper.UserId, viewModel);
             editTrackRepository.GetAlbumName(AlbumId, viewModel);
-
-            LoadTrackDetails();
+            editTrackRepository.GetTrackDetails(viewModel, TrackId);
         }
 
-        public void LoadTrackDetails()
+        public void GetGenreList()
         {
-            editTrackRepository.GetTrackDetails(viewModel, TrackId);
+            editTrackRepository.GetGenreList(viewModel);
         }
 
         public bool CheckIfLastPublished()
