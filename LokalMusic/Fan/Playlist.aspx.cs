@@ -31,14 +31,14 @@ namespace LokalMusic
             {
                 UserSeperatorHelper.AllowFrontendUsers();
 
-                albums = presenter.GetAlbums();
+                collectionLink.HRef = "~/Fan/" + AuthenticationHelper.Username;
 
+                albums = presenter.GetAlbums();
 
                 List<PlaylistAlbum> partition1;
                 List<PlaylistAlbum> partition2;
 
                 (partition1, partition2) = presenter.PartitionPlaylist(albums);
-
 
                 // bind model to view
                 partition1AlbumContainer.DataSource = partition1;

@@ -109,7 +109,7 @@
             <div class="mx-auto text-center mt-md-5 mt-3 mb-md-0 mb-3">
                 <a href="~/Store/Home.aspx" class="btn btn-outline-danger badge-pill bold-text" runat="server"><span>Return</span></a>
                     
-                <a href="~/Fan/Collection" class="btn btn-outline-info badge-pill bold-text" runat="server"><span>Collection</span></a>
+                <a class="btn btn-outline-info badge-pill bold-text" runat="server" id="collectionLink"><span>Collection</span></a>
 
                 <a href="~/Account/Signout" class="btn btn-dark badge-pill bold-text" runat="server"><span>Signout</span></a>
             </div>
