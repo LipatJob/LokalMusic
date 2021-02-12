@@ -144,7 +144,7 @@
                     <p class="side-links mt-3"><%=BackendAuthenticationHelper.Username%></p>
                     <hr style="width: 150px; background: #525252; margin-top: 0px;" />
                     <a href="~/Finance/Reports" runat="server" class="side-links productsSideItem">Reports</a>
-                    <a href="~/Finance/Receipts" runat="server" class="side-links usersSideItem">Receipts</a>
+                    <a href="~/Finance/SalesHistory" runat="server" class="side-links usersSideItem">Sales</a>
                     <hr style="margin-top: auto; width: 150px; background: #525252;" />
                     <a style="" href="~/Admin/Signout" class="pb-3" runat="server">Signout</a>
                 </div>

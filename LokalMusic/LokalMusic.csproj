@@ -315,7 +315,8 @@
     <Content Include="ErrorPage.aspx" />
     <Content Include="Fan\Collection.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="Finance\Receipts.aspx" />
+    <Content Include="Finance\ArtistPayment.aspx" />
+    <Content Include="Finance\SalesHistory.aspx" />
     <Content Include="Finance\Reports.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Fan\Playlist.aspx" />
@@ -569,12 +570,19 @@
     <Compile Include="Fan\Collection.aspx.designer.cs">
       <DependentUpon>Collection.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Finance\Receipts.aspx.cs">
-      <DependentUpon>Receipts.aspx</DependentUpon>
+    <Compile Include="Finance\ArtistPayment.aspx.cs">
+      <DependentUpon>ArtistPayment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Finance\Receipts.aspx.designer.cs">
-      <DependentUpon>Receipts.aspx</DependentUpon>
+    <Compile Include="Finance\ArtistPayment.aspx.designer.cs">
+      <DependentUpon>ArtistPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\SalesHistory.aspx.cs">
+      <DependentUpon>SalesHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\SalesHistory.aspx.designer.cs">
+      <DependentUpon>SalesHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Finance\Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
@@ -822,7 +830,7 @@
     <Compile Include="_Code\Presenters\Fan\PlaylistPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\AlbumsPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
-    <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
+    <Compile Include="_Code\Presenters\Finance\SalesHistoryPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\Album\AddAlbumPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\Album\EditAlbumPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\Album\TracksPresenter.cs" />
@@ -848,7 +856,7 @@
     <Compile Include="_Code\Repositories\Cart\CartRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\PlaylistRepository.cs" />
-    <Compile Include="_Code\Repositories\Finance\ReceiptsRepository.cs" />
+    <Compile Include="_Code\Repositories\Finance\SalesHistoryRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\AlbumsRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\Album\AddAlbumRepository.cs" />

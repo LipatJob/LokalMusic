@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Receipts" Language="C#" MasterPageFile="~/Template/FinanceLayout.master" AutoEventWireup="true" CodeBehind="Receipts.aspx.cs" Inherits="LokalMusic.Finance.Receipts" %>
+﻿<%@ Page Title="Sales History" Language="C#" MasterPageFile="~/Template/FinanceLayout.master" AutoEventWireup="true" CodeBehind="SalesHistory.aspx.cs" Inherits="LokalMusic.Finance.SalesHistory" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
@@ -198,7 +198,7 @@
             historyData = null;
             $.ajax({
                 type: "POST",
-                url: "/Finance/Receipts.aspx/GetSalesHistory",
+                url: "/Finance/SalesHistory.aspx/GetSalesHistory",
                 data: `{ startDate: '${startDate}', endDate: '${endDate}'}`,
                 contentType: "application/json; charset=utf-8",
                 async: false,
@@ -254,7 +254,7 @@
         function ViewReceipt(transactionId) {
             $.ajax({
                 type: "POST",
-                url: "/Finance/Receipts.aspx/GetReceipt",
+                url: "/Finance/SalesHistory.aspx/GetReceipt",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: `{receiptId: '${transactionId}'}`,

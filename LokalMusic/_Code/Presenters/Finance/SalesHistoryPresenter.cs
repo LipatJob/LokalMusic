@@ -8,12 +8,12 @@ using System.Web;
 
 namespace LokalMusic._Code.Presenters.Finance
 {
-    public class ReceiptsPresenter
+    public class SalesHistoryPresenter
     {
-        private Receipts receipts;
-        private ReceiptsRepository repository;
+        private SalesHistory receipts;
+        private SalesHistoryRepository repository;
 
-        public ReceiptsPresenter(Receipts receipts, ReceiptsRepository repository)
+        public SalesHistoryPresenter(SalesHistory receipts, SalesHistoryRepository repository)
         {
             this.receipts = receipts;
             this.repository = repository;
@@ -21,20 +21,20 @@ namespace LokalMusic._Code.Presenters.Finance
 
         internal static IList<SalesListItem> GetReceipts()
         {
-            var repository = new ReceiptsRepository();
+            var repository = new SalesHistoryRepository();
             return repository.GetReceipts();
         }
 
         internal static ReceiptModel GetReceiptModel(int receiptId)
         {
-            var repository = new ReceiptsRepository();
+            var repository = new SalesHistoryRepository();
             return repository.GetReceiptModel(receiptId);
         }
 
         internal static SalesHistoryModel GetSalesHistory(DateTime start, DateTime end)
         {
             if(start > end) { return null; }
-            var repository = new ReceiptsRepository();
+            var repository = new SalesHistoryRepository();
             return repository.GetSalesHistoryModel(start, end);
         }
     }
