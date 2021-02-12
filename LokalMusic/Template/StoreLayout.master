@@ -313,6 +313,12 @@
                 backdrop: 'static',
                 keyboard: false
             })
+            $("#trackModal").on('hide.bs.modal', function () {
+                $('audio').each(function () {
+                    this.pause();
+                    this.currentTime = 0;
+                })
+            });
             $("#trackModal").modal('show');
             $("#track").text(data["TrackName"]);
             $("#artist").text(data["ArtistName"]);
