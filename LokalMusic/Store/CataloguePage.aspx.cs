@@ -24,8 +24,6 @@ namespace LokalMusic.Store
         {
             try
             {
-                UserSeperatorHelper.AllowFrontendUsers();
-
                 // handle url request
                 string searchValue = (string)NavigationHelper.GetRouteValue("SearchVal");
 

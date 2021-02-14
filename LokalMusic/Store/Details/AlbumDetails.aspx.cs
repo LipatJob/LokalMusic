@@ -65,8 +65,6 @@ namespace LokalMusic.Store.Details
         {
             try
             {
-                UserSeperatorHelper.AllowFrontendUsers();
-
                 this.HandleUrlRequest();
 
                 // populate models' additional information

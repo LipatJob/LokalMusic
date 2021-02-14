@@ -28,8 +28,6 @@ namespace LokalMusic
                     NavigationHelper.RedirectReturnAddress("~/Account/Login.aspx");
                 else
                 {
-                    UserSeperatorHelper.AllowFrontendUsers();
-
                     collectionLink.HRef = "~/Fan/" + AuthenticationHelper.Username;
 
                     albums = presenter.GetAlbums();

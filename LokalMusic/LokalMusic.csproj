@@ -775,7 +775,6 @@
     <Compile Include="_Code\Helpers\NavigationHelper.cs" />
     <Compile Include="_Code\Helpers\NewFolder1\Class1.cs" />
     <Compile Include="_Code\Helpers\TracksHelper.cs" />
-    <Compile Include="_Code\Helpers\UserSeperatorHelper.cs" />
     <Compile Include="_Code\Helpers\ValidationHelper.cs" />
     <Compile Include="_Code\Helpers\ValidUtils.cs" />
     <Compile Include="_Code\Models\Account\ILoginModel.cs" />

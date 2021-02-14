@@ -22,8 +22,6 @@ namespace LokalMusic.Store
         {
             try
             {
-                UserSeperatorHelper.AllowFrontendUsers();
-
                 string sortby = (string)NavigationHelper.GetRouteValue("SortBy");
                 string orderby = (string)NavigationHelper.GetRouteValue("OrderBy");
 
