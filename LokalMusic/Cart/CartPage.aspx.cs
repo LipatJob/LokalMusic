@@ -5,6 +5,7 @@ using LokalMusic._Code.Repositories.Cart;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -27,8 +28,15 @@ namespace LokalMusic.Cart
         {
             try
             {
-                presenter.PageLoad();
+                this.presenter.PageLoad();
+            }
+            catch (ThreadAbortException x)
+            {
+                NavigationHelper.Redirect("~/Store/Home");
+            }
 
+            try
+            {
                 this.albums = this.presenter.GetCartAlbums();
                 if (albums != null)
                     this.albums = this.presenter.GetCartAlbumsAdditionalDetails(this.albums);

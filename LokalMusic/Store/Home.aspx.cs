@@ -26,8 +26,6 @@ namespace LokalMusic.Store
         {
             try
             {
-                UserSeperatorHelper.AllowFrontendUsers();
-
                 // bind url to view links
                 albumViewAll.HRef = $"~/Store/Albums/{"s1"}/{"asc"}";
                 artistViewAll.HRef = $"~/Store/Artists/{"s1"}/{"asc"}";
