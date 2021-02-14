@@ -42,7 +42,7 @@
                             <th>Order Id</th>
                             <th>Name</th>
                             <th>Order Date</th>
-                            <th>Amount Paid</th>
+                            <th>Amount (PHP)</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -157,13 +157,13 @@
                         { 'data': 'OrderId' },
                         { 'data': 'Name' },
                         { 'data': 'FormattedDate' },
-                        { 'data': 'AmountPaid' },
+                        { 'data': 'AmountPaid', 'width': '22%'},
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
                                 return `<button class="btn btn-outline-danger" onclick="ViewReceipt(${row["OrderId"]}, this); return false;">Details</button></a>`;
                             },
-                            "width": "15%"
+                            'width': '15%'
 
                         }
                     ],

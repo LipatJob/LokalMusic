@@ -826,6 +826,7 @@
     <Compile Include="_Code\Presenters\Admin\AdminLoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\ProductsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
+    <Compile Include="_Code\Presenters\Finance\ArtistPaymentPresenter.cs" />
     <Compile Include="_Code\Presenters\Cart\CartPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\PlaylistPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\AlbumsPresenter.cs" />
@@ -856,6 +857,7 @@
     <Compile Include="_Code\Repositories\Cart\CartRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\PlaylistRepository.cs" />
+    <Compile Include="_Code\Repositories\Finance\ArtistPaymentRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\SalesHistoryRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\AlbumsRepository.cs" />
