@@ -24,22 +24,28 @@ namespace LokalMusic.Store
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Exception Ex = Server.GetLastError();
-            //Server.ClearError();
-            //NavigationHelper.Redirect("Error/404/Error encountered in home");
+            try
+            {
+                // bind url to view links
+                albumViewAll.HRef = $"~/Store/Albums/{"s1"}/{"asc"}";
+                artistViewAll.HRef = $"~/Store/Artists/{"s1"}/{"asc"}";
+                trackViewAll.HRef = $"~/Store/Tracks/{"s1"}/{"asc"}";
 
-            // bind url to view links
-            albumViewAll.HRef = $"~/Store/Albums/{"s1"}/{"asc"}";
-            artistViewAll.HRef = $"~/Store/Artists/{"s1"}/{"asc"}";
-            trackViewAll.HRef = $"~/Store/Tracks/{"s1"}/{"asc"}";
+                this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
+                this.topArtists = this.presenter.GetTopArtists();
+                this.famousTracks = this.presenter.GetFamousTracks();
+                this.featuredProducts = this.presenter.GetFeaturedProducts();
 
-            this.bestSellingAlbums = this.presenter.GetBestSellingAlbums();
-            this.topArtists = this.presenter.GetTopArtists();
-            this.famousTracks = this.presenter.GetFamousTracks();
-            this.featuredProducts = this.presenter.GetFeaturedProducts();
-
-
-            this.BindModels();
+                this.BindModels();
+            }
+            catch (System.Data.SqlClient.SqlException x)
+            {
+                NavigationHelper.Redirect("~/Error/Database");
+            }
+            catch (Exception x)
+            {
+                NavigationHelper.Redirect("~/Error/Error");
+            }
         }
 
         private void BindModels()

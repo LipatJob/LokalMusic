@@ -37,6 +37,8 @@ namespace LokalMusic._Code.Models.Store.Details
         public int TrackCount { get; set; }
         public double MinuteCount { get; set; }
 
+        public bool AddableToCart { get; set; } // true if the album is not in cart or not bought
+
         public string AlbumArtistUrl
         {
             get

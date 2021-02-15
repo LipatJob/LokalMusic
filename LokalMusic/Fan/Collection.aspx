@@ -32,10 +32,10 @@
             transition: 0.1s ease-out all;
         }
 
-            .collection-item:hover {
-                transition: border 0.1s ease-in-out !important;
-                border: 1px dotted #ffbaba;
-            }
+        .collection-item:hover {
+            transition: border 0.1s ease-in-out !important;
+            border: 1px dotted #ffbaba;
+        }
 
         .item-link:link, .item-link:visited {
             color: black;
@@ -91,7 +91,9 @@
                 <%-- Template for Collection Item --%>
                 <ItemTemplate>
                     <%-- Like to Product Page --%>
-                    <a href='<%#Eval("GetUrl")%>' class="item-link">
+
+                    <%--album--%>
+                    <a href='<%#Eval("GetUrl")%>' class="item-link <%# Eval("ProductType").ToString().ToLower().Equals("album") ? "" : "d-none" %>">
                         <div class="collection-item">
                             <%-- Album Cover --%>
                             <asp:Image ImageUrl='<%#Eval("CoverLink")%>' runat="server" class="item-picture" />
@@ -103,6 +105,21 @@
                             <p>By <%#Eval("ArtistName")%></p>
                         </div>
                     </a>
+
+                    <%--track--%>
+                    <a href="#" onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="item-link text-dark <%# Eval("ProductType").ToString().ToLower().Equals("track") ? "" : "d-none" %>">
+                        <div class="collection-item">
+                            <%-- Album Cover --%>
+                            <asp:Image ImageUrl='<%#Eval("CoverLink")%>' runat="server" class="item-picture" />
+
+                            <%-- Album/Track Name --%>
+                            <b><%#Eval("ProductName") %></b>
+
+                            <%-- Artist Name --%>
+                            <p>By <%#Eval("ArtistName")%></p>
+                        </div>
+                    </a>
+
                 </ItemTemplate>
             </asp:Repeater>
         </div>

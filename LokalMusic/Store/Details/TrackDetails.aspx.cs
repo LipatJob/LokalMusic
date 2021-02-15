@@ -61,7 +61,7 @@ namespace LokalMusic.Store.Details
         {
             this.HandleUrlRequest();
 
-
+            // bind model to view
             List<Track> tempTracks = new List<Track>();
             tempTracks.Add(this.trackDetails);
             trackContainer.DataSource = tempTracks;

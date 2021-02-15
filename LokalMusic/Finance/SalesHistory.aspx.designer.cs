@@ -10,7 +10,7 @@
 
 namespace LokalMusic.Finance
 {
-    public partial class Receipts
+    public partial class SalesHistory
     {
     }
 }

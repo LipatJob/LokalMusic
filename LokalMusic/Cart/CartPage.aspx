@@ -61,7 +61,7 @@
         <div class="row">
 
             <%--products--%>
-            <div class="col-xl-8">
+            <div class="col-xl-8 mb-xl-0 mb-4">
                 <h3 class="mb-3">Individual Tracks per Artists</h3>
 
                 <%--individual tracks r--%>
@@ -88,19 +88,19 @@
                                                     id='<%#Eval("TrackId") %>'
                                                     class="form-check-input mx-xl-auto my-xl-auto mx-md-auto my-md-auto mx-auto mb-4"
                                                     onclick='<%# string.Format("CheckChanged(this, {0}, \"{1}\", {2}, \"{3}\");", Eval("TrackId"), Eval("TrackName"), Eval("Price"), "TRACK") %>' />
-                                            </div>
+                                            </div>  
 
                                             <%--image--%>
                                             <div class="col-md-2 m-0 p-0">
-                                                <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
+                                                <a onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' >
                                                     <img src=<%#Eval("AlbumCover") %> class="mx-auto my-auto d-block img-responsive img-hoverable" width="100" height="100"/>
                                                 </a>
                                             </div>
 
                                             <%--title and other description--%>
                                             <div class="col-md-6">
-                                                <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
-                                                    <h4 class="card-title" style="color:#AA3A3A; font-size:24px;"><%#Eval("TrackName") %></h4>
+                                                <a onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>'>
+                                                    <h4 class="card-title titleLink" style="font-weight: 600"><%#Eval("TrackName") %></h4>
                                                 </a>
 
                                                 <a href=<%#Eval("TrackAlbumDetails") %> class="titleLink" target="_blank" runat="server">
@@ -146,8 +146,8 @@
 
                                 <%--image--%>
                                 <div class="col-md-3 m-0 p-0">
-                                    <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
-                                        <img src=<%#Eval("AlbumCoverAddress") %> class="mx-auto d-block img-responsive img-hoverable" width="150" height="150"/>
+                                    <a href=<%#Eval("DetailsUrl") %> class="" target="_blank" runat="server">
+                                        <img src=<%#Eval("AlbumCoverAddress") %> class="mx-auto d-block img-responsive img-hoverable shadow-sm" width="150" height="150"/>
                                     </a>
                                 </div>
 
@@ -155,8 +155,8 @@
                                 <div class="col-md-5 col-xl-5">
                                     <h6 class="" style="font-size:16px; color: #C4C4C4">Album</h6>
 
-                                    <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
-                                        <h4 class="card-title" style="color:#AA3A3A; font-size:28px;"><%#Eval("AlbumName") %></h4>
+                                    <a href=<%#Eval("DetailsUrl") %> class=" titleLink" target="_blank" runat="server">
+                                        <h4 class="card-title titleLink" style="font-weight: 600"><%#Eval("AlbumName") %></h4>
                                     </a>
 
                                     <a href=<%#Eval("AlbumArtistUrl") %> class="titleLink" target="_blank" runat="server">
@@ -183,6 +183,10 @@
 
             <%--summary and checkout--%>
             <div class="col-xl-4">
+
+                <div class="text-right mb-2">
+                    <button type="button" id="removeFromCart" onclick="RemoveSelected()" class="btn btn-dark btn-sm" style="font-weight: 600">Remove From Cart</button>
+                </div>
 
                 <%--summary of selected products--%>
                 <div class="card shadow-sm mb-3 border-0" style="background-color: #F4F4F4;">
@@ -231,26 +235,26 @@
                         <div class="form-row mt-3">
                             <div class="col-12">
                                 <label for="cardHolderName" class="bg-white w-100 pl-2 rounded pb-0">CARDHOLDER'S NAME</label>
-                                <input type="text" id="cardHolderName" name="cardHolderName" class="form-control border-0 pt-0" placeholder="" required>
+                                <input type="text" id="cardHolderName" name="cardHolderName" class="form-control border-0 pt-0" placeholder="">
                             </div>
                         </div>
 
                         <div class="form-row mt-3">
                             <div class="col-12">
                                 <label for="cardNumber" class="bg-white w-100 pl-2 rounded pb-0">CARD NUMBER</label>
-                                <input type="number" id="cardNumber" name="cardNumber" class="form-control border-0 pt-0"  required min="1000000000000000" max="9999999999999999">
+                                <input type="number" id="cardNumber" name="cardNumber" class="form-control border-0 pt-0"  min="1000000000000000" max="9999999999999999">
                             </div>
                         </div>
 
                         <div class="form-row mt-3">
                             <div class="col-md-8">
                                 <label for="expDate" class="bg-white w-100 pl-2 rounded pb-0">EXPIRATION DATE</label>
-                                <input type="month" id="expDate" name="expDate" class="form-control border-0 pt-0" required>
+                                <input type="month" id="expDate" name="expDate" class="form-control border-0 pt-0" >
                             </div>
 
                             <div class="col-md-4">
                                 <label for="securityCode" class="bg-white w-100 pl-2 rounded pb-0">SEC CODE</label>
-                                <input type="text" id="securityCode" name="securityCode" class="form-control border-0 pt-0" required>
+                                <input type="text" id="securityCode" name="securityCode" class="form-control border-0 pt-0" >
                             </div>
                         </div>
 
@@ -382,8 +386,15 @@
                         contentType: "application/json; charset=utf-8",
                         data: "{ 'forCheckout' : '" + JSON.stringify(items) + "', 'paymentProvider' : '" + providerName + "'}",
                         dataType: "json",
-                        success: function (message) {
-                            alert(message.d);
+                        success: function (result) {
+                            if (result.d) {
+                                username = '<%Response.Write(AuthenticationHelper.Username);%>';
+                                window.location.href = "/Fan/" + username;
+                            }
+                            else {
+                                alert("Something went wrong. Try again later.");
+                            }
+
                         },
                         error: function () {
                             alert("An Error has occured");
@@ -393,6 +404,30 @@
             }
             else {
                 alert("You have not selected any products for checkout.");
+            }
+        }
+
+        function RemoveSelected(){
+            var productIds = [];
+            for (var productId in forCheckout) {
+                productIds.push(productId);
+                console.log(productId);
+            }
+
+            if (productIds.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Cart/CartService.asmx/RemoveProductFromCart",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{ 'productIds' : '" + JSON.stringify(productIds) + "'}",
+                    dataType: "json",
+                    success: function () {
+                        window.location.reload();
+                    },
+                    error: function () {
+                        alert("An Error has occured");
+                    }
+                });
             }
         }
 

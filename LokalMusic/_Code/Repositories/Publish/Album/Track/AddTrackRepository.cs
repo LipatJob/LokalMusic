@@ -1,6 +1,8 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Models.Publish.Album.Track;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Web;
 
@@ -22,6 +24,20 @@ namespace LokalMusic._Code.Repositories.Publish.Album.Track
             var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
 
             model.AlbumName = result.ToString();
+        }
+
+        public void GetGenreList(IAddTrackModel model)
+        {
+            string query = "SELECT GenreName FROM Genre";
+            var result = DbHelper.ExecuteDataTableQuery(query);
+
+            List<string> genreList = new List<string> { };
+            foreach (DataRow row in result.Rows)
+            {
+                string genre = (string)row["GenreName"];
+                genreList.Add(genre);
+            }
+            model.Genres = genreList;
         }
 
         public void AddTrack(IAddTrackModel model, int albumId, HttpPostedFile trackFile, HttpPostedFile clipFile)
