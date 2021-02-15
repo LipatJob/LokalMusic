@@ -35,8 +35,10 @@
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Price (₱)" runat="server" />
-                    <asp:TextBox ID="priceTxt" runat="server" type="number" step=".01" min="0" max="214748.3647" Width="500" CssClass="form-control" AutoPostBack="True" OnTextChanged="priceTxt_TextChanged"></asp:TextBox>
-                    <p style="font-size: small; color: #525252;">Earnings: ₱<asp:Label ID="earnings" runat="server" Text="0.00"></asp:Label> (Transaction fee: ₱<asp:Label ID="transactionFee" runat="server" Text="0.00"></asp:Label>)</p>
+                    <asp:TextBox ID="priceTxt" runat="server" type="number" step=".01" min="0" max="214748.3647" Width="500" CssClass="form-control priceTxt"></asp:TextBox>
+                    <p style="font-size: small; color: #525252;">
+                        Earnings: ₱ <span class="earningsSpan" id="earningsSpan" runat="server">0.00</span>
+                        (Transaction fee: ₱<span class="transactionFeeSpan" id="transactionFeeSpan" runat="server">0.00</span>)</p>
                     <asp:CustomValidator ID="priceTxtCv" runat="server" ErrorMessage="CustomValidator" Display="Dynamic" ControlToValidate="priceTxt" ValidateEmptyText="True" CssClass="validation-message" OnServerValidate="priceTxtCv_ServerValidate"></asp:CustomValidator>
                 </div>
             </div>
@@ -79,6 +81,25 @@
 
     <script>
         $('document').ready(function () {
+            updatePrice();
+            $(".priceTxt").change(updatePrice);
+
+            function updatePrice() {
+                var priceText = $(".priceTxt").val();
+
+                if (isNaN(priceText) || priceText === "") {
+                    $(".earningsSpan").html("0.00");
+                    $(".transactionFeeSpan").html("0.00");
+                    return;
+                }
+                var price = parseFloat($(".priceTxt").val());
+                var transactionFee = price * .15;
+                var earnings = price - transactionFee;
+
+                $(".earningsSpan").html(earnings.toFixed(2));
+                $(".transactionFeeSpan").html(transactionFee.toFixed(2));
+            }
+
             $(".trackFile").change(function (e) {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
@@ -89,7 +110,6 @@
 
                     var fileName = this.files[0].name;
                     $('.custom-track-file .custom-file-label').html(fileName);
-
                 }
             });
 

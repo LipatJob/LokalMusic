@@ -105,22 +105,22 @@ namespace LokalMusic.Publish.Album.Track
         protected global::System.Web.UI.WebControls.TextBox priceTxt;
 
         /// <summary>
-        /// earnings control.
+        /// earningsSpan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label earnings;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl earningsSpan;
 
         /// <summary>
-        /// transactionFee control.
+        /// transactionFeeSpan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label transactionFee;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl transactionFeeSpan;
 
         /// <summary>
         /// priceTxtCv control.

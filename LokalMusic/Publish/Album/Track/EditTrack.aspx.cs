@@ -47,11 +47,11 @@ namespace LokalMusic.Publish.Album.Track
                 Presenter.PageLoad();
                 SetPublishUnpublishBtn();
                 GetGenreItems();
-
-                priceTxt_TextChanged(priceTxt, EventArgs.Empty);
+                SetTrackPrices();
             }
         }
 
+        
         private void SetPublishUnpublishBtn()
         {
             if (Status == "PUBLISHED")
@@ -85,6 +85,18 @@ namespace LokalMusic.Publish.Album.Track
                 builder.Append(String.Format("<option value='{0}'>", genre));
             genres.InnerHtml = builder.ToString();
         }
+
+        private void SetTrackPrices()
+        {
+            if (decimal.TryParse(priceTxt.Text, out decimal priceInput))
+            {
+                decimal feeAmount = priceInput * 0.15m;
+                decimal earningsAmount = priceInput - feeAmount;
+                earningsSpan.InnerHtml = earningsAmount.ToString("N2");
+                transactionFeeSpan.InnerHtml = feeAmount.ToString("N2");
+            }
+        }
+
 
         protected void saveBtn_Click(object sender, EventArgs e)
         {
@@ -174,22 +186,6 @@ namespace LokalMusic.Publish.Album.Track
                     errorMessage: "Please upload a clip file")
                 .Validate();
         }
-
-        protected void priceTxt_TextChanged(object sender, EventArgs e)
-        {
-            if (decimal.TryParse(priceTxt.Text, out decimal priceInput))
-            {
-                decimal feeAmount = priceInput * 0.15m;
-                decimal earningsAmount = priceInput - feeAmount;
-
-                earnings.Text = earningsAmount.ToString("N2");
-                transactionFee.Text = feeAmount.ToString("N2");
-            }
-            else
-            {
-                earnings.Text = "0.00";
-                transactionFee.Text = "0.00";
-            }
-        }
+       
     }
 }

@@ -89,22 +89,5 @@ namespace LokalMusic.Publish.Album
                     errorMessage: "Please upload an album cover")
                 .Validate();
         }
-
-        protected void priceTxt_TextChanged(object sender, EventArgs e)
-        {
-            if (decimal.TryParse(priceTxt.Text, out decimal priceInput))
-            {
-                decimal feeAmount = priceInput * 0.15m;
-                decimal earningsAmount = priceInput - feeAmount;
-
-                earnings.Text = earningsAmount.ToString("N2");
-                transactionFee.Text = feeAmount.ToString("N2");
-            }
-            else
-            {
-                earnings.Text = "0.00";
-                transactionFee.Text = "0.00";
-            }
-        }
     }
 }
