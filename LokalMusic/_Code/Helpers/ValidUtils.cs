@@ -80,7 +80,10 @@ namespace LokalMusic._Code.Helpers
                     errorMessage: "This is a required field")
                 .AddRule(
                     rule: () => username.Length >= 5,
-                    errorMessage: "Username must be at least 5 characters");
+                    errorMessage: "Username must be at least 5 characters")
+                .AddRule(
+                    rule: ValidUtils.IsValidRegex(username, "^[A-Za-z0-9_-]*$"),
+                    errorMessage: "Username must only contain valid characters");
         }
     }
 }
