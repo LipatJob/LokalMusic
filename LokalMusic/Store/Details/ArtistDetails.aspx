@@ -35,7 +35,7 @@
         <nav aria-label="breadcrumb" class="mt-4">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="~/Store/Home.aspx" runat="server">Home</a></li>
-                <li class="breadcrumb-item"><a href="~/Store/ArtistPage.aspx" runat="server">Artists</a></li>
+                <li class="breadcrumb-item"><a href="~/Store/ArtistsPage.aspx" runat="server">Artists</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Details</li>
             </ol>
         </nav>

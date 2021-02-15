@@ -34,7 +34,7 @@
         <nav aria-label="breadcrumb" class="">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="~/Store/Home.aspx" runat="server">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Tracks</li>
+                <li class="breadcrumb-item active" aria-current="page">Artists</li>
             </ol>
         </nav>
 
@@ -56,7 +56,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <a href=<%#Eval("DetailsUrl") %> class="titleLink">
+                                    <a href=<%#Eval("DetailsUrl") %> class="titleLink" runat="server">
                                         <h4 class="artist-name titleLink"><%#Eval("ArtistName")%></h4>
                                     </a>
 
