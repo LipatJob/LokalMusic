@@ -24,9 +24,9 @@ SELECT
     Track.TrackDuration AS Duration,
     Product.Price,
     (SELECT
-        COUNT(TransactionId)
-    FROM TransactionProduct
-    WHERE TransactionProduct.ProductId = Track.TrackId) AS SalesCount
+        COUNT(ProductId)
+    FROM ProductOrder
+    WHERE ProductOrder.ProductId = Track.TrackId) AS SalesCount
 FROM Track
     LEFT JOIN Album ON Track.AlbumId = Album.AlbumId
     LEFT JOIN Product ON Track.TrackId = Product.ProductId
