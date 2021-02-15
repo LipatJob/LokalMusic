@@ -106,6 +106,7 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
             if (valid)
             {
+                var a = Decimal.Round(Decimal.Parse(values.Rows[0]["Price"].ToString()), 2);
                 trackDetails = new Track(
                     (int)values.Rows[0]["TrackId"],
                     (int)values.Rows[0]["AlbumId"],
