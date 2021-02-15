@@ -23,22 +23,22 @@
     <div class="content">
         <div class="row">
             <div class="col-6">
-                <h3>Remaining Balances</h3>
+                <h4>Remaining Balances</h4>
                 <asp:GridView ID="RemainingBalances" runat="server" CssClass="RemainingBalanceTable table" AutoGenerateColumns="false">
                     <Columns>
                         <asp:BoundField DataField="ArtistName" HeaderText="Artist Name" />
-                        <asp:BoundField DataField="AmountDue" HeaderText="Amount Due" />
+                        <asp:BoundField DataField="AmountDue" HeaderText="Amount Due" DataFormatString="{0:0.00}"/>
                     </Columns>
                 </asp:GridView>
             </div>
 
             <div class="col-6">
-                <h3>Recent Artist Payments</h3>
+                <h4>Recent Artist Payments</h4>
                 <asp:GridView ID="ArtistPayments" runat="server" CssClass="ArtistPaymentsTable table" AutoGenerateColumns="false">
                     <Columns>
                         <asp:BoundField DataField="ArtistName" HeaderText="Artist Name" />
-                        <asp:BoundField DataField="DatePaid" HeaderText="Date Paid" />
-                        <asp:BoundField DataField="TransactionFee" HeaderText="Transaction Fee" />
+                        <asp:BoundField DataField="DatePaid" HeaderText="Date Paid" DataFormatString="{0:MMM dd yyyy}"/>
+                        <asp:BoundField DataField="TransactionFee" HeaderText="Transaction Fee" DataFormatString="{0:0.00}"/>
 
                     </Columns>
                 </asp:GridView>

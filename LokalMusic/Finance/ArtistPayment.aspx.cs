@@ -47,6 +47,7 @@ namespace LokalMusic.Finance
         protected void PayArtistsBtn_Click(object sender, EventArgs e)
         {
             presenter.PayArtists();
+            Bind();
         }
     }
 }
