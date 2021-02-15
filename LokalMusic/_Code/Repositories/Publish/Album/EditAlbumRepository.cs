@@ -142,7 +142,9 @@ WHERE Product.ProductId = @AlbumId
         {
             string query = @"
 UPDATE Product 
-SET ProductStatusId = 4 
+SET ProductStatusId = ( SELECT [ProductStatus].ProductStatusId 
+					    FROM [ProductStatus] 
+					    WHERE [ProductStatus].StatusName = 'UNPUBLISHED')
 WHERE ProductId = @AlbumId
 OR ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)
 ";
@@ -153,7 +155,9 @@ OR ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)
         {
             string query = @"
 UPDATE Product 
-SET ProductStatusId = 1
+SET ProductStatusId = ( SELECT [ProductStatus].ProductStatusId 
+					    FROM [ProductStatus] 
+					    WHERE [ProductStatus].StatusName = 'PUBLISHED')
 WHERE ProductId = @AlbumId
 OR ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)
 ";

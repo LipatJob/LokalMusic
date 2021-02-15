@@ -43,9 +43,6 @@ namespace LokalMusic.Account.Register
                 .AddRule(
                     rule: () => presenter.IsUsernameUnique(),
                     errorMessage: "That username has already been taken")
-                .AddRule(
-                    rule: () => !Username.Any(e => Char.IsWhiteSpace(e)),
-                    errorMessage: "Username may not contain whitespace")
                 .Validate();
         }
 

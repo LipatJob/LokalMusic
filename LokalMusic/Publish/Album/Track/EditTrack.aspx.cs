@@ -126,8 +126,8 @@ namespace LokalMusic.Publish.Album.Track
             }
             else
             {
-                saveBtn_Click(saveBtn, EventArgs.Empty);
                 Presenter.PublishTrack();
+                saveBtn_Click(saveBtn, EventArgs.Empty);
             }
 
             NavigationHelper.Redirect("~/Publish/Album/" + AlbumId);
