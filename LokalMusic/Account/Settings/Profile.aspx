@@ -20,7 +20,7 @@
         <div class="change-profile-picture-container">
             <div class="change-profile-picture mb-3">
                 <%-- Profile Picture--%>
-                <asp:Image ID="ProfilePictureImg" mageUrl="~/Content/Images/Logo.png" runat="server" CssClass="profile-picture shadow mb-3 ProfilePictureImg" />
+                <asp:Image ID="ProfilePictureImg" runat="server" CssClass="profile-picture shadow mb-3 ProfilePictureImg" />
 
                 <%-- Profile Picture File Upload--%>
                 <div class="custom-file">
@@ -52,7 +52,7 @@
             <asp:TextBox ID="ArtistNameTxt" runat="server" ValidateRequestMode="Disabled" CssClass="form-control" ReadOnly="true" />
         </div>
         <div class="form-group">
-            <asp:Label Text="Bio" runat="server" />
+            <asp:Label Text="Bio" runat="server"  MaxLength="500" />
             <asp:TextBox ID="BioTxt" runat="server" CssClass="form-control" TextMode="MultiLine" ValidationGroup="UpdateBio" />
         </div>
         <%-- Update Bio Button--%>

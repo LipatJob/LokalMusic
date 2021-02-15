@@ -28,7 +28,7 @@
 
     <div class="signin-form">
         <%-- Brand Logo --%>
-        <asp:Image ImageUrl="~/Content/Images/Old Logo.png" Style="width: 150px; height: auto;" runat="server" CssClass="my-3" />
+        <asp:Image ImageUrl="~/Content/Images/lokal_logo_puzzle_O.png" runat="server" CssClass="login-brand-logo" style="width: 220px; height: auto; margin: 40px;"/>
 
         <%-- Login Header --%>
         <div class="login-header">
@@ -40,12 +40,12 @@
         <div class="row form-group">
             <div class="col-6" style="padding: 0; padding-right: 6px;">
                 <asp:Label Text="First Name" runat="server" />
-                <asp:TextBox ID="FirstNameTxt" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="FirstNameTxt" runat="server" CssClass="form-control"  MaxLength="100" />
                 <asp:RequiredFieldValidator ErrorMessage="This is a required field" ControlToValidate="FirstNameTxt" runat="server" CssClass="validation-message" Display="Dynamic" />
             </div>
             <div class="col-6" style="padding: 0; padding-left: 6px;">
                 <asp:Label Text="Last Name" runat="server" />
-                <asp:TextBox ID="LastNameTxt" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="LastNameTxt" runat="server" CssClass="form-control"  MaxLength="100" />
                 <asp:RequiredFieldValidator ErrorMessage="This is a required field" ControlToValidate="LastNameTxt" runat="server" CssClass="validation-message" Display="Dynamic" />
             </div>
         </div>
@@ -53,28 +53,28 @@
         <%-- Username --%>
         <div class="form-group">
             <asp:Label Text="Username" runat="server" />
-            <asp:TextBox ID="UsernameTxt" runat="server" CssClass="form-control" />
+            <asp:TextBox ID="UsernameTxt" runat="server" CssClass="form-control"  MaxLength="100" />
             <asp:CustomValidator ID="UsernameTxtCv" ErrorMessage="Error Message" ControlToValidate="UsernameTxt" runat="server" OnServerValidate="UsernameTxtCv_ServerValidate" CssClass="validation-message" ValidateEmptyText="true" Display="Dynamic" />
         </div>
 
         <%-- Email --%>
         <div class="form-group">
             <asp:Label Text="Email" runat="server" />
-            <asp:TextBox ID="EmailTxt" runat="server" CssClass="form-control" type="email" />
+            <asp:TextBox ID="EmailTxt" runat="server" CssClass="form-control" type="email"  MaxLength="100" />
             <asp:CustomValidator ID="EmailTxtCv" ErrorMessage="Error Message" ControlToValidate="EmailTxt" runat="server" OnServerValidate="EmailTxtCv_ServerValidate" CssClass="validation-message" ValidateEmptyText="true" Display="Dynamic" />
         </div>
 
         <%-- Password --%>
         <div class="form-group">
             <asp:Label Text="Password" runat="server" />
-            <asp:TextBox ID="PasswordTxt" runat="server" CssClass="form-control" type="password" />
+            <asp:TextBox ID="PasswordTxt" runat="server" CssClass="form-control" type="password"  MaxLength="100" />
             <asp:CustomValidator ID="PasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="PasswordTxt" runat="server" OnServerValidate="PasswordTxtCv_ServerValidate" CssClass="validation-message" ValidateEmptyText="true" Display="Dynamic" />
         </div>
 
         <%-- Confirm Password --%>
         <div class="form-group">
             <asp:Label Text="Confirm Password" runat="server" />
-            <asp:TextBox ID="ConfirmPasswordTxt" runat="server" CssClass="form-control" type="password" />
+            <asp:TextBox ID="ConfirmPasswordTxt" runat="server" CssClass="form-control" type="password"  MaxLength="100" />
             <asp:CustomValidator ID="ConfirmPasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="ConfirmPasswordTxt" runat="server" OnServerValidate="ConfirmPasswordTxtCv_ServerValidate" CssClass="validation-message" ValidateEmptyText="true" Display="Dynamic" />
 
         </div>

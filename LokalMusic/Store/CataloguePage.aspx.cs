@@ -22,14 +22,24 @@ namespace LokalMusic.Store
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // handle url request
-            // get parameters
-            string searchValue = (string)NavigationHelper.GetRouteValue("SearchVal");
+            try
+            {
+                // handle url request
+                string searchValue = (string)NavigationHelper.GetRouteValue("SearchVal");
 
-            this.catalogueItems = this.presenter.GetSearchedProducts(searchValue);
+                this.catalogueItems = this.presenter.GetSearchedProducts(searchValue);
 
-            productContainer.DataSource = this.catalogueItems;
-            productContainer.DataBind();
+                productContainer.DataSource = this.catalogueItems;
+                productContainer.DataBind();
+            }
+            catch (System.Data.SqlClient.SqlException x)
+            {
+                NavigationHelper.Redirect("~/Error/Database");
+            }
+            catch (Exception x)
+            {
+                NavigationHelper.Redirect("~/Error/Error");
+            }
         }
     }
 }

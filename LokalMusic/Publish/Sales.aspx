@@ -10,7 +10,7 @@
             <div class="row" style="margin-top:40px">
                 <div class="col-12">
                     <table id="salesTable" class="table table-striped table-bordered table-hover dt-responsive">
-                        <thead>
+                        <thead style="color: #B82828;">
                             <tr>
                                 <th>Order ID</th>
                                 <th>Date</th>
@@ -27,7 +27,7 @@
                                         <td><%#Eval("Date","{0:dd MMMM yyyy}") %></td>
                                         <td><%#Eval("Customer") %></td>
                                         <td><%#Eval("Products") %></td>
-                                        <td style="text-align: right;"><%#Eval("AmountPaid","{0:N}") %></td>
+                                        <td style="text-align: right;">₱<%#Eval("AmountPaid","{0:N}") %></td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:Repeater>

@@ -7,7 +7,7 @@ namespace LokalMusic._Code.Models.Finance
 {
     public class ReceiptModel
     {
-        public string Username { get; set; }
+        public string Name { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal AmountPaid { get; set; }
         public string FormattedDate { get { return OrderDate.ToShortDateString(); } }

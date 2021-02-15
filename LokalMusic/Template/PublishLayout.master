@@ -27,8 +27,21 @@
             text-decoration: none;
         }
 
+        h1{
+            font-size: 40px;
+            color: #B82828;
+        }
+
         .redtext{
             color: #B82828;
+        }
+
+        .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+           background-color: #FFEDED;
+        }
+
+        .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+          background-color: #FADEDE;
         }
     </style>
 

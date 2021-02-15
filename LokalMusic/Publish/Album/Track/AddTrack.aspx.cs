@@ -3,6 +3,7 @@ using LokalMusic._Code.Presenters.Publish.Album.Track;
 using LokalMusic._Code.Repositories.Publish.Album.Track;
 using LokalMusic._Code.Views.Publish;
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,7 +13,7 @@ namespace LokalMusic.Publish.Album.Track
     public partial class AddTrack : System.Web.UI.Page, IAddTrackViewModel
     {
         private AddTrackPresenter Presenter;
-        private string AlbumId;
+        private string AlbumId => NavigationHelper.GetRouteValue("AlbumId").ToString();
 
         public AddTrack()
         {
@@ -29,17 +30,15 @@ namespace LokalMusic.Publish.Album.Track
         public TimeSpan TrackFileDuration { get; set; }
         public string ClipFile { get => clipSource.Src; set => clipSource.Src = value; }
         public TimeSpan ClipFileDuration { get; set; }
+        public IList<string> Genres { get; set; }
         public HttpPostedFile UploadedTrackFile => trackFile.PostedFile;
         public HttpPostedFile UploadedClipFile => clipFile.PostedFile;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Presenter.PageLoad();
-
-            AlbumId = NavigationHelper.GetRouteValue("AlbumId").ToString();
-            viewTracks.HRef = "~/Publish/Album/" + AlbumId;
-
             ValidateMaxTrackCount();
+            GetGenreItems();
         }
 
         private void ValidateMaxTrackCount()
@@ -58,6 +57,16 @@ namespace LokalMusic.Publish.Album.Track
             }
         }
 
+        private void GetGenreItems()
+        {
+            Presenter.GetGenreList();
+
+            var builder = new System.Text.StringBuilder();
+            foreach (string genre in Genres)
+                builder.Append(String.Format("<option value='{0}'>", genre));
+            genres.InnerHtml = builder.ToString();
+        }
+
         protected void addBtn_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -69,11 +78,7 @@ namespace LokalMusic.Publish.Album.Track
 
         protected void cancelBtn_Click(object sender, EventArgs e)
         {
-            trackNameTxt.Text = "";
-            genreTxt.Text = "";
-            descriptionTxt.Text = "";
-            priceTxt.Text = "";
-
+            NavigationHelper.Redirect("~/Publish/Album/" + AlbumId);
         }
 
         protected void trackNameTxtCv_ServerValidate(object source, ServerValidateEventArgs args)
@@ -116,6 +121,23 @@ namespace LokalMusic.Publish.Album.Track
                     rule: () => clipFile.HasFile,
                     errorMessage: "Please upload a clip file")
                 .Validate();
+        }
+
+        protected void priceTxt_TextChanged(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(priceTxt.Text, out decimal priceInput))
+            {
+                decimal feeAmount = priceInput * 0.15m;
+                decimal earningsAmount = priceInput - feeAmount;
+
+                earnings.Text = earningsAmount.ToString("N2");
+                transactionFee.Text = feeAmount.ToString("N2");
+            }
+            else
+            {
+                earnings.Text = "0.00";
+                transactionFee.Text = "0.00";
+            }
         }
     }
 }

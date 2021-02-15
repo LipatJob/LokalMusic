@@ -19,11 +19,19 @@ namespace LokalMusic
             error = (string)NavigationHelper.GetRouteValue("msg");
             description = (string)NavigationHelper.GetRouteValue("handler");
 
-            if (error == null) error = "###";
-            if (description == null) description = "*";
+            if (error == null || error == "") error = "Error";
+            if (description == null || description == "") description = GetMessage(error);
 
             errorTitle.InnerHtml = error;
             errorText.InnerHtml = description;
+        }
+
+        protected string GetMessage(string error)
+        {
+            if (error.ToLower() == "database")
+                return "Conenction error to database server. Please try again.";
+            else
+                return "Unexpected error encountered. Please try again";
         }
     }
 }

@@ -33,7 +33,7 @@
 
     <div class="signin-form">
         <%-- Brand Logo --%>
-        <asp:Image ImageUrl="~/Content/Images/Old Logo.png" runat="server" CssClass="login-brand-logo my-3" style="width: 150px; height: auto;"/>
+        <asp:Image ImageUrl="~/Content/Images/lokal_logo_puzzle_O.png" runat="server" CssClass="login-brand-logo" style="width: 220px; height: auto; margin: 40px;"/>
 
         <%-- Login Header --%>
         <div class="login-header">
@@ -46,14 +46,14 @@
         <%-- Email --%>
         <div class="form-group">
             <asp:Label Text="Email" runat="server" />
-            <asp:TextBox ID="EmailTxt" runat="server" CssClass="form-control" type="email" />
+            <asp:TextBox ID="EmailTxt" runat="server" CssClass="form-control" type="email"  MaxLength="100" />
             <asp:RequiredFieldValidator ErrorMessage="Please enter your Email" ControlToValidate="EmailTxt" runat="server" CssClass="validation-message" Display="Dynamic"/>
         </div>
 
         <%-- Password --%>
         <div class="form-group">
             <asp:Label Text="Password" runat="server" />
-            <asp:TextBox ID="PasswordTxt" runat="server" CssClass="form-control" type="password" />
+            <asp:TextBox ID="PasswordTxt" runat="server" CssClass="form-control" type="password"  MaxLength="100" />
             <asp:RequiredFieldValidator ErrorMessage="Please enter your password" ControlToValidate="PasswordTxt" runat="server" CssClass="validation-message" Display="Dynamic" />
         </div>
 
