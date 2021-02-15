@@ -11,8 +11,8 @@
 
     <%--Nav--%>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="../Store/Home.aspx" runat="server">
-            <img src="~/Content/Images/Logo New Updated.png" height="45" class="d-inline-block my-auto ml-xl-5" alt="" runat="server">
+         <a class="navbar-brand ml-xl-3" href="../Store/Home.aspx" runat="server">
+            <img src="~/Content/Images/lokal_logo_puzzle_O.png"  height="30" class="d-inline-block my-auto " alt="" runat="server">
         </a>
 
 

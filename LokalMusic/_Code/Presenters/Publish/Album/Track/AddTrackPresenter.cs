@@ -33,6 +33,11 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
             addTrackRepository.GetAlbumName(AlbumId, viewModel);
         }
 
+        public void GetGenreList()
+        {
+            addTrackRepository.GetGenreList(viewModel);
+        }
+
         public void AddTrack()
         {
             addTrackRepository.AddTrack(viewModel, AlbumId, viewModel.UploadedTrackFile, viewModel.UploadedClipFile);

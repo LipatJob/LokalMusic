@@ -80,7 +80,7 @@ namespace LokalMusic
                 "Error/{msg}/{handler}",
                 "~/ErrorPage.aspx",
                 false,
-                new RouteValueDictionary { { "msg", "###" }, { "handler", "*" } }
+                new RouteValueDictionary { { "msg", "" }, { "handler", "" } }
                 );
 
             // Publish Pages

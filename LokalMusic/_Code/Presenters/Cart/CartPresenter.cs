@@ -21,8 +21,7 @@ namespace LokalMusic._Code.Presenters.Cart
         public void PageLoad()
         {
             if (AuthenticationHelper.LoggedIn == false)
-                NavigationHelper.Redirect("~/Account/Login.aspx");
-
+                NavigationHelper.RedirectReturnAddress("~/Account/Login.aspx");
         }
 
         public List<CartAlbum> GetCartAlbums()

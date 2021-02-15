@@ -19,9 +19,9 @@ namespace LokalMusic.Publish
             AlbumItemRepeater.DataBind();
 
             if (Model.AlbumsItems.Count < 1)
-                instruction.Visible = true;
+                addAlbumInstruction.Visible = true;
             else
-                instruction.Visible = false;
+                addAlbumInstruction.Visible = false;
         }
 
         public Albums()

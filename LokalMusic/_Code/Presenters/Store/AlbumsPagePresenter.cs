@@ -33,11 +33,6 @@ namespace LokalMusic._Code.Presenters.Store
                 if (album == null)
                     break;
 
-                List<TrackSummary> tracks = this.repository.GetSummarizedTracksByAlbumId(album.AlbumId);
-
-                if (tracks == null)
-                    break;
-
                 // SQL Queries were used because I did not want to query the whole track and perform LINQ commands or iterations
                 (album.TrackCount, album.TrackMinutes) = this.repository.GetTrackCountAndDurationOfAlbum(album.AlbumId);
                 album.Genre = this.repository.GetGenreOfAlbum(album.AlbumId);

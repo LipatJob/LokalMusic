@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -180,6 +181,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -200,6 +202,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
@@ -294,21 +298,28 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\cart-white.PNG" />
+    <Content Include="Content\Images\cart.png" />
     <Content Include="Content\Images\default_artist_image.JPG" />
     <Content Include="Content\Images\default_cover.jpg" />
+    <Content Include="Content\Images\information-white.png" />
     <Content Include="Content\Images\Logo New Updated.png" />
     <Content Include="Content\Images\lokal_logo_with_L.png" />
     <Content Include="Content\Images\lokal_logo_puzzle_O.png" />
+    <Content Include="Content\Images\menu.png" />
     <Content Include="Content\Images\New Logo.png" />
-    <Content Include="Content\Images\cart.png" />
+    <Content Include="Content\Images\cart old.png" />
     <Content Include="Content\Images\Old Logo.png" />
+    <Content Include="Content\Images\search-white.png" />
     <Content Include="Content\Site.css" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="Fan\Collection.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="Finance\Receipts.aspx" />
+    <Content Include="Finance\ArtistPayment.aspx" />
+    <Content Include="Finance\SalesHistory.aspx" />
     <Content Include="Finance\Reports.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Fan\Playlist.aspx" />
     <Content Include="Publish\Albums.aspx" />
     <Content Include="Publish\Album\Add.aspx" />
     <Content Include="Publish\Album\Edit.aspx" />
@@ -460,6 +471,7 @@
     <Content Include="Store\Details\TrackDetails.aspx" />
     <Content Include="Store\Home.aspx" />
     <Content Include="Store\TracksPage.aspx" />
+    <Content Include="Store\TracksService.asmx" />
     <Content Include="Template\Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -558,12 +570,19 @@
     <Compile Include="Fan\Collection.aspx.designer.cs">
       <DependentUpon>Collection.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Finance\Receipts.aspx.cs">
-      <DependentUpon>Receipts.aspx</DependentUpon>
+    <Compile Include="Finance\ArtistPayment.aspx.cs">
+      <DependentUpon>ArtistPayment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Finance\Receipts.aspx.designer.cs">
-      <DependentUpon>Receipts.aspx</DependentUpon>
+    <Compile Include="Finance\ArtistPayment.aspx.designer.cs">
+      <DependentUpon>ArtistPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\SalesHistory.aspx.cs">
+      <DependentUpon>SalesHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\SalesHistory.aspx.designer.cs">
+      <DependentUpon>SalesHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Finance\Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
@@ -571,6 +590,13 @@
     </Compile>
     <Compile Include="Finance\Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Fan\Playlist.aspx.cs">
+      <DependentUpon>Playlist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fan\Playlist.aspx.designer.cs">
+      <DependentUpon>Playlist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Publish\Albums.aspx.cs">
       <DependentUpon>Albums.aspx</DependentUpon>
@@ -681,6 +707,10 @@
     <Compile Include="Store\TracksPage.aspx.designer.cs">
       <DependentUpon>TracksPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Store\TracksService.asmx.cs">
+      <DependentUpon>TracksService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Template\AdminLayout.master.cs">
       <DependentUpon>AdminLayout.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -744,6 +774,7 @@
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
     <Compile Include="_Code\Helpers\NavigationHelper.cs" />
     <Compile Include="_Code\Helpers\NewFolder1\Class1.cs" />
+    <Compile Include="_Code\Helpers\TracksHelper.cs" />
     <Compile Include="_Code\Helpers\ValidationHelper.cs" />
     <Compile Include="_Code\Helpers\ValidUtils.cs" />
     <Compile Include="_Code\Models\Account\ILoginModel.cs" />
@@ -757,11 +788,15 @@
     <Compile Include="_Code\Models\Cart\CartArtist.cs" />
     <Compile Include="_Code\Models\Cart\CartTrack.cs" />
     <Compile Include="_Code\Models\Cart\CheckoutItem.cs" />
+    <Compile Include="_Code\Models\Fan\PlaylistTrack.cs" />
     <Compile Include="_Code\Models\Fan\CollectionItem.cs" />
     <Compile Include="_Code\Models\Fan\CollectionModel.cs" />
-    <Compile Include="_Code\Models\Finance\ReceiptListItem.cs" />
+    <Compile Include="_Code\Models\Fan\PlaylistAlbum.cs" />
+    <Compile Include="_Code\Models\Finance\SalesListItem.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptModel.cs" />
     <Compile Include="_Code\Models\Finance\ReceiptProductItem.cs" />
+    <Compile Include="_Code\Models\Finance\SalesHistoryModel.cs" />
+    <Compile Include="_Code\Models\Finance\SalesProductModel.cs" />
     <Compile Include="_Code\Models\Publish\AlbumsItem.cs" />
     <Compile Include="_Code\Models\Publish\AlbumsModel.cs" />
     <Compile Include="_Code\Models\Publish\Album\IAddAlbumModel.cs" />
@@ -790,10 +825,12 @@
     <Compile Include="_Code\Presenters\Admin\AdminLoginPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\ProductsPresenter.cs" />
     <Compile Include="_Code\Presenters\Admin\UsersPresenter.cs" />
+    <Compile Include="_Code\Presenters\Finance\ArtistPaymentPresenter.cs" />
     <Compile Include="_Code\Presenters\Cart\CartPresenter.cs" />
+    <Compile Include="_Code\Presenters\Fan\PlaylistPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\AlbumsPresenter.cs" />
     <Compile Include="_Code\Presenters\Fan\CollectionPresenter.cs" />
-    <Compile Include="_Code\Presenters\Finance\ReceiptsPresenter.cs" />
+    <Compile Include="_Code\Presenters\Finance\SalesHistoryPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\Album\AddAlbumPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\Album\EditAlbumPresenter.cs" />
     <Compile Include="_Code\Presenters\Publish\Album\TracksPresenter.cs" />
@@ -818,7 +855,9 @@
     <Compile Include="_Code\Repositories\Cart\AddToCartRepository.cs" />
     <Compile Include="_Code\Repositories\Cart\CartRepository.cs" />
     <Compile Include="_Code\Repositories\Fan\CollectionRepository.cs" />
-    <Compile Include="_Code\Repositories\Finance\ReceiptsRepository.cs" />
+    <Compile Include="_Code\Repositories\Fan\PlaylistRepository.cs" />
+    <Compile Include="_Code\Repositories\Finance\ArtistPaymentRepository.cs" />
+    <Compile Include="_Code\Repositories\Finance\SalesHistoryRepository.cs" />
     <Compile Include="_Code\Repositories\Finance\ReportsRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\AlbumsRepository.cs" />
     <Compile Include="_Code\Repositories\Publish\Album\AddAlbumRepository.cs" />

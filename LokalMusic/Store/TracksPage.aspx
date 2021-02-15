@@ -50,12 +50,12 @@
                             <ItemTemplate>
                                 <tr class="text-center ">
                                     <td class="float-right">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server">
-                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable"/>
+                                        <a onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
+                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable shadow-sm"/>
                                         </a>
                                     </td>   
                                     <td class="emphasize my-auto">
-                                        <a href=<%#Eval("DetailsUrl") %> runat="server" class="titleLink">
+                                        <a  onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="titleLink">
                                             <%#Eval("TrackName") %>
                                         </a>
                                     </td>
@@ -63,11 +63,10 @@
                                     <td class="my-auto"><%#Eval("ArtistName") %></td>
                                     <td><%#Eval("Genre") %></td>
                                     <td><%#Eval("AudioDuration", "{0:g}") %></td>
-                                    <td class="emphasize">₱<%#Eval("Price") %></td>
-                                    <td class="">
-                                        <button onclick='AddToCart(<%#Eval("TrackId")%>)' class="p-0" style="margin-top: -12px;">
-                                            <%--<img src="../Content/Images/cart.png" class="" width="20" height="20" runat="server" />--%>
-                                            <span class="bi bi-cart-plus cart" style="font-size: 22px;"></span>
+                                    <td class="emphasize">₱<%#Eval("Price", "{0:n}") %></td>
+                                    <td class="  ">
+                                        <button onclick='AddToCart(<%#Eval("TrackId")%>)' class="p-0 <%# Eval("AddableToCart").Equals(true) ? "visible" : " invisible" %>" style="margin-top: -12px;">
+                                            <img src="~/Content/Images/cart.png" class="" width="20" height="20" runat="server" />
                                         </button>
                                     </td>
                                 </tr>

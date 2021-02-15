@@ -25,16 +25,33 @@ namespace LokalMusic.Store
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public string AddProductToCart(string productId)
+        public object AddProductToCart(string productId)
         {
-            // add try catch
             int addToCartStatus = AddToCartHelper.AddProductToCart(int.Parse(productId));
-            return AddToCartHelper.GetAddToCartMessage(addToCartStatus);
+
+            return new object[] { addToCartStatus, AddToCartHelper.GetAddToCartMessage(addToCartStatus) };
         }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public string ProcessCheckout(object forCheckout, string paymentProvider)
+        public void RemoveProductFromCart(object productIds)
+        {
+            string[] tempIds = Regex.Split(productIds.ToString(), ",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+
+            for (int i = 0; i < tempIds.Length; i++)
+                tempIds[i] = tempIds[i].Replace(']', ' ').Replace('[', ' ').Replace('"', ' ').Trim();
+
+            List<int> pIds = new List<int>();
+
+            foreach (string id in tempIds)
+                pIds.Add( int.Parse(id) );
+
+            AddToCartHelper.RemoveProductsFromCart(pIds);
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod]
+        public bool ProcessCheckout(object forCheckout, string paymentProvider)
         {
             List<CheckoutItem> cart = new List<CheckoutItem>();
 
@@ -65,7 +82,8 @@ namespace LokalMusic.Store
             }
 
             bool status = new CartPresenter(new CartRepository()).ProcessCustomerOrder(cart, paymentProvider);
-            return status ? "Your order and payment has been processed successfully. You can view product in your collections." : "Something went wrong. Try again later.";
+
+            return status; /*? "Your order and payment has been processed successfully. You can view product in your collections." : "Something went wrong. Try again later.";*/
         }
     }
 }
