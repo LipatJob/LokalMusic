@@ -28,9 +28,9 @@ SELECT
     WHERE Track.AlbumId = Album.AlbumId
     AND Product.ProductStatusId != 2) AS TrackCount,
     (SELECT
-        COUNT(TransactionId)
-    FROM TransactionProduct
-    WHERE TransactionProduct.ProductId = Album.AlbumId) AS SalesCount
+        COUNT(ProductId)
+    FROM ProductOrder
+    WHERE ProductOrder.ProductId= Album.AlbumId) AS SalesCount
 FROM Product
     RIGHT JOIN Album ON Product.ProductId = Album.AlbumId
     LEFT JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
