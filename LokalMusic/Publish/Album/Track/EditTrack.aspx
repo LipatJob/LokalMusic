@@ -47,8 +47,8 @@
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
-                    <div class="custom-file">
-                        <asp:FileUpload runat="server" ID="trackFile" CssClass="form-control-file custom-file-input trackFile"/>
+                    <div class="custom-file custom-track-file">
+                        <asp:FileUpload runat="server" ID="trackFile" CssClass="form-control-file custom-file-input trackFile" accept="audio/*"/>
                         <label class="custom-file-label" for="custom-file">Choose file</label>
                     </div>
                 </div>
@@ -59,8 +59,8 @@
                     </audio>
                 </div>
                 <div style="margin-bottom:20px;">
-                    <div class="custom-file">
-                        <asp:FileUpload runat="server" ID="clipFile" CssClass="form-control-file custom-file-input clipFile"/>
+                    <div class="custom-file custom-clip-file">
+                        <asp:FileUpload runat="server" ID="clipFile" CssClass="form-control-file custom-file-input clipFile" accept="audio/*"/>
                         <label class="custom-file-label" for="custom-file">Choose file</label>
                     </div>
                 </div>
@@ -79,13 +79,17 @@
 
     <script>
         $('document').ready(function () {
-            $(".trackFile").change(function () {
+            $(".trackFile").change(function (e) {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         $('.trackSource').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(this.files[0]);
+
+                    var fileName = this.files[0].name;
+                    $('.custom-track-file .custom-file-label').html(fileName);
+
                 }
             });
 
@@ -96,9 +100,14 @@
                         $('.clipSource').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(this.files[0]);
+
+                    var fileName = this.files[0].name;
+                    $('.custom-clip-file .custom-file-label').html(fileName);
                 }
             });
         });
+
+
 
     </script>
 </asp:Content>

@@ -39,7 +39,6 @@
                         <asp:BoundField DataField="ArtistName" HeaderText="Artist Name" />
                         <asp:BoundField DataField="DatePaid" HeaderText="Date Paid" DataFormatString="{0:MMM dd yyyy}"/>
                         <asp:BoundField DataField="TransactionFee" HeaderText="Transaction Fee" DataFormatString="{0:0.00}"/>
-
                     </Columns>
                 </asp:GridView>
             </div>

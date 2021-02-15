@@ -78,6 +78,8 @@
                         $('.albumCoverPreview').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(this.files[0]);
+                    var fileName = this.files[0].name;
+                    $('.custom-file-label').html(fileName);
                 }
             });
         });
