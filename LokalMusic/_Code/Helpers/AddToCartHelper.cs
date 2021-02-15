@@ -48,10 +48,18 @@ namespace LokalMusic._Code.Helpers
                     return ADD_TO_CART_OWNPRODUCT;
             }
 
+            // actual adding to cart
             if (AddToCartRepository.AddToCart(productId, AuthenticationHelper.UserId) == 0)
                 return ADD_TO_CART_ERROR;
 
             return ADD_TO_CART_SUCCESS;
+        }
+
+        public static void RemoveProductsFromCart(List<int> productIds)
+        {
+            if (productIds.Count > 0)
+                foreach (int productId in productIds)
+                    AddToCartRepository.RemoveFromCart(productId, AuthenticationHelper.UserId);
         }
 
         public static string GetAddToCartMessage(int category)

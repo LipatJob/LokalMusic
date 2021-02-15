@@ -38,7 +38,11 @@ namespace LokalMusic._Code.Presenters.Admin
             {
                 BackendAuthenticationHelper.UserId = userId;
 
-                if (BackendAuthenticationHelper.UserType == BackendAuthenticationHelper.FINANCE_USER_TYPE)
+                if (NavigationHelper.QueryString("ReturnAddress") != null)
+                {
+                    NavigationHelper.Redirect(NavigationHelper.QueryString("ReturnAddress"));
+                }
+                else if (BackendAuthenticationHelper.UserType == BackendAuthenticationHelper.FINANCE_USER_TYPE)
                 {
                     NavigationHelper.Redirect("~/Finance/Reports");
                 }

@@ -4,7 +4,7 @@
 
     <style>
         #featured-artist {
-/*            background-color: #FFDCDC;*/
+         /* background-color: #FFDCDC;*/
             background-color: #bd4f6c;
             background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
         }
@@ -57,6 +57,10 @@
         .featured-text-display{
             color: #FFDCDC;
         }
+
+        a:hover{
+            text-decoration: none;
+        }
     </style>
 
     <div id="featured-artist" class="pt-5 pb-4">
@@ -77,7 +81,7 @@
                 <asp:Repeater runat="server" ID="FeaturedProductRepeater">
                     <ItemTemplate>
                         <div class="col-lg-3 col-md-4 col-sm-5 mb-lg-0 mx-auto mb-sm-4 mb-4">
-                            <a href="<%# Eval("MarketPage")%>"" class="" target="_blank">
+                            <a href="<%# Eval("MarketPage")%>"" class="">
                                 <img src="<%# Eval("ProductImage")%>"" class="img-hoverable mx-auto d-block shadow rounded" style="width:200px; height:auto;" alt="feature-artist-name" />
                             </a>
                         </div>
@@ -100,10 +104,10 @@
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
-                                <img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable" alt="album-name" /></a>
+                                <img src="<%#Eval("AlbumCover") %>" class="card-img-top img-hoverable shadow-sm" alt="album-name" /></a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("AlbumName")%></p>
-                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
+                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price", "{0:n}")%></p>
                                 <p class="by-artist float-right" style="color: #767676;"><%#Eval("ArtistName")%></p>
                             </div>
                         </div>
@@ -127,7 +131,7 @@
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
                             <a href='<%#Eval("DetailsUrl") %>' runat="server">
-                                <img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable" alt="artist-name" /></a>
+                                <img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable shadow-sm" alt="artist-name" /></a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("ArtistName")%></p>
                                 <p style="font-weight: 400;"><%#Eval("Bio")%></p>
@@ -152,11 +156,12 @@
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
-                            <a href='<%#Eval("DetailsUrl") %>' runat="server">
-                                <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable" alt="track-name" /></a>
+                           <a  onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="">
+                                <img src="<%#Eval("AlbumCover")%>" class="card-img-top img-hoverable shadow-sm" alt="track-name" />
+                            </a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("TrackName")%></p>
-                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price")%></p>
+                                <p class="" style="color: #F82B2B; font-weight: 600;">₱<%#Eval("Price", "{0:n}")%></p>
                                 <p class="by-artist float-right" style="color: #767676;"><%#Eval("ArtistName")%></p>
                             </div>
                         </div>

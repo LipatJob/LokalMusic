@@ -4,7 +4,29 @@ namespace LokalMusic._Code.Models.Store
 {
     public class TrackSummary
     {
-        public TrackSummary(int trackId, int albumId, int artistId, string trackName, decimal price, DateTime dateAdded, string albumName, string artistName, string genre, string audioClip, TimeSpan audioClipDuration, TimeSpan audioDuration, string albumCover)
+        public TrackSummary() { }
+
+        public TrackSummary(int trackId, int albumId, int artistId, string trackName, string albumCover)
+        {
+            TrackId = trackId;
+            AlbumId = albumId;
+            ArtistId = artistId;
+            TrackName = trackName;
+            AlbumCover = albumCover;
+        }
+
+        public TrackSummary(int trackId, int albumId, int artistId, string trackName, Decimal price, string albumName, string artistName, string albumCover)
+        {
+            TrackId = trackId;
+            AlbumId = albumId;
+            ArtistId = artistId;
+            TrackName = trackName;
+            Price = price;
+            AlbumName = albumName;
+            ArtistName = artistName;
+            AlbumCover = albumCover;
+        }
+        public TrackSummary(int trackId, int albumId, int artistId, string trackName, decimal price, DateTime dateAdded, string albumName, string artistName, string genre, TimeSpan audioDuration, string albumCover)
         {
             TrackId = trackId;
             AlbumId = albumId;
@@ -15,8 +37,6 @@ namespace LokalMusic._Code.Models.Store
             AlbumName = albumName;
             ArtistName = artistName;
             Genre = genre;
-            AudioClip = audioClip;
-            AudioClipDuration = audioClipDuration;
             AudioDuration = audioDuration;
             AlbumCover = albumCover;
         }
@@ -33,11 +53,11 @@ namespace LokalMusic._Code.Models.Store
 
         public string Genre { get; set; }
 
-        public string AudioClip { get; set; }
-        public TimeSpan AudioClipDuration { get; set; }
         public TimeSpan AudioDuration { get; set; }
 
         public string AlbumCover { get; set; }
+
+        public bool AddableToCart { get; set; } // true if the track is not in cart or not bought
 
         public string DetailsUrl { 
             get { 

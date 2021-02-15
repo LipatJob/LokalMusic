@@ -7,7 +7,6 @@
         #joinSignIn .btn{
             font-weight: 700;
             font-size: 14px;
-            
         }
 
         h1 {
@@ -65,6 +64,7 @@
         .cart{
             color: black;
             font-weight: 700;
+            
         }
 
         /* Zoom */
@@ -74,7 +74,7 @@
         .img-hoverable:hover {
           -ms-transform: scale(1.07); /* IE 9 */
           -webkit-transform: scale(1.07); /* Safari 3-8 */
-          transform: scale(1.07); 
+          transform: scale(1.07);
         }
 
         .dropdown-item.active, .dropdown-item:active {
@@ -99,14 +99,14 @@
                 </li>
             </ul>--%>
 
-            <div class="form-inline ml-auto mr-md-3">
+            <div class="form-inline ml-auto mr-md-3 mt-lg-0 mt-2">
                 <div class="input-group">
-                
+
                     <input type="text" id="SearchTxt" class="form-control border-0 rounded" placeholder="Search" runat="server" />
                     <div class="input-group-append">
                         <%--<asp:Button ID="SearchBtn" runat="server" Text="Search" CssClass="btn btn-primary my-2 my-sm-0" OnClick="SearchBtn_Click" />--%>
-                        <button id="SearchBtn" runat="server" class="btn btn-danger" onserverclick="SearchBtn_Click">
-                            <span class="bi bi-search"></span>
+                        <button id="SearchBtn" runat="server" class="btn btn-danger mx-auto my-auto" onserverclick="SearchBtn_Click">
+                            <img src="~/Content/Images/search-white.png" runat="server" class="" width="20" style="margin-top:-2px;"/>
                         </button>
                     </div>
 
@@ -120,7 +120,7 @@
                         <ul class="navbar-nav ml-xl-2 mr-xl-2 mt-sm-1 mb-md-1">
                             <li class="nav-item dropdown">
 
-                                <a class="nav-link dropdown-toggle" href="~/Account/Collection" id="navbarDropdown" 
+                                <a class="nav-link dropdown-toggle" href="~/Account/Collection" id="navbarDropdown"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server"
                                     style="font-weight:600; font-size:17px; ">
                                     <span style="color:#B82828;"><% Response.Write(AuthenticationHelper.Username); %></span>
@@ -166,7 +166,7 @@
              <%}
                else
                {%>
-                    <div id="joinSignIn" class="">
+                    <div id="joinSignIn" class=" mt-lg-0 mt-1">
                         <div class="">
                             <ul class="navbar-nav">
                                 <li class="nav-item ml-md-2 mr-md-1 mb-sm-1 mt-sm-1 mb-0 mt-0">
@@ -185,9 +185,8 @@
             <% if (AuthenticationHelper.LoggedIn)
             {%>
                 <div class="mb-2">
-                    <a class="ml-xl-2 mr-md-4 cart" href="~/Cart/CartPage.aspx" runat="server">
-                    <%--<img src="~/Content/Images/cart.png" width="20" height="20" class="d-block my-auto" alt="" runat="server">--%>
-                        <span class="bi bi-cart2" style="font-size:25px;"></span>
+                    <a class="ml-xl-2 mr-md-4" href="~/Cart/CartPage.aspx" runat="server">
+                        <img src="~/Content/Images/cart.png" width="21" class="mt-2" alt="cart" runat="server">
                     </a>
                 </div>
             <%}%>
@@ -199,8 +198,73 @@
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
 
-    <%--AJAX Add to Cart--%>
+    <%--model for track details--%>
+    <div class="modal fade border-0" id="trackModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #bd4f6c; background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);">
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row my-auto mx-auto " >
+                                <span id="price" class="" style="color: white; font-weight: 600; font-size: 20px;">₱699.99 </span>
+                                <div id="forVisible">
+                                    <button type="button" class="rounded-0 ml-2" id="addToCart" <%--onclick='AddToCart(<%#Eval("AlbumId")%>)'--%>>
+                                        <img src="~/Content/Images/cart-white.png" class="mb-1" runat="server" width="18" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-4"></div>
+
+                        <div class="col-4">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" style="color:white">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pl-0 pr-0">
+                        <img src="#" id="cover" alt="album-cover" class="mx-auto d-block w-50 mt-5 mb-3 shadow-lg" style="border-radius:20px;"/>
+
+                        <%--titles--%>
+                        <div class="text-center" style="color: white">
+                            <p id="track" style="font-size:28px; font-weight:600;">Hello</p>
+                            <p id="artist" style="color:#FFDCDC; font-size:18px; font-weight:500; margin-top:-12px">Adele</p>
+                            <p id="album" style="color:#FFDCDC; font-size:16px; font-weight:500; margin-top:-12px">24</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer border-0 mb-3" >
+                    <div class="row mx-auto my-auto ">
+                        <div class="col-10 mx-auto my-auto ">
+                            <audio controls src="" id="clip" style="margin-top:5px"></audio>
+                        </div>
+                        <div class="col-2 mx-auto my-auto ">
+                            <button type="button" data-toggle="collapse" data-target="#descriptionCollapse" aria-controls="descriptionCollapse"><img src="~/Content/Images/information-white.png" runat="server" height="25" /></button>
+                        </div>
+                    </div>
+
+                    <div class="row mx-auto my-auto w-100">
+                        <div class="col-12 collapse pl-4 pr-4 mt-4 pt-2" id="descriptionCollapse">
+                            <div class="card" style="background-color:#ee6f57;">
+                                <div class="card-body pl-5 pt-5 pr-5 pb-4">
+                                     <p id="description" style="color:white; font-weight:600; line-height:30px;"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script>
+        //AJAX Add to Cart
         function AddToCart(productId) {
             $.ajax({
                 type: "POST",
@@ -209,14 +273,75 @@
                 data: "{ 'productId' : '" + productId + "'}",
                 //data: JSON.stringify(trackId),
                 dataType: "json",
-                success: function (message) {
-                    alert(message.d);
+                success: function (result) {
+
+                    var needsLogin = '<%Response.Write(AddToCartHelper.ADD_TO_CART_LOGIN);%>';
+
+                    if (result.d[0] == needsLogin) {
+                        window.location.href = "/Account/Login?ReturnAddress=" + window.location.pathname;
+                    } else {
+                        alert(result.d[1]);
+                    }
+
                 },
                 error: function () {
                     alert("An Error has occured");
                 }
             });
             return false;
+        }
+
+        //AJAX Get Track Details
+        function GetTrack(trackId) {
+            $.ajax({
+                type: "POST",
+                url: "/Store/TracksService.asmx/GetTrack",
+                contentType: "application/json; charset=utf-8",
+                data: "{ 'trackId' : '" + trackId + "'}",
+                dataType: "json",
+                success: function (data) {
+                    ShowTrackModel(data.d);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status, thrownError);
+                }
+            });
+        }
+
+        function ShowTrackModel(data) {
+            $('#trackModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+            $("#trackModal").on('hide.bs.modal', function () {
+                $('audio').each(function () {
+                    this.pause();
+                    this.currentTime = 0;
+                })
+            });
+            $("#trackModal").modal('show');
+            $("#track").text(data["TrackName"]);
+            $("#artist").text(data["ArtistName"]);
+            $("#album").text(data["AlbumName"]);
+            $("#price").text("₱"+data["Price"]);
+            $("#description").text(data["Description"]);
+            $("#cover").attr("src", data["AlbumCover"]);
+            $("#clip").attr("src", data["AudioAddress"]);
+            $('#addToCart').unbind('click');
+            $('#addToCart').unbind('onclick');
+            $('#addToCart').attr("onclick", "").click(function () {
+                AddToCart(data["TrackId"]);
+                return false;
+            });
+
+            $("#forVisible").removeClass("visible");
+            $("#forVisible").removeClass("invisible");
+
+            var visibility = "invisible";
+            console.log(data['AddableToCart']);
+            if (data['AddableToCart'] == true) visibility = "visible";
+
+            $("#forVisible").addClass(visibility);
         }
     </script>
 

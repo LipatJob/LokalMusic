@@ -33,13 +33,22 @@ namespace LokalMusic.Publish.Album.Track
         protected global::System.Web.UI.WebControls.Label albumName;
 
         /// <summary>
-        /// viewTracks control.
+        /// withdrawBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor viewTracks;
+        protected global::System.Web.UI.WebControls.LinkButton withdrawBtn;
+
+        /// <summary>
+        /// publishUnpublishBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button publishUnpublishBtn;
 
         /// <summary>
         /// trackNameTxt control.
@@ -69,6 +78,15 @@ namespace LokalMusic.Publish.Album.Track
         protected global::System.Web.UI.WebControls.TextBox genreTxt;
 
         /// <summary>
+        /// genres control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl genres;
+
+        /// <summary>
         /// descriptionTxt control.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,24 @@ namespace LokalMusic.Publish.Album.Track
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox priceTxt;
+
+        /// <summary>
+        /// earnings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label earnings;
+
+        /// <summary>
+        /// transactionFee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label transactionFee;
 
         /// <summary>
         /// priceTxtCv control.
@@ -132,15 +168,6 @@ namespace LokalMusic.Publish.Album.Track
         protected global::System.Web.UI.WebControls.FileUpload clipFile;
 
         /// <summary>
-        /// withdrawBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton withdrawBtn;
-
-        /// <summary>
         /// cancelBtn control.
         /// </summary>
         /// <remarks>
@@ -157,14 +184,5 @@ namespace LokalMusic.Publish.Album.Track
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button saveBtn;
-
-        /// <summary>
-        /// publishUnpublishBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button publishUnpublishBtn;
     }
 }

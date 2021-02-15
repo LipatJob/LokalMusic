@@ -95,7 +95,7 @@
                         <div class="mt-3"  id="img-bottom">
                             <div class="row">
                                 <div class="col-6">
-                                    <p class=""><%#Eval("AudioDuration") %> minutes</p>
+                                    <p class=""><%#Eval("AudioDuration" , "{0:g}") %> minutes</p>
                                 </div>
 
                                 <div class="col-6">
@@ -116,7 +116,7 @@
 
                         <div class="row w-100 ml-2">
                             <h3 id="track-name" class=""><%#Eval("TrackName") %></h3>
-                            <p id="price" class="ml-auto">₱<%#Eval("Price") %></p> 
+                            <p id="price" class="ml-auto">₱<%#Eval("Price", "{0:n}") %></p> 
                         </div>
 
                         <div class="row ml-2">

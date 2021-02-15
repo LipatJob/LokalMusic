@@ -13,6 +13,64 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
         const string STATUS_PRODUCT_VISIBLE = "PUBLISHED";
         const string STATUS_ARTIST_ACTIVE = "ACTIVE";
 
+        // Query for track modal
+        public static Track GetTrackDetails(int trackId)
+        {
+            Track trackDetails = null;
+
+            string query = "SELECT Genre.GenreName as Genre, Track.TrackId, Product.ProductName as TrackName, Product.Price, TrackAudioFile.FileName as AudioAddress, " +
+                           "Track.Description, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, AlbumFile.FileName as AlbumCover " +
+                           "FROM Product " +
+                           "INNER JOIN Track " +
+                           "ON Product.ProductId = Track.TrackId " +
+                           "INNER JOIN FileInfo as TrackAudioFile " +
+                           "ON Track.ClipFileID = TrackAudioFile.FileId " +
+                           "INNER JOIN Genre " +
+                           "ON Track.GenreId = Genre.GenreId " +
+                           "INNER JOIN Album " +
+                           "ON Track.AlbumId = Album.AlbumId " +
+                           "INNER JOIN FileInfo as AlbumFile " +
+                           "ON Album.AlbumCoverID = AlbumFile.FileId " +
+                           "INNER JOIN Product as AlbumProduct " +
+                           "ON AlbumProduct.ProductId = Track.AlbumId " +
+                           "INNER JOIN ArtistInfo " +
+                           "ON Album.UserId = ArtistInfo.UserId " +
+                           "INNER JOIN UserInfo " +
+                           "ON ArtistInfo.UserId = UserInfo.UserId " +
+                           "LEFT JOIN FileInfo as ArtistImageFile " +
+                           "ON UserInfo.ProfileImageId = ArtistImageFile.FileId " +
+                           "WHERE Track.TrackId = @TrackId " +
+                           "AND Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "') " +
+                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
+
+            var values = DbHelper.ExecuteDataTableQuery(query, ("TrackId", trackId));
+            bool valid = values.Rows.Count > 0;
+
+            if (valid)
+            {
+                trackDetails = new Track();
+                trackDetails.TrackId = (int)values.Rows[0]["TrackId"];
+                trackDetails.TrackName = values.Rows[0]["TrackName"].ToString();
+                trackDetails.Price = Decimal.Round(Decimal.Parse(values.Rows[0]["Price"].ToString()), 2);
+                trackDetails.AudioAddress = values.Rows[0]["AudioAddress"].ToString();
+                trackDetails.Description = values.Rows[0]["Description"].ToString();
+                trackDetails.AlbumName = values.Rows[0]["AlbumName"].ToString();
+                trackDetails.ArtistName = values.Rows[0]["ArtistName"].ToString();
+                trackDetails.AlbumCover = values.Rows[0]["AlbumCover"].ToString();
+
+                // check if product is in cart or bought by the user
+                if (AuthenticationHelper.LoggedIn)
+                    trackDetails.AddableToCart = AddableToCart(trackDetails.TrackId, AuthenticationHelper.UserId);
+                else
+                    trackDetails.AddableToCart = true;
+                
+            }
+
+            return trackDetails;
+        }
+
+
         // Main queries for details
         public Track GetTrackDetails(int trackId, int albumId, int artistId)
         {
@@ -110,6 +168,11 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
 
                     values.Rows[0]["ArtistName"].ToString()
                     );
+
+                if (AuthenticationHelper.LoggedIn)
+                    albumDetails.AddableToCart = AddableToCart(albumDetails.AlbumId, AuthenticationHelper.UserId);
+                else
+                    albumDetails.AddableToCart = true;
             }
 
             return albumDetails;
@@ -257,6 +320,11 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
                         values.Rows[i]["ArtistName"].ToString()
                         );
 
+                    if (AuthenticationHelper.LoggedIn)
+                        album.AddableToCart = AddableToCart(album.AlbumId, AuthenticationHelper.UserId);
+                    else
+                        album.AddableToCart = true;
+
                     albums.Add(album);
                 }
             }
@@ -267,6 +335,33 @@ namespace LokalMusic._Code.Repositories.Store.ProductDetails
         // End List queries
 
         // helper queries
+        public static bool AddableToCart(int productId, int customerId)
+        {
+            string query = "SELECT ProductId " +
+                           "FROM OrderInfo " +
+                           "INNER JOIN ProductOrder " +
+                           "ON OrderInfo.OrderId = ProductOrder.OrderId " +
+                           "WHERE OrderInfo.CustomerId = @CustomerId AND ProductId = @ProductId";
+
+            bool addable = DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("ProductId", productId)) == null ? true : false;
+
+            // if not addable at this point, return it already
+            if (addable == false)
+                return addable;
+
+            // else check in user cart
+
+            query = "SELECT UserId " +
+                    "FROM UserCart " +
+                    "WHERE UserId = @CustomerId AND ProductId = @ProductId";
+
+
+            addable = DbHelper.ExecuteScalar(query, ("CustomerId", customerId), ("ProductId", productId)) == null ? true : false;
+
+            //return the bool value. if it is false the add to cart button will not be shown.
+            return addable;
+        }
+
         public List<string> GetAlbumGenres(int albumId)
         {
             List<string> genreList = new List<string>();

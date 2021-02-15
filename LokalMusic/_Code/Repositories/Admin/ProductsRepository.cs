@@ -24,7 +24,6 @@ SELECT
 	[ArtistInfo].ArtistName,
 	[ProductType].TypeName,
 	[ProductStatus].StatusName
-	
 FROM [Product]
 	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
 	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId, [Product].ProductId)

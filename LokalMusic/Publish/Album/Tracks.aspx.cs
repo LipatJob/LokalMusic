@@ -24,11 +24,12 @@ namespace LokalMusic.Publish
 
             AlbumId = int.Parse((string)NavigationHelper.GetRouteValue("AlbumId"));
             addTrack.HRef = "~/Publish/Album/" + AlbumId + "/Track/Add";
+            addTrackInstruction.HRef = "~/Publish/Album/" + AlbumId + "/Track/Add";
 
             if (Model.TracksItems.Count < 1)
-                instruction.Visible = true;
+                addTrackInstruction.Visible = true;
             else
-                instruction.Visible = false;
+                addTrackInstruction.Visible = false;
 
             ValidateMaxTrackCount();
         }

@@ -23,7 +23,7 @@ namespace LokalMusic.Publish.Album
         public string Description { get => descriptionTxt.Text; set => descriptionTxt.Text = value; }
         public DateTime DateReleased { get => Convert.ToDateTime(dateReleasedTxt.Text); set => dateReleasedTxt.Text = value.ToString("yyyy-MM-dd"); }
         public string Producer { get => producerTxt.Text; set => producerTxt.Text = value; }
-        public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = String.Format("{0:N}", value); }
+        public decimal Price { get => decimal.Parse(priceTxt.Text); set => priceTxt.Text = value.ToString("F2"); }
         public string AlbumCover { get => albumCoverPreview.ImageUrl; set => albumCoverPreview.ImageUrl = value; }
         public HttpPostedFile UploadedAlbumCover => albumCoverFile.PostedFile;
         public bool AlbumCoverIsUpdated { get; set; }
@@ -35,7 +35,10 @@ namespace LokalMusic.Publish.Album
             if (!Page.IsPostBack)
             {
                 Presenter.PageLoad();
+                dateReleasedTxt.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 SetPublishUnpublishBtn();
+
+                priceTxt_TextChanged(priceTxt, EventArgs.Empty);
             }
         }
 
@@ -68,12 +71,13 @@ namespace LokalMusic.Publish.Album
                     AlbumCoverIsUpdated = false;
 
                 Presenter.EditAlbum();
+                NavigationHelper.Redirect("~/Publish/Albums");
             }
         }
 
         protected void cancelBtn_Click(object sender, EventArgs e)
         {
-            Presenter.LoadAlbumDetails();
+            NavigationHelper.Redirect("~/Publish/Albums");
         }
 
         protected void withdrawBtn_Click(object sender, EventArgs e)
@@ -130,6 +134,23 @@ namespace LokalMusic.Publish.Album
                     rule: () => decimal.Parse(priceTxt.Text) < (decimal)214748.3647,
                     errorMessage: "Price can't be more than 214,748.3647")
                 .Validate();
+        }
+
+        protected void priceTxt_TextChanged(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(priceTxt.Text, out decimal priceInput))
+            {
+                decimal feeAmount = priceInput * 0.15m;
+                decimal earningsAmount = priceInput - feeAmount;
+
+                earnings.Text = earningsAmount.ToString("N2");
+                transactionFee.Text = feeAmount.ToString("N2");
+            }
+            else
+            {
+                earnings.Text = "0.00";
+                transactionFee.Text = "0.00";
+            }
         }
     }
 }

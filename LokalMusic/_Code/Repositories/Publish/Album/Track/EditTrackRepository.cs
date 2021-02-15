@@ -1,6 +1,8 @@
 ﻿using LokalMusic._Code.Helpers;
 using LokalMusic._Code.Models.Publish.Album.Track;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Web;
 
@@ -57,9 +59,35 @@ WHERE TrackId = @trackId
             model.ClipFileDuration = (TimeSpan)result.Rows[0]["ClipFileDuration"];
             model.Status = (string)result.Rows[0]["Status"];
         }
-        public bool GetAlbumIsPublished(int albumId)
+
+        public void GetGenreList(IEditTrackModel model)
         {
-            string query = "SELECT ProductStatusId FROM Product WHERE ProductId = @AlbumId";
+            string query = "SELECT GenreName FROM Genre";
+            var result = DbHelper.ExecuteDataTableQuery(query);
+
+            List<string> genreList = new List<string> { };
+            foreach (DataRow row in result.Rows)
+            {
+                string genre = (string)row["GenreName"];
+                genreList.Add(genre);
+            }
+            model.Genres = genreList;
+        }
+
+        public bool CheckIfLastPublished(int albumId)
+        {
+            string query = "SELECT COUNT(TrackId) FROM Track LEFT JOIN Product ON Track.TrackId = Product.ProductId WHERE AlbumId = @AlbumId AND ProductStatusId = 1;";
+            var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
+
+            if ((int)result <= 1)
+                return true;
+            else
+                return false;
+        }
+
+        public bool CheckAlbumIsPublished(int albumId)
+        {
+            string query = "SELECT ProductStatusId FROM Product WHERE ProductId = @AlbumId;";
             var result = DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
 
             if ((int)result == 1)
