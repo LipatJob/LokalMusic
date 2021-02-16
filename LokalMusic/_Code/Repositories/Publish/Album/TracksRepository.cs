@@ -15,7 +15,6 @@ namespace LokalMusic._Code.Repositories.Publish.Albums
 SELECT
     Product.ProductStatusId,
     Product.ProductId AS TrackId,
-    Track.AlbumId,
     FileInfo.[FileName] AS TrackCoverLink,
     Product.ProductName AS TrackName,
     ProductStatus.StatusName AS Status,
@@ -34,6 +33,7 @@ FROM Track
     LEFT JOIN Genre ON Track.GenreId = Genre.GenreId
     LEFT JOIN ProductStatus ON Product.ProductStatusId = ProductStatus.ProductStatusId
 WHERE Album.AlbumId = @AlbumId
+ORDER BY Product.ProductId DESC;
 ";
 
             var result = DbHelper.ExecuteDataTableQuery(query, ("AlbumId", albumId));
@@ -46,7 +46,7 @@ WHERE Album.AlbumId = @AlbumId
                     Items.Add(new TracksItem()
                     {
                         TrackId = (int)row["TrackId"],
-                        AlbumId = (int)row["AlbumId"],
+                        AlbumId = albumId,
                         TrackCoverLink = (string)row["TrackCoverLink"],
                         TrackName = (string)row["TrackName"],
                         Status = new CultureInfo("en").TextInfo.ToTitleCase(row["Status"].ToString().ToLower()),

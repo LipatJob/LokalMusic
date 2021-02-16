@@ -36,6 +36,7 @@ FROM Product
     LEFT JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
     LEFT JOIN ProductStatus ON Product.ProductStatusId = ProductStatus.ProductStatusId
 WHERE Album.UserId = @ArtistId
+ORDER BY Product.ProductId DESC;
 ";
 
             var result = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
