@@ -69,33 +69,33 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xl-3 col-md-6 text-right top-tracks mt-3 mt-md-0 <%# Eval("TrackTop1") == null ? "invisible" : "" %>">
-                                    <h5 class="">Top Track(s)</h5>
+                                <div class="col-xl-3 col-md-6 text-right top-tracks mt-3 mt-md-0 <%# Eval("LatestTrack1") == null ? "invisible" : "" %>">
+                                    <h5 class="">Latest Track(s)</h5>
 
                                     <div class="">
-                                        <a onclick='<%# "GetTrack(" +Eval("TrackTop1.TrackId") + " );" %>' class="img-hoverable">
+                                        <a onclick='<%# "GetTrack(" +Eval("LatestTrack1.TrackId") + " );" %>' class="img-hoverable">
                                             <div class="row mt-4">
                                                 <div class="col-9 text-right my-auto">
-                                                    <p class="my-auto track-title titleLink"><%#Eval("TrackTop1.TrackName") %></p>
+                                                    <p class="my-auto track-title titleLink"><%#Eval("LatestTrack1.TrackName") %></p>
                                                 </div>
 
                                                 <div class="col-3 mx-auto">
                                                     <%--link--%>
-                                                    <img src=<%#Eval("TrackTop1.AlbumCover")%> width="45" height="45" class="mx-auto d-block img-hoverable shadow-sm" runat="server" alt="track1"/>
+                                                    <img src=<%#Eval("LatestTrack1.AlbumCover")%> width="45" height="45" class="mx-auto d-block img-hoverable shadow-sm" runat="server" alt="track1"/>
                                                 </div>
                                             </div>
                                         </a>
                                     </div>
 
-                                    <div class="<%# Eval("TrackTop2") == null ? "invisible" : "" %>">
-                                        <a onclick='<%# "GetTrack(" +Eval("TrackTop2.TrackId") + " );" %>' class="img-hoverable">
+                                    <div class="<%# Eval("LatestTrack2") == null ? "invisible" : "" %>">
+                                        <a onclick='<%# "GetTrack(" +Eval("LatestTrack2.TrackId") + " );" %>' class="img-hoverable">
                                             <div class="row mt-4">
                                                 <div class="col-9 text-right my-auto">
-                                                    <p class="my-auto track-title titleLink"><%#Eval("TrackTop2.TrackName")%></p>
+                                                    <p class="my-auto track-title titleLink"><%#Eval("LatestTrack2.TrackName")%></p>
                                                 </div>
 
                                                 <div class="col-3 mx-auto">
-                                                    <img src=<%#Eval("TrackTop2.AlbumCover")%> width="45" height="45" class="mx-auto d-block img-hoverable shadow-sm" runat="server" alt="track2" />
+                                                    <img src=<%#Eval("LatestTrack2.AlbumCover")%> width="45" height="45" class="mx-auto d-block img-hoverable shadow-sm" runat="server" alt="track2" />
                                                 </div>
                                             </div>
                                         </a>
