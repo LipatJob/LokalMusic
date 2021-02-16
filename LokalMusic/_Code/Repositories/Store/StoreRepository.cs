@@ -188,26 +188,37 @@ namespace LokalMusic._Code.Repositories
         {
             List<TrackSummary> tracks = new List<TrackSummary>();
 
-            string query = "SELECT TOP " + HOME_DISPLAY_LIMIT + " TrackId, Track.AlbumId, Album.UserId as ArtistId, TrackProduct.ProductName as TrackName, " +
-                           "TrackProduct.Price, AlbumProduct.ProductName as AlbumName, ArtistInfo.ArtistName, AlbumFile.FileName as AlbumCover " +
-                           "FROM Product as TrackProduct " +
-                           "INNER JOIN Track " +
-                           "ON TrackProduct.ProductId = Track.TrackId " +
-                           "INNER JOIN Album " +
-                           "ON Track.AlbumId = Album.AlbumId " +
-                           "INNER JOIN Product as AlbumProduct " +
-                           "ON Album.AlbumId = AlbumProduct.ProductId " +
-                           "INNER JOIN ArtistInfo " +
-                           "ON Album.UserId = ArtistInfo.UserId " +
-                           "INNER JOIN FileInfo as AlbumFile " +
-                           "ON Album.AlbumCoverID = AlbumFile.FileId " +
-                           "INNER JOIN FileInfo as TrackFile " +
-                           "ON Track.ClipFileID = TrackFile.FileId " +
-                           "INNER JOIN UserInfo " +
-                           "ON ArtistInfo.UserId = UserInfo.UserId " +
-                           "WHERE TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')" +
-                           "AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')" +
-                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "')";
+            string query = $@"  SELECT TOP {HOME_DISPLAY_LIMIT} 
+                                    TrackId, 
+                                    Track.AlbumId, 
+                                    Album.UserId as ArtistId, 
+                                    Product.ProductName as TrackName, 
+                                    Product.Price, 
+                                    AlbumProduct.ProductName as AlbumName, 
+                                    ArtistInfo.ArtistName, 
+                                    FileName as AlbumCover
+                                FROM Product
+                                    INNER JOIN Track ON Track.TrackId = Product.ProductId
+                                    INNER JOIN (
+	                                    SELECT 
+                                            ProductOrder.ProductId, 
+                                            COUNT(ProductOrder.ProductId) as BoughtFrequency
+	                                    FROM ProductOrder
+	                                        INNER JOIN Track ON Track.TrackId = ProductOrder.ProductId
+	                                    GROUP BY 
+                                            ProductOrder.ProductId
+                                    ) AS TrackBought ON Track.TrackId = TrackBought.ProductId
+                                    INNER JOIN Product as AlbumProduct ON Track.AlbumId = AlbumProduct.ProductId
+                                    INNER JOIN Album ON Track.AlbumId = Album.AlbumId
+                                    INNER JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
+                                    INNER JOIN ArtistInfo ON Album.UserId = ArtistInfo.UserId
+                                    INNER JOIN UserInfo ON Album.UserId = UserInfo.UserId
+                                WHERE 
+                                    Product.ProductStatusId = (SELECT ProductStatus.ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '{STATUS_PRODUCT_VISIBLE}')
+                                    AND AlbumProduct.ProductStatusId = (SELECT ProductStatus.ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '{STATUS_PRODUCT_VISIBLE}')
+                                    AND UserInfo.UserStatusId = (SELECT UserStatus.UserStatusId FROM UserStatus WHERE UserStatus.UserStatusName = '{STATUS_ARTIST_ACTIVE}')
+                                ORDER BY 
+                                    BoughtFrequency DESC";
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
@@ -240,18 +251,33 @@ namespace LokalMusic._Code.Repositories
         {
             List<AlbumSummary> albums = new List<AlbumSummary>();
 
-            string query = "SELECT TOP " + HOME_DISPLAY_LIMIT + " AlbumId, Album.UserId as ArtistId, ProductName as AlbumName, Price, ProducerName, FileInfo.FileName as AlbumCover, ArtistName, DateReleased " +
-                           "FROM Product " +
-                           "INNER JOIN Album " +
-                           "ON Product.ProductId = AlbumId " +
-                           "INNER JOIN ArtistInfo " +
-                           "ON Album.UserId = ArtistInfo.UserId " +
-                           "INNER JOIN FileInfo " +
-                           "On Album.AlbumCoverID = FileInfo.FileId " +
-                           "INNER JOIN UserInfo " +
-                           "ON ArtistInfo.UserId = UserInfo.UserId " +
-                           "WHERE Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '" + STATUS_PRODUCT_VISIBLE + "')" +
-                           "AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "') ";
+            string query = $@"  SELECT TOP {HOME_DISPLAY_LIMIT} 
+                                    AlbumId, 
+                                    Album.UserId as ArtistId, 
+                                    ProductName as AlbumName, 
+                                    Price, ProducerName, 
+                                    FileInfo.FileName as AlbumCover, 
+                                    ArtistName, 
+                                    DateReleased
+                                FROM Product
+                                    INNER JOIN Album ON Album.AlbumId = Product.ProductId
+                                    INNER JOIN (
+	                                    SELECT 
+                                            ProductOrder.ProductId, 
+                                            COUNT(ProductOrder.ProductId) as BoughtFrequency
+	                                    FROM ProductOrder
+	                                        INNER JOIN Album ON Album.AlbumId = ProductOrder.ProductId
+	                                    GROUP BY 
+                                            ProductOrder.ProductId
+                                    ) AS AlbumBought ON Album.AlbumId = AlbumBought.ProductId
+                                    INNER JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
+                                    INNER JOIN ArtistInfo ON Album.UserId = ArtistInfo.UserId
+                                    INNER JOIN UserInfo ON Album.UserId = UserInfo.UserId
+                                WHERE 
+                                    Product.ProductStatusId = (SELECT ProductStatus.ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '{STATUS_PRODUCT_VISIBLE}')
+                                    AND UserInfo.UserStatusId = (SELECT UserStatus.UserStatusId FROM UserStatus WHERE UserStatus.UserStatusName = '{STATUS_ARTIST_ACTIVE}')
+                                ORDER BY 
+                                    BoughtFrequency DESC";
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
@@ -283,16 +309,33 @@ namespace LokalMusic._Code.Repositories
 
         public List<ArtistSummary> GetMostPopularArtist()
         {
-            // Most popular == artist that sold many albums
             List<ArtistSummary> artists = new List<ArtistSummary>();
 
-            string query = "SELECT TOP " + HOME_DISPLAY_LIMIT + " ArtistInfo.UserId as ArtistId, ArtistName, Bio, UserInfo.DateRegistered as DateJoined, FileInfo.FileName as ArtistProfileImage " +
-                           "FROM ArtistInfo " +
-                           "INNER JOIN UserInfo " +
-                           "ON ArtistInfo.UserId = UserInfo.UserId " +
-                           "LEFT JOIN FileInfo " +
-                           "ON UserInfo.ProfileImageId = FileInfo.FileId " +
-                           "WHERE UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '" + STATUS_ARTIST_ACTIVE + "') ";
+            string query = $@"  SELECT TOP {HOME_DISPLAY_LIMIT} 
+                                    ArtistInfo.UserId as ArtistId, 
+                                    ArtistName, 
+                                    Bio, 
+                                    UserInfo.DateRegistered as DateJoined, 
+                                    FileInfo.FileName as ArtistProfileImage
+                                FROM ArtistInfo
+                                    INNER JOIN (
+	                                    SELECT 
+                                            COALESCE(TrackAlbum.UserId, Album.UserId) as ArtistId, 
+                                            COUNT(Product.ProductId) as BoughtFrequency
+	                                    FROM ProductOrder
+	                                        INNER JOIN Product ON ProductOrder.ProductId = Product.ProductId
+	                                        LEFT JOIN Track ON Product.ProductId = Track.TrackId
+	                                        LEFT JOIN Album as TrackAlbum ON TrackAlbum.AlbumId = Track.AlbumId
+	                                        LEFT JOIN Album ON Product.ProductId = Album.AlbumId
+	                                    GROUP BY 
+                                            COALESCE(TrackAlbum.UserId, Album.UserId)
+                                    ) AS ProductBought ON ArtistInfo.UserId = ProductBought.ArtistId
+                                    INNER JOIN UserInfo ON ArtistInfo.UserId = UserInfo.UserId
+                                    LEFT JOIN FileInfo ON UserInfo.ProfileImageId = FileInfo.FileId
+                                WHERE 
+                                    UserInfo.UserStatusId = (SELECT UserStatus.UserStatusId FROM UserStatus WHERE UserStatus.UserStatusName = '{STATUS_ARTIST_ACTIVE}')
+                                ORDER BY 
+                                    BoughtFrequency DESC";
 
             var values = DbHelper.ExecuteDataTableQuery(query);
             bool valid = values.Rows.Count > 0;
