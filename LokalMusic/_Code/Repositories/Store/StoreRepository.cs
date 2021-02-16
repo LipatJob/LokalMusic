@@ -372,28 +372,30 @@ namespace LokalMusic._Code.Repositories
 
             return artists;
         }
-        public List<TrackSummary> GetTopTwoTracks(int artistId)
+        public List<TrackSummary> GetTopTwoNewTracks(int artistId)
         {
             List<TrackSummary> tracks = new List<TrackSummary>();
 
-            string query = $@"  SELECT TOP 2 
-                                    TrackId, 
-                                    Track.AlbumId, 
-                                    Album.UserId as ArtistId, 
-                                    TrackProduct.ProductName as TrackName,
-                                    AlbumFile.FileName as AlbumCover
-                                FROM Product as TrackProduct
-                                    INNER JOIN Track ON TrackProduct.ProductId = Track.TrackId
-                                    INNER JOIN Album ON Track.AlbumId = Album.AlbumId
-                                    INNER JOIN Product as AlbumProduct ON Album.AlbumId = AlbumProduct.ProductId
-                                    INNER JOIN ArtistInfo ON Album.UserId = ArtistInfo.UserId
-                                    INNER JOIN FileInfo as AlbumFile ON Album.AlbumCoverID = AlbumFile.FileId
-                                    INNER JOIN UserInfo ON ArtistInfo.UserId = UserInfo.UserId
-                                WHERE 
-                                    TrackProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '{STATUS_PRODUCT_VISIBLE}')
-                                    AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '{STATUS_PRODUCT_VISIBLE}')
-                                    AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '{STATUS_ARTIST_ACTIVE}')
-                                    And Album.UserId = @ArtistId";
+            string query = $@"  
+                            SELECT TOP 2
+                                TrackId, 
+                                Track.AlbumId, 
+                                Album.UserId as ArtistId, 
+                                Product.ProductName as TrackName,
+                                FileName as AlbumCover
+                            FROM Product
+                                INNER JOIN Track ON Product.ProductId = Track.TrackId
+                                INNER JOIN Product AS AlbumProduct ON Track.AlbumId = AlbumProduct.ProductId
+                                INNER JOIN Album ON Track.AlbumId = Album.AlbumId
+                                INNER JOIN ArtistInfo ON Album.UserId = ArtistInfo.UserId
+                                INNER JOIN UserInfo ON Album.UserId = UserInfo.UserId
+                                INNER JOIN FileInfo ON Album.AlbumCoverID = FileInfo.FileId
+                            WHERE
+                                Product.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '{STATUS_PRODUCT_VISIBLE}')
+                                AND AlbumProduct.ProductStatusId = (SELECT ProductStatusId FROM ProductStatus WHERE StatusName = '{STATUS_PRODUCT_VISIBLE}')
+                                AND UserInfo.UserStatusId = (SELECT UserStatusId FROM UserStatus WHERE UserStatusName = '{STATUS_ARTIST_ACTIVE}')
+                                AND Album.UserId = @ArtistId
+                                ORDER BY Product.DateAdded DESC";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
             bool valid = values.Rows.Count > 0;

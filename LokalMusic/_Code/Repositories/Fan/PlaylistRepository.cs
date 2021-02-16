@@ -56,7 +56,7 @@ namespace LokalMusic._Code.Repositories.Fan
                 }
             }
 
-            return albums.Count > 0 ? albums : null;
+            return albums;
         }
         public List<PlaylistTrack> GetPlaylistTrack(int albumId)
         {
@@ -162,7 +162,7 @@ namespace LokalMusic._Code.Repositories.Fan
                 }
             }
 
-            return albums.Count > 0 ? albums : null;
+            return albums;
         }
         public List<PlaylistTrack> GetIncompleteTracks(int customerId, int albumId)
         {
