@@ -440,13 +440,14 @@ namespace LokalMusic._Code.Repositories
 	                            LEFT JOIN Album ON Product.ProductId = Album.AlbumId
 	                            LEFT JOIN Track ON Product.ProductId = Track.TrackId
 	                            LEFT JOIN Album AS TrackAlbum ON Track.AlbumId = TrackAlbum.AlbumId
+                                INNER JOIN ProductStatus ON Product.ProductStatusId = ProductStatus.ProductStatusId
 	                            INNER JOIN ProductType ON Product.ProductTypeId = ProductType.ProductTypeId
 	                            INNER JOIN ArtistInfo ON ArtistInfo.UserId = COALESCE(Album.UserId, TrackAlbum.UserId)
 	                            INNER JOIN UserInfo ON ArtistInfo.UserId = UserInfo.UserId
 	                            INNER JOIN FileInfo ON FileInfo.FileId = COALESCE(Album.AlbumCoverID, TrackAlbum.AlbumCoverID)
                             WHERE 
 	                            Product.ProductName LIKE '{searchValue}'
-	                            AND Product.ProductStatusId = (SELECT ProductStatus.ProductStatusId FROM ProductStatus WHERE ProductStatus.StatusName = '{STATUS_PRODUCT_VISIBLE}')
+	                            AND ProductStatus.StatusName = '{STATUS_PRODUCT_VISIBLE}'
 	                            AND UserInfo.UserStatusId = (SELECT UserStatus.UserStatusId FROM UserStatus WHERE UserStatus.UserStatusName = '{STATUS_ARTIST_ACTIVE}')";
 
             var values = DbHelper.ExecuteDataTableQuery(query, ("SearchValue", searchValue));
