@@ -124,7 +124,7 @@ ORDER BY [OrderInfo].OrderDate ASC;
         {
             string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.PICTURE_CONTAINER_NAME, file, true);
             int profileImageId = (int)DbHelper.ExecuteScalar(
-                "INSERT INTO FileInfo(FileTypeId, FileName) VALUES((SELECT FileTypeId FROM FileType WHERE FileTypeName=@FileTypeName), @FileName) SELECT SCOPE_IDENTITY()",
+                "INSERT INTO FileInfo(FileTypeId, FileName) OUTPUT INSERTED.FileId VALUES((SELECT FileTypeId FROM FileType WHERE FileTypeName=@FileTypeName), @FileName)",
                 ("FileTypeName", FileSystemHelper.PICTURE_CONTAINER_NAME),
                 ("FileName", fileLocation));
             DbHelper.ExecuteNonQuery(
@@ -145,7 +145,7 @@ ORDER BY [OrderInfo].OrderDate ASC;
         private bool HasProfilePicture(int userId)
         {
             string query = "SELECT ProfileImageId FROM UserInfo WHERE UserId = @UserId";
-            return DbHelper.ExecuteScalar(query, ("UserId", userId)) != null;
+            return DbHelper.ExecuteScalar(query, ("UserId", userId)) != DBNull.Value;
         }
 
         internal IList<SalesListItem> GetReceipts(int userId)
