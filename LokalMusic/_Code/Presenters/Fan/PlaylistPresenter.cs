@@ -33,7 +33,7 @@ namespace LokalMusic._Code.Presenters.Fan
                 // there might be a question on why does that happen, its because the album might upload new tracks later on.
                 // So if the user bought the album the additional tracks will be automatically owned. 
 
-                // check this scenario above occured, if it does stop it from retrieving the invidually bought track
+                // check this scenario above. if it does occur, stop it from retrieving the invidually bought track
                 if (! albums.Select(m => m.AlbumId).ToList().Contains(albumId))
                     albums.AddRange( repository.GetPlaylistAlbumOfIndividualTracks(AuthenticationHelper.UserId, albumId) );
             }

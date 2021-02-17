@@ -29,8 +29,8 @@ namespace LokalMusic._Code.Models.Store
         // Processed in presenter
         public int AlbumCount { get; set; }
         public int TrackTotalCount { get; set; }
-        public TrackSummary TrackTop1 { get; set; }
-        public TrackSummary TrackTop2 { get; set; }
+        public TrackSummary LatestTrack1 { get; set; }
+        public TrackSummary LatestTrack2 { get; set; }
 
         public string DetailsUrl
         {

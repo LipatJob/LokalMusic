@@ -35,14 +35,14 @@ namespace LokalMusic._Code.Presenters.Store
                 if (artist == null)
                     break;
 
-                List<TrackSummary> tracks = this.repository.GetTopTwoTracks(artist.ArtistId);
+                List<TrackSummary> tracks = this.repository.GetTopTwoNewTracks(artist.ArtistId);
 
                 if (tracks != null)
                 {
                     if (tracks.Count >= 1)
-                        artist.TrackTop1 = tracks[0];
+                        artist.LatestTrack1 = tracks[0];
                     if (tracks.Count >= 2)
-                        artist.TrackTop2 = tracks[1];
+                        artist.LatestTrack2 = tracks[1];
                 }
 
                 // SQL Queries were used because I did not want to query the whole track and perform LINQ commands or iterations
