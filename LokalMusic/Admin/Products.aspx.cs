@@ -1,8 +1,10 @@
-﻿using LokalMusic._Code.Models.Admin;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Admin;
 using LokalMusic._Code.Presenters.Admin;
 using System;
 using System.Collections.Generic;
 using System.Web.Services;
+using System.Web.UI.WebControls;
 
 namespace LokalMusic.Admin
 {
@@ -12,28 +14,32 @@ namespace LokalMusic.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             presenter = new ProductsPresenter(this);
+
+            if (!Page.IsPostBack) { Bind(); }
         }
 
-        [WebMethod]
-        public static IList<ProductItem> GetProductList()
+        private void Bind()
         {
-            return ProductsPresenter.GetProductList();
+            GridViewHelper.BindData(ProductsGridView, presenter.GetProductList());
+
         }
 
-        [WebMethod]
-        public static bool WithdrawItem(int productId)
+        public string GetMarketPage(string productType, int artistId, int albumId, int productId)
         {
-            ProductsPresenter.WithdrawItem(productId);
-            return true;
+            if (productType.ToLower() == "album")
+            {
+                return NavigationHelper.CreateAbsoluteUrl($"/Store/{artistId}/{productId}");
+            }
+            return NavigationHelper.CreateAbsoluteUrl($"/Store/{artistId}/{albumId}/{productId}");
         }
 
-        [WebMethod]
-        public static bool RepublishItem(int productId)
+        protected void ProductsGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            ProductsPresenter.RepublishItem(productId);
-            return true;
+            if(e.CommandName == "UnlistRepublish")
+            {
+                presenter.UnlistRepublishProduct(int.Parse(e.CommandArgument.ToString()));
+                Bind();
+            }
         }
-
-
     }
 }

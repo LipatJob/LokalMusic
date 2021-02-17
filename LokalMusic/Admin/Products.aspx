@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Products" Language="C#" MasterPageFile="~/Template/AdminLayout.master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="LokalMusic.Admin.Products" %>
+﻿<%@ Page Title="Products" Language="C#" MasterPageFile="~/Template/AdminLayout.master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="LokalMusic.Admin.Products" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
@@ -8,148 +8,42 @@
         <h2>Products</h2>
         <div class="row">
             <div class="col-12">
-                <table class="table table-hover dt-responsive" id="productsTbl">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>Artist</th>
-                            <th>Product Type</th>
-                            <th>Date Listed</th>
-                            <th></th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <asp:GridView ID="ProductsGridView" runat="server" AutoGenerateColumns="False" CssClass="table table-hover dt-responsive productsGv" OnRowCommand="ProductsGridView_RowCommand">
+                    <Columns>
+                        <asp:BoundField HeaderText="Title" DataField="ProductName" />
+                        <asp:BoundField HeaderText="Artist" DataField="ArtistName" />
+                        <asp:TemplateField HeaderText="Product Type">
+                            <ItemTemplate><%# MiscUtils.UppercaseFirstOnly(Eval("ProductType").ToString()) %> </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField HeaderText="Date Added" DataField="DateAdded" DataFormatString="{0:MMM dd yyyy}" />
+
+                        <asp:TemplateField HeaderText=" ">
+                            <ItemTemplate>
+                                <a href='<%# GetMarketPage((string) Eval("ProductType"), (int) Eval("ArtistId"), (int) Eval("AlbumId"), (int) Eval("ProductId")) %> ' class="text-danger">Product Page</a>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Action">
+                            <ItemTemplate>
+                                <asp:Button
+                                    Text='<%# Eval("StatusName").ToString().ToUpper() == "WITHDRAWN" ? "Relist" : "Withdraw" %>' runat="server"
+                                    CommandName="UnlistRepublish"
+                                    CommandArgument='<%#Eval("ProductId")%>'
+                                    Enabled=<%# !(Eval("AlbumStatusName").ToString().ToUpper() == "WITHDRAWN" && Eval("ProductType").ToString().ToUpper() == "TRACK")%>
+                                    CssClass='<%# Eval("StatusName").ToString().ToUpper() == "WITHDRAWN" ? "btn btn-secondary" : "btn btn-outline-danger" %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+
+                </asp:GridView>
             </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        $(".productsSideItem").addClass("sidebar-active");
-
-        $(function () {
-            bsCustomFileInput.init()
-
-            $.ajax({
-                type: "POST",
-                url: "/Admin/Products.aspx/GetProductList",
-                data: '{}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert(JSON.stringify(response));
-                },
-                error: function (response) {
-                    alert(JSON.stringify(response));
-                }
-            });
+        $(".productsGv").DataTable({
+            "stateSave": true,
+            "stateDuration": 60 * 10,
         });
-
-        function OnSuccess(response) {
-            $("#productsTbl").DataTable(
-                {
-                    "pageLength": 5,
-                    bLengthChange: true,
-                    lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-                    bFilter: true,
-                    bSort: true,
-                    bPaginate: true,
-                    data: response.d,
-                    columns: [
-                        { 'data': 'ProductId' },
-                        { 'data': 'ProductName' },
-                        { 'data': 'ArtistName' },
-                        { 'data': 'ProductType' },
-                        { 'data': 'FormattedDateListed' },
-                        {
-                            data: "MarketPage",
-                            render: function (data) {
-                                data = `<a href="${data}" class='text-danger'> Product Page </a>`;
-                                return data;
-                            }
-                        },
-                        {
-                            'data': 'null',
-                            'render': function (data, type, row) {
-                                if (row["ProductStatus"].toUpperCase() == "WITHDRAWN") {
-                                    return `<button class="btn btn-secondary" onclick="RepublishItem(${row["ProductId"]}, this); return false;">Republish</button>`;
-                                }
-                                return `<button class="btn btn-outline-danger" onclick="WithdrawItem(${row["ProductId"]}, this); return false;">Withdraw</button></a>`;
-                            }
-                        },
-                    ],
-                    "columnDefs": [
-                        {
-                            "targets": [0],
-                            "visible": false,
-                            "searchable": false
-                        },
-                    ]
-                });
-        };
-
-        function WithdrawItem(id, parent) {
-            $.ajax({
-                type: "POST",
-                url: "/Admin/Products.aspx/WithdrawItem",
-                contentType: "application/json; charset=utf-8",
-                data: "{ 'productId': '" + id + "' }",
-                dataType: "json",
-                success: function () {
-                    ChangeToRepublish(id, parent);
-                },
-                error: function () {
-                    alert("An Error has occured while unlisting the item");
-                }
-            });
-            return false;
-        }
-
-        function ChangeToRepublish(id, item) {
-            item.classList.remove('btn-outline-danger');
-            item.classList.add('btn-secondary');
-            item.innerHTML = "Republish";
-            item.onclick = function () { RepublishItem(id, item); return false; };
-        }
-
-        function RepublishItem(id, parent) {
-            $.ajax({
-                type: "POST",
-                url: "/Admin/Products.aspx/RepublishItem",
-                data: "{ 'productId': '" + id + "' }",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function () {
-                    ChangeToWithdraw(id, parent);
-                },
-                error: function () {
-                    alert("An Error has occured while unlisting the item");
-                    return false;
-                }
-            });
-            return false;
-        }
-
-        function ChangeToWithdraw(id, item) {
-            item.classList.remove('btn-secondary');
-            item.classList.add('btn-outline-danger');
-            item.innerHTML = "Withdraw"
-            item.onclick = function () { WithdrawItem(id, item); return false; };
-        }
-
-
     </script>
 </asp:Content>

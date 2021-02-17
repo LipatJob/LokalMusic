@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Models.Finance;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Finance;
 using LokalMusic._Code.Presenters.Finance;
 using LokalMusic._Code.Repositories.Finance;
 using System;
@@ -20,7 +21,6 @@ namespace LokalMusic.Finance
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         [WebMethod]

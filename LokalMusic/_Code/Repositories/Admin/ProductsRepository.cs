@@ -10,9 +10,9 @@ namespace LokalMusic._Code.Repositories.Admin
 	public class ProductsRepository
 	{
 		private const string WITHDRAWN_STATUS = "WITHDRAWN";
-		private const string PUBLISHED_STATUS = "PUBLISHED";
+		private const string UNPUBLISHED_STATUS = "UNPUBLISHED";
 
-		public IList<ProductItem> GetProducts()
+		public DataTable GetProducts()
 		{
 			string query = @"
 SELECT
@@ -22,35 +22,50 @@ SELECT
 	[Product].DateAdded,
 	[ArtistInfo].UserId AS ArtistId,
 	[ArtistInfo].ArtistName,
-	[ProductType].TypeName,
-	[ProductStatus].StatusName
+	[ProductType].TypeName AS ProductType,
+	[ProductStatus].StatusName,
+	[AlbumStatus].StatusName AS AlbumStatusName
 FROM [Product]
 	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
 	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId, [Product].ProductId)
 	LEFT JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
 	INNER JOIN [ProductStatus] ON [ProductStatus].ProductStatusId = [Product].ProductStatusId
 	INNER JOIN [ProductType] ON	[ProductType].ProductTypeId = [Product].ProductTypeId
+	INNER JOIN [Product] AS [AlbumDetails] ON [AlbumDetails].ProductId = [Album].AlbumId
+	INNER JOIN [ProductStatus] AS [AlbumStatus] ON [AlbumStatus].ProductStatusId = [AlbumDetails].ProductStatusId
 ORDER BY [Product].DateAdded DESC;
 ";
-			return DbHelper.ExecuteDataTableQuery(query).AsEnumerable().Select((row) =>
-			{
-				return new ProductItem()
-				{
-					AlbumId = row.IsNull("AlbumId") ? null : (int?)row["AlbumId"],
-					ProductId = (int)row["ProductId"],
-					ProductName = (string)row["ProductName"],
-					ArtistName = (string)row["ArtistName"],
-					DateListed = (DateTime)row["DateAdded"],
-					ProductType = (string)row["TypeName"],
-					ProductStatus = (string)row["StatusName"],
-					ArtistId = (int)row["ArtistId"]
-				};
-			}).ToList();
+			return DbHelper.ExecuteDataTableQuery(query);
 		}
 
-		public void RepublishItem(int productId)
+        internal void UnlistRepublishProduct(int productId)
+        {
+            if(GetProductStatus(productId).ToUpper() != WITHDRAWN_STATUS)
+            {
+				WithdrawItem(productId);
+            }
+            else
+            {
+				UnpublishItem(productId);
+
+			}
+		}
+
+		private string GetProductStatus(int productId)
+        {
+			string query = @"
+SELECT [ProductStatus].StatusName
+FROM [Product] 
+	INNER JOIN [ProductStatus] ON [ProductStatus].ProductStatusId = [Product].ProductStatusId
+WHERE [Product].ProductId = @ProductId
+";
+			return (string)DbHelper.ExecuteScalar(query, ("ProductId", productId));
+
+		}
+
+        public void UnpublishItem(int productId)
 		{
-			ChangeProductStatus(productId, PUBLISHED_STATUS);
+			ChangeProductStatus(productId, UNPUBLISHED_STATUS);
 		}
 
 		public void WithdrawItem(int productId)
@@ -60,16 +75,45 @@ ORDER BY [Product].DateAdded DESC;
 
 		public void ChangeProductStatus(int productId, string productStatus)
 		{
-			string query = @"
+			string StatusQuery = @"
 UPDATE [Product]
 SET ProductStatusId = (SELECT ProductStatusId
 						FROM [ProductStatus]
 						WHERE StatusName = @ProductStatus)
 WHERE ProductId = @ProductId";
 			DbHelper.ExecuteNonQuery(
-				query,
+				StatusQuery,
 				("ProductStatus", productStatus),
 				("ProductId", productId));
+
+			if(IsAlbum(productId))
+            {
+				string updateQuery = @"
+UPDATE [Product]
+SET ProductStatusId = (SELECT ProductStatusId
+						FROM [ProductStatus]
+						WHERE StatusName = @ProductStatus)
+WHERE ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)";
+
+				DbHelper.ExecuteNonQuery(
+					updateQuery,
+					("ProductStatus", productStatus),
+					("AlbumId", productId));
+            }
+		}
+
+		private bool IsAlbum(int productId)
+        {
+			string productTypeQuery = @"
+SELECT
+	[ProductType].TypeName
+FROM [Product]
+	INNER JOIN [ProductType] ON [ProductType].ProductTypeId = [Product].ProductTypeId
+WHERE [Product].ProductId = @ProductId;
+";
+			string typeName = (string) DbHelper.ExecuteScalar(productTypeQuery, ("ProductId", productId));
+
+			return typeName.ToUpper() == "ALBUM";
 		}
 	}
 }

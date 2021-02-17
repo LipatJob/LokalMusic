@@ -1,7 +1,9 @@
 ﻿using LokalMusic._Code.Models.Admin;
 using LokalMusic._Code.Repositories.Admin;
 using LokalMusic.Admin;
+using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace LokalMusic._Code.Presenters.Admin
 {
@@ -16,22 +18,27 @@ namespace LokalMusic._Code.Presenters.Admin
             this.repository = new ProductsRepository();
         }
 
-        public static IList<ProductItem> GetProductList()
+        public DataTable GetProductList()
         {
             var repository = new ProductsRepository();
             return repository.GetProducts();
         }
 
-        public static void WithdrawItem(int productId)
+        public void WithdrawItem(int productId)
         {
             var repository = new ProductsRepository();
             repository.WithdrawItem(productId);
         }
 
-        public static void RepublishItem(int productId)
+        internal void UnlistRepublishProduct(int productId)
+        {
+            repository.UnlistRepublishProduct(productId);
+        }
+
+        public void RepublishItem(int productId)
         {
             var repository = new ProductsRepository();
-            repository.RepublishItem(productId);
+            repository.UnpublishItem(productId);
         }
     }
 }
