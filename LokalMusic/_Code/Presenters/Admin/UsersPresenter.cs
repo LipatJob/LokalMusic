@@ -1,6 +1,8 @@
 ﻿using LokalMusic._Code.Models.Admin;
 using LokalMusic._Code.Repositories.Admin;
+using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace LokalMusic._Code.Presenters.Admin
 {
@@ -13,22 +15,15 @@ namespace LokalMusic._Code.Presenters.Admin
             repository = new UsersRepository();
         }
 
-        public static IList<UsersItem> GetUsers()
+        public DataTable GetUsers()
         {
             var repository = new UsersRepository();
             return repository.GetUsers();
         }
 
-        public static void DeactivateUser(int userId)
+        internal void ActivateReactivateAccount(int userId)
         {
-            var repository = new UsersRepository();
-            repository.DeactivateUserAccount(userId);
-        }
-
-        public static void ReactivateUser(int userId)
-        {
-            var repository = new UsersRepository();
-            repository.ReactivateUserAccount(userId);
+            repository.ActivateReactivateAccount(userId);
         }
     }
 }

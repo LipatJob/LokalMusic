@@ -2,6 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
+
+        .action-btn{
+            width: 100px;
+        }
     </style>
 
     <div class="container">
@@ -11,12 +15,14 @@
                 <asp:GridView ID="ProductsGridView" runat="server" AutoGenerateColumns="False" CssClass="table table-hover dt-responsive productsGv" OnRowCommand="ProductsGridView_RowCommand">
                     <Columns>
                         <asp:BoundField HeaderText="Title" DataField="ProductName" />
+
                         <asp:BoundField HeaderText="Artist" DataField="ArtistName" />
+
                         <asp:TemplateField HeaderText="Product Type">
                             <ItemTemplate><%# MiscUtils.UppercaseFirstOnly(Eval("ProductType").ToString()) %> </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField HeaderText="Date Added" DataField="DateAdded" DataFormatString="{0:MMM dd yyyy}" />
 
+                        <asp:BoundField HeaderText="Date Added" DataField="DateAdded" DataFormatString="{0:MMM dd yyyy}" />
 
 
                         <asp:TemplateField HeaderText=" ">
@@ -34,8 +40,10 @@
                                     Text='<%# Eval("StatusName").ToString().ToUpper() == "WITHDRAWN" ? "Relist" : "Withdraw" %>' runat="server"
                                     CommandName="UnlistRepublish"
                                     CommandArgument='<%#Eval("ProductId")%>'
-                                    Enabled=<%# !(Eval("AlbumStatusName").ToString().ToUpper() == "WITHDRAWN" && Eval("ProductType").ToString().ToUpper() == "TRACK")%>
-                                    CssClass='<%# Eval("StatusName").ToString().ToUpper() == "WITHDRAWN" ? "btn btn-secondary" : "btn btn-outline-danger" %>' />
+                                    Enabled=<%#     Eval("ArtistStatus").ToString().ToUpper() == "ACTIVE"
+                                                    && !(Eval("AlbumStatusName").ToString().ToUpper() == "WITHDRAWN" 
+                                                    && Eval("ProductType").ToString().ToUpper() == "TRACK")%>
+                                    CssClass='<%# Eval("StatusName").ToString().ToUpper() == "WITHDRAWN" ? "btn btn-secondary action-btn" : "btn btn-outline-danger action-btn" %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -46,6 +54,8 @@
     </div>
 
     <script type="text/javascript">
+        $(".productsSideItem").addClass("sidebar-active");
+
         $(".productsGv").DataTable({
             "stateSave": true,
             "stateDuration": 60 * 10,

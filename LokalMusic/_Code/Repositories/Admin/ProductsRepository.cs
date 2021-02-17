@@ -24,7 +24,8 @@ SELECT
 	[ArtistInfo].ArtistName,
 	[ProductType].TypeName AS ProductType,
 	[ProductStatus].StatusName,
-	[AlbumStatus].StatusName AS AlbumStatusName
+	[AlbumStatus].StatusName AS AlbumStatusName,
+	[UserStatus].UserStatusName AS ArtistStatus
 FROM [Product]
 	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
 	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId, [Product].ProductId)
@@ -33,6 +34,9 @@ FROM [Product]
 	INNER JOIN [ProductType] ON	[ProductType].ProductTypeId = [Product].ProductTypeId
 	INNER JOIN [Product] AS [AlbumDetails] ON [AlbumDetails].ProductId = [Album].AlbumId
 	INNER JOIN [ProductStatus] AS [AlbumStatus] ON [AlbumStatus].ProductStatusId = [AlbumDetails].ProductStatusId
+	
+	INNER JOIN [UserInfo] ON [UserInfo].UserId = [ArtistInfo].UserId
+	INNER JOIN [UserStatus] ON [UserStatus].UserStatusId = [UserInfo].UserStatusId
 ORDER BY [Product].DateAdded DESC;
 ";
 			return DbHelper.ExecuteDataTableQuery(query);
