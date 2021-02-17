@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Presenters.Finance;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Presenters.Finance;
 using LokalMusic._Code.Repositories.Finance;
 using System;
 using System.Collections.Generic;
@@ -24,24 +25,10 @@ namespace LokalMusic.Finance
 
         public void Bind()
         {
-            PopulateTable(RemainingBalances, presenter.GetRemainingBalances());
-            PopulateTable(ArtistPayments, presenter.GetRecentPayments());
 
-        }
+            GridViewHelper.BindData(RemainingBalances, presenter.GetRemainingBalances());
+            GridViewHelper.BindData(ArtistPayments, presenter.GetRecentPayments());
 
-        private void PopulateTable(GridView view, DataTable table)
-        {
-            if(table.Rows.Count == 0)
-            {
-                return;
-            }
-
-            view.DataSource = table;
-            view.DataBind();
-
-            view.UseAccessibleHeader = true;
-            view.HeaderRow.TableSection = TableRowSection.TableHeader;
-            view.GridLines = GridLines.None;
         }
 
         protected void PayArtistsBtn_Click(object sender, EventArgs e)

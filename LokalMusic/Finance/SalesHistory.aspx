@@ -148,11 +148,6 @@
         function initializeSalesHistoryTable() {
             var dataTable = $("#receiptsTable").DataTable(
                 {
-                    bLengthChange: true,
-                    lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-                    bFilter: true,
-                    bSort: true,
-                    bPaginate: true,
                     columns: [
                         { 'data': 'OrderId' },
                         { 'data': 'Name' },

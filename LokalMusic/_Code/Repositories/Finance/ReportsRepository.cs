@@ -156,7 +156,7 @@ GROUP BY [Months].DateStart
 @"
 SELECT
 	COALESCE(SUM([OrderInfo].AmountPaid) - SUM([OrderInfo].AmountPaid) * .15, 0) AS NetSales,
-	COALESCE(SUM([OrderInfo].AmountPaid) * .15, 0) AS TotalArtistRevenue,
+	COALESCE(SUM([OrderInfo].AmountPaid) * .85, 0) AS TotalArtistRevenue,
 	COALESCE(SUM([OrderInfo].AmountPaid), 0) AS GrossSales,
 	COALESCE(COUNT([OrderInfo].OrderId), 0) AS ProductsSold
 FROM [OrderInfo]

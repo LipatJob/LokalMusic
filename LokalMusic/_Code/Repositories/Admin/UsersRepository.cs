@@ -32,6 +32,7 @@ INNER JOIN [UserStatus] ON
 INNER JOIN [UserType] ON
 	[UserType].UserTypeId = [UserInfo].UserTypeId
 WHERE [UserType].TypeName IN ('FAN', 'ARTIST')
+ORDER BY DateRegistered DESC
 ";
             return DbHelper.ExecuteDataTableQuery(query);
         }
