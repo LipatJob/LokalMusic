@@ -17,9 +17,14 @@
                         </asp:TemplateField>
                         <asp:BoundField HeaderText="Date Added" DataField="DateAdded" DataFormatString="{0:MMM dd yyyy}" />
 
+
+
                         <asp:TemplateField HeaderText=" ">
                             <ItemTemplate>
-                                <a href='<%# GetMarketPage((string) Eval("ProductType"), (int) Eval("ArtistId"), (int) Eval("AlbumId"), (int) Eval("ProductId")) %> ' class="text-danger">Product Page</a>
+                                <a href='<%# Eval("StatusName").ToString().ToUpper() == "PUBLISHED" ? GetMarketPage((string) Eval("ProductType"), (int) Eval("ArtistId"), (int) Eval("AlbumId"), (int) Eval("ProductId")) : "#"%> ' 
+                                    class='<%# Eval("StatusName").ToString().ToUpper() == "PUBLISHED" ? "text-danger" : "text-secondary" %>'>
+                                    <%# Eval("StatusName").ToString().ToUpper() == "PUBLISHED" ? "Product Page" : "Unavailable" %>
+                                </a>
                             </ItemTemplate>
                         </asp:TemplateField>
 
