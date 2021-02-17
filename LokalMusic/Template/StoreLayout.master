@@ -130,7 +130,7 @@
 
                                     <a class="dropdown-item" runat="server" id="CollectionLink">Collection</a>
                                     <a class="dropdown-item" href="/Fan/Playlist" id="PlaustListLink">Playlist</a>
-                                    <a class="dropdown-item" href="~/Account/Settings" runat="server">Settings</a>
+                                    <a class="dropdown-item" href="~/Account/Settings/Profile" runat="server">Settings</a>
                                     <div class="dropdown-divider"></div>
 
                                     <% if (AuthenticationHelper.UserType == AuthenticationHelper.ARTIST_USER_TYPE)%>
