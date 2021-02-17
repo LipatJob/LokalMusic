@@ -20,7 +20,7 @@
             font-size: 25px;
         }
 
-        #price{
+        #priceAlbum{
             color: #AA3A3A;
             font-weight: 600;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -105,7 +105,7 @@
                                     <%--add to cart--%>
                                     <div class="row shadow-sm w-100 m-0" style="background-color:#FFDCDC;">
                                         <div class="col-8 text-center mt-1">
-                                            <span id="price" class="">₱<%#Eval("Price", "{0:n}") %></span>
+                                            <span id="priceAlbum" class="">₱<%#Eval("Price", "{0:n}") %></span>
                                         </div>
 
                                         <div class="col-4 p-0 text-right">
