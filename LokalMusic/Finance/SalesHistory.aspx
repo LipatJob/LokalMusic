@@ -14,6 +14,15 @@
             display: flex;
             flex-direction: row;
         }
+
+        .max-lines {
+            display: block; /* or inline-block */
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            overflow: hidden;
+            max-height: 3.6em;
+            line-height: 1.8em;
+        }
     </style>
 
     <div>
@@ -61,11 +70,13 @@
                 <div id="mostBought">
                     <h4>Most Bought</h4>
                     <div class="card">
-                        <div style="height: 5rem; display: flex;">
-                            <img src="../Content/Images/default_artist_image.JPG" id="mostProductCover" style="height: 5rem; width: 5rem;">
+                        <div style="height: 8rem; display: flex;">
+                            <img src="../Content/Images/default_artist_image.JPG" id="mostProductCover" style="height: 100%; width: auto;">
                             <div class="p-2 pl-4">
-                                <h5><span id="mostProductName"></span></h5>
-                                <p><span id="mostProductArtistName"></span></p>
+                                <h5 class=""><span id="mostProductName"></span></h5>
+                                <p class="mb-1 "><span id="mostProductArtistName"></span></p>
+                                <p><span id="mostProductType"></span></p>
+
                             </div>
                         </div>
 
@@ -75,11 +86,12 @@
                 <div id="leastBought" class="mt-3">
                     <h4>Least Bought</h4>
                     <div class="card">
-                        <div style="height: 5rem; display: flex;">
-                            <img src="../Content/Images/default_artist_image.JPG" id="leastProductCover" style="height: 5rem; width: 5rem;">
+                        <div style="height: 8rem; display: flex;">
+                            <img src="../Content/Images/default_artist_image.JPG" id="leastProductCover" style="height: 100%; width: auto;">
                             <div class="p-2 pl-4">
                                 <h5><span id="leastProductName"></span></h5>
-                                <p><span id="leastProductArtistName"></span></p>
+                                <p class="mb-1"><span id="leastProductArtistName"></span></p>
+                                <p><span id="leastProductType"></span></p>
                             </div>
                         </div>
 
@@ -152,7 +164,7 @@
                         { 'data': 'OrderId' },
                         { 'data': 'Name' },
                         { 'data': 'FormattedDate' },
-                        { 'data': 'FormattedAmount', 'width': '22%'},
+                        { 'data': 'FormattedAmount', 'width': '22%' },
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
@@ -228,6 +240,8 @@
             $("#mostProductName").text(data["ProductName"]);
             $("#mostProductArtistName").text(data["ArtistName"]);
             $("#mostProductCover").attr("src", data["AlbumCover"]);
+            $("#mostProductType").text(data["ProductType"]);
+
         }
 
         function updateLeastBought(data) {
@@ -240,6 +254,8 @@
             $("#leastProductName").text(data["ProductName"]);
             $("#leastProductArtistName").text(data["ArtistName"]);
             $("#leastProductCover").attr("src", data["AlbumCover"]);
+            $("#leastProductType").text(data["ProductType"]);
+
         }
 
 

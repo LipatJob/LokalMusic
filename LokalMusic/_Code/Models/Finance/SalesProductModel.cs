@@ -10,6 +10,8 @@ namespace LokalMusic._Code.Models.Finance
         public string ArtistName { get; set; }
         public string ProductName { get; set; }
         public string AlbumCover { get; set; }
+        public string ProductType { get; set; }
+
 
     }
 }
