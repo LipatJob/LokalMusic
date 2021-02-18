@@ -25,7 +25,7 @@ namespace LokalMusic.Admin
 
         public void Bind()
         {
-            GridViewHelper.BindData(UsersGridView, presenter.GetUsers());
+            GridViewHelper.BindDataTable(UsersGridView, presenter.GetUsers());
         }
 
         protected void UsersGridView_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)

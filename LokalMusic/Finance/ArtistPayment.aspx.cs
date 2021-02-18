@@ -25,9 +25,8 @@ namespace LokalMusic.Finance
 
         public void Bind()
         {
-
-            GridViewHelper.BindData(RemainingBalances, presenter.GetRemainingBalances());
-            GridViewHelper.BindData(ArtistPayments, presenter.GetRecentPayments());
+            GridViewHelper.BindDataTable(RemainingBalances, presenter.GetRemainingBalances());
+            GridViewHelper.BindDataTable(ArtistPayments, presenter.GetRecentPayments());
 
         }
 

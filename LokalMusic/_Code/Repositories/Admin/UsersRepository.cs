@@ -66,7 +66,7 @@ WHERE [UserInfo].UserId = @UserId";
 
         public void ReactivateUserAccount(int userId)
         {
-            ChangeUserStatus(userId, ACTIVE_USER_STATUS, UNPUBLISHED_PRODUCT_STATUS);
+            ChangeUserStatus(userId, ACTIVE_USER_STATUS, WITHDRAWN_PRODUCT_STATUS);
         }
 
         public void ChangeUserStatus(int UserId, string userStatus, string productStatus)

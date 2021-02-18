@@ -20,7 +20,7 @@ namespace LokalMusic.Admin
 
         private void Bind()
         {
-            GridViewHelper.BindData(ProductsGridView, presenter.GetProductList());
+            GridViewHelper.BindDataTable(ProductsGridView, presenter.GetProductList());
 
         }
 
