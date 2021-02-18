@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-
-        .action-btn{
+        .action-btn {
             width: 100px;
         }
     </style>
@@ -27,10 +26,20 @@
 
                         <asp:TemplateField HeaderText=" ">
                             <ItemTemplate>
-                                <a href='<%# Eval("StatusName").ToString().ToUpper() == "PUBLISHED" ? GetMarketPage((string) Eval("ProductType"), (int) Eval("ArtistId"), (int) Eval("AlbumId"), (int) Eval("ProductId")) : "#"%> ' 
-                                    class='<%# Eval("StatusName").ToString().ToUpper() == "PUBLISHED" ? "text-danger" : "text-secondary" %>'>
-                                    <%# Eval("StatusName").ToString().ToUpper() == "PUBLISHED" ? "Product Page" : "Unavailable" %>
-                                </a>
+                                <div 
+                                    runat="server"
+                                    visible=<%# Eval("StatusName").ToString().ToUpper() == "PUBLISHED"%>>
+                                    <a target="_blank"
+                                        href='<%# GetMarketPage((string) Eval("ProductType"), (int) Eval("ArtistId"), (int) Eval("AlbumId"), (int) Eval("ProductId"))%> '
+                                        class="text-danger">
+                                        Product Page
+                                    </a>
+                                </div>
+                                <div
+                                    runat="server"
+                                    visible=<%# Eval("StatusName").ToString().ToUpper() != "PUBLISHED"%>>
+                                    <p class="text-secondary">Unavailable</p>
+                                </div>
                             </ItemTemplate>
                         </asp:TemplateField>
 
@@ -40,9 +49,9 @@
                                     Text='<%# Eval("StatusName").ToString().ToUpper() == "WITHDRAWN" ? "Relist" : "Withdraw" %>' runat="server"
                                     CommandName="UnlistRepublish"
                                     CommandArgument='<%#Eval("ProductId")%>'
-                                    Enabled=<%#     Eval("ArtistStatus").ToString().ToUpper() == "ACTIVE"
+                                    Enabled='<%#     Eval("ArtistStatus").ToString().ToUpper() == "ACTIVE"
                                                     && !(Eval("AlbumStatusName").ToString().ToUpper() == "WITHDRAWN" 
-                                                    && Eval("ProductType").ToString().ToUpper() == "TRACK")%>
+                                                    && Eval("ProductType").ToString().ToUpper() == "TRACK")%>'
                                     CssClass='<%# Eval("StatusName").ToString().ToUpper() == "WITHDRAWN" ? "btn btn-secondary action-btn" : "btn btn-outline-danger action-btn" %>' />
                             </ItemTemplate>
                         </asp:TemplateField>

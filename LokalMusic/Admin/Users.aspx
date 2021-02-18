@@ -25,12 +25,14 @@
                             <ItemTemplate>
                                 <div runat="server" visible='<%#Eval("UserStatus").ToString().ToUpper() == "ACTIVE" %>'>
                                     <a
+                                        target="_blank"
                                         runat="server"
                                         href='<%# "~/Fan/"+Eval("Username").ToString()%>'
                                         class="text-danger">Fan Page
                                     </a>
                                     <br />
                                     <a
+                                        target="_blank"
                                         runat="server"
                                         visible='<%# Eval("UserType").ToString().ToUpper() == "ARTIST" %>'
                                         href='<%#"~/Store/"+Eval("UserId").ToString()%> '
