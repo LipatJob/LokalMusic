@@ -95,28 +95,26 @@
             <%-- Net Sales --%>
             <div class="figure-item">
                 <h5>Net Sales</h5>
-                <span class="figure-amount" id="netSales">0</span>
-
+                <span class="figure-amount">₱<span id="netSales">0</span></span>
             </div>
 
             <%-- Gross Sales --%>
             <div class="figure-item">
                 <h5>Gross Sales</h5>
-                <span class="figure-amount" id="grossSales">0</span>
+                <span class="figure-amount">₱<span id="grossSales">0</span></span>
 
             </div>
 
             <%-- Total Artist Revenue --%>
             <div class="figure-item">
                 <h5>Total Artist Revenue </h5>
-                <span class="figure-amount" id="totalArtistRevenue">0</span>
-
+                <span class="figure-amount">₱<span id="totalArtistRevenue">0</span></span>
             </div>
 
             <%-- Products Sold --%>
             <div class="figure-item">
                 <h5>Products Sold</h5>
-                <span class="figure-amount" id="productsSold">0</span>
+                <span class="figure-amount">₱<span id="productsSold">0</span></span>
             </div>
         </div>
 
