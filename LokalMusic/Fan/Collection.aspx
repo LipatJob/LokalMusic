@@ -89,7 +89,7 @@
                 <%-- Edit Profile Button --%>
                 <%if (Model.UserId == AuthenticationHelper.UserId)%>
                 <%{%>
-                <a href="~/Account/Settings" runat="server">
+                <a href="~/Account/Settings/Profile" runat="server">
                     <input type="button" name="name" value="Edit Profile" class="btn btn-danger" />
                 </a>
                 <%}%>
