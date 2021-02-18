@@ -105,7 +105,7 @@
                     columns: [
                         { 'data': 'OrderId' },
                         { 'data': 'FormattedDate' },
-                        { 'data': 'AmountPaid' },
+                        { 'data': 'FormattedAmount' },
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
@@ -144,10 +144,10 @@
             $("#Username").text(data["Username"]);
             $("#TransactionDate").text(data["FormattedDate"]);
             $("#OrderId").text(data["OrderId"]);
-            $("#AmountPaid").text(data["AmountPaid"]);
+            $("#AmountPaid").text(data["FormattedAmountPaid"]);
             $("#products").html("");
             data["Products"].forEach((productItem) => {
-                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["ProductPrice"]}</td> </tr>`)
+                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["FormattedPrice"]}</td> </tr>`)
             });
         }
 

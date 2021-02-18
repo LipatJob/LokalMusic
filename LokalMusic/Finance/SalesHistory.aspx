@@ -42,7 +42,7 @@
                             <th>Order Id</th>
                             <th>Name</th>
                             <th>Order Date</th>
-                            <th>Amount (PHP)</th>
+                            <th>Amount</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -152,7 +152,7 @@
                         { 'data': 'OrderId' },
                         { 'data': 'Name' },
                         { 'data': 'FormattedDate' },
-                        { 'data': 'AmountPaid', 'width': '22%'},
+                        { 'data': 'FormattedAmount', 'width': '22%'},
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
@@ -262,13 +262,13 @@
 
         function ShowReceiptModal(data) {
             $("#receiptModal").modal('show');
-            $("#Name").text(data["Name"]);
+            $("#Username").text(data["Username"]);
             $("#TransactionDate").text(data["FormattedDate"]);
             $("#OrderId").text(data["OrderId"]);
-            $("#AmountPaid").text(data["AmountPaid"]);
+            $("#AmountPaid").text(data["FormattedAmountPaid"]);
             $("#products").html("");
             data["Products"].forEach((productItem) => {
-                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["ProductPrice"]}</td> </tr>`)
+                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["FormattedPrice"]}</td> </tr>`)
             });
         }
 

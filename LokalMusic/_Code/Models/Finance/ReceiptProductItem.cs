@@ -9,5 +9,7 @@ namespace LokalMusic._Code.Models.Finance
     {
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
+        public string FormattedPrice { get { return "₱" + ProductPrice.ToString("#,##0.00"); } }
+
     }
 }
