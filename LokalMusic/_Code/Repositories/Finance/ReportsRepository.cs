@@ -37,7 +37,7 @@ namespace LokalMusic._Code.Repositories.Finance
             const int MONTH_DAYS = 30;
             const int WEEK_DAYS = 7;
             const int YEAR_DAYS = 365;
-            const int MAX_COUNT = 30;
+            const int MAX_COUNT = 80;
 
             if (period == MONTHLY)
             {
