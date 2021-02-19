@@ -279,6 +279,24 @@
     </div>
 
     <script>
+        var today = new Date();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        // cannot expire in the same month
+        if (mm > 12) {
+            yyyy = yyyy + 1;
+            mm = '0' + 1;
+        }
+
+        today = yyyy + '-' + mm;
+        console.log(today);
+        document.getElementById("expDate").setAttribute("min", today);
+
+
         /*data structure
          * {id# : [id, trackname, price, productType],
          *  id# : [id, albumname, price, productType]}
