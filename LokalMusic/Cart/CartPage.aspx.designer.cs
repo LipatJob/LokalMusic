@@ -15,6 +15,15 @@ namespace LokalMusic.Cart
     {
 
         /// <summary>
+        /// emptyTrack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl emptyTrack;
+
+        /// <summary>
         /// artistsContainer control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace LokalMusic.Cart
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater artistsContainer;
+
+        /// <summary>
+        /// emptyAlbum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl emptyAlbum;
 
         /// <summary>
         /// albumContainer control.

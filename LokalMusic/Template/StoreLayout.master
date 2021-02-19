@@ -277,11 +277,14 @@
                 success: function (result) {
 
                     var needsLogin = '<%Response.Write(AddToCartHelper.ADD_TO_CART_LOGIN);%>';
+                    var success = '<%Response.Write(AddToCartHelper.ADD_TO_CART_SUCCESS);%>';
 
                     if (result.d[0] == needsLogin) {
                         window.location.href = "/Account/Login?ReturnAddress=" + window.location.pathname;
                     } else {
                         alert(result.d[1]);
+
+                        if (result.d[0] == success) window.open("/Cart/CartPage.aspx", '_blank');
                     }
 
                 },
