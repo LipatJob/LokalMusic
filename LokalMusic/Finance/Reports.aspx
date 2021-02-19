@@ -113,7 +113,7 @@
 
             <%-- Products Sold --%>
             <div class="figure-item">
-                <h5>Products Sold</h5>
+                <h5>Orders</h5>
                 <span class="figure-amount"><span id="productsSold">0</span></span>
             </div>
         </div>
