@@ -21,10 +21,6 @@ namespace LokalMusic._Code.Presenters.Account
         {
             SettingsRepository repository = new SettingsRepository();
             var model = repository.GetReceiptModel(receiptId);
-            if(model.Name != AuthenticationHelper.Username)
-            {
-                return null;
-            }
             return model;
         }
     }

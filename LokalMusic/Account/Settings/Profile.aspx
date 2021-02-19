@@ -31,7 +31,7 @@
                 <%-- Submit Profile Picture--%>
                 <asp:Button ID="submitProfilePicture" Text="Update Picture" runat="server" disabled CssClass="btn btn-danger mt-2 submitProfilePicture" Style="width: 100%" OnClick="submitProfilePicture_Click" ValidationGroup="ChangeProfilePicture" />
                 <asp:CustomValidator ID="ProfilePictureFileCv" ErrorMessage="Error Message" ControlToValidate="ProfilePictureFile" runat="server" ValidationGroup="ChangeProfilePicture" OnServerValidate="ProfilePictureFileCv_ServerValidate" CssClass="validation-message" Display="Dynamic" />
-
+                <small style="text-align:center; color:gray;">Image must be at least 200px by 200px and less than 20MB</small>
             </div>
         </div>
     </div>

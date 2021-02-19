@@ -28,6 +28,8 @@
                     <asp:Label Text="Genre" runat="server" />
                     <asp:TextBox ID="genreTxt" list="genres" runat="server" Width="500" CssClass="form-control" MaxLength="70"></asp:TextBox>
                     <datalist id="genres" runat="server" ClientIDMode="Static"></datalist>
+                    <asp:RequiredFieldValidator ErrorMessage="This is a required field" ControlToValidate="genreTxt" runat="server" Display="Dynamic" CssClass="validation-message"/>
+
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Description" runat="server" />

@@ -126,7 +126,7 @@
 
         <%--Artists--%>
         <div class="row">
-            <asp:Repeater ID="artistContainer" runat="server">
+            <asp:Repeater ID="artistContainer" runat="server">  
                 <ItemTemplate>
                     <div class="col-lg-2 col-sm-4">
                         <div class="card border-0 ml-5 mr-5 ml-sm-0 mr-sm-0">
@@ -134,7 +134,9 @@
                                 <img src="<%#Eval("ArtistProfileImage")%>" class="card-img-top img-hoverable shadow-sm" alt="artist-name" /></a>
                             <div class="card-body">
                                 <p class="productName"><%#Eval("ArtistName")%></p>
-                                <p style="font-weight: 400;"><%#Eval("Bio")%></p>
+                                <p style="font-weight: 400;">
+                                    <%# (Eval("Bio").ToString().Length > 16) ? (Eval("Bio").ToString().Substring(0, 16) + "...") : Eval("Bio")%>
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -43,6 +43,7 @@ SELECT
 	[ArtistPayment].TransactionFee AS TransactionFee
 FROM [ArtistPayment]
 INNER JOIN [ArtistInfo] ON [ArtistInfo].UserId = [ArtistPayment].ArtistId
+ORDER BY DatePaid DESC;
 ";
 			return DbHelper.ExecuteDataTableQuery(query);
         }

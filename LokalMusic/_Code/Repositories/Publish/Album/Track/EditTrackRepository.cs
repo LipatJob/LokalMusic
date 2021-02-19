@@ -196,12 +196,6 @@ WHERE TrackId = @trackId;";
             return int.Parse(genreId.ToString());
         }
 
-        public void WithdrawTrack(int trackId)
-        {
-            string query = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @trackId";
-            DbHelper.ExecuteNonQuery(query, ("trackId", trackId));
-        }
-
         public string GetTrackStatus(int trackId)
         {
             string query = @"
@@ -212,6 +206,18 @@ WHERE Product.ProductId = @TrackId
             var result = DbHelper.ExecuteScalar(query, ("TrackId", trackId));
 
             return (string)result;
+        }
+        public void WithdrawTrack(int trackId)
+        {
+            int albumId = (int) DbHelper.ExecuteScalar("SELECT AlbumId FROM Track WHERE TrackId = @TrackId", ("TrackId", trackId));
+            bool isLastPublished = CheckIfLastPublished(albumId);
+            string query = "UPDATE Product SET ProductStatusId = 2 WHERE ProductId = @trackId";
+
+            DbHelper.ExecuteNonQuery(query, ("trackId", trackId));
+            if (isLastPublished)
+            {
+                DbHelper.ExecuteNonQuery("UPDATE Product SET ProductStatusId = 4 WHERE ProductId = @AlbumId", ("AlbumId", albumId));
+            }
         }
 
         public void UnpublishTrack(int trackId)

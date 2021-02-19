@@ -772,6 +772,8 @@
     <Compile Include="_Code\Helpers\BackendAuthenticationHelper.cs" />
     <Compile Include="_Code\Helpers\DbHelper.cs" />
     <Compile Include="_Code\Helpers\FileSystemHelper.cs" />
+    <Compile Include="_Code\Helpers\GridViewHelper.cs" />
+    <Compile Include="_Code\Helpers\MiscUtils.cs" />
     <Compile Include="_Code\Helpers\NavigationHelper.cs" />
     <Compile Include="_Code\Helpers\NewFolder1\Class1.cs" />
     <Compile Include="_Code\Helpers\TracksHelper.cs" />

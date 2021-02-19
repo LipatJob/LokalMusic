@@ -129,7 +129,8 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item" runat="server" id="CollectionLink">Collection</a>
-                                    <a class="dropdown-item" href="~/Account/Settings" runat="server">Settings</a>
+                                    <a class="dropdown-item" href="/Fan/Playlist" id="PlaustListLink">Playlist</a>
+                                    <a class="dropdown-item" href="~/Account/Settings/Profile" runat="server">Settings</a>
                                     <div class="dropdown-divider"></div>
 
                                     <% if (AuthenticationHelper.UserType == AuthenticationHelper.ARTIST_USER_TYPE)%>
@@ -169,11 +170,11 @@
                     <div id="joinSignIn" class=" mt-lg-0 mt-1">
                         <div class="">
                             <ul class="navbar-nav">
-                                <li class="nav-item ml-md-2 mr-md-1 mb-sm-1 mt-sm-1 mb-0 mt-0">
+                                <li class="nav-item ml-md-2 mr-md-1 mb-1 mt-1 ">
                                     <%--<a class="nav-link" href="~/Account/Register/Fan" runat="server">Join</a>--%>
                                     <a class="btn btn-outline-danger badge-pill pl-4 pr-4" href="~/Account/Register/Fan" runat="server">JOIN</a>
                                 </li>
-                                <li class="nav-item ml-md-1 mr-md-2 mb-sm-1 mt-sm-1 mb-0 mt-0">
+                                <li class="nav-item ml-md-1 mr-md-2 mb-1 mt-1 ">
                                     <%--<a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>--%>
                                     <a class="btn btn-danger badge-pill pl-4 pr-4" href="~/Account/Login" runat="server">SIGN IN</a>
                                 </li>
@@ -207,7 +208,7 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="row my-auto mx-auto " >
-                                <span id="price" class="" style="color: white; font-weight: 600; font-size: 20px;">₱699.99 </span>
+                                <span id="price" class="" style="color: white; font-weight: 600; font-size: 20px;"></span>
                                 <div id="forVisible">
                                     <button type="button" class="rounded-0 ml-2" id="addToCart" <%--onclick='AddToCart(<%#Eval("AlbumId")%>)'--%>>
                                         <img src="~/Content/Images/cart-white.png" class="mb-1" runat="server" width="18" />
@@ -285,7 +286,7 @@
 
                 },
                 error: function () {
-                    alert("An Error has occured");
+                    console.log("Error Occured")
                 }
             });
             return false;
@@ -303,7 +304,7 @@
                     ShowTrackModel(data.d);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status, thrownError);
+                    console.log(xhr.status, ": Error occured");
                 }
             });
         }

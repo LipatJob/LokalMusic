@@ -27,7 +27,7 @@
                 <asp:GridView ID="RemainingBalances" runat="server" CssClass="RemainingBalanceTable table" AutoGenerateColumns="false">
                     <Columns>
                         <asp:BoundField DataField="ArtistName" HeaderText="Artist Name" />
-                        <asp:BoundField DataField="AmountDue" HeaderText="Amount Due" DataFormatString="{0:0.00}"/>
+                        <asp:BoundField DataField="AmountDue" HeaderText="Amount Due (₱)" DataFormatString="{0:0.00}"/>
                     </Columns>
                 </asp:GridView>
             </div>
@@ -38,7 +38,7 @@
                     <Columns>
                         <asp:BoundField DataField="ArtistName" HeaderText="Artist Name" />
                         <asp:BoundField DataField="DatePaid" HeaderText="Date Paid" DataFormatString="{0:MMM dd yyyy}"/>
-                        <asp:BoundField DataField="TransactionFee" HeaderText="Transaction Fee" DataFormatString="{0:0.00}"/>
+                        <asp:BoundField DataField="TransactionFee" HeaderText="Transaction Fee (₱)" DataFormatString="{0:0.00}"/>
                     </Columns>
                 </asp:GridView>
             </div>

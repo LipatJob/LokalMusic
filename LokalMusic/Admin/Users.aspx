@@ -1,35 +1,63 @@
-﻿<%@ Page Title="Users" Language="C#" MasterPageFile="~/Template/AdminLayout.master" AutoEventWireup="true" CodeBehind="Users.aspx.cs" Inherits="LokalMusic.Admin.Users" %>
+﻿<%@ Page Title="Users" Language="C#" MasterPageFile="~/Template/AdminLayout.master" AutoEventWireup="true" CodeBehind="Users.aspx.cs" Inherits="LokalMusic.Admin.Users" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+
+
 
     <div class="container">
         <h2>Users</h2>
         <div class="row">
             <div class="col-12">
-                <table class="table table-hover dt-responsive" id="productsTbl">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Date Registered</th>
-                            <th>UserType</th>
-                            <th></th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <asp:GridView ID="UsersGridView" runat="server" AutoGenerateColumns="False" CssClass="table table-hover dt-responsive usersGv" OnRowCommand="UsersGridView_RowCommand">
+                    <Columns>
+                        <asp:BoundField HeaderText="Username" DataField="Username" />
+
+                        <asp:BoundField HeaderText="Email" DataField="Email" />
+
+                        <asp:BoundField HeaderText="Date Registered" DataField="DateRegistered" DataFormatString="{0:MMM dd yyyy}" />
+
+                        <asp:TemplateField HeaderText="User Type">
+                            <ItemTemplate><%# MiscUtils.UppercaseFirstOnly(Eval("UserType").ToString()) %> </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText=" ">
+                            <ItemTemplate>
+                                <div runat="server" visible='<%#Eval("UserStatus").ToString().ToUpper() == "ACTIVE" %>'>
+                                    <a
+                                        target="_blank"
+                                        runat="server"
+                                        href='<%# "~/Fan/"+Eval("Username").ToString()%>'
+                                        class="text-danger">Fan Page
+                                    </a>
+                                    <br />
+                                    <a
+                                        target="_blank"
+                                        runat="server"
+                                        visible='<%# Eval("UserType").ToString().ToUpper() == "ARTIST" %>'
+                                        href='<%#"~/Store/"+Eval("UserId").ToString()%> '
+                                        class='text-danger'>Artist Page
+                                    </a>
+                                </div>
+                                <div runat="server" visible='<%#Eval("UserStatus").ToString().ToUpper() != "ACTIVE" %>'>
+                                    <p class="text-secondary">Unavailable</p>
+                                </div>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Action">
+                            <ItemTemplate>
+                                <asp:Button
+                                    Text='<%# Eval("UserStatus").ToString().ToUpper() == "ACTIVE" ? "Deactivate" : "Reactivate" %>' runat="server"
+                                    CommandName="ActivateReactivate"
+                                    CommandArgument='<%#Eval("UserId")%>'
+                                    CssClass='<%# Eval("UserStatus").ToString().ToUpper() == "ACTIVE" ? "btn btn-outline-danger" : "btn btn-secondary"%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+
+                </asp:GridView>
+
             </div>
         </div>
     </div>
@@ -37,118 +65,10 @@
     <script type="text/javascript">
         $(".usersSideItem").addClass("sidebar-active");
 
-
-        $(function () {
-            bsCustomFileInput.init()
-
-            $.ajax({
-                type: "POST",
-                url: "/Admin/Users.aspx/GetUsers",
-                data: '{}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert(JSON.stringify(response));
-                },
-                error: function (response) {
-                    alert(JSON.stringify(response));
-                }
-            });
+        $(".usersGv").DataTable({
+            "stateSave": true,
+            "stateDuration": 60 * 10,
         });
-
-        function OnSuccess(response) {
-            $("#productsTbl").DataTable(
-                {
-                    bLengthChange: true,
-                    lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-                    bFilter: true,
-                    bSort: true,
-                    bPaginate: true,
-                    data: response.d,
-                    columns: [
-                        { 'data': 'UserId' },
-                        { 'data': 'Username' },
-                        { 'data': 'Email' },
-                        { 'data': 'FormattedDate' },
-                        { 'data': 'UserType' },
-                        {
-                            data: "ProfilePage",
-                            render: function (data) {
-                                data = `<a href="${data}" class='text-danger'> Profile </a>`;
-                                return data;
-                            }
-                        },
-                        {
-                            'data': 'null',
-                            'render': function (data, type, row) {
-                                if (row["UserStatus"] != "ACTIVE") {
-                                    return `<button class="btn btn-secondary" onclick="ReactivateUser(${row["UserId"]}, this); return false;">Reactivate</button>`;
-                                }
-                                return `<button class="btn btn-outline-danger" onclick="DeactivateUser(${row["UserId"]}, this); return false;">Deactivate</button></a>`;
-                            }
-
-                        },
-                    ],
-                    "columnDefs": [
-                        {
-                            "targets": [0],
-                            "visible": false,
-                            "searchable": false
-                        },
-                    ]
-                });
-        };
-
-        function DeactivateUser(id, parent) {
-            $.ajax({
-                type: "POST",
-                url: "/Admin/Users.aspx/DeactivateUser",
-                contentType: "application/json; charset=utf-8",
-                data: `{ 'userId' : '${id}'}`,
-                dataType: "json",
-                success: function () {
-                    ChangeToReactivate(id, parent);
-                },
-                error: function () {
-                    alert("An Error has occured while unlisting the item");
-                }
-            });
-            return false;
-        }
-
-        function ChangeToReactivate(id, item) {
-            item.classList.remove('btn-outline-danger');
-            item.classList.add('btn-secondary');
-            item.innerHTML = "Reactivate";
-            item.onclick = function () { ReactivateUser(id, item); return false; };
-        }
-
-        function ReactivateUser(id, parent) {
-            $.ajax({
-                type: "POST",
-                url: "/Admin/Users.aspx/ReactivateUser",
-                data: `{ 'userId' : '${id}'}`,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function () {
-                    ChangeToDeactivate(id, parent);
-                },
-                error: function () {
-                    alert("An Error has occured while unlisting the item");
-                    return false;
-                }
-            });
-            return false;
-        }
-
-        function ChangeToDeactivate(id, item) {
-            item.classList.remove('btn-secondary');
-            item.classList.add('btn-outline-danger');
-            item.innerHTML = "Deactivate"
-            item.onclick = function () { DeactivateUser(id, item); return false; };
-        }
-
 
     </script>
 

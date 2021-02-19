@@ -1,4 +1,5 @@
-﻿using LokalMusic._Code.Models.Admin;
+﻿using LokalMusic._Code.Helpers;
+using LokalMusic._Code.Models.Admin;
 using LokalMusic._Code.Presenters.Admin;
 using System;
 using System.Collections.Generic;
@@ -16,28 +17,24 @@ namespace LokalMusic.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!Page.IsPostBack)
+            {
+                Bind();
+            }
         }
 
-
-        [WebMethod]
-        public static IList<UsersItem> GetUsers()
+        public void Bind()
         {
-            return UsersPresenter.GetUsers();
+            GridViewHelper.BindDataTable(UsersGridView, presenter.GetUsers());
         }
 
-        [WebMethod]
-        public static bool DeactivateUser(int userId)
+        protected void UsersGridView_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
-            UsersPresenter.DeactivateUser(userId);
-            return true;
-        }
-
-        [WebMethod]
-        public static bool ReactivateUser(int userId)
-        {
-            UsersPresenter.ReactivateUser(userId);
-            return true;
+            if (e.CommandName == "ActivateReactivate")
+            {
+                presenter.ActivateReactivateAccount(int.Parse(e.CommandArgument.ToString()));
+                Bind();
+            }
         }
     }
 }

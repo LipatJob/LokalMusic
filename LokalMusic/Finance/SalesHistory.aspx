@@ -14,6 +14,15 @@
             display: flex;
             flex-direction: row;
         }
+
+        .max-lines {
+            display: block; /* or inline-block */
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            overflow: hidden;
+            max-height: 3.6em;
+            line-height: 1.8em;
+        }
     </style>
 
     <div>
@@ -42,7 +51,7 @@
                             <th>Order Id</th>
                             <th>Name</th>
                             <th>Order Date</th>
-                            <th>Amount (PHP)</th>
+                            <th>Amount (₱)</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -61,11 +70,13 @@
                 <div id="mostBought">
                     <h4>Most Bought</h4>
                     <div class="card">
-                        <div style="height: 5rem; display: flex;">
-                            <img src="../Content/Images/default_artist_image.JPG" id="mostProductCover" style="height: 5rem; width: 5rem;">
+                        <div style="height: 8rem; display: flex;">
+                            <img src="../Content/Images/default_artist_image.JPG" id="mostProductCover" style="height: 100%; width: auto;">
                             <div class="p-2 pl-4">
-                                <h5><span id="mostProductName"></span></h5>
-                                <p><span id="mostProductArtistName"></span></p>
+                                <h5 class=""><span id="mostProductName"></span></h5>
+                                <p class="mb-1 "><span id="mostProductArtistName"></span></p>
+                                <p><span id="mostProductType"></span></p>
+
                             </div>
                         </div>
 
@@ -75,11 +86,12 @@
                 <div id="leastBought" class="mt-3">
                     <h4>Least Bought</h4>
                     <div class="card">
-                        <div style="height: 5rem; display: flex;">
-                            <img src="../Content/Images/default_artist_image.JPG" id="leastProductCover" style="height: 5rem; width: 5rem;">
+                        <div style="height: 8rem; display: flex;">
+                            <img src="../Content/Images/default_artist_image.JPG" id="leastProductCover" style="height: 100%; width: auto;">
                             <div class="p-2 pl-4">
                                 <h5><span id="leastProductName"></span></h5>
-                                <p><span id="leastProductArtistName"></span></p>
+                                <p class="mb-1"><span id="leastProductArtistName"></span></p>
+                                <p><span id="leastProductType"></span></p>
                             </div>
                         </div>
 
@@ -94,7 +106,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Receipt Details</h5>
+                    <h5 class="modal-title">Order Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -148,16 +160,11 @@
         function initializeSalesHistoryTable() {
             var dataTable = $("#receiptsTable").DataTable(
                 {
-                    bLengthChange: true,
-                    lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-                    bFilter: true,
-                    bSort: true,
-                    bPaginate: true,
                     columns: [
                         { 'data': 'OrderId' },
                         { 'data': 'Name' },
                         { 'data': 'FormattedDate' },
-                        { 'data': 'AmountPaid', 'width': '22%'},
+                        { 'data': 'FormattedAmount', 'width': '22%' },
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
@@ -233,6 +240,8 @@
             $("#mostProductName").text(data["ProductName"]);
             $("#mostProductArtistName").text(data["ArtistName"]);
             $("#mostProductCover").attr("src", data["AlbumCover"]);
+            $("#mostProductType").text(data["ProductType"]);
+
         }
 
         function updateLeastBought(data) {
@@ -245,6 +254,8 @@
             $("#leastProductName").text(data["ProductName"]);
             $("#leastProductArtistName").text(data["ArtistName"]);
             $("#leastProductCover").attr("src", data["AlbumCover"]);
+            $("#leastProductType").text(data["ProductType"]);
+
         }
 
 
@@ -267,13 +278,13 @@
 
         function ShowReceiptModal(data) {
             $("#receiptModal").modal('show');
-            $("#Name").text(data["Name"]);
+            $("#Username").text(data["Username"]);
             $("#TransactionDate").text(data["FormattedDate"]);
             $("#OrderId").text(data["OrderId"]);
-            $("#AmountPaid").text(data["AmountPaid"]);
+            $("#AmountPaid").text(data["FormattedAmountPaid"]);
             $("#products").html("");
             data["Products"].forEach((productItem) => {
-                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["ProductPrice"]}</td> </tr>`)
+                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["FormattedPrice"]}</td> </tr>`)
             });
         }
 

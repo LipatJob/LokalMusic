@@ -22,11 +22,11 @@ namespace LokalMusic
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (!AuthenticationHelper.LoggedIn)
+                NavigationHelper.Redirect("~/Store/Home.aspx");
+            else
             {
-                if (!AuthenticationHelper.LoggedIn)
-                    NavigationHelper.RedirectReturnAddress("~/Account/Login.aspx");
-                else
+                try
                 {
                     collectionLink.HRef = "~/Fan/" + AuthenticationHelper.Username;
 
@@ -44,14 +44,14 @@ namespace LokalMusic
                     partition2AlbumContainer.DataSource = partition2;
                     partition2AlbumContainer.DataBind();
                 }
-            }
-            catch (System.Data.SqlClient.SqlException x)
-            {
-                NavigationHelper.Redirect("~/Error/Database");
-            }
-            catch (Exception x)
-            {
-                NavigationHelper.Redirect("~/Error/Error");
+                catch (System.Data.SqlClient.SqlException x)
+                {
+                    NavigationHelper.Redirect("~/Error/Database");
+                }
+                catch (Exception x)
+                {
+                    NavigationHelper.Redirect("~/Error/Error");
+                }
             }
         }
     }

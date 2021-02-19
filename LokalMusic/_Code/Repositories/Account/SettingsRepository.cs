@@ -107,6 +107,13 @@ ORDER BY [OrderInfo].OrderDate ASC;
             return receipts;
         }
 
+        public void ChangeName(int userId, string firstName, string lastName)
+        {
+            string query = @"UPDATE UserInfo SET FirstName = @FirstName, LastName = @LastName WHERE UserId = @UserId";
+            DbHelper.ExecuteNonQuery(query, ("FirstName", firstName), ("LastName", lastName), ("UserId", userId));
+        }
+
+
         public void ChangeProfilePicture(int userId, HttpPostedFile file)
         {
             string fileName = userId + Path.GetExtension(file.FileName);
@@ -124,7 +131,7 @@ ORDER BY [OrderInfo].OrderDate ASC;
         {
             string fileLocation = FileSystemHelper.UploadFile(fileName, FileSystemHelper.PICTURE_CONTAINER_NAME, file, true);
             int profileImageId = (int)DbHelper.ExecuteScalar(
-                "INSERT INTO FileInfo(FileTypeId, FileName) VALUES((SELECT FileTypeId FROM FileType WHERE FileTypeName=@FileTypeName), @FileName) SELECT SCOPE_IDENTITY()",
+                "INSERT INTO FileInfo(FileTypeId, FileName) OUTPUT INSERTED.FileId VALUES((SELECT FileTypeId FROM FileType WHERE FileTypeName=@FileTypeName), @FileName)",
                 ("FileTypeName", FileSystemHelper.PICTURE_CONTAINER_NAME),
                 ("FileName", fileLocation));
             DbHelper.ExecuteNonQuery(
@@ -145,7 +152,7 @@ ORDER BY [OrderInfo].OrderDate ASC;
         private bool HasProfilePicture(int userId)
         {
             string query = "SELECT ProfileImageId FROM UserInfo WHERE UserId = @UserId";
-            return DbHelper.ExecuteScalar(query, ("UserId", userId)) != null;
+            return DbHelper.ExecuteScalar(query, ("UserId", userId)) != DBNull.Value;
         }
 
         internal IList<SalesListItem> GetReceipts(int userId)
@@ -186,7 +193,7 @@ ORDER BY [OrderInfo].OrderDate DESC;
 SELECT
 	[OrderInfo].OrderId,
 	[OrderInfo].OrderDate,
-	[UserInfo].Username,
+	[UserInfo].FirstName  + ' ' +[UserInfo].LastName AS Name,
 	[OrderInfo].AmountPaid
 FROM [OrderInfo]
 	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
@@ -197,7 +204,7 @@ WHERE [OrderInfo].OrderId = @OrderId;";
                 OrderId = (int)modelResult["OrderId"],
                 AmountPaid = (decimal)modelResult["AmountPaid"],
                 OrderDate = (DateTime)modelResult["OrderDate"],
-                Name = (string)modelResult["Username"],
+                Name = (string)modelResult["Name"],
                 Products = new List<ReceiptProductItem>()
             };
 

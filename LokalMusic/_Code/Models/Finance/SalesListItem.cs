@@ -12,5 +12,7 @@ namespace LokalMusic._Code.Models.Finance
         public DateTime OrderDate { get; set; }
         public decimal AmountPaid { get; set; }
         public string FormattedDate { get { return OrderDate.ToString("MMM dd, yyyy"); } }
+        public string FormattedAmount { get { return AmountPaid.ToString("#,##0.00"); } }
+
     }
 }

@@ -38,6 +38,7 @@
                             <td>Album</td>
                             <td>Artist</td>
                             <td>Genre </td>
+                            <td>Date Added</td>
                             <td>Track Duration</td>
                             <td>Price</td>
                             <td>Add to Cart</td>
@@ -51,7 +52,7 @@
                                 <tr class="text-center ">
                                     <td class="float-right">
                                         <a onclick='<%# "GetTrack(" +Eval("TrackId") + " );" %>' class="img-hoverable">
-                                            <img src="<%#Eval("AlbumCover")%>" width="30" height="30" class="mx-auto img-hoverable shadow-sm"/>
+                                            <img src="<%#Eval("AlbumCover")%>" width="35" height="35" class="mx-auto my-auto img-hoverable shadow-sm"/>
                                         </a>
                                     </td>   
                                     <td class="emphasize my-auto">
@@ -62,6 +63,7 @@
                                     <td><%#Eval("AlbumName") %></td>
                                     <td class="my-auto"><%#Eval("ArtistName") %></td>
                                     <td><%#Eval("Genre") %></td>
+                                    <td><%#Eval("DateAdded", "{0:MMM dd, yyyy}") %></td>
                                     <td><%#Eval("AudioDuration", "{0:g}") %></td>
                                     <td class="emphasize">₱<%#Eval("Price", "{0:n}") %></td>
                                     <td class="  ">

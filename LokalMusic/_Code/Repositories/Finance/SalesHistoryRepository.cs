@@ -73,13 +73,15 @@ SELECT
 	[ArtistInfo].ArtistName,
 	[Product].ProductName,
 	[FileInfo].[FileName] AS AlbumCover,
-	[MostBoughtProduct].SoldCount
+	[MostBoughtProduct].SoldCount,
+	[ProductType].TypeName
 FROM [Product]
 	INNER JOIN [MostBoughtProduct] ON [MostBoughtProduct].ProductId = [Product].ProductId
 	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
 	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId, [Product].ProductId)
 	LEFT JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
-	LEFT JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID;
+	LEFT JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
+	INNER JOIN [ProductType] ON [ProductType].ProductTypeId = [Product].ProductTypeId;
 ";
 			var result = DbHelper.ExecuteDataTableQuery(
 				query,
@@ -95,6 +97,8 @@ FROM [Product]
 				AlbumCover = (string) result.Rows[0]["AlbumCover"],
 				ArtistName = (string) result.Rows[0]["ArtistName"],
 				ProductName = (string) result.Rows[0]["ProductName"],
+				ProductType= (string)result.Rows[0]["TypeName"],
+
 			};
         }
 
@@ -114,13 +118,15 @@ SELECT
 	[ArtistInfo].ArtistName,
 	[Product].ProductName,
 	[FileInfo].[FileName] AS AlbumCover,
-	[MostBoughtProduct].SoldCount
+	[MostBoughtProduct].SoldCount,
+	[ProductType].TypeName
 FROM [Product]
 	INNER JOIN [MostBoughtProduct] ON [MostBoughtProduct].ProductId = [Product].ProductId
 	LEFT JOIN [Track] ON [Track].TrackId = [Product].ProductId
 	LEFT JOIN [Album] ON [Album].AlbumId = COALESCE([Track].AlbumId, [Product].ProductId)
 	LEFT JOIN [ArtistInfo] ON [ArtistInfo].UserId = [Album].UserId
-	LEFT JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID;
+	LEFT JOIN [FileInfo] ON [FileInfo].FileId = [Album].AlbumCoverID
+	INNER JOIN [ProductType] ON [ProductType].ProductTypeId = [Product].ProductTypeId;
 ";
 			var result = DbHelper.ExecuteDataTableQuery(
 				query,
@@ -136,6 +142,7 @@ FROM [Product]
 				AlbumCover = (string)result.Rows[0]["AlbumCover"],
 				ArtistName = (string)result.Rows[0]["ArtistName"],
 				ProductName = (string)result.Rows[0]["ProductName"],
+				ProductType = (string)result.Rows[0]["TypeName"],
 			};
 		}
 

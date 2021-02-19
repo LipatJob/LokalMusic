@@ -16,7 +16,7 @@
                         <tr>
                             <th>Order Id</th>
                             <th>Order Date</th>
-                            <th>Amount Paid</th>
+                            <th>Amount Paid (₱)</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -37,14 +37,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Receipt Details</h5>
+                    <h5 class="modal-title">Order Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <p><b>Order ID: </b><span id="OrderId"></span></p>
-                    <p><b>Username : </b><span id="Username"></span></p>
+                    <p><b>Name : </b><span id="Name"></span></p>
                     <p><b>Transaction Date : </b><span id="TransactionDate"></span></p>
 
 
@@ -105,7 +105,7 @@
                     columns: [
                         { 'data': 'OrderId' },
                         { 'data': 'FormattedDate' },
-                        { 'data': 'AmountPaid' },
+                        { 'data': 'FormattedAmount' },
                         {
                             'data': 'null',
                             'render': function (data, type, row) {
@@ -141,13 +141,13 @@
 
         function ShowReceiptModal(data) {
             $("#receiptModal").modal('show');
-            $("#Username").text(data["Username"]);
+            $("#Name").text(data["Name"]);
             $("#TransactionDate").text(data["FormattedDate"]);
             $("#OrderId").text(data["OrderId"]);
-            $("#AmountPaid").text(data["AmountPaid"]);
+            $("#AmountPaid").text(data["FormattedAmountPaid"]);
             $("#products").html("");
             data["Products"].forEach((productItem) => {
-                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["ProductPrice"]}</td> </tr>`)
+                $("#products").append(`<tr> <td>${productItem["ProductName"]}</td><td>${productItem["FormattedPrice"]}</td> </tr>`)
             });
         }
 

@@ -56,6 +56,20 @@
         .artist-link {
             color: gray;
         }
+
+        .view-playlist{
+            font-weight: 500;
+            font-size: 12px;
+            border: solid;
+            border-width: 1px;
+            border-color: #dc3545;
+            border-radius: 5px;
+            padding: 3px 6px;
+        }
+
+        .view-playlist:hover{
+            text-decoration:none;
+        }
     </style>
 
     <div class="container">
@@ -75,7 +89,7 @@
                 <%-- Edit Profile Button --%>
                 <%if (Model.UserId == AuthenticationHelper.UserId)%>
                 <%{%>
-                <a href="~/Account/Settings" runat="server">
+                <a href="~/Account/Settings/Profile" runat="server">
                     <input type="button" name="name" value="Edit Profile" class="btn btn-danger" />
                 </a>
                 <%}%>
@@ -85,7 +99,15 @@
         <hr />
 
         <%-- Collection --%>
-        <h3>Collection</h3>
+        <div style="display:flex; flex-direction:row; align-items:flex-end; margin-bottom:12px;">
+        <h3 style="margin-bottom: 0; margin-right: 12px;">Collection</h3>
+            <div>
+                <%if (Model.UserId == AuthenticationHelper.UserId) %>
+            <%{%>
+                <a href="/Fan/Playlist" class="view-playlist text-danger">View Playlist</a>
+            <%}%>
+            </div>
+        </div>
         <div class="collection-container">
             <asp:Repeater ID="collectionItemRepeater" runat="server">
                 <%-- Template for Collection Item --%>
@@ -99,7 +121,7 @@
                             <asp:Image ImageUrl='<%#Eval("CoverLink")%>' runat="server" class="item-picture" />
 
                             <%-- Album/Track Name --%>
-                            <b><%#Eval("ProductName") %></b>
+                            <b style="text-align:center;"><%#Eval("ProductName") %></b>
 
                             <%-- Artist Name --%>
                             <p>By <%#Eval("ArtistName")%></p>
@@ -113,7 +135,7 @@
                             <asp:Image ImageUrl='<%#Eval("CoverLink")%>' runat="server" class="item-picture" />
 
                             <%-- Album/Track Name --%>
-                            <b><%#Eval("ProductName") %></b>
+                            <b style="text-align:center;"><%#Eval("ProductName") %></b>
 
                             <%-- Artist Name --%>
                             <p>By <%#Eval("ArtistName")%></p>

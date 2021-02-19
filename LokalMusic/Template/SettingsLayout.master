@@ -42,6 +42,36 @@
         .nav-link:visited{
             color:black;
         }
+
+        .settings-content{
+            margin:0 auto;
+            width: 540px;
+        }
+
+        .pagination > li > a {
+            background-color: white;
+            color: #B82828;
+        }
+
+            .pagination > li > a:focus,
+            .pagination > li > a:hover,
+            .pagination > li > span:focus,
+            .pagination > li > span:hover {
+                color: #B82828;
+                background-color: #eee;
+                border-color: #ddd;
+            }
+
+        .pagination > .active > a {
+            color: white;
+            background-color: #B82828 !Important;
+            border: solid 1px #B82828 !Important;
+        }
+
+            .pagination > .active > a:hover {
+                background-color: #B82828 !Important;
+                border: solid 1px #B82828;
+            }
     </style>
     <div style="height:100%;">
         <div class="container" style="height:100%;">
@@ -51,11 +81,11 @@
                         <li class="nav-item">
                             <h5>Settings</h5>
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link account-nav-item" href="~/Account/Settings" runat="server">Account</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link profile-nav-item" href="~/Account/Settings/Profile" runat="server">Profile</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link account-nav-item" href="~/Account/Settings/Default" runat="server">Account</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link purchases-nav-item" href="~/Account/Settings/Purchases" runat="server">Purchases</a>
@@ -63,7 +93,7 @@
                     </ul>
                 </div>
                 <div class="col-9 pt-3">
-                    <div class="settings-content container" style="padding: 0 160px;">
+                    <div class="settings-content container" style="">
                         <asp:ContentPlaceHolder ID="SettingsContent" runat="server"></asp:ContentPlaceHolder>
                     </div>
                 </div>
