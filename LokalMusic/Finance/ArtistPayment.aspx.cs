@@ -20,7 +20,10 @@ namespace LokalMusic.Finance
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            Bind();
+            if(!Page.IsPostBack)
+            {
+                Bind();
+            }
         }
 
         public void Bind()
