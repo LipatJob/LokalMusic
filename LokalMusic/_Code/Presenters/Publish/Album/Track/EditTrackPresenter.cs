@@ -21,12 +21,14 @@ namespace LokalMusic._Code.Presenters.Publish.Album.Track
         {
             if (AuthenticationHelper.LoggedIn == false)
             {
-                NavigationHelper.Redirect("~/Account/Login");
+                NavigationHelper.RedirectReturnAddress("~/Account/Login");
             }
             else if (AuthenticationHelper.UserType != AuthenticationHelper.ARTIST_USER_TYPE)
             {
                 NavigationHelper.Redirect("~");
             }
+
+            ProductHelper.CheckTrackOwnership();
 
             editTrackRepository.GetArtistName(AuthenticationHelper.UserId, viewModel);
             editTrackRepository.GetAlbumName(AlbumId, viewModel);

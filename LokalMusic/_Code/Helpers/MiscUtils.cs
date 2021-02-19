@@ -20,5 +20,8 @@ namespace LokalMusic._Code.Helpers
             // Return char and concat substring.
             return char.ToUpper(s[0]) + s.Substring(1);
         }
+
+
     }
+
 }
