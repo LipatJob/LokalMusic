@@ -106,7 +106,7 @@
 
             <img src="~/Content/Images/lokal_logo_puzzle_O.png" alt="LOKAL-Logo" runat="server" class="mx-auto d-block w-50"/>
 
-            <div class="mx-auto text-center mt-md-5 mt-3 mb-md-0 mb-3">
+            <div class="mx-auto text-center mt-md-5 mt-3 mb-3">
                 <a href="~/Store/Home.aspx" class="btn btn-outline-danger badge-pill bold-text" runat="server"><span>Return</span></a>
                     
                 <a class="btn btn-outline-info badge-pill bold-text" runat="server" id="collectionLink"><span>Collection</span></a>

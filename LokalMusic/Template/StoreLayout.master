@@ -170,11 +170,11 @@
                     <div id="joinSignIn" class=" mt-lg-0 mt-1">
                         <div class="">
                             <ul class="navbar-nav">
-                                <li class="nav-item ml-md-2 mr-md-1 mb-sm-1 mt-sm-1 mb-0 mt-0">
+                                <li class="nav-item ml-md-2 mr-md-1 mb-1 mt-1 ">
                                     <%--<a class="nav-link" href="~/Account/Register/Fan" runat="server">Join</a>--%>
                                     <a class="btn btn-outline-danger badge-pill pl-4 pr-4" href="~/Account/Register/Fan" runat="server">JOIN</a>
                                 </li>
-                                <li class="nav-item ml-md-1 mr-md-2 mb-sm-1 mt-sm-1 mb-0 mt-0">
+                                <li class="nav-item ml-md-1 mr-md-2 mb-1 mt-1 ">
                                     <%--<a class="nav-link" href="~/Account/Login" runat="server">Sign In</a>--%>
                                     <a class="btn btn-danger badge-pill pl-4 pr-4" href="~/Account/Login" runat="server">SIGN IN</a>
                                 </li>
@@ -286,7 +286,7 @@
 
                 },
                 error: function () {
-                    alert("An Error has occured");
+                    console.log("Error Occured")
                 }
             });
             return false;
@@ -304,7 +304,7 @@
                     ShowTrackModel(data.d);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status, thrownError);
+                    console.log(xhr.status, ": Error occured");
                 }
             });
         }

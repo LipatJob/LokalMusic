@@ -29,6 +29,7 @@ FROM ProductOrder
     LEFT JOIN ProductType ON Product.ProductTypeId = ProductType.ProductTypeId
 WHERE ArtistInfo.UserId = @ArtistId
 GROUP BY OrderInfo.OrderId
+ORDER BY OrderInfo.OrderId DESC;
 ";
             var result = DbHelper.ExecuteDataTableQuery(query, ("ArtistId", artistId));
 
