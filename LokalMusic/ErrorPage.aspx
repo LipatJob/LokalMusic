@@ -28,7 +28,7 @@
 
     <div>
         <div id="logo">
-            <img src="~/Content/Images/Old Logo.png" runat="server" alt="lokal-logo" class="mx-auto d-block" width="200"/>
+            <img src="~/Content/Images/lokal_logo_puzzle_O.png" runat="server" alt="lokal-logo" class="mx-auto d-block" width="400"/>
         </div>
 
         <div class="card mx-auto shadow-lg text-center" style="width:35rem;">
