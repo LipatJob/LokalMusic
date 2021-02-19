@@ -64,6 +64,15 @@ namespace LokalMusic.Cart
             // artist with their tracks
             artistsContainer.DataSource = this.artists;
             artistsContainer.DataBind();
+
+            // if empty or nulll
+            if (artists != null)
+                if (artists.Count > 0) 
+                    emptyTrack.Visible = false;
+
+            if (albums != null)
+                if (albums.Count > 0) 
+                    emptyAlbum.Visible = false;
         }
 
     }

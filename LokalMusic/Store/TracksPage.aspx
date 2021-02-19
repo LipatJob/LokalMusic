@@ -67,9 +67,9 @@
                                     <td><%#Eval("AudioDuration", "{0:g}") %></td>
                                     <td class="emphasize">₱<%#Eval("Price", "{0:n}") %></td>
                                     <td class="  ">
-                                        <button onclick='AddToCart(<%#Eval("TrackId")%>)' class="p-0 <%# Eval("AddableToCart").Equals(true) ? "visible" : " invisible" %>" style="margin-top: -12px;">
+                                        <a onclick='AddToCart(<%#Eval("TrackId")%>)' class="p-0 <%# Eval("AddableToCart").Equals(true) ? "visible" : " invisible" %>" style="margin-top: -12px;">
                                             <img src="~/Content/Images/cart.png" class="" width="20" height="20" runat="server" />
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                                 </a>
