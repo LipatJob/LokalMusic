@@ -135,7 +135,7 @@
                             <div class="card-body">
                                 <p class="productName"><%#Eval("ArtistName")%></p>
                                 <p style="font-weight: 400;">
-                                    <%# (Eval("Bio").ToString().Length > 16) ? (Eval("Bio").ToString().Substring(0, 16) + "...") : Eval("Bio")%>
+                                    <%# (Eval("Bio").ToString().Length > 25) ? (Eval("Bio").ToString().Substring(0, 25) + "...") : Eval("Bio")%>
                                 </p>
                             </div>
                         </div>
