@@ -38,7 +38,7 @@ namespace LokalMusic._Code.Presenters.Admin
         public void RepublishItem(int productId)
         {
             var repository = new ProductsRepository();
-            repository.UnpublishItem(productId);
+            repository.RelistItem(productId);
         }
     }
 }

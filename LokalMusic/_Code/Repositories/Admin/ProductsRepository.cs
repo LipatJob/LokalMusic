@@ -50,7 +50,7 @@ ORDER BY [Product].DateAdded DESC;
             }
             else
             {
-				UnpublishItem(productId);
+				RelistItem(productId);
 
 			}
 		}
@@ -67,7 +67,7 @@ WHERE [Product].ProductId = @ProductId
 
 		}
 
-        public void UnpublishItem(int productId)
+        public void RelistItem(int productId)
 		{
 			ChangeProductStatus(productId, UNPUBLISHED_STATUS);
 		}
@@ -75,6 +75,10 @@ WHERE [Product].ProductId = @ProductId
 		public void WithdrawItem(int productId)
 		{
 			ChangeProductStatus(productId, WITHDRAWN_STATUS);
+            if (IsAlbum(productId))
+            {
+				ChangeAlbumTrackStatus(productId, WITHDRAWN_STATUS);
+			}
 		}
 
 		public void ChangeProductStatus(int productId, string productStatus)
@@ -89,21 +93,21 @@ WHERE ProductId = @ProductId";
 				StatusQuery,
 				("ProductStatus", productStatus),
 				("ProductId", productId));
+		}
 
-			if(IsAlbum(productId))
-            {
-				string updateQuery = @"
+		public void ChangeAlbumTrackStatus(int albumId, string productStatus)
+        {
+			string updateQuery = @"
 UPDATE [Product]
 SET ProductStatusId = (SELECT ProductStatusId
 						FROM [ProductStatus]
 						WHERE StatusName = @ProductStatus)
 WHERE ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)";
 
-				DbHelper.ExecuteNonQuery(
-					updateQuery,
-					("ProductStatus", productStatus),
-					("AlbumId", productId));
-            }
+			DbHelper.ExecuteNonQuery(
+				updateQuery,
+				("ProductStatus", productStatus),
+				("AlbumId", albumId));
 		}
 
 		private bool IsAlbum(int productId)

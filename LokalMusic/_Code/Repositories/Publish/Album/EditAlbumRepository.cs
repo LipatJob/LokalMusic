@@ -9,6 +9,10 @@ namespace LokalMusic._Code.Repositories.Publish.Album
 {
     public class EditAlbumRepository
     {
+        private const string WITHDRAWN_STATUS = "WITHDRAWN";
+        private const string UNPUBLISHED_STATUS = "UNPUBLISHED";
+        private const string PUBLISHED_STATUS = "PUBLISHED";
+
         public void GetArtistName(int artistId, IEditAlbumModel model)
         {
             string query = "SELECT ArtistName FROM ArtistInfo WHERE UserId = @ArtistId;";
@@ -107,7 +111,7 @@ WHERE AlbumId = @albumId;";
                 getAlbumCoverIdQuery,
                 ("albumId", albumId));
 
-            if(result != null)
+            if (result != null)
             {
                 int albumCoverId = (int)result;
                 string query2 = "UPDATE FileInfo SET FileName = @albumCover WHERE FileId = @albumCoverId";
@@ -115,16 +119,7 @@ WHERE AlbumId = @albumId;";
             }
         }
 
-        public void WithdrawAlbum(int albumId)
-        {
-            string query = @"
-UPDATE Product 
-SET ProductStatusId = 2
-WHERE ProductId = @AlbumId
-OR ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)
-";
-            DbHelper.ExecuteNonQuery(query, ("AlbumId", albumId));
-        }
+       
 
         public string GetAlbumStatus(int albumId)
         {
@@ -138,30 +133,70 @@ WHERE Product.ProductId = @AlbumId
             return (string)result;
         }
 
+        public void WithdrawAlbum(int albumId)
+        {
+            ChangeAlbumStatus(albumId, WITHDRAWN_STATUS);
+            ChangeAllAlbumTrackStatus(albumId, WITHDRAWN_STATUS);
+        }
+
         public void UnpublishAlbum(int albumId)
         {
-            string query = @"
-UPDATE Product 
-SET ProductStatusId = ( SELECT [ProductStatus].ProductStatusId 
-					    FROM [ProductStatus] 
-					    WHERE [ProductStatus].StatusName = 'UNPUBLISHED')
-WHERE ProductId = @AlbumId
-OR ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)
-";
-            DbHelper.ExecuteNonQuery(query, ("AlbumId", albumId));
+            ChangeAlbumStatus(albumId, UNPUBLISHED_STATUS);
+            ChangeUnwithdrawnAlbumTrackStatus(albumId, UNPUBLISHED_STATUS);
         }
 
         public void PublishAlbum(int albumId)
         {
-            string query = @"
-UPDATE Product 
-SET ProductStatusId = ( SELECT [ProductStatus].ProductStatusId 
-					    FROM [ProductStatus] 
-					    WHERE [ProductStatus].StatusName = 'PUBLISHED')
-WHERE ProductId = @AlbumId
-OR ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)
-";
-            DbHelper.ExecuteNonQuery(query, ("AlbumId", albumId));
+            ChangeAlbumStatus(albumId, PUBLISHED_STATUS);
+            ChangeUnwithdrawnAlbumTrackStatus(albumId, PUBLISHED_STATUS);
+        }
+
+        public void ChangeAlbumStatus(int albumId, string productStatus)
+        {
+            string StatusQuery = @"
+UPDATE [Product]
+SET ProductStatusId = (SELECT ProductStatusId
+						FROM [ProductStatus]
+						WHERE StatusName = @ProductStatus)
+WHERE ProductId = @ProductId";
+            DbHelper.ExecuteNonQuery(
+                StatusQuery,
+                ("ProductStatus", productStatus),
+                ("ProductId", albumId));
+        }
+
+        public void ChangeAllAlbumTrackStatus(int albumId, string productStatus)
+        {
+            string updateQuery = @"
+UPDATE [Product]
+SET ProductStatusId = (SELECT ProductStatusId
+						FROM [ProductStatus]
+						WHERE StatusName = @ProductStatus)
+WHERE ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)";
+
+            DbHelper.ExecuteNonQuery(
+                updateQuery,
+                ("ProductStatus", productStatus),
+                ("AlbumId", albumId));
+        }
+
+        public void ChangeUnwithdrawnAlbumTrackStatus(int albumId, string productStatus)
+        {
+            string updateQuery = $@"
+UPDATE [Product]
+SET ProductStatusId = (SELECT ProductStatusId
+						FROM [ProductStatus]
+						WHERE StatusName = @ProductStatus)
+WHERE 
+    ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId) AND
+    ProductStatusId != (SELECT ProductStatusId
+						FROM [ProductStatus]
+						WHERE StatusName = '{WITHDRAWN_STATUS}')";
+
+            DbHelper.ExecuteNonQuery(
+                updateQuery,
+                ("ProductStatus", productStatus),
+                ("AlbumId", albumId));
         }
     }
 }
