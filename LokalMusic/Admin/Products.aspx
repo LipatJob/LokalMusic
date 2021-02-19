@@ -15,7 +15,7 @@
                     <Columns>
                         <asp:BoundField HeaderText="Title" DataField="ProductName" />
 
-                        <asp:BoundField HeaderText="Artist" DataField="ArtistName" />
+                        <asp:BoundField HeaderText="Artist Username" DataField="Username" />
 
                         <asp:TemplateField HeaderText="Product Type">
                             <ItemTemplate><%# MiscUtils.UppercaseFirstOnly(Eval("ProductType").ToString()) %> </ItemTemplate>

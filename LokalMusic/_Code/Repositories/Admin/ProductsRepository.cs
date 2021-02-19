@@ -22,6 +22,7 @@ SELECT
 	[Product].DateAdded,
 	[ArtistInfo].UserId AS ArtistId,
 	[ArtistInfo].ArtistName,
+	[UserInfo].Username,
 	[ProductType].TypeName AS ProductType,
 	[ProductStatus].StatusName,
 	[AlbumStatus].StatusName AS AlbumStatusName,
