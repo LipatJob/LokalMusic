@@ -76,7 +76,7 @@
                             <div class="card-body">
 
                                 <div class="ml-3">
-                                    <a href=<%#Eval("DetailsUrl") %> class="titleLink" target="_blank" runat="server">
+                                    <a href=<%#Eval("DetailsUrl") %> class="titleLink" runat="server">
                                         <p style="font-size:20px; color:black; font-weight: 600;"><%#Eval("ArtistName") %></p>
                                     </a>
                                     <p style="color:#C4C4C4; font-size:16px; font-weight: 600; margin-top:-17px;">Artist</p>
@@ -108,7 +108,7 @@
                                                     <h4 class="card-title titleLink" style="font-weight: 600"><%#Eval("TrackName") %></h4>
                                                 </a>
 
-                                                <a href=<%#Eval("TrackAlbumDetails") %> class="titleLink" target="_blank" runat="server">
+                                                <a href=<%#Eval("TrackAlbumDetails") %> class="titleLink" runat="server">
                                                     <h6 class="" style="font-size:15px; color: #5E5E5E"><%#Eval("AlbumName") %></h6>
                                                 </a>
 
@@ -156,7 +156,7 @@
 
                                 <%--image--%>
                                 <div class="col-md-3 m-0 p-0">
-                                    <a href=<%#Eval("DetailsUrl") %> class="" target="_blank" runat="server">
+                                    <a href=<%#Eval("DetailsUrl") %> class="" runat="server">
                                         <img src=<%#Eval("AlbumCoverAddress") %> class="mx-auto d-block img-responsive img-hoverable shadow-sm" width="150" height="150"/>
                                     </a>
                                 </div>
@@ -165,11 +165,11 @@
                                 <div class="col-md-5 col-xl-5">
                                     <h6 class="" style="font-size:16px; color: #C4C4C4">Album</h6>
 
-                                    <a href=<%#Eval("DetailsUrl") %> class=" titleLink" target="_blank" runat="server">
+                                    <a href=<%#Eval("DetailsUrl") %> class=" titleLink" runat="server">
                                         <h4 class="card-title titleLink" style="font-weight: 600"><%#Eval("AlbumName") %></h4>
                                     </a>
 
-                                    <a href=<%#Eval("AlbumArtistUrl") %> class="titleLink" target="_blank" runat="server">
+                                    <a href=<%#Eval("AlbumArtistUrl") %> class="titleLink"  runat="server">
                                         <h6 class="" style="font-size:16px; color: #5E5E5E">By <%#Eval("ArtistName") %></h6>
                                     </a>
 
