@@ -22,6 +22,11 @@ namespace LokalMusic._Code.Presenters.Fan
                 NavigationHelper.Redirect("~");
             }
             model = repository.SetUserInformation(username);
+
+            if(model is null)
+            {
+                NavigationHelper.Redirect("~");
+            }
         }
     }
 }
