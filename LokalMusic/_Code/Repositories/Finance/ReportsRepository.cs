@@ -155,10 +155,10 @@ GROUP BY [Months].DateStart
             string query =
 @"
 SELECT
-	COALESCE(SUM([OrderInfo].AmountPaid) - SUM([OrderInfo].AmountPaid) * .15, 0) AS NetSales,
-	COALESCE(SUM([OrderInfo].AmountPaid) * .85, 0) AS TotalArtistRevenue,
-	COALESCE(SUM([OrderInfo].AmountPaid), 0) AS GrossSales,
-	COALESCE(COUNT([OrderInfo].OrderId), 0) AS ProductsSold
+	COALESCE(SUM([OrderInfo].AmountPaid) - SUM([OrderInfo].AmountPaid) * .85, 0.0) AS NetSales,
+	COALESCE(SUM([OrderInfo].AmountPaid) * .85, 0.0) AS TotalArtistRevenue,
+	COALESCE(SUM([OrderInfo].AmountPaid), 0.0) AS GrossSales,
+	COALESCE(COUNT([OrderInfo].OrderId), 0.0) AS ProductsSold
 FROM [OrderInfo]
 WHERE
 	[OrderInfo].OrderDate >= @StartDate AND
@@ -174,13 +174,18 @@ WHERE
             string endString = end.ToString();
             return new
             {
-                NetSales = values.Rows[0]["NetSales"],
-                GrossSales = values.Rows[0]["GrossSales"],
-                TotalArtistRevenue = values.Rows[0]["TotalArtistRevenue"],
+                NetSales = GetMoneyString(values.Rows[0]["NetSales"]),
+                GrossSales = GetMoneyString(values.Rows[0]["GrossSales"]),
+                TotalArtistRevenue = GetMoneyString(values.Rows[0]["TotalArtistRevenue"]),
                 ProductsSold = values.Rows[0]["ProductsSold"],
                 startString,
                 endString
             };
+        }
+
+        private string GetMoneyString(object value)
+        {
+            return ((decimal)value).ToString("#,##0.00");
         }
     }
 }

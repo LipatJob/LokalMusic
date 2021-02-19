@@ -51,7 +51,7 @@
                             <th>Order Id</th>
                             <th>Name</th>
                             <th>Order Date</th>
-                            <th>Amount</th>
+                            <th>Amount (₱)</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -106,7 +106,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Receipt Details</h5>
+                    <h5 class="modal-title">Order Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

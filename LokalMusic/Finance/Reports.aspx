@@ -114,7 +114,7 @@
             <%-- Products Sold --%>
             <div class="figure-item">
                 <h5>Products Sold</h5>
-                <span class="figure-amount">₱<span id="productsSold">0</span></span>
+                <span class="figure-amount"><span id="productsSold">0</span></span>
             </div>
         </div>
 

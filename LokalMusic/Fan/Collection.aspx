@@ -121,7 +121,7 @@
                             <asp:Image ImageUrl='<%#Eval("CoverLink")%>' runat="server" class="item-picture" />
 
                             <%-- Album/Track Name --%>
-                            <b><%#Eval("ProductName") %></b>
+                            <b style="text-align:center;"><%#Eval("ProductName") %></b>
 
                             <%-- Artist Name --%>
                             <p>By <%#Eval("ArtistName")%></p>
@@ -135,7 +135,7 @@
                             <asp:Image ImageUrl='<%#Eval("CoverLink")%>' runat="server" class="item-picture" />
 
                             <%-- Album/Track Name --%>
-                            <b><%#Eval("ProductName") %></b>
+                            <b style="text-align:center;"><%#Eval("ProductName") %></b>
 
                             <%-- Artist Name --%>
                             <p>By <%#Eval("ArtistName")%></p>

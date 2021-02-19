@@ -193,7 +193,7 @@ ORDER BY [OrderInfo].OrderDate DESC;
 SELECT
 	[OrderInfo].OrderId,
 	[OrderInfo].OrderDate,
-	[UserInfo].Username,
+	[UserInfo].FirstName  + ' ' +[UserInfo].LastName AS Name,
 	[OrderInfo].AmountPaid
 FROM [OrderInfo]
 	LEFT JOIN [UserInfo] ON [UserInfo].UserId = [OrderInfo].CustomerId
@@ -204,7 +204,7 @@ WHERE [OrderInfo].OrderId = @OrderId;";
                 OrderId = (int)modelResult["OrderId"],
                 AmountPaid = (decimal)modelResult["AmountPaid"],
                 OrderDate = (DateTime)modelResult["OrderDate"],
-                Name = (string)modelResult["Username"],
+                Name = (string)modelResult["Name"],
                 Products = new List<ReceiptProductItem>()
             };
 
