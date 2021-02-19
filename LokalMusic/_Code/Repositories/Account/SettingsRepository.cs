@@ -107,6 +107,13 @@ ORDER BY [OrderInfo].OrderDate ASC;
             return receipts;
         }
 
+        public void ChangeName(int userId, string firstName, string lastName)
+        {
+            string query = @"UPDATE UserInfo SET FirstName = @FirstName, LastName = @LastName WHERE UserId = @UserId";
+            DbHelper.ExecuteNonQuery(query, ("FirstName", firstName), ("LastName", lastName), ("UserId", userId));
+        }
+
+
         public void ChangeProfilePicture(int userId, HttpPostedFile file)
         {
             string fileName = userId + Path.GetExtension(file.FileName);

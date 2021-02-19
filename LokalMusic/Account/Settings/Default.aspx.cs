@@ -26,7 +26,10 @@ namespace LokalMusic.Account.Settings
             {
                 NavigationHelper.RedirectReturnAddress("~/Account/Login");
             }
-            presenter.PageLoad();
+            if(!Page.IsPostBack)
+            {
+                presenter.PageLoad();
+            }
             if (IsPasswordChanged())
             {
                 ShowPasswordChangedMessage();
@@ -90,6 +93,14 @@ namespace LokalMusic.Account.Settings
             if (Page.IsValid)
             {
                 presenter.ChangePassword();
+            }
+        }
+
+        protected void btnSubmitAccountDetails_Click(object sender, EventArgs e)
+        {
+            if(Page.IsValid)
+            {
+                presenter.ChangeAccountDetails();
             }
         }
     }

@@ -36,5 +36,10 @@ namespace LokalMusic._Code.Presenters.Account
         {
             return repository.CheckPassword(AuthenticationHelper.UserId, model.OldPassword);
         }
+
+        internal void ChangeAccountDetails()
+        {
+            repository.ChangeName(AuthenticationHelper.UserId, model.FirstName, model.LastName);
+        }
     }
 }

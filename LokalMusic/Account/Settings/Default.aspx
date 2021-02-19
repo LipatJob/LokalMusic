@@ -2,19 +2,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SettingsContent" runat="server">
     <script> $(".account-nav-item").addClass("active"); </script>
-    <div>
+    <div class="mb-4">
         <h5>Account Details</h5>
 
         <%-- First Name and Last Name --%>
-        <div class="container">
+        <div class="container mb">
             <div class="row form-group">
                 <div class="col-6" style="padding: 0; padding-right: 6px;">
                     <asp:Label Text="First Name" runat="server" />
-                    <asp:TextBox ID="FirstNameTxt" runat="server" ValidateRequestMode="Disabled" CssClass="form-control" ReadOnly="true" />
+                    <asp:TextBox ID="FirstNameTxt" runat="server" CssClass="form-control" />
+                    <asp:RequiredFieldValidator ErrorMessage="This is a required field" ControlToValidate="FirstNameTxt" runat="server" Display="Dynamic" CssClass="validation-message" ValidationGroup="AccountDetails"/>
                 </div>
                 <div class="col-6" style="padding: 0; padding-left: 6px;">
                     <asp:Label Text="Last Name" runat="server" />
-                    <asp:TextBox ID="LastNameTxt" runat="server" ValidateRequestMode="Disabled" CssClass="form-control" ReadOnly="true" />
+                    <asp:TextBox ID="LastNameTxt" runat="server" CssClass="form-control"/>
+                    <asp:RequiredFieldValidator ErrorMessage="This is a required field" ControlToValidate="LastNameTxt" runat="server" Display="Dynamic" CssClass="validation-message" ValidationGroup="AccountDetails"/>
                 </div>
             </div>
         </div>
@@ -28,6 +30,11 @@
         <div class="form-group">
             <asp:Label Text="Email" runat="server" />
             <asp:TextBox ID="EmailTxt" runat="server" ValidateRequestMode="Disabled" CssClass="form-control" ReadOnly="true" />
+        </div>
+        
+        <%-- Change Name Button--%>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+            <asp:Button ID="btnSubmitAccountDetails" Text="Update Details" runat="server" OnClick="btnSubmitAccountDetails_Click" CssClass="btn btn-danger" ValidationGroup="AccountDetails" />
         </div>
     </div>
 
