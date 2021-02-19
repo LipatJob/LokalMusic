@@ -52,7 +52,7 @@
 
         <%-- Old Password --%>
         <div class="form-group">
-            <asp:Label Text="Old Password" runat="server"  MaxLength="100" />
+            <asp:Label Text="Current Password" runat="server"  MaxLength="100" />
             <asp:TextBox ID="OldPasswordTxt" runat="server" type="password" CssClass="form-control" />
             <asp:CustomValidator ID="OldPasswordTxtCv" ErrorMessage="Error Message" ControlToValidate="OldPasswordTxt" runat="server" OnServerValidate="OldPasswordTxtCv_ServerValidate" Display="Dynamic" ValidateEmptyText="True" CssClass="validation-message" ValidationGroup="ChangePassword" />
         </div>

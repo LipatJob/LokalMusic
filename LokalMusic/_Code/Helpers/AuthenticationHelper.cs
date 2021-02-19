@@ -72,5 +72,7 @@ namespace LokalMusic._Code.Helpers
             string query = "SELECT TypeName FROM UserType WHERE UserTypeId = (SELECT UserTypeId FROM UserInfo WHERE UserId = @UserId);";
             return (string)DbHelper.ExecuteScalar(query, ("UserId", UserId));
         }
+
+
     }
 }
