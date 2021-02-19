@@ -102,7 +102,7 @@
             <hr style="width: 150px; background:#525252;"/>
             <p class="mt-5">Sort By</p>
             <hr style="margin-top:-5px; width: 150px; background:#525252;"/>
-            <asp:Button ID="sort1" OnClick="SortClick" CssClass="my-button border-0 mx-auto d-block mt-3" runat="server" Text="Recently Added" CommandArgument="s1"/>
+            <asp:Button ID="sort1" OnClick="SortClick" CssClass="my-button border-0 mx-auto d-block mt-3" runat="server" Text="Date Added" CommandArgument="s1"/>
             <asp:Button ID="sort2" OnClick="SortClick" CssClass="my-button border-0 mx-auto d-block mt-3" runat="server" Text="Title" CommandArgument="s2"/>
             <asp:Button ID="sort3" OnClick="SortClick" CssClass="my-button special-btn border-0 mx-auto d-block mt-3 mb-3" runat="server" Text="Price" CommandArgument="s3"/>
             <%--<a runat="server" class="side-links" id="sort_a_z" onclick="sortClick">Title</a>--%>
