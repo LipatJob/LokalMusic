@@ -60,9 +60,15 @@ namespace LokalMusic.Publish.Album.Track
 
                 bool lastPublishedTrack = Presenter.CheckIfLastPublished();
                 if (lastPublishedTrack)
+                {
                     publishUnpublishBtn.Enabled = false;
+                    withdrawBtn.Enabled = false;
+                }
                 else
+                {
                     publishUnpublishBtn.Enabled = true;
+                    withdrawBtn.Enabled = true;
+                }
             }
             else
             {
@@ -70,9 +76,15 @@ namespace LokalMusic.Publish.Album.Track
 
                 bool albumIsPublished = Presenter.CheckAlbumIsPublished();
                 if (albumIsPublished)
+                {
                     publishUnpublishBtn.Enabled = true;
+                    withdrawBtn.Enabled = true;
+                }
                 else
+                {
                     publishUnpublishBtn.Enabled = false;
+                    withdrawBtn.Enabled = false;
+                }
             }
         }
 
