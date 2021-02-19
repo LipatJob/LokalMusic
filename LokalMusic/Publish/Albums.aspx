@@ -20,7 +20,7 @@
                     <ItemTemplate>
                         <tr>
                             <td style="text-align: right"><asp:Image ID="albumCover" runat="server" ImageUrl=<%#Eval("AlbumCoverLink") %> Height="70" Width="70" /></td>
-                            <td style="vertical-align: middle"><strong class="redtext"><%#Eval("AlbumName") %></strong></td>
+                            <td style="vertical-align: middle"><strong class='<%# (Eval("Status").Equals("Published")) ?  "redtext" : "graytext" %>'><%#Eval("AlbumName") %></strong></td>
                             <td style="vertical-align: middle">Status: <%#Eval("Status") %><br />Date Added: <%#Eval("DateAdded","{0:dd MMM yyyy}") %></td>
                             <td style="vertical-align: middle">Tracks: <%#Eval("TrackCount") %><br />Producer: <%#Eval("Producer") %></td>
                             <td style="vertical-align: middle">Sales: <%#Eval("SalesCount") %><br />Price: <%#Eval("Price","{0:N}") %></td>
