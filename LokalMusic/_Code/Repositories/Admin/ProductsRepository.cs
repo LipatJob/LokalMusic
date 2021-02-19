@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace LokalMusic._Code.Repositories.Admin
 {
-	public class ProductsRepository
-	{
-		private const string WITHDRAWN_STATUS = "WITHDRAWN";
-		private const string UNPUBLISHED_STATUS = "UNPUBLISHED";
+    public class ProductsRepository
+    {
+        private const string WITHDRAWN_STATUS = "WITHDRAWN";
+        private const string UNPUBLISHED_STATUS = "UNPUBLISHED";
 
-		public DataTable GetProducts()
-		{
-			string query = @"
+        public DataTable GetProducts()
+        {
+            string query = @"
 SELECT
 	[Product].ProductId,
 	[Album].AlbumId,
@@ -39,89 +39,116 @@ FROM [Product]
 	INNER JOIN [UserStatus] ON [UserStatus].UserStatusId = [UserInfo].UserStatusId
 ORDER BY [Product].DateAdded DESC;
 ";
-			return DbHelper.ExecuteDataTableQuery(query);
-		}
+            return DbHelper.ExecuteDataTableQuery(query);
+        }
 
         internal void UnlistRepublishProduct(int productId)
         {
-            if(GetProductStatus(productId).ToUpper() != WITHDRAWN_STATUS)
+            if (GetProductStatus(productId).ToUpper() != WITHDRAWN_STATUS)
             {
-				WithdrawItem(productId);
+                WithdrawItem(productId);
             }
             else
             {
-				RelistItem(productId);
+                RelistItem(productId);
 
-			}
-		}
+            }
+        }
 
-		private string GetProductStatus(int productId)
+        private string GetProductStatus(int productId)
         {
-			string query = @"
+            string query = @"
 SELECT [ProductStatus].StatusName
 FROM [Product] 
 	INNER JOIN [ProductStatus] ON [ProductStatus].ProductStatusId = [Product].ProductStatusId
 WHERE [Product].ProductId = @ProductId
 ";
-			return (string)DbHelper.ExecuteScalar(query, ("ProductId", productId));
+            return (string)DbHelper.ExecuteScalar(query, ("ProductId", productId));
 
-		}
+        }
 
         public void RelistItem(int productId)
-		{
-			ChangeProductStatus(productId, UNPUBLISHED_STATUS);
-		}
+        {
+            ChangeProductStatus(productId, UNPUBLISHED_STATUS);
+        }
 
-		public void WithdrawItem(int productId)
-		{
-			ChangeProductStatus(productId, WITHDRAWN_STATUS);
+        public void WithdrawItem(int productId)
+        {
+            ChangeProductStatus(productId, WITHDRAWN_STATUS);
             if (IsAlbum(productId))
             {
-				ChangeAlbumTrackStatus(productId, WITHDRAWN_STATUS);
-			}
-		}
+                ChangeAlbumTrackStatus(productId, WITHDRAWN_STATUS);
+            }
+            else
+            {
+                int albumId = GetAlbumId(productId);
+                if (CountUnwithdrawnTracks(albumId) == 0)
+                {
+                    ChangeProductStatus(albumId, UNPUBLISHED_STATUS);
+                }
+            }
+        }
 
-		public void ChangeProductStatus(int productId, string productStatus)
-		{
-			string StatusQuery = @"
+        private int GetAlbumId(int trackId)
+        {
+            string query = "SELECT AlbumId FROM [Track] WHERE [Track].TrackId = @TrackId";
+            return (int) DbHelper.ExecuteScalar(query, ("TrackId", trackId));
+        }
+
+        private int CountUnwithdrawnTracks(int albumId)
+        {
+            string query = $@"
+SELECT COUNT(*) AS ProductCount
+FROM [Track]
+    INNER JOIN [Product] ON [Product].ProductId = [Track].TrackId
+WHERE
+    [Track].AlbumId = @AlbumId AND
+    [Product].ProductStatusId != (SELECT ProductStatusId FROM [ProductStatus] WHERE StatusName = '{WITHDRAWN_STATUS}')";
+
+            return (int)DbHelper.ExecuteScalar(query, ("AlbumId", albumId));
+        }
+
+        public void ChangeProductStatus(int productId, string productStatus)
+        {
+            string StatusQuery = @"
 UPDATE [Product]
 SET ProductStatusId = (SELECT ProductStatusId
 						FROM [ProductStatus]
 						WHERE StatusName = @ProductStatus)
 WHERE ProductId = @ProductId";
-			DbHelper.ExecuteNonQuery(
-				StatusQuery,
-				("ProductStatus", productStatus),
-				("ProductId", productId));
-		}
+            DbHelper.ExecuteNonQuery(
+                StatusQuery,
+                ("ProductStatus", productStatus),
+                ("ProductId", productId));
+        }
 
-		public void ChangeAlbumTrackStatus(int albumId, string productStatus)
+        public void ChangeAlbumTrackStatus(int albumId, string productStatus)
         {
-			string updateQuery = @"
+            string updateQuery = @"
 UPDATE [Product]
 SET ProductStatusId = (SELECT ProductStatusId
 						FROM [ProductStatus]
 						WHERE StatusName = @ProductStatus)
 WHERE ProductId IN (SELECT TrackId FROM Track WHERE AlbumId = @AlbumId)";
 
-			DbHelper.ExecuteNonQuery(
-				updateQuery,
-				("ProductStatus", productStatus),
-				("AlbumId", albumId));
-		}
+            DbHelper.ExecuteNonQuery(
+                updateQuery,
+                ("ProductStatus", productStatus),
+                ("AlbumId", albumId));
+        }
 
-		private bool IsAlbum(int productId)
+        private bool IsAlbum(int productId)
         {
-			string productTypeQuery = @"
+            string productTypeQuery = @"
 SELECT
 	[ProductType].TypeName
 FROM [Product]
 	INNER JOIN [ProductType] ON [ProductType].ProductTypeId = [Product].ProductTypeId
 WHERE [Product].ProductId = @ProductId;
 ";
-			string typeName = (string) DbHelper.ExecuteScalar(productTypeQuery, ("ProductId", productId));
+            string typeName = (string)DbHelper.ExecuteScalar(productTypeQuery, ("ProductId", productId));
 
-			return typeName.ToUpper() == "ALBUM";
-		}
-	}
+            return typeName.ToUpper() == "ALBUM";
+        }
+    }
 }

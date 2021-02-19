@@ -23,6 +23,11 @@
 
                         <asp:BoundField HeaderText="Date Added" DataField="DateAdded" DataFormatString="{0:MMM dd yyyy}" />
 
+                        
+                        <asp:TemplateField HeaderText="Status">
+                            <ItemTemplate><%# MiscUtils.UppercaseFirstOnly(Eval("StatusName").ToString()) %> </ItemTemplate>
+                        </asp:TemplateField>
+
 
                         <asp:TemplateField HeaderText=" ">
                             <ItemTemplate>
