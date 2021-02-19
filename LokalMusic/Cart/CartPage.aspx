@@ -64,6 +64,11 @@
             <div class="col-xl-8 mb-xl-0 mb-4">
                 <h3 class="mb-3">Individual Tracks per Artists</h3>
 
+                <p id="emptyTrack" runat="server" class="text-center" style="font-size:17px; font-weight:600">
+                    Add your first tracks in 
+                    <a href="~/Store/TracksPage.aspx" runat="server" class="text-danger">Lokal Tracks</a>
+                </p>
+
                 <%--individual tracks r--%>
                 <asp:Repeater ID="artistsContainer" runat="server">
                     <ItemTemplate>
@@ -129,6 +134,11 @@
                 </asp:Repeater>
 
                 <h3 class="mb-3 mt-5">Albums</h3>
+
+                <p id="emptyAlbum" runat="server" class="text-center" style="font-size:17px; font-weight:600">
+                    Add your first albums in 
+                    <a href="~/Store/AlbumsPage.aspx" runat="server" class="text-danger">Lokal Albums</a>
+                </p>
 
                 <%--individual album--%>
                 <asp:Repeater ID="albumContainer" runat="server">
