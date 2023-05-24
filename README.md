@@ -1,4 +1,4 @@
-# LokalMusic
+# Lokal Music
 An eCommerce website where fans may purchase and download music uploaded by independent Filipino artists. Built using SQL Server, ASP.NET WebForms and ADO.NET
 
 Live: http://lokalmusic.azurewebsites.net/
